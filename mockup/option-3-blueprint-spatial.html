@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemilang Labs — Option 3: Spatial Blueprint Lab</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              400: '#38bdf8',
+              500: '#0284c7',
+              600: '#0369a1',
+            },
+            blueprint: {
+              base: '#030712',
+              grid: '#0f172a',
+              card: '#090d1a',
+              line: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Three.js & GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <style>
+    body { background-color: #030712; color: #f8fafc; }
+    .bg-blueprint {
+      background-size: 24px 24px;
+      background-image: 
+        radial-gradient(circle, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+    }
+    #three-iso {
+      position: absolute;
+      top: 0; right: 0; width: 55%; height: 100%;
+      pointer-events: auto; z-index: 1;
+    }
+    @media (max-width: 1024px) {
+      #three-iso { width: 100%; opacity: 0.3; pointer-events: none; }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-500/30 selection:text-brand-300">
+
+  <!-- TOP SWITCHER BAR -->
+  <div class="bg-blueprint-card border-b border-blueprint-line text-xs py-2 px-6 sticky top-0 z-50 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="font-mono text-sky-400 font-bold">DESAIN MOCKUP:</span>
+      <span class="text-slate-400 hidden sm:inline">Pilih Varian Konsep Visual Gemilang Labs:</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="option-1-dark-tech.html" class="px-3 py-1 rounded bg-blueprint-base border border-blueprint-line text-slate-400 hover:text-white">Opsi 1: Dark-Tech Kinetic</a>
+      <a href="option-2-linear-minimal.html" class="px-3 py-1 rounded bg-blueprint-base border border-blueprint-line text-slate-400 hover:text-white">Opsi 2: Linear Minimal</a>
+      <a href="option-3-blueprint-spatial.html" class="px-3 py-1 rounded bg-sky-500 text-slate-950 font-bold">Opsi 3: Spatial Blueprint</a>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="border-b border-blueprint-line bg-blueprint-base/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded border border-sky-400/40 bg-sky-500/10 flex items-center justify-center font-mono text-sky-400 font-bold text-xs">
+          [GL]
+        </div>
+        <div>
+          <span class="font-bold text-white tracking-wider text-sm block leading-none">GEMILANG LABS</span>
+          <span class="text-[10px] font-mono text-slate-500">SYS.ID: 2026-ENG</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-6 text-xs font-mono text-slate-400">
+        <a href="#services" class="hover:text-sky-400 transition-colors">// PILAR_SOLUSI</a>
+        <a href="#calculator" class="hover:text-sky-400 transition-colors">// KALKULATOR_WA</a>
+      </nav>
+
+      <a 
+        href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20konsultasi%20arsitektur%20sistem." 
+        target="_blank" 
+        class="inline-flex items-center gap-2 px-4 py-2 rounded border border-sky-400 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs font-mono transition-all"
+      >
+        <span>&gt; KONSULTASI_WA</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- BLUEPRINT HERO -->
+  <section class="relative min-h-[calc(100dvh-100px)] flex items-center px-6 max-w-7xl mx-auto bg-blueprint overflow-hidden">
+    <canvas id="three-iso"></canvas>
+
+    <div class="relative z-10 max-w-xl py-12">
+      <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-sky-400/30 bg-blueprint-card text-[11px] font-mono text-sky-300 mb-6">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+        ISOMETRIC LAB SPECIFICATION &bull; ARCHITECTURE 4.0
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight mb-5">
+        Rekayasa Solusi Digital & Sistem AI Skala Industri.
+      </h1>
+
+      <p class="text-sm sm:text-base text-slate-400 font-normal leading-relaxed mb-8 max-w-lg">
+        Dari platform web jutaan request hingga custom model AI terintegrasi cloud: kami merancang sistem dengan presisi rekayasa tinggi tanpa dependensi rapuh.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center gap-3">
+        <a 
+          href="#calculator" 
+          class="w-full sm:w-auto px-6 py-3.5 rounded bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs font-mono tracking-wider transition-all text-center"
+        >
+          [+] HITUNG_ESTIMASI_PROYEK
+        </a>
+        <a 
+          href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20ingin%20diskusi%20kebutuhan%20teknologi." 
+          target="_blank" 
+          class="w-full sm:w-auto px-6 py-3.5 rounded border border-blueprint-line bg-blueprint-card hover:bg-slate-800 text-white font-medium text-xs font-mono tracking-wider transition-all text-center"
+        >
+          DISPOSISI_WHATSAPP
+        </a>
+      </div>
+
+      <div class="mt-10 p-3 rounded border border-blueprint-line bg-blueprint-card/80 font-mono text-xs text-slate-400 flex items-center justify-between">
+        <span>3D ISOMETRIC CLUSTER ACTIVE</span>
+        <span class="text-sky-400">Hover canvas untuk memutar node</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE SPEC CALCULATOR -->
+  <section id="calculator" class="py-20 px-6 max-w-5xl mx-auto border-t border-blueprint-line">
+    <div class="mb-10 text-center">
+      <span class="text-xs font-mono text-sky-400 block mb-1">// PROJECT_CONFIGURATOR</span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-white">Spesifikasikan Kebutuhan Sistem Anda</h2>
+      <p class="text-xs text-slate-400 mt-1">Pilih parameter untuk menghasilkan draf instruksi teknis langsung ke WhatsApp tim lead.</p>
+    </div>
+
+    <div class="rounded-xl border border-blueprint-line bg-blueprint-card p-6 sm:p-8">
+      <!-- Matrix Options -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div class="p-4 rounded border border-sky-500 bg-sky-500/10 cursor-pointer param-card active" data-type="Web & SaaS Architecture">
+          <span class="font-mono text-[10px] text-sky-400 font-bold block mb-1">MODULE_01</span>
+          <h4 class="text-sm font-bold text-white">Web & SaaS Scalable</h4>
+          <p class="text-xs text-slate-400 mt-1">Next.js 15, Global Edge CDN, sub-second latency.</p>
+        </div>
+
+        <div class="p-4 rounded border border-blueprint-line bg-blueprint-base cursor-pointer param-card" data-type="Applied AI & RAG Agent">
+          <span class="font-mono text-[10px] text-slate-500 font-bold block mb-1">MODULE_02</span>
+          <h4 class="text-sm font-bold text-white">Applied AI & Custom LLM</h4>
+          <p class="text-xs text-slate-400 mt-1">Vector DB, autonomous workflow, WhatsApp AI Bot.</p>
+        </div>
+
+        <div class="p-4 rounded border border-blueprint-line bg-blueprint-base cursor-pointer param-card" data-type="Cloud DevOps & Security Audit">
+          <span class="font-mono text-[10px] text-slate-500 font-bold block mb-1">MODULE_03</span>
+          <h4 class="text-sm font-bold text-white">Cloud Infra & Audit</h4>
+          <p class="text-xs text-slate-400 mt-1">Docker/K8s, DB optimization, OWASP security.</p>
+        </div>
+      </div>
+
+      <!-- Action Banner -->
+      <div class="p-5 rounded border border-blueprint-line bg-blueprint-base flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
+        <div>
+          <span class="text-slate-500 text-[10px] uppercase block">PREVIEW_PAYLOAD:</span>
+          <p id="calc-preview" class="text-slate-300 mt-1">
+            "Halo Gemilang Labs, saya butuh implementasi Web & SaaS Scalable. Mohon jadwal konsultasi teknis."
+          </p>
+        </div>
+        <a 
+          id="calc-submit"
+          href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs" 
+          target="_blank" 
+          class="shrink-0 px-6 py-3 rounded bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold tracking-wider"
+        >
+          KIRIM KE WHATSAPP &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-8 border-t border-blueprint-line text-center text-xs font-mono text-slate-500">
+    GEMILANG LABS &copy; 2026. Option 3: Spatial Blueprint Lab.
+  </footer>
+
+  <!-- SCRIPT: THREE.JS ISOMETRIC INTERACTIVE 3D NODES (Ultra lightweight) -->
+  <script>
+    (function initIsometric() {
+      const canvas = document.getElementById('three-iso');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const aspect = canvas.clientWidth / canvas.clientHeight;
+      const d = 14;
+      const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 1, 1000);
+      camera.position.set(20, 20, 20);
+      camera.lookAt(scene.position);
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Group of isometric cubes (Server Cluster Nodes)
+      const group = new THREE.Group();
+      scene.add(group);
+
+      const boxGeo = new THREE.BoxGeometry(2.8, 2.8, 2.8);
+      const edgeGeo = new THREE.EdgesGeometry(boxGeo);
+
+      const colors = [0x38bdf8, 0x0284c7, 0x0369a1];
+      const positions = [
+        [-4, 0, -4], [0, 0, -4], [4, 0, -4],
+        [-4, 0, 0],  [0, 2, 0],   [4, 0, 0],
+        [-4, 0, 4],  [0, 0, 4],   [4, 0, 4]
+      ];
+
+      positions.forEach((pos, i) => {
+        const mat = new THREE.MeshBasicMaterial({
+          color: colors[i % colors.length],
+          wireframe: true,
+          transparent: true,
+          opacity: 0.35
+        });
+        const cube = new THREE.Mesh(boxGeo, mat);
+        cube.position.set(pos[0], pos[1], pos[2]);
+
+        const line = new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: 0x38bdf8, opacity: 0.8, transparent: true }));
+        cube.add(line);
+
+        group.add(cube);
+      });
+
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.0005;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.0005;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        group.rotation.y += 0.003 + mouseX * 0.1;
+        group.rotation.x = Math.sin(Date.now() * 0.001) * 0.05 + mouseY * 0.1;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        if (!canvas) return;
+        const newAspect = canvas.clientWidth / canvas.clientHeight;
+        camera.left = -d * newAspect;
+        camera.right = d * newAspect;
+        camera.top = d;
+        camera.bottom = -d;
+        camera.updateProjectionMatrix();
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      });
+    })();
+
+    // Configurator script
+    let selectedModule = "Web & SaaS Architecture";
+    const cards = document.querySelectorAll('.param-card');
+    const calcPreview = document.getElementById('calc-preview');
+    const calcSubmit = document.getElementById('calc-submit');
+
+    cards.forEach(c => {
+      c.addEventListener('click', () => {
+        cards.forEach(x => {
+          x.classList.remove('active', 'border-sky-500', 'bg-sky-500/10');
+          x.classList.add('border-blueprint-line', 'bg-blueprint-base');
+        });
+        c.classList.remove('border-blueprint-line', 'bg-blueprint-base');
+        c.classList.add('active', 'border-sky-500', 'bg-sky-500/10');
+        selectedModule = c.getAttribute('data-type');
+
+        const msg = `Halo Gemilang Labs, saya butuh implementasi ${selectedModule} untuk sistem perusahaan kami. Mohon jadwal konsultasi teknis.`;
+        calcPreview.innerText = `"${msg}"`;
+        calcSubmit.href = `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
+      });
+    });
+  </script>
+</body>
+</html>

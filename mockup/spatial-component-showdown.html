@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemilang Labs — Spatial Luminous Component Showdown</title>
+  <meta name="description" content="Eksplorasi mendalam Design System Spatial Luminous untuk Gemilang Labs: Glassmorphism berkelas, GSAP animasi, accordion cards, floating chatbot, dan komponen interaktif." />
+
+  <!-- Fonts: Space Grotesk (Headings), Plus Jakarta Sans (Body), JetBrains Mono (Specs) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            spatial: {
+              bg: '#EDF3F9',
+              navy: '#1B3A8C',
+              dark: '#0B1938',
+              sky: '#2196F3',
+              cyan: '#00B4D8',
+              gold: '#F5B800',
+              goldGlow: 'rgba(245, 184, 0, 0.35)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --sp-navy: #1B3A8C;
+      --sp-dark: #0B1938;
+      --sp-sky: #2196F3;
+      --sp-cyan: #00B4D8;
+      --sp-gold: #F5B800;
+      --sp-bg: #EDF3F9;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      background-color: var(--sp-bg);
+      color: #0B1938;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Spatial Mesh Background */
+    .spatial-ambient-bg {
+      background:
+        radial-gradient(ellipse 70% 50% at 85% 10%, rgba(33, 150, 243, 0.15) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 60% at 10% 40%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 70% 85%, rgba(245, 184, 0, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 60% at 30% 95%, rgba(27, 58, 140, 0.07) 0%, transparent 70%),
+        #EDF3F9;
+      background-attachment: fixed;
+    }
+
+    /* Spatial Frosted Glass Panels */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-top: 1px solid rgba(255, 255, 255, 0.98);
+      box-shadow:
+        0 20px 45px -12px rgba(27, 58, 140, 0.09),
+        0 1px 3px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(33, 150, 243, 0.4);
+      box-shadow:
+        0 30px 60px -15px rgba(27, 58, 140, 0.15),
+        0 0 0 1px rgba(33, 150, 243, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    }
+
+    .glass-card-elevated {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow:
+        0 25px 60px -15px rgba(27, 58, 140, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.8);
+      border-radius: 28px;
+    }
+
+    /* Buttons */
+    .btn-spatial-primary {
+      background: linear-gradient(135deg, var(--sp-navy) 0%, var(--sp-sky) 80%, var(--sp-cyan) 100%);
+      color: #ffffff;
+      font-weight: 700;
+      border-radius: 9999px;
+      box-shadow:
+        0 8px 24px -4px rgba(27, 58, 140, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+    }
+    .btn-spatial-primary:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px -4px rgba(27, 58, 140, 0.45);
+    }
+    .btn-spatial-primary:active { transform: scale(0.97); }
+
+    .btn-spatial-glass {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      color: var(--sp-dark);
+      font-weight: 700;
+      border-radius: 9999px;
+      box-shadow: 0 4px 16px rgba(27, 58, 140, 0.06);
+      transition: all 0.16s ease;
+    }
+    .btn-spatial-glass:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: var(--sp-sky);
+      color: var(--sp-navy);
+      transform: translateY(-1px);
+    }
+    .btn-spatial-glass:active { transform: scale(0.97); }
+
+    /* Specular Text Sheen */
+    .text-sheen {
+      background: linear-gradient(135deg, #0B1938 0%, #1B3A8C 50%, #2196F3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Accordion transitions */
+    .accordion-content {
+      overflow: hidden;
+      height: 0;
+      opacity: 0;
+      transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+    .accordion-item.is-open .accordion-content {
+      height: auto;
+      opacity: 1;
+    }
+    .accordion-item.is-open .accordion-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Chatbot floating widget */
+    #chat-dialog {
+      transform-origin: bottom right;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    }
+    #chat-dialog.is-closed {
+      transform: scale(0.85) translateY(30px);
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="spatial-ambient-bg selection:bg-spatial-sky selection:text-white">
+
+  <!-- ============================================================
+       TOP FIXED NAVIGATION BAR (Floating Pill Glass Navbar)
+  ============================================================ -->
+  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-6xl">
+    <div class="glass-card-elevated px-5 sm:px-7 py-3 flex items-center justify-between gap-4 shadow-xl">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-2.5">
+        <img src="../gemilang.jpeg" alt="Gemilang Labs" class="h-8 sm:h-9 w-auto" />
+        <span class="font-heading font-extrabold text-sm sm:text-base tracking-tight text-spatial-navy hidden sm:inline">
+          GEMILANG LABS
+        </span>
+      </a>
+
+      <!-- Center Links (Pill Jump Navigation) -->
+      <nav class="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-slate-100/70 border border-white/60 text-xs font-semibold text-slate-600">
+        <a href="#nav-showcase" class="px-3.5 py-1.5 rounded-full hover:bg-white hover:text-spatial-navy transition-all">Navbars</a>
+        <a href="#cards-showcase" class="px-3.5 py-1.5 rounded-full hover:bg-white hover:text-spatial-navy transition-all">Bento Cards</a>
+        <a href="#accordion-showcase" class="px-3.5 py-1.5 rounded-full hover:bg-white hover:text-spatial-navy transition-all">Accordions</a>
+        <a href="#tabs-showcase" class="px-3.5 py-1.5 rounded-full hover:bg-white hover:text-spatial-navy transition-all">Tabs</a>
+        <a href="#estimator-showcase" class="px-3.5 py-1.5 rounded-full hover:bg-white hover:text-spatial-navy transition-all">Form &amp; WA</a>
+      </nav>
+
+      <!-- Right CTAs -->
+      <div class="flex items-center gap-2.5">
+        <button onclick="toggleChatbot(true)" class="btn-spatial-glass px-3 sm:px-4 py-2 text-xs flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+          <i data-lucide="bot" class="w-3.5 h-3.5 text-blue-600"></i>
+          <span class="hidden sm:inline">Tanya AI</span>
+        </button>
+
+        <a
+          href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20dengan%20sistem%20Spatial%20Luminous."
+          target="_blank"
+          class="btn-spatial-primary px-4 sm:px-5 py-2 text-xs flex items-center gap-1.5"
+        >
+          <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+          <span>Konsultasi</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       SHOWDOWN HEADER / HERO BANNER
+  ============================================================ -->
+  <div class="pt-28 sm:pt-36 pb-12 px-5 sm:px-8 max-w-6xl mx-auto">
+    
+    <div class="text-center space-y-4 max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card text-xs font-mono font-bold text-spatial-navy shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-spatial-sky"></span>
+        <span>DESIGN SYSTEM 04: SPATIAL LUMINOUS SHOWDOWN</span>
+      </div>
+
+      <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-sheen" style="text-wrap: balance;">
+        Koleksi Komponen Spatial Luminous
+      </h1>
+
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
+        Setiap komponen dirancang dengan kedalaman kaca transparan (*frosted glass*), kilau *specular highlights*, dan interaksi mikro GSAP yang mewah untuk merefleksikan Gemilang Labs sebagai studio teknologi kelas satu.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- ============================================================
+       MAIN SHOWDOWN CATALOG CONTAINER
+  ============================================================ -->
+  <main class="max-w-6xl mx-auto px-5 sm:px-8 pb-32 space-y-24">
+
+    <!-- ───────────────────────────────────────────────────────────
+         BAGIAN 1: NAVBAR VARIATIONS
+    ─────────────────────────────────────────────────────────── -->
+    <section id="nav-showcase" class="space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-300/60 pb-3">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase text-spatial-sky">01 • NAVIGASI SPATIAL</span>
+          <h2 class="font-heading text-xl sm:text-2xl font-bold text-spatial-dark">Variasi Bilah Navigasi</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-500">2 Opsi Layout</span>
+      </div>
+
+      <!-- Nav Varian A: Floating Pill (Sudah aktif di atas) -->
+      <div class="glass-card p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="font-heading text-sm font-bold text-slate-900">Varian A: Floating Detached Pill (Aktif di Atas Layar)</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-bold">RECOMMENDED</span>
+        </div>
+        <p class="text-xs text-slate-600">
+          Melayang anggun dengan `backdrop-blur(24px)`, sudut membulat 9999px (*pill*), dan bayangan difus. Tidak menyentuh tepi layar, memberi kesan spatial modern ala Apple VisionOS.
+        </p>
+      </div>
+
+      <!-- Nav Varian B: In-Grid Modular Bar -->
+      <div class="glass-card p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="font-heading text-sm font-bold text-slate-900">Varian B: Architectural In-Grid Header</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-bold">ALTERNATIVE</span>
+        </div>
+
+        <div class="rounded-2xl bg-white/60 border border-white/90 p-3.5 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-spatial-navy"></span>
+            <span class="font-heading font-extrabold text-xs text-spatial-navy">GEMILANG LABS</span>
+          </div>
+          <div class="flex items-center gap-5 text-xs font-mono text-slate-600">
+            <span>// PILAR_01</span>
+            <span>// PILAR_02</span>
+            <span>// PILAR_03</span>
+          </div>
+          <button class="px-3.5 py-1 rounded-lg bg-spatial-navy text-white text-xs font-mono font-bold">
+            Hubungi Tim
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ───────────────────────────────────────────────────────────
+         BAGIAN 2: BENTO GLASS CARDS & TILT PHYSICS
+    ─────────────────────────────────────────────────────────── -->
+    <section id="cards-showcase" class="space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-300/60 pb-3">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase text-spatial-sky">02 • BENTO SURFACES</span>
+          <h2 class="font-heading text-xl sm:text-2xl font-bold text-spatial-dark">Kartu Frosted Glass &amp; Hover Physics</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-500">Arahkan Kursor / Hover</span>
+      </div>
+
+      <!-- 3-Column Asymmetric Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Card 1: Web Scale -->
+        <div class="glass-card p-7 flex flex-col justify-between group cursor-pointer" data-tilt>
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-spatial-navy to-spatial-sky flex items-center justify-center text-white mb-6 shadow-md shadow-blue-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="globe" class="w-6 h-6"></i>
+            </div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-spatial-sky mb-1 block">MODUL 01</span>
+            <h3 class="font-heading text-lg font-bold text-spatial-dark mb-2">Web App &amp; SaaS Engine</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Arsitektur aplikasi web performa tinggi dengan Server-Side Rendering, edge caching, dan pengalaman interaktif responsif tanpa jeda.
+            </p>
+          </div>
+
+          <div class="pt-6 border-t border-slate-200/60 mt-6 flex items-center justify-between">
+            <span class="text-[11px] font-mono font-bold text-slate-500">Lighthouse 98+</span>
+            <span class="w-7 h-7 rounded-full bg-white/80 border border-white flex items-center justify-center text-spatial-navy group-hover:translate-x-1 transition-transform">
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Card 2: AI Automation -->
+        <div class="glass-card p-7 flex flex-col justify-between group cursor-pointer" data-tilt>
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center text-slate-950 mb-6 shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="sparkles" class="w-6 h-6"></i>
+            </div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-600 mb-1 block">MODUL 02</span>
+            <h3 class="font-heading text-lg font-bold text-spatial-dark mb-2">Sistem AI &amp; Otomasi Cerdas</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Chatbot WhatsApp berkemampuan nalar kontekstual, pemrosesan dokumen otomatis, computer vision, dan pipeline data tanpa input manual.
+            </p>
+          </div>
+
+          <div class="pt-6 border-t border-slate-200/60 mt-6 flex items-center justify-between">
+            <span class="text-[11px] font-mono font-bold text-slate-500">Respon 24/7 Nonstop</span>
+            <span class="w-7 h-7 rounded-full bg-white/80 border border-white flex items-center justify-center text-spatial-navy group-hover:translate-x-1 transition-transform">
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Card 3: Enterprise ERP -->
+        <div class="glass-card p-7 flex flex-col justify-between group cursor-pointer" data-tilt>
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 mb-6 group-hover:scale-105 transition-transform">
+              <i data-lucide="database" class="w-6 h-6"></i>
+            </div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-600 mb-1 block">MODUL 03</span>
+            <h3 class="font-heading text-lg font-bold text-spatial-dark mb-2">ERP, CRM &amp; Manajemen</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Satu pintu pelacakan inventori gudang, pencatatan kas keluar-masuk, dan dashboard analitik bisnis yang aman dan dapat diperluas.
+            </p>
+          </div>
+
+          <div class="pt-6 border-t border-slate-200/60 mt-6 flex items-center justify-between">
+            <span class="text-[11px] font-mono font-bold text-slate-500">Zero Data Leak</span>
+            <span class="w-7 h-7 rounded-full bg-white/80 border border-white flex items-center justify-center text-spatial-navy group-hover:translate-x-1 transition-transform">
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ───────────────────────────────────────────────────────────
+         BAGIAN 3: ACCORDION CARDS (GSAP EXPANDABLE)
+    ─────────────────────────────────────────────────────────── -->
+    <section id="accordion-showcase" class="space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-300/60 pb-3">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase text-spatial-sky">03 • INTERAKTIF ACCORDIONS</span>
+          <h2 class="font-heading text-xl sm:text-2xl font-bold text-spatial-dark">Kartu Akordion Halus (GSAP Driven)</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-500">Klik untuk Buka/Tutup</span>
+      </div>
+
+      <div class="space-y-3.5">
+
+        <!-- Accordion Item 1 -->
+        <div class="accordion-item glass-card overflow-hidden transition-all duration-300">
+          <button type="button" onclick="toggleAccordion(this)" class="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer">
+            <div class="flex items-center gap-4">
+              <div class="w-8 h-8 rounded-xl bg-blue-100/80 text-spatial-navy flex items-center justify-center font-mono font-bold text-xs flex-shrink-0">
+                01
+              </div>
+              <div>
+                <h4 class="font-heading text-sm sm:text-base font-bold text-spatial-dark">
+                  Bagaimana jika bisnis kami sama sekali belum paham teknologi?
+                </h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">Penjelasan alur kerja untuk pemilik bisnis awam</p>
+              </div>
+            </div>
+            <div class="accordion-chevron w-8 h-8 rounded-full bg-white/80 border border-white flex items-center justify-center text-slate-600 transition-transform duration-300 flex-shrink-0">
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </div>
+          </button>
+
+          <div class="accordion-content">
+            <div class="px-5 sm:px-6 pb-6 pt-2 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/50">
+              Justru di sinilah peran Gemilang Labs. Anda tidak perlu memikirkan kode, server, atau kerumitan teknis. Anda cukup menceritakan bagaimana bisnis Anda berjalan setiap hari dan apa kendala yang paling menyita waktu. Tim kami yang akan merancang sistem digital yang ramah dan mudah digunakan oleh Anda dan karyawan Anda.
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion Item 2 -->
+        <div class="accordion-item glass-card overflow-hidden transition-all duration-300">
+          <button type="button" onclick="toggleAccordion(this)" class="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer">
+            <div class="flex items-center gap-4">
+              <div class="w-8 h-8 rounded-xl bg-amber-100/80 text-amber-900 flex items-center justify-center font-mono font-bold text-xs flex-shrink-0">
+                02
+              </div>
+              <div>
+                <h4 class="font-heading text-sm sm:text-base font-bold text-spatial-dark">
+                  Apakah sistem yang dibuat bisa dihubungkan ke WhatsApp?
+                </h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">Integrasi komunikasi &amp; bot otomatisasi</p>
+              </div>
+            </div>
+            <div class="accordion-chevron w-8 h-8 rounded-full bg-white/80 border border-white flex items-center justify-center text-slate-600 transition-transform duration-300 flex-shrink-0">
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </div>
+          </button>
+
+          <div class="accordion-content">
+            <div class="px-5 sm:px-6 pb-6 pt-2 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/50">
+              Bisa 100%. Kami dapat menghubungkan sistem website, absensi karyawan, hingga pencatatan pesanan ke WhatsApp resmi bisnis Anda. Misalnya mengirimkan notifikasi invoice otomatis ke pelanggan atau bot AI yang membalas pertanyaan harga 24 jam nonstop.
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion Item 3 -->
+        <div class="accordion-item glass-card overflow-hidden transition-all duration-300">
+          <button type="button" onclick="toggleAccordion(this)" class="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer">
+            <div class="flex items-center gap-4">
+              <div class="w-8 h-8 rounded-xl bg-emerald-100/80 text-emerald-900 flex items-center justify-center font-mono font-bold text-xs flex-shrink-0">
+                03
+              </div>
+              <div>
+                <h4 class="font-heading text-sm sm:text-base font-bold text-spatial-dark">
+                  Berapa lama estimasi pengerjaan sebuah sistem kustom?
+                </h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">Skala pengerjaan &amp; timeline realistis</p>
+              </div>
+            </div>
+            <div class="accordion-chevron w-8 h-8 rounded-full bg-white/80 border border-white flex items-center justify-center text-slate-600 transition-transform duration-300 flex-shrink-0">
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </div>
+          </button>
+
+          <div class="accordion-content">
+            <div class="px-5 sm:px-6 pb-6 pt-2 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/50">
+              Tergantung skala kebutuhan: untuk prototipe awal (MVP) atau website bisnis cepat biasanya selesai dalam 2-4 minggu. Untuk sistem manajemen perusahaan yang kompleks (ERP multi-cabang/gudang), biasanya berkisar antara 1 hingga 2 bulan dengan sistem pengujian teruji sebelum peluncuran.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ───────────────────────────────────────────────────────────
+         BAGIAN 4: SEGMENTED TABS WITH SPRING INDICATOR
+    ─────────────────────────────────────────────────────────── -->
+    <section id="tabs-showcase" class="space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-300/60 pb-3">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase text-spatial-sky">04 • SEGMENTED TABS</span>
+          <h2 class="font-heading text-xl sm:text-2xl font-bold text-spatial-dark">Tab Penjelajah Solusi dengan Indikator GSAP</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-500">Interaktif Bergeser Halus</span>
+      </div>
+
+      <div class="glass-card p-6 sm:p-8 space-y-6">
+        
+        <!-- Tab Selector Bar -->
+        <div class="relative flex items-center p-1.5 rounded-full bg-slate-200/60 border border-white/60 max-w-md mx-auto" id="tab-pill-bar">
+          <!-- Active Pill Indicator (GSAP Animated) -->
+          <div id="tab-indicator" class="absolute top-1.5 left-1.5 h-[calc(100%-12px)] w-[calc(33.33%-4px)] rounded-full bg-white shadow-md transition-all duration-300"></div>
+
+          <button onclick="switchTabDemo(0, this)" class="relative z-10 flex-1 py-2 text-xs font-heading font-bold text-spatial-navy transition-colors text-center">
+            Solusi Web
+          </button>
+          <button onclick="switchTabDemo(1, this)" class="relative z-10 flex-1 py-2 text-xs font-heading font-bold text-slate-600 hover:text-spatial-navy transition-colors text-center">
+            Solusi AI
+          </button>
+          <button onclick="switchTabDemo(2, this)" class="relative z-10 flex-1 py-2 text-xs font-heading font-bold text-slate-600 hover:text-spatial-navy transition-colors text-center">
+            Sistem ERP
+          </button>
+        </div>
+
+        <!-- Tab Content Panels -->
+        <div class="pt-4 min-h-[160px]">
+          <!-- Panel 0 -->
+          <div id="tab-panel-0" class="tab-panel grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+            <div class="space-y-2">
+              <span class="text-xs font-mono font-bold text-spatial-sky">ARSITEKTUR WEB SCALABLE</span>
+              <h3 class="font-heading text-xl font-bold text-spatial-dark">Website &amp; Aplikasi Web Kustom</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Dibangun dengan standar Next.js 15, optimasi Google Core Web Vitals, dan integrasi payment gateway otomatis. Cocok untuk portal keanggotaan, company profile kredibel, atau SaaS multitenant.
+              </p>
+            </div>
+            <div class="p-5 rounded-2xl bg-white/70 border border-white space-y-2">
+              <div class="flex justify-between text-xs font-mono">
+                <span>Skor Lighthouse:</span>
+                <span class="font-bold text-emerald-600">99 / 100</span>
+              </div>
+              <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                <div class="bg-emerald-500 h-full w-[98%]"></div>
+              </div>
+              <span class="text-[11px] text-slate-500 block pt-1">Hasil: Akses secepat kilat &amp; ramah SEO Google</span>
+            </div>
+          </div>
+
+          <!-- Panel 1 -->
+          <div id="tab-panel-1" class="tab-panel hidden grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+            <div class="space-y-2">
+              <span class="text-xs font-mono font-bold text-amber-600">INTELLIGENT WORKFLOWS</span>
+              <h3 class="font-heading text-xl font-bold text-spatial-dark">AI Chatbot &amp; Otomasi Dokumen</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Membantu tim penjualan dan CS melayani ribuan pesan masuk secara otomatis dengan kecerdasan buatan berbasis data SOP internal Anda.
+              </p>
+            </div>
+            <div class="p-5 rounded-2xl bg-white/70 border border-white space-y-2">
+              <div class="flex justify-between text-xs font-mono">
+                <span>Efisiensi Waktu Tim:</span>
+                <span class="font-bold text-amber-600">+72% Hemat</span>
+              </div>
+              <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                <div class="bg-amber-500 h-full w-[72%]"></div>
+              </div>
+              <span class="text-[11px] text-slate-500 block pt-1">Hasil: Pelanggan terlayani instan tanpa menunggu jam kerja</span>
+            </div>
+          </div>
+
+          <!-- Panel 2 -->
+          <div id="tab-panel-2" class="tab-panel hidden grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+            <div class="space-y-2">
+              <span class="text-xs font-mono font-bold text-emerald-600">CENTRALIZED MANAGEMENT</span>
+              <h3 class="font-heading text-xl font-bold text-spatial-dark">ERP &amp; Manajemen Data Perusahaan</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Mencegah kebocoran stok barang, mencatat setiap rupiah yang keluar-masuk, dan menyajikan laporan kinerja bulanan tanpa excel manual yang membingungkan.
+              </p>
+            </div>
+            <div class="p-5 rounded-2xl bg-white/70 border border-white space-y-2">
+              <div class="flex justify-between text-xs font-mono">
+                <span>Akurasi Laporan Kas:</span>
+                <span class="font-bold text-emerald-600">100% Real-time</span>
+              </div>
+              <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                <div class="bg-emerald-500 h-full w-[100%]"></div>
+              </div>
+              <span class="text-[11px] text-slate-500 block pt-1">Hasil: Pemilik usaha memantau bisnis dari mana saja</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ───────────────────────────────────────────────────────────
+         BAGIAN 5: FORM ESTIMATOR & WHATSAPP GENERATOR
+    ─────────────────────────────────────────────────────────── -->
+    <section id="estimator-showcase" class="space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-300/60 pb-3">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase text-spatial-sky">05 • FORM &amp; WHATSAPP GENERATOR</span>
+          <h2 class="font-heading text-xl sm:text-2xl font-bold text-spatial-dark">Kalkulator Rencana Sistem Bisnis</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-500">Live WhatsApp Dispatch</span>
+      </div>
+
+      <div class="glass-card p-6 sm:p-8 space-y-6">
+        
+        <!-- Pilihan Sistem -->
+        <div class="space-y-2">
+          <label class="text-xs font-mono font-bold uppercase text-slate-600 block">
+            1. Sistem apa yang ingin Anda bangun?
+          </label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="ds-calc-svc">
+            <button type="button" data-val="Website atau Aplikasi Web" class="calc-btn active p-3 rounded-2xl bg-white border-2 border-spatial-sky text-xs font-bold text-spatial-navy shadow-sm text-left">
+              Web &amp; SaaS
+            </button>
+            <button type="button" data-val="Sistem AI & Otomasi Chatbot" class="calc-btn p-3 rounded-2xl bg-white/60 border border-white/80 hover:border-spatial-sky text-xs font-semibold text-slate-700 text-left">
+              AI &amp; Otomasi
+            </button>
+            <button type="button" data-val="Sistem ERP & Manajemen Bisnis" class="calc-btn p-3 rounded-2xl bg-white/60 border border-white/80 hover:border-spatial-sky text-xs font-semibold text-slate-700 text-left">
+              ERP / CRM
+            </button>
+            <button type="button" data-val="Perangkat IoT & Sensor" class="calc-btn p-3 rounded-2xl bg-white/60 border border-white/80 hover:border-spatial-sky text-xs font-semibold text-slate-700 text-left">
+              IoT &amp; Hardware
+            </button>
+          </div>
+        </div>
+
+        <!-- Pilihan Skala -->
+        <div class="space-y-2">
+          <label class="text-xs font-mono font-bold uppercase text-slate-600 block">
+            2. Skala &amp; Target Pengerjaan:
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="ds-calc-tier">
+            <button type="button" data-val="MVP Cepat (2-4 Minggu)" class="tier-btn active p-3 rounded-2xl bg-white border-2 border-spatial-sky text-xs font-bold text-spatial-navy shadow-sm text-left">
+              Butuh Cepat (2-4 Mgg)
+            </button>
+            <button type="button" data-val="Pengembangan Skala Penuh (1-2 Bulan)" class="tier-btn p-3 rounded-2xl bg-white/60 border border-white/80 hover:border-spatial-sky text-xs font-semibold text-slate-700 text-left">
+              Skala Penuh (1-2 Bulan)
+            </button>
+            <button type="button" data-val="Ingin Konsultasi Dulu" class="tier-btn p-3 rounded-2xl bg-white/60 border border-white/80 hover:border-spatial-sky text-xs font-semibold text-slate-700 text-left">
+              Mau Diskusi Santai Dulu
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview & Tombol Kirim -->
+        <div class="p-5 rounded-2xl bg-white/80 border border-white flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[10px] font-mono font-bold uppercase text-slate-500">Draf Pesan Terformat:</span>
+            </div>
+            <p id="ds-wa-preview" class="text-xs font-mono text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-200/80 leading-relaxed">
+              "Halo Gemilang Labs, saya tertarik membangun Website atau Aplikasi Web dengan target MVP Cepat (2-4 Minggu). Boleh diskusi lebih lanjut?"
+            </p>
+          </div>
+
+          <a
+            id="ds-wa-submit"
+            href="#"
+            target="_blank"
+            class="btn-spatial-primary px-7 py-3.5 text-xs font-bold flex items-center justify-center gap-2 flex-shrink-0 w-full md:w-auto"
+          >
+            <i data-lucide="send" class="w-4 h-4"></i>
+            <span>Kirim ke WhatsApp</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       FLOATING ACTION BUTTON & AI CHATBOT MODAL (Spatial Luminous)
+  ============================================================ -->
+  <!-- FAB Button at Bottom-Right -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button
+      onclick="toggleChatbot()"
+      id="chat-fab"
+      class="btn-spatial-primary w-14 h-14 rounded-full flex items-center justify-center shadow-2xl relative group cursor-pointer"
+      title="Buka Asisten AI Gemilang Labs"
+    >
+      <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-white animate-pulse"></span>
+      <i data-lucide="bot" class="w-6 h-6 text-white group-hover:scale-110 transition-transform"></i>
+    </button>
+  </div>
+
+  <!-- Chatbot Dialog Window (Spatial Glass) -->
+  <div
+    id="chat-dialog"
+    class="is-closed fixed bottom-24 right-6 z-50 w-[92vw] max-w-sm glass-card-elevated p-5 flex flex-col shadow-2xl border border-white/90"
+  >
+    <!-- Chat Header -->
+    <div class="flex items-center justify-between pb-3.5 border-b border-slate-200/60 flex-shrink-0">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-spatial-navy to-spatial-sky flex items-center justify-center text-white shadow-sm">
+          <i data-lucide="bot" class="w-4 h-4"></i>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-xs text-spatial-dark">Gemilang AI Assistant</h4>
+          <span class="text-[10px] font-mono text-emerald-600 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Online • Siap Menjawab
+          </span>
+        </div>
+      </div>
+      
+      <button onclick="toggleChatbot(false)" class="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 text-xs">
+        ✕
+      </button>
+    </div>
+
+    <!-- Message History Area -->
+    <div id="chat-messages" class="py-4 space-y-3 max-h-72 overflow-y-auto pr-1 text-xs">
+      <!-- Bot Message -->
+      <div class="flex items-start gap-2">
+        <div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0">
+          GL
+        </div>
+        <div class="p-3 rounded-2xl rounded-tl-none bg-white border border-slate-200/70 text-slate-800 leading-relaxed shadow-sm">
+          Halo! Saya asisten virtual Gemilang Labs. Ada rencana sistem digital yang ingin Anda tanyakan atau konsultasikan?
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Prompt Chips -->
+    <div class="py-2 flex flex-wrap gap-1.5 border-t border-slate-200/60 flex-shrink-0">
+      <button onclick="sendQuickPrompt('Berapa estimasi waktu buat web SaaS?')" class="text-[10.5px] font-mono px-2.5 py-1 rounded-full bg-white hover:bg-blue-50 border border-slate-200 text-slate-700">
+        ⏱️ Estimasi Waktu?
+      </button>
+      <button onclick="sendQuickPrompt('Bisa integrasi sistem ke WhatsApp?')" class="text-[10.5px] font-mono px-2.5 py-1 rounded-full bg-white hover:bg-blue-50 border border-slate-200 text-slate-700">
+        💬 Integrasi WA?
+      </button>
+      <button onclick="sendQuickPrompt('Bagaimana cara mulai konsultasinya?')" class="text-[10.5px] font-mono px-2.5 py-1 rounded-full bg-white hover:bg-blue-50 border border-slate-200 text-slate-700">
+        🚀 Cara Mulai?
+      </button>
+    </div>
+
+    <!-- Chat Input & WhatsApp Handoff -->
+    <div class="pt-2 flex items-center gap-2 flex-shrink-0">
+      <input
+        type="text"
+        id="chat-input"
+        placeholder="Tulis pertanyaan Anda..."
+        class="flex-1 bg-white border border-slate-200 rounded-full px-3.5 py-2 text-xs text-slate-800 outline-none focus:border-spatial-sky"
+        onkeydown="if(event.key==='Enter') sendUserMessage()"
+      />
+      <button
+        onclick="sendUserMessage()"
+        class="w-8 h-8 rounded-full bg-spatial-navy hover:bg-spatial-sky text-white flex items-center justify-center transition-colors flex-shrink-0"
+      >
+        <i data-lucide="send" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+
+    <!-- Direct WhatsApp Handoff Link -->
+    <div class="pt-2.5 text-center">
+      <a
+        href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20ingin%20berbicara%20langsung%20dengan%20Engineer."
+        target="_blank"
+        class="text-[11px] font-mono text-blue-600 hover:underline flex items-center justify-center gap-1"
+      >
+        <i data-lucide="phone-call" class="w-3 h-3"></i>
+        <span>Atau langsung chat dengan Lead Engineer kami</span>
+      </a>
+    </div>
+
+  </div>
+
+
+  <!-- ============================================================
+       SCRIPTS & INTERACTION ENGINE
+  ============================================================ -->
+  <script>
+    lucide.createIcons();
+
+    /* ── 1. Accordion Toggle Logic ── */
+    function toggleAccordion(button) {
+      const item = button.closest('.accordion-item');
+      const isOpen = item.classList.contains('is-open');
+
+      // Close other accordions for clean single view
+      document.querySelectorAll('.accordion-item').forEach((acc) => {
+        acc.classList.remove('is-open');
+      });
+
+      if (!isOpen) {
+        item.classList.add('is-open');
+      }
+    }
+
+    /* ── 2. Segmented Tabs Switcher (GSAP Animated Pill) ── */
+    function switchTabDemo(index, button) {
+      const indicator = document.getElementById('tab-indicator');
+      const bar = document.getElementById('tab-pill-bar');
+      const totalTabs = 3;
+
+      // Move indicator with GSAP
+      const widthPercent = 100 / totalTabs;
+      const leftOffset = index * widthPercent;
+
+      gsap.to(indicator, {
+        left: `${leftOffset}%`,
+        duration: 0.35,
+        ease: 'power2.out'
+      });
+
+      // Update button text color
+      bar.querySelectorAll('button').forEach((btn, idx) => {
+        if (idx === index) {
+          btn.classList.add('text-spatial-navy');
+          btn.classList.remove('text-slate-600');
+        } else {
+          btn.classList.remove('text-spatial-navy');
+          btn.classList.add('text-slate-600');
+        }
+      });
+
+      // Cross-fade panel content
+      for (let i = 0; i < totalTabs; i++) {
+        const panel = document.getElementById(`tab-panel-${i}`);
+        if (i === index) {
+          panel.classList.remove('hidden');
+          gsap.fromTo(panel, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3 });
+        } else {
+          panel.classList.add('hidden');
+        }
+      }
+    }
+
+    /* ── 3. WhatsApp Estimator Calculator ── */
+    const WA_NUMBER = '6281234567890';
+    let selectedSvc = 'Website atau Aplikasi Web';
+    let selectedTier = 'MVP Cepat (2-4 Minggu)';
+
+    const previewEl = document.getElementById('ds-wa-preview');
+    const submitEl = document.getElementById('ds-wa-submit');
+
+    function updateWAPreview() {
+      const text = `Halo Gemilang Labs, saya tertarik membangun ${selectedSvc} dengan target ${selectedTier}. Boleh diskusi lebih lanjut?`;
+      previewEl.textContent = `"${text}"`;
+      submitEl.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+    }
+
+    document.querySelectorAll('#ds-calc-svc .calc-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#ds-calc-svc .calc-btn').forEach((b) => {
+          b.classList.remove('active', 'border-2', 'border-spatial-sky', 'text-spatial-navy');
+          b.classList.add('border', 'border-white/80', 'text-slate-700');
+        });
+        btn.classList.add('active', 'border-2', 'border-spatial-sky', 'text-spatial-navy');
+        selectedSvc = btn.getAttribute('data-val');
+        updateWAPreview();
+      });
+    });
+
+    document.querySelectorAll('#ds-calc-tier .tier-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#ds-calc-tier .tier-btn').forEach((b) => {
+          b.classList.remove('active', 'border-2', 'border-spatial-sky', 'text-spatial-navy');
+          b.classList.add('border', 'border-white/80', 'text-slate-700');
+        });
+        btn.classList.add('active', 'border-2', 'border-spatial-sky', 'text-spatial-navy');
+        selectedTier = btn.getAttribute('data-val');
+        updateWAPreview();
+      });
+    });
+
+    updateWAPreview();
+
+    /* ── 4. Floating Chatbot Dialog & Quick Prompts ── */
+    function toggleChatbot(forceOpen) {
+      const dialog = document.getElementById('chat-dialog');
+      if (typeof forceOpen === 'boolean') {
+        if (forceOpen) dialog.classList.remove('is-closed');
+        else dialog.classList.add('is-closed');
+      } else {
+        dialog.classList.toggle('is-closed');
+      }
+    }
+
+    function appendMessage(sender, text) {
+      const history = document.getElementById('chat-messages');
+      const isBot = sender === 'bot';
+
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `flex items-start gap-2 ${isBot ? '' : 'flex-row-reverse'}`;
+
+      msgDiv.innerHTML = `
+        <div class="w-6 h-6 rounded-full ${isBot ? 'bg-blue-600 text-white' : 'bg-slate-800 text-white'} flex items-center justify-center text-[10px] font-bold flex-shrink-0">
+          ${isBot ? 'GL' : 'Anda'}
+        </div>
+        <div class="p-3 rounded-2xl ${isBot ? 'rounded-tl-none bg-white border border-slate-200/70' : 'rounded-tr-none bg-spatial-navy text-white'} text-xs leading-relaxed shadow-sm max-w-[80%]">
+          ${text}
+        </div>
+      `;
+
+      history.appendChild(msgDiv);
+      history.scrollTop = history.scrollHeight;
+    }
+
+    function sendQuickPrompt(promptText) {
+      appendMessage('user', promptText);
+
+      // Simulate bot answers
+      setTimeout(() => {
+        if (promptText.includes('Estimasi')) {
+          appendMessage('bot', 'Untuk MVP atau website cepat biasanya 2-4 minggu. Untuk sistem ERP manajemen skala penuh sekitar 1-2 bulan, dengan pelaporan progress berkala setiap minggunya!');
+        } else if (promptText.includes('WhatsApp')) {
+          appendMessage('bot', 'Tentu saja! Kami bisa menghubungkan sistem pesanan, pengingat jadwal, atau bot customer service otomatis langsung ke WhatsApp resmi bisnis Anda.');
+        } else {
+          appendMessage('bot', 'Sangat mudah! Cukup ceritakan apa kebutuhan bisnis Anda lewat WhatsApp, tim engineer kami akan memberikan gambaran solusi realistis tanpa biaya.');
+        }
+      }, 500);
+    }
+
+    function sendUserMessage() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendMessage('user', text);
+      input.value = '';
+
+      setTimeout(() => {
+        appendMessage('bot', 'Pertanyaan yang bagus! Untuk pembahasan detail dan estimasi langsung sesuai alur bisnis Anda, yuk klik tombol WhatsApp di bawah agar terhubung langsung dengan tim kami.');
+      }, 600);
+    }
+
+    /* ── 5. Subtle Card 3D Tilt Parallax on Mouse Move ── */
+    document.querySelectorAll('[data-tilt]').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+
+        const rotX = ((y - cy) / cy) * -6;
+        const rotY = ((x - cx) / cx) * 6;
+
+        card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0)';
+      });
+    });
+  </script>
+</body>
+</html>

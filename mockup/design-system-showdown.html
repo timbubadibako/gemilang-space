@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemilang Labs — Multi Design System Showdown</title>
+  <meta name="description" content="Komparasi interaktif 4 Design System berbeda untuk Gemilang Labs: Neo-Precision, Warm Atelier, Tactile Studio, dan Spatial Luminous." />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Unbounded, Syne, JetBrains Mono, Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       DYNAMIC DESIGN SYSTEM TOKENS (SWAPPED BY JAVASCRIPT)
+    ============================================================ */
+    #preview-frame {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* 1. NEO-PRECISION (Linear / Stripe Light) */
+    .theme-precision {
+      --ds-bg: #F8FAFC;
+      --ds-surface: #FFFFFF;
+      --ds-surface-subtle: #F1F5F9;
+      --ds-text-primary: #0F172A;
+      --ds-text-secondary: #475569;
+      --ds-text-muted: #94A3B8;
+      --ds-border: rgba(15, 23, 42, 0.08);
+      --ds-border-strong: rgba(15, 23, 42, 0.16);
+      --ds-brand-primary: #1B3A8C;
+      --ds-brand-accent: #2196F3;
+      --ds-brand-highlight: #F5B800;
+      --ds-radius: 12px;
+      --ds-radius-lg: 16px;
+      --ds-font-heading: 'Plus Jakarta Sans', sans-serif;
+      --ds-font-body: 'Plus Jakarta Sans', sans-serif;
+      --ds-font-mono: 'JetBrains Mono', monospace;
+      --ds-shadow: 0 4px 20px -4px rgba(27, 58, 140, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      --ds-shadow-hover: 0 16px 36px -8px rgba(27, 58, 140, 0.14);
+      --ds-pattern: radial-gradient(circle, rgba(27, 58, 140, 0.08) 1.2px, transparent 1.2px);
+      --ds-pattern-size: 28px 28px;
+    }
+
+    /* 2. WARM ATELIER (Kinfolk / Pentagram Bespoke Studio) */
+    .theme-atelier {
+      --ds-bg: #FAF7F2;
+      --ds-surface: #FFFFFF;
+      --ds-surface-subtle: #F2ECE1;
+      --ds-text-primary: #1E1A16;
+      --ds-text-secondary: #5C544B;
+      --ds-text-muted: #9E9486;
+      --ds-border: rgba(92, 84, 75, 0.12);
+      --ds-border-strong: rgba(92, 84, 75, 0.24);
+      --ds-brand-primary: #1B3A8C;
+      --ds-brand-accent: #D97706;
+      --ds-brand-highlight: #2563EB;
+      --ds-radius: 20px;
+      --ds-radius-lg: 28px;
+      --ds-font-heading: 'Syne', sans-serif;
+      --ds-font-body: 'Plus Jakarta Sans', sans-serif;
+      --ds-font-mono: 'JetBrains Mono', monospace;
+      --ds-shadow: 0 8px 30px -6px rgba(92, 84, 75, 0.08);
+      --ds-shadow-hover: 0 20px 40px -10px rgba(92, 84, 75, 0.16);
+      --ds-pattern: radial-gradient(circle, rgba(92, 84, 75, 0.06) 1px, transparent 1px);
+      --ds-pattern-size: 24px 24px;
+    }
+
+    /* 3. TACTILE STUDIO (Modern Punchy / Confident Modular) */
+    .theme-tactile {
+      --ds-bg: #F4F4F7;
+      --ds-surface: #FFFFFF;
+      --ds-surface-subtle: #EBEBEF;
+      --ds-text-primary: #0A0A0E;
+      --ds-text-secondary: #40404C;
+      --ds-text-muted: #7A7A8E;
+      --ds-border: #0A0A0E;
+      --ds-border-strong: #0A0A0E;
+      --ds-brand-primary: #1B3A8C;
+      --ds-brand-accent: #2563EB;
+      --ds-brand-highlight: #F59E0B;
+      --ds-radius: 14px;
+      --ds-radius-lg: 18px;
+      --ds-font-heading: 'Unbounded', sans-serif;
+      --ds-font-body: 'Plus Jakarta Sans', sans-serif;
+      --ds-font-mono: 'JetBrains Mono', monospace;
+      --ds-shadow: 4px 4px 0px #0A0A0E;
+      --ds-shadow-hover: 6px 6px 0px #0A0A0E;
+      --ds-pattern: none;
+      --ds-pattern-size: auto;
+    }
+
+    /* 4. SPATIAL LUMINOUS (Apple VisionOS / Frosted Ambient Glass) */
+    .theme-spatial {
+      --ds-bg: #F0F4F9;
+      --ds-surface: rgba(255, 255, 255, 0.78);
+      --ds-surface-subtle: rgba(255, 255, 255, 0.55);
+      --ds-text-primary: #0B1938;
+      --ds-text-secondary: #3B4B6E;
+      --ds-text-muted: #788BAE;
+      --ds-border: rgba(255, 255, 255, 0.85);
+      --ds-border-strong: rgba(33, 150, 243, 0.35);
+      --ds-brand-primary: #1B3A8C;
+      --ds-brand-accent: #00B4D8;
+      --ds-brand-highlight: #F5B800;
+      --ds-radius: 24px;
+      --ds-radius-lg: 32px;
+      --ds-font-heading: 'Space Grotesk', sans-serif;
+      --ds-font-body: 'Plus Jakarta Sans', sans-serif;
+      --ds-font-mono: 'JetBrains Mono', monospace;
+      --ds-shadow: 0 20px 45px -10px rgba(27, 58, 140, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.7);
+      --ds-shadow-hover: 0 28px 60px -12px rgba(27, 58, 140, 0.20), 0 0 0 1.5px rgba(33, 150, 243, 0.5);
+      --ds-pattern: radial-gradient(ellipse at 80% 20%, rgba(33, 150, 243, 0.12) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(245, 184, 0, 0.08) 0%, transparent 50%);
+      --ds-pattern-size: 100% 100%;
+    }
+
+    /* Applying variables to preview components */
+    .ds-canvas {
+      background-color: var(--ds-bg);
+      background-image: var(--ds-pattern);
+      background-size: var(--ds-pattern-size);
+      color: var(--ds-text-primary);
+    }
+    .ds-heading {
+      font-family: var(--ds-font-heading);
+      letter-spacing: -0.025em;
+    }
+    .ds-body {
+      font-family: var(--ds-font-body);
+    }
+    .ds-mono {
+      font-family: var(--ds-font-mono);
+    }
+    .ds-card {
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      border-radius: var(--ds-radius);
+      box-shadow: var(--ds-shadow);
+      transition: all 0.22s ease;
+    }
+    .ds-card:hover {
+      box-shadow: var(--ds-shadow-hover);
+      border-color: var(--ds-border-strong);
+    }
+    .ds-btn-primary {
+      background: linear-gradient(135deg, var(--ds-brand-primary), var(--ds-brand-accent));
+      color: #ffffff;
+      border-radius: var(--ds-radius);
+      font-family: var(--ds-font-heading);
+      box-shadow: 0 6px 20px -4px rgba(27, 58, 140, 0.3);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .ds-btn-primary:hover { opacity: 0.95; }
+    .ds-btn-primary:active { transform: scale(0.97); }
+
+    .ds-btn-secondary {
+      background: var(--ds-surface);
+      color: var(--ds-text-primary);
+      border: 1.5px solid var(--ds-border-strong);
+      border-radius: var(--ds-radius);
+      font-family: var(--ds-font-heading);
+      transition: all 0.15s ease;
+    }
+    .ds-btn-secondary:hover {
+      background: var(--ds-surface-subtle);
+    }
+    .ds-btn-secondary:active { transform: scale(0.97); }
+
+    .ds-pill {
+      background: var(--ds-surface-subtle);
+      border: 1px solid var(--ds-border);
+      color: var(--ds-brand-primary);
+      border-radius: 9999px;
+      font-family: var(--ds-font-mono);
+    }
+
+    /* Switcher Tab Pills */
+    .tab-active {
+      background: #2563EB;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       TOP CONTROL BAR (Showdown Switcher Hub)
+  ============================================================ -->
+  <header class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 px-4 sm:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
+    
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-black text-sm text-white font-mono shadow-md">
+        GL
+      </div>
+      <div>
+        <h1 class="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+          <span>Gemilang Labs — Design System Studio</span>
+          <span class="px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 text-[10px] font-mono border border-blue-700/50">4 Varian</span>
+        </h1>
+        <p class="text-[11px] text-slate-400">Pilih varian di bawah untuk melihat transformasi visual halaman secara langsung</p>
+      </div>
+    </div>
+
+    <!-- 4 System Switcher Tabs -->
+    <div class="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800 overflow-x-auto max-w-full">
+      <button onclick="setSystem('precision')" id="btn-precision" class="tab-btn tab-active px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5">
+        <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
+        <span>1. Neo-Precision</span>
+      </button>
+
+      <button onclick="setSystem('atelier')" id="btn-atelier" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white whitespace-nowrap transition-all flex items-center gap-1.5">
+        <i data-lucide="feather" class="w-3.5 h-3.5"></i>
+        <span>2. Warm Atelier</span>
+      </button>
+
+      <button onclick="setSystem('tactile')" id="btn-tactile" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white whitespace-nowrap transition-all flex items-center gap-1.5">
+        <i data-lucide="box" class="w-3.5 h-3.5"></i>
+        <span>3. Tactile Studio</span>
+      </button>
+
+      <button onclick="setSystem('spatial')" id="btn-spatial" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white whitespace-nowrap transition-all flex items-center gap-1.5">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+        <span>4. Spatial Luminous</span>
+      </button>
+    </div>
+
+    <!-- Right: Quick Diagnostic Tag -->
+    <div class="hidden lg:flex items-center gap-3 text-xs font-mono text-slate-400">
+      <span id="active-system-desc" class="text-blue-400 font-medium">Swiss Precision / Linear Light</span>
+    </div>
+
+  </header>
+
+
+  <!-- ============================================================
+       SYSTEM SPECIFICATION BANNER
+  ============================================================ -->
+  <section class="bg-slate-900/90 border-b border-slate-800 px-5 sm:px-8 py-3.5">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 text-xs">
+      <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-mono">DNA AESTHETIC:</span>
+        <span id="spec-name" class="font-bold text-white uppercase font-mono tracking-wider">Neo-Precision Engine</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4 sm:gap-8 font-mono text-[11px] text-slate-400">
+        <div><span>TYPOGRAPHY:</span> <strong id="spec-font" class="text-slate-200">Plus Jakarta Sans + JetBrains</strong></div>
+        <div><span>SURFACE:</span> <strong id="spec-surface" class="text-slate-200">1px Hairline + Pure White</strong></div>
+        <div><span>VIBE:</span> <strong id="spec-vibe" class="text-slate-200">Engineering Authority &amp; Surgical Clarity</strong></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       LIVE PREVIEW FRAME (THE SYSTEM IN ACTION)
+  ============================================================ -->
+  <main id="preview-frame" class="theme-precision ds-canvas min-h-screen py-12 px-4 sm:px-8 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto space-y-16">
+
+      <!-- 1. LIVE NAVBAR -->
+      <div class="ds-card p-4 sm:p-5 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img src="../gemilang.jpeg" alt="Gemilang Labs" class="h-8 sm:h-9 w-auto" />
+          <span class="ds-heading font-extrabold text-sm sm:text-base tracking-tight" style="color: var(--ds-brand-primary)">
+            GEMILANG LABS
+          </span>
+        </div>
+
+        <div class="hidden md:flex items-center gap-6 text-xs font-semibold" style="color: var(--ds-text-secondary)">
+          <span class="hover:underline cursor-pointer">Layanan Kami</span>
+          <span class="hover:underline cursor-pointer">Pendekatan</span>
+          <span class="hover:underline cursor-pointer">Kemitraan</span>
+        </div>
+
+        <button class="ds-btn-primary px-4 sm:px-5 py-2 text-xs font-bold flex items-center gap-2">
+          <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+          <span>Mulai Diskusi</span>
+        </button>
+      </div>
+
+      <!-- 2. LIVE HERO PREVIEW -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-4 pb-8">
+        
+        <div class="lg:col-span-7 space-y-6">
+          <div class="ds-pill inline-flex items-center gap-2 px-3.5 py-1 text-[11px] font-bold">
+            <span class="w-1.5 h-1.5 rounded-full animate-ping" style="background: var(--ds-brand-accent)"></span>
+            <span id="hero-badge-text">STUDIO SISTEM DIGITAL &amp; AI</span>
+          </div>
+
+          <h2 class="ds-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.12]" style="color: var(--ds-text-primary); text-wrap: balance;">
+            Membangun Sistem yang <span style="color: var(--ds-brand-accent)">Bekerja Nyata</span> untuk Pertumbuhan Bisnis Anda.
+          </h2>
+
+          <p class="ds-body text-sm sm:text-base leading-relaxed max-w-xl" style="color: var(--ds-text-secondary)">
+            Kami merancang website kustom, sistem AI terapan, ERP manajemen, dan otomasi alur kerja yang membebaskan waktu operasional Anda. Bukan sekadar vendor lepas, melainkan kawan bertumbuh jangka panjang.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3.5 pt-2">
+            <button class="ds-btn-primary px-6 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-2">
+              <span>Konsultasikan Kebutuhan</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <button class="ds-btn-secondary px-5 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-2">
+              <span>Lihat Contoh Solusi</span>
+            </button>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-6 pt-4 text-xs" style="color: var(--ds-text-muted)">
+            <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> 100% Kode Kustom</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Tanpa Jargon Rumit</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Dampingan Berkelanjutan</span>
+          </div>
+        </div>
+
+        <!-- Right Side: Graphic Visual / Component Sandbox -->
+        <div class="lg:col-span-5">
+          <div class="ds-card p-6 space-y-4">
+            <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--ds-border)">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full" style="background: var(--ds-brand-accent)"></span>
+                <span class="ds-mono text-[11px] font-bold uppercase tracking-wider" style="color: var(--ds-text-primary)">Simpul Solusi Aktif</span>
+              </div>
+              <span class="ds-mono text-[10px] px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-bold">READY</span>
+            </div>
+
+            <div class="space-y-2.5">
+              <div class="p-3 rounded-lg border flex items-center justify-between" style="border-color: var(--ds-border); background: var(--ds-surface-subtle)">
+                <div class="flex items-center gap-2.5">
+                  <i data-lucide="globe" class="w-4 h-4" style="color: var(--ds-brand-primary)"></i>
+                  <span class="text-xs font-bold" style="color: var(--ds-text-primary)">Web App &amp; Portal SaaS</span>
+                </div>
+                <span class="ds-mono text-[10px]" style="color: var(--ds-text-muted)">Skalabilitas Tinggi</span>
+              </div>
+
+              <div class="p-3 rounded-lg border flex items-center justify-between" style="border-color: var(--ds-border); background: var(--ds-surface-subtle)">
+                <div class="flex items-center gap-2.5">
+                  <i data-lucide="bot" class="w-4 h-4 text-amber-500"></i>
+                  <span class="text-xs font-bold" style="color: var(--ds-text-primary)">AI &amp; Otomasi WhatsApp</span>
+                </div>
+                <span class="ds-mono text-[10px]" style="color: var(--ds-text-muted)">Respon 24/7</span>
+              </div>
+
+              <div class="p-3 rounded-lg border flex items-center justify-between" style="border-color: var(--ds-border); background: var(--ds-surface-subtle)">
+                <div class="flex items-center gap-2.5">
+                  <i data-lucide="database" class="w-4 h-4 text-emerald-600"></i>
+                  <span class="text-xs font-bold" style="color: var(--ds-text-primary)">ERP &amp; Manajemen Bisnis</span>
+                </div>
+                <span class="ds-mono text-[10px]" style="color: var(--ds-text-muted)">Stok &amp; Keuangan</span>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <div class="p-3 rounded-xl border border-dashed flex items-center justify-between" style="border-color: var(--ds-brand-accent); background: rgba(33, 150, 243, 0.05)">
+                <span class="text-xs font-medium" style="color: var(--ds-brand-primary)">Butuh kombinasi sistem di atas?</span>
+                <span class="ds-mono text-xs font-bold underline cursor-pointer" style="color: var(--ds-brand-accent)">Rancang Solusi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 3. LIVE SERVICE TILES SHOWCASE -->
+      <div class="space-y-6">
+        <div>
+          <span class="ds-mono text-xs font-bold uppercase tracking-wider" style="color: var(--ds-brand-primary)">PILIHAN SOLUSI</span>
+          <h3 class="ds-heading text-2xl font-bold mt-1" style="color: var(--ds-text-primary)">Layanan yang Kami Hadirkan untuk Anda</h3>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          
+          <div class="ds-card p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-white" style="background: var(--ds-brand-primary)">
+                <i data-lucide="layout" class="w-5 h-5"></i>
+              </div>
+              <h4 class="ds-heading text-base font-bold mb-1.5" style="color: var(--ds-text-primary)">Web &amp; Aplikasi Bisnis</h4>
+              <p class="ds-body text-xs leading-relaxed" style="color: var(--ds-text-secondary)">Website company profile cepat, dashboard portal, toko online, hingga platform SaaS kustom.</p>
+            </div>
+            <div class="pt-4 border-t mt-4 flex items-center justify-between" style="border-color: var(--ds-border)">
+              <span class="ds-mono text-[10px]" style="color: var(--ds-text-muted)">MODUL 01</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5" style="color: var(--ds-brand-accent)"></i>
+            </div>
+          </div>
+
+          <div class="ds-card p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-slate-950" style="background: var(--ds-brand-highlight)">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+              </div>
+              <h4 class="ds-heading text-base font-bold mb-1.5" style="color: var(--ds-text-primary)">AI &amp; Otomasi Cerdas</h4>
+              <p class="ds-body text-xs leading-relaxed" style="color: var(--ds-text-secondary)">Chatbot CS 24 jam, pembacaan data otomatis, face recognition, dan otomasi dokumen.</p>
+            </div>
+            <div class="pt-4 border-t mt-4 flex items-center justify-between" style="border-color: var(--ds-border)">
+              <span class="ds-mono text-[10px]" style="color: var(--ds-text-muted)">MODUL 02</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5" style="color: var(--ds-brand-accent)"></i>
+            </div>
+          </div>
+
+          <div class="ds-card p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center mb-4 text-emerald-700">
+                <i data-lucide="database" class="w-5 h-5"></i>
+              </div>
+              <h4 class="ds-heading text-base font-bold mb-1.5" style="color: var(--ds-text-primary)">ERP &amp; Sistem Manajemen</h4>
+              <p class="ds-body text-xs leading-relaxed" style="color: var(--ds-text-secondary)">Pencatatan kas masuk-keluar, inventori stok gudang, dan laporan performa bisnis terpusat.</p>
+            </div>
+            <div class="pt-4 border-t mt-4 flex items-center justify-between" style="border-color: var(--ds-border)">
+              <span class="ds-mono text-[10px]" style="color: var(--ds-text-muted)">MODUL 03</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5" style="color: var(--ds-brand-accent)"></i>
+            </div>
+          </div>
+
+          <div class="ds-card p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-center mb-4 text-sky-700">
+                <i data-lucide="cpu" class="w-5 h-5"></i>
+              </div>
+              <h4 class="ds-heading text-base font-bold mb-1.5" style="color: var(--ds-text-primary)">IoT &amp; Hardware</h4>
+              <p class="ds-body text-xs leading-relaxed" style="color: var(--ds-text-secondary)">Menghubungkan sensor alat fisik, mesin, atau pintu akses langsung ke aplikasi HP Anda.</p>
+            </div>
+            <div class="pt-4 border-t mt-4 flex items-center justify-between" style="border-color: var(--ds-border)">
+              <span class="ds-mono text-[10px]" style="color: var(--ds-text-muted)">MODUL 04</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5" style="color: var(--ds-brand-accent)"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 4. LIVE WHATSAPP INQUIRY BOX -->
+      <div class="ds-card p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="space-y-1 max-w-lg">
+          <span class="ds-mono text-[11px] font-bold uppercase tracking-wider" style="color: var(--ds-brand-accent)">KONSULTASI AWAL 100% BEBAS BIAYA</span>
+          <h4 class="ds-heading text-xl sm:text-2xl font-bold" style="color: var(--ds-text-primary)">Mari Mulai Obrolan Santai Tentang Rencana Anda</h4>
+          <p class="ds-body text-xs sm:text-sm" style="color: var(--ds-text-secondary)">Tidak perlu sungkan. Kami siap mendengarkan apa saja yang ingin Anda rapikan atau otomatisasikan.</p>
+        </div>
+
+        <a
+          href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20ingin%20ngobrol%20santai%20tentang%20kebutuhan%20sistem%20digital."
+          target="_blank"
+          class="ds-btn-primary px-7 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-2 flex-shrink-0"
+        >
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Hubungi via WhatsApp</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       INTERACTIVE SWITCHER LOGIC
+  ============================================================ -->
+  <script>
+    lucide.createIcons();
+
+    const SYSTEMS = {
+      precision: {
+        className: 'theme-precision',
+        badge: 'STUDIO SISTEM DIGITAL & AI',
+        desc: 'Swiss Precision / Linear Light (Surgical, Clean, Minimalist)',
+        name: 'Neo-Precision Engine',
+        font: 'Plus Jakarta Sans + JetBrains Mono',
+        surface: '1px Hairline + Pure White Surface',
+        vibe: 'Engineering Authority & Surgical Clarity'
+      },
+      atelier: {
+        className: 'theme-atelier',
+        badge: 'REKAN TUMBUH SISTEM DIGITAL',
+        desc: 'Warm Atelier (Kinfolk / Pentagram Humanist Craft)',
+        name: 'Warm Atelier / Humanist Studio',
+        font: 'Syne Display + Plus Jakarta Sans',
+        surface: 'Warm Linen Sand (#FAF7F2) + 20px Curvature',
+        vibe: 'Bespoke Craftsmanship, High-Trust & Emotional Partnership'
+      },
+      tactile: {
+        className: 'theme-tactile',
+        badge: 'IT SOLUTION & AUTOMATION STUDIO',
+        desc: 'Tactile Studio (Modern Punchy / Confident Modular)',
+        name: 'Tactile Solid Studio',
+        font: 'Unbounded 900 + Plus Jakarta Sans',
+        surface: '2px Solid Dark Border + 4px Hard Drop-Shadow',
+        vibe: 'Punchy, Direct, Confident, & Zero Fluff'
+      },
+      spatial: {
+        className: 'theme-spatial',
+        badge: 'INTELLIGENT SPATIAL SYSTEMS',
+        desc: 'Spatial Luminous (Apple VisionOS / Frosted Ambient Glass)',
+        name: 'Spatial Luminous Glass',
+        font: 'Space Grotesk + Plus Jakarta Sans',
+        surface: 'Frosted Glass (Backdrop-blur) + Ambient Gradient Mesh',
+        vibe: 'Futuristic Depth, Soft Ambient Glow, & Next-Gen Systems'
+      }
+    };
+
+    function setSystem(key) {
+      const sys = SYSTEMS[key];
+      const frame = document.getElementById('preview-frame');
+
+      // Swap Theme Class
+      frame.className = `ds-canvas min-h-screen py-12 px-4 sm:px-8 transition-colors duration-300 ${sys.className}`;
+
+      // Update Active Tab Button
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('tab-active');
+        btn.classList.add('text-slate-400');
+      });
+      const activeBtn = document.getElementById(`btn-${key}`);
+      activeBtn.classList.add('tab-active');
+      activeBtn.classList.remove('text-slate-400');
+
+      // Update Spec Banner
+      document.getElementById('active-system-desc').textContent = sys.desc;
+      document.getElementById('spec-name').textContent = sys.name;
+      document.getElementById('spec-font').textContent = sys.font;
+      document.getElementById('spec-surface').textContent = sys.surface;
+      document.getElementById('spec-vibe').textContent = sys.vibe;
+      document.getElementById('hero-badge-text').textContent = sys.badge;
+
+      // Re-create icons for any updated SVG
+      lucide.createIcons();
+    }
+  </script>
+
+</body>
+</html>

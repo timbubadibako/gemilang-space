@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id" class="light scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemilang Labs — Option 1: Swiss Precision Light</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#2563eb', // Electric Cobalt
+              600: '#1d4ed8',
+              700: '#1e40af',
+            },
+            surface: {
+              base: '#ffffff',
+              subtle: '#f8fafc',
+              card: '#ffffff',
+              border: '#e2e8f0',
+              hover: '#f1f5f9'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Three.js & GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    body { background-color: #ffffff; color: #0f172a; }
+    .bg-tech-light-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    }
+    #three-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 1;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-500/15 selection:text-brand-700">
+
+  <!-- TOP SWITCHER BAR (LIGHT) -->
+  <div class="bg-surface-subtle border-b border-surface-border text-xs py-2 px-6 sticky top-0 z-50 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="font-mono text-brand-600 font-bold">THEME: LIGHT MODE</span>
+      <span class="text-slate-400 hidden sm:inline">| Pilih Varian Konsep:</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="option-1-light-tech.html" class="px-3 py-1 rounded bg-brand-500 text-white font-bold shadow-sm">Opsi 1: Swiss Precision</a>
+      <a href="option-2-linear-light.html" class="px-3 py-1 rounded bg-white border border-surface-border text-slate-600 hover:text-slate-950">Opsi 2: Linear Editorial</a>
+      <a href="option-3-blueprint-light.html" class="px-3 py-1 rounded bg-white border border-surface-border text-slate-600 hover:text-slate-950">Opsi 3: Architectural Lab</a>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="border-b border-surface-border bg-white/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-mono font-bold text-xs">
+          GL
+        </div>
+        <span class="font-bold text-slate-900 tracking-tight text-base">Gemilang<span class="text-brand-600 font-mono text-xs ml-0.5">.labs</span></span>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-xs font-semibold text-slate-600">
+        <a href="#services" class="hover:text-slate-950 transition-colors">Solusi</a>
+        <a href="#simulator" class="hover:text-slate-950 transition-colors">Arsitektur Sistem</a>
+        <a href="#estimator" class="hover:text-slate-950 transition-colors">Kalkulator WA</a>
+      </nav>
+
+      <a 
+        href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20ingin%20konsultasi%20pengembangan%20sistem%20%26%20AI." 
+        target="_blank" 
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition-all active:scale-95 shadow-sm"
+      >
+        <span>Konsultasi via WhatsApp</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION (Fits 100dvh in initial viewport) -->
+  <section class="relative min-h-[calc(100dvh-100px)] flex items-center justify-center px-6 bg-tech-light-grid overflow-hidden">
+    <canvas id="three-canvas"></canvas>
+
+    <div class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
+      <div class="mb-4 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/90 text-[11px] font-mono tracking-widest text-brand-600 shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
+        DIGITAL ENGINEERING & APPLIED AI STUDIO
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-950 leading-tight mb-5">
+        Rekayasa Software Skalabilitas Tinggi & <span class="text-brand-600">Model AI Terapan.</span>
+      </h1>
+
+      <p class="text-base text-slate-600 max-w-lg mb-8 leading-relaxed">
+        Partner rekayasa software enterprise, arsitektur cloud scalable, dan integrasi model AI presisi tinggi untuk akselerasi bisnis Anda.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+        <a 
+          href="#estimator" 
+          class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs tracking-wider uppercase transition-all shadow-md shadow-brand-500/20"
+        >
+          Hitung Estimasi Proyek
+        </a>
+        <a 
+          href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20konsultasi%20teknologi." 
+          target="_blank" 
+          class="w-full sm:w-auto px-6 py-3.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-semibold text-xs tracking-wider uppercase transition-all"
+        >
+          Konsultasi via WhatsApp
+        </a>
+      </div>
+
+      <div class="mt-8 font-mono text-[11px] text-slate-500 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        <span>Three.js Kinetic Wireframe 60 FPS (Light Mode Hardware Accelerated)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE SYSTEM ARCHITECTURE SANDBOX (LIGHT) -->
+  <section id="simulator" class="py-20 px-6 max-w-6xl mx-auto border-t border-surface-border">
+    <div class="text-center mb-10">
+      <span class="text-xs font-mono uppercase tracking-widest text-brand-600 font-bold">Simulasi Arsitektur</span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">Standar Arsitektur Sistem Kami</h2>
+      <p class="text-slate-600 text-xs mt-2">Bebas kompromi performa. Klik modul untuk melihat spesifikasi teknis:</p>
+    </div>
+
+    <div class="rounded-2xl bg-surface-subtle border border-surface-border p-6 sm:p-8">
+      <!-- Architecture Node Selector -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-6" id="arch-tabs">
+        <button class="arch-tab active px-4 py-2 rounded-lg bg-white border border-brand-500 text-brand-600 font-mono text-xs font-bold shadow-sm" data-node="web">
+          [1] Next.js 15 Edge Frontend
+        </button>
+        <button class="arch-tab px-4 py-2 rounded-lg bg-white border border-surface-border text-slate-600 font-mono text-xs hover:border-slate-400" data-node="ai">
+          [2] RAG & Custom LLM Pipeline
+        </button>
+        <button class="arch-tab px-4 py-2 rounded-lg bg-white border border-surface-border text-slate-600 font-mono text-xs hover:border-slate-400" data-node="cloud">
+          [3] Postgres Cluster & Redis Cache
+        </button>
+      </div>
+
+      <!-- Live Code / Benchmark Display -->
+      <div class="rounded-xl bg-white border border-surface-border p-5 font-mono text-xs shadow-sm" id="arch-display">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-surface-border text-slate-500 text-[11px]">
+          <span id="arch-file" class="font-bold text-slate-700">frontend-edge-handler.ts</span>
+          <span class="text-emerald-600 font-bold" id="arch-stat">● Status: 32ms Latency (Global Edge)</span>
+        </div>
+        <pre class="text-slate-800 overflow-x-auto leading-relaxed" id="arch-code">// Next.js 15 Server Component + Turbopack
+export async function generateContent({ payload }: EdgeRequest) {
+  const cachedResponse = await redis.get(payload.hashKey);
+  if (cachedResponse) return Response.json(cachedResponse, { status: 200 });
+  
+  const optimizedData = await db.query.scalableSystems.findFirst();
+  return Response.json(optimizedData);
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENTO GRID (LIGHT) -->
+  <section id="services" class="py-20 px-6 max-w-7xl mx-auto">
+    <div class="mb-10">
+      <span class="text-xs font-mono uppercase tracking-widest text-brand-600 font-bold">Kapabilitas Layanan</span>
+      <h2 class="text-3xl font-extrabold text-slate-950 mt-1">Solusi Rekayasa Digital Gemilang Labs</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Bento 1 (2 cols) -->
+      <div class="md:col-span-2 rounded-2xl bg-white border border-surface-border p-8 shadow-sm hover:border-brand-500 transition-colors">
+        <span class="text-brand-600 font-mono text-xs font-bold block mb-2">01 / WEB & APP ENGINEERING</span>
+        <h3 class="text-xl font-bold text-slate-950 mb-2">SaaS & Enterprise Web Applications</h3>
+        <p class="text-slate-600 text-xs leading-relaxed mb-6">
+          Pengembangan web app modern, dashboard analitik, dan SaaS multitenant dengan sub-second loading time, arsitektur modular, dan skalabilitas jutaan request.
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-[11px]">
+          <div class="p-2.5 rounded bg-surface-subtle border border-surface-border text-slate-700">Next.js 15 App Router</div>
+          <div class="p-2.5 rounded bg-surface-subtle border border-surface-border text-slate-700">TypeScript Strict</div>
+          <div class="p-2.5 rounded bg-surface-subtle border border-surface-border text-slate-700">Tailwind v4 Clean</div>
+        </div>
+      </div>
+
+      <!-- Bento 2 (1 col) -->
+      <div class="rounded-2xl bg-white border border-surface-border p-8 shadow-sm hover:border-brand-500 transition-colors">
+        <span class="text-brand-600 font-mono text-xs font-bold block mb-2">02 / APPLIED AI</span>
+        <h3 class="text-xl font-bold text-slate-950 mb-2">Applied AI & Custom Agents</h3>
+        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+          Automasi dokumen dengan RAG internal, integrasi model LLM ke WhatsApp, dan automated decision pipelines.
+        </p>
+        <span class="inline-block px-2.5 py-1 rounded bg-brand-50 text-brand-700 font-mono text-[11px] border border-brand-200">
+          99.4% Retrieval Accuracy
+        </span>
+      </div>
+
+      <!-- Bento 3 (1 col) -->
+      <div class="rounded-2xl bg-white border border-surface-border p-8 shadow-sm hover:border-brand-500 transition-colors">
+        <span class="text-brand-600 font-mono text-xs font-bold block mb-2">03 / CLOUD INFRA</span>
+        <h3 class="text-xl font-bold text-slate-950 mb-2">System-as-a-Service & Cloud DevOps</h3>
+        <p class="text-slate-600 text-xs leading-relaxed">
+          Setup cluster Docker, failover Postgres berkinerja tinggi, proteksi Cloudflare, dan automated CI/CD.
+        </p>
+      </div>
+
+      <!-- Bento 4 (2 cols) -->
+      <div class="md:col-span-2 rounded-2xl bg-white border border-surface-border p-8 shadow-sm hover:border-brand-500 transition-colors">
+        <span class="text-brand-600 font-mono text-xs font-bold block mb-2">04 / CODE & ARCHITECTURE AUDIT</span>
+        <h3 class="text-xl font-bold text-slate-950 mb-2">Modernisasi Sistem Legacy & Fractional CTO</h3>
+        <p class="text-slate-600 text-xs leading-relaxed">
+          Profiling mendalam untuk sistem yang lambat, refactoring clean-code, optimasi query database, dan arsitektur roadmap terarah.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTIMATOR & WHATSAPP ENGINE (LIGHT) -->
+  <section id="estimator" class="py-20 px-6 max-w-4xl mx-auto">
+    <div class="rounded-2xl bg-white border border-surface-border p-8 shadow-sm">
+      <span class="text-xs font-mono uppercase tracking-widest text-brand-600 font-bold block mb-1">Direct WhatsApp Engine</span>
+      <h2 class="text-2xl font-bold text-slate-950 mb-6">Kalkulator Kebutuhan & WhatsApp Dispatch</h2>
+
+      <div class="space-y-6">
+        <div>
+          <label class="block text-xs font-mono text-slate-600 mb-2">Pilih Solusi Utama:</label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="est-services">
+            <button class="est-btn active p-3 rounded-lg bg-brand-50 border border-brand-500 text-brand-700 font-mono text-xs font-bold" data-val="Web Application Scalable">Web App</button>
+            <button class="est-btn p-3 rounded-lg bg-surface-subtle border border-surface-border text-slate-600 font-mono text-xs" data-val="SaaS & Cloud Backend">SaaS Cloud</button>
+            <button class="est-btn p-3 rounded-lg bg-surface-subtle border border-surface-border text-slate-600 font-mono text-xs" data-val="Applied AI & RAG Pipeline">AI & RAG</button>
+            <button class="est-btn p-3 rounded-lg bg-surface-subtle border border-surface-border text-slate-600 font-mono text-xs" data-val="System Refactor & Audit">Audit Sistem</button>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-surface-subtle border border-surface-border flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <span class="text-[10px] font-mono uppercase text-slate-500 block">Draf Pesan WhatsApp Otomatis:</span>
+            <p id="est-preview" class="text-xs font-mono text-slate-800 mt-1">
+              "Halo Gemilang Labs, saya ingin diskusi kebutuhan Web Application Scalable."
+            </p>
+          </div>
+          <a 
+            id="est-submit"
+            href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs" 
+            target="_blank" 
+            class="shrink-0 px-6 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs tracking-wider uppercase transition-all shadow-sm"
+          >
+            Kirim WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 px-6 border-t border-surface-border text-center text-xs font-mono text-slate-500">
+    Gemilang Labs &copy; 2026. Option 1: Swiss Precision Light.
+  </footer>
+
+  <!-- SCRIPT: THREE.JS LIGHT MODE WIREFRAME -->
+  <script>
+    (function init3DLight() {
+      const canvas = document.getElementById('three-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 28;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Central Geometric Core in Slate-800 wireframe
+      const geo = new THREE.IcosahedronGeometry(8.5, 1);
+      const mat = new THREE.MeshBasicMaterial({ color: 0x2563eb, wireframe: true, transparent: true, opacity: 0.22 });
+      const mesh = new THREE.Mesh(geo, mat);
+      scene.add(mesh);
+
+      // Light slate particles
+      const particleCount = 140;
+      const pGeo = new THREE.BufferGeometry();
+      const pPos = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount * 3; i += 3) {
+        pPos[i] = (Math.random() - 0.5) * 45;
+        pPos[i + 1] = (Math.random() - 0.5) * 35;
+        pPos[i + 2] = (Math.random() - 0.5) * 25;
+      }
+      pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+      const pMat = new THREE.PointsMaterial({ size: 0.25, color: 0x0f172a, transparent: true, opacity: 0.35 });
+      const pCloud = new THREE.Points(pGeo, pMat);
+      scene.add(pCloud);
+
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        mesh.rotation.x += 0.0025 + mouseY * 0.08;
+        mesh.rotation.y += 0.0035 + mouseX * 0.08;
+        pCloud.rotation.y -= 0.0006;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    })();
+
+    // Architecture Tabs
+    const tabs = document.querySelectorAll('.arch-tab');
+    const archFile = document.getElementById('arch-file');
+    const archStat = document.getElementById('arch-stat');
+    const archCode = document.getElementById('arch-code');
+
+    const snippets = {
+      web: {
+        file: 'frontend-edge-handler.ts',
+        stat: '● Status: 32ms Latency (Global Edge)',
+        code: `// Next.js 15 Server Component + Turbopack
+export async function generateContent({ payload }: EdgeRequest) {
+  const cachedResponse = await redis.get(payload.hashKey);
+  if (cachedResponse) return Response.json(cachedResponse, { status: 200 });
+  
+  const optimizedData = await db.query.scalableSystems.findFirst();
+  return Response.json(optimizedData);
+}`
+      },
+      ai: {
+        file: 'rag-vector-orchestrator.py',
+        stat: '● Status: Embedding Ingestion Active (99.4% Precision)',
+        code: `# Enterprise RAG Pipeline using Custom Quantized Vectors
+def execute_rag_pipeline(query: str, client_context: dict) -> AgentResponse:
+    dense_vec = embed_model.encode(query)
+    relevant_chunks = pgvector_store.similarity_search(dense_vec, top_k=5)
+    
+    return llm_agent.generate_grounded_answer(
+        context=relevant_chunks,
+        prompt=query,
+        temperature=0.1
+    )`
+      },
+      cloud: {
+        file: 'cluster-failover-policy.yml',
+        stat: '● Status: Zero-Downtime Cluster Ready',
+        code: `apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gemilang-core-cluster
+spec:
+  replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0`
+      }
+    };
+
+    tabs.forEach(t => {
+      t.addEventListener('click', () => {
+        tabs.forEach(b => {
+          b.classList.remove('active', 'bg-brand-50', 'border-brand-500', 'text-brand-600', 'font-bold');
+          b.classList.add('bg-white', 'border-surface-border', 'text-slate-600');
+        });
+        t.classList.remove('bg-white', 'border-surface-border', 'text-slate-600');
+        t.classList.add('active', 'bg-brand-50', 'border-brand-500', 'text-brand-600', 'font-bold');
+
+        const key = t.getAttribute('data-node');
+        archFile.innerText = snippets[key].file;
+        archStat.innerText = snippets[key].stat;
+        archCode.innerText = snippets[key].code;
+      });
+    });
+
+    // Estimator
+    let curService = 'Web Application Scalable';
+    const estBtns = document.querySelectorAll('.est-btn');
+    const estPreview = document.getElementById('est-preview');
+    const estSubmit = document.getElementById('est-submit');
+
+    function updateEst() {
+      const msg = `Halo Gemilang Labs, saya ingin diskusi kebutuhan ${curService} untuk perusahaan saya. Mohon informasi ketersediaan tim.`;
+      estPreview.innerText = `"${msg}"`;
+      estSubmit.href = `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
+    }
+
+    estBtns.forEach(b => {
+      b.addEventListener('click', () => {
+        estBtns.forEach(x => {
+          x.classList.remove('active', 'bg-brand-50', 'border-brand-500', 'text-brand-700', 'font-bold');
+          x.classList.add('bg-surface-subtle', 'border-surface-border', 'text-slate-600');
+        });
+        b.classList.remove('bg-surface-subtle', 'border-surface-border', 'text-slate-600');
+        b.classList.add('active', 'bg-brand-50', 'border-brand-500', 'text-brand-700', 'font-bold');
+        curService = b.getAttribute('data-val');
+        updateEst();
+      });
+    });
+    updateEst();
+  </script>
+</body>
+</html>

@@ -1,0 +1,654 @@
+{
+  "settings": {
+    "siteName": "Gemilang Labs",
+    "availabilityStatus": {
+      "id": "TERSEDIA UNTUK KEMITRAAN BARU",
+      "en": "AVAILABLE FOR NEW PROJECTS & PARTNERSHIPS"
+    },
+    "whatsappNumber": "6281234567890",
+    "contactEmail": "hello@gemilanglabs.com",
+    "metaTitle": {
+      "id": "Gemilang Labs — Studio Rekayasa Digital & Desain Produk",
+      "en": "Gemilang Labs — Digital Engineering & Product Design Studio"
+    },
+    "metaDescription": {
+      "id": "Gemilang Labs adalah partner teknologi founder-led yang membangun produk digital, platform SaaS, AI terapan, dan sistem ERP/CRM modern melalui kemitraan fleksibel.",
+      "en": "Gemilang Labs is a founder-led engineering & design partner helping modern tech companies build digital products, SaaS platforms, applied AI, and scalable systems."
+    },
+    "defaultLanguage": "id"
+  },
+  "hero": {
+    "badge": {
+      "id": "PARTNER TEKNOLOGI & DESAIN FOUNDER-LED",
+      "en": "FOUNDER-LED ENGINEERING & DESIGN PARTNER"
+    },
+    "headline": {
+      "id": "Digital engineering & product design for modern tech companies.",
+      "en": "Digital engineering & product design for modern tech companies."
+    },
+    "subtitle": {
+      "id": "Gemilang Labs adalah partner teknologi founder-led yang membangun produk digital, platform SaaS berkinerja tinggi, agen AI terapan, dan sistem ERP/CRM modern melalui model kemitraan yang fleksibel.",
+      "en": "Gemilang Labs is a founder-led engineering & design partner helping modern tech companies build high-impact digital products, SaaS platforms, applied AI agents, and scalable systems."
+    },
+    "ctaPrimary": {
+      "id": "Lihat Paket Kemitraan",
+      "en": "View Engagement Plans"
+    },
+    "ctaSecondary": {
+      "id": "Konsultasi WhatsApp",
+      "en": "Book WhatsApp Call"
+    },
+    "videoUrl": "https://framerusercontent.com/assets/EvTwFp1w8yZn29DwjTYtca5VyE8.mp4",
+    "videoPoster": "https://framerusercontent.com/images/vmp26uS1fzAEOVbdH19mrf2bnw.jpg",
+    "featuredLabel": {
+      "id": "Unggulan: 5U AI Logistics Platform",
+      "en": "Featured: 5U AI Logistics Platform"
+    },
+    "featuredSublabel": {
+      "id": "Pendanaan Awal: US $3.2M",
+      "en": "Pre-seed Raised: US $3.2M"
+    }
+  },
+  "valueProps": [
+    {
+      "id": "vp-1",
+      "number": "01",
+      "title": {
+        "id": "Desain & Rekayasa Produk SaaS",
+        "en": "Product & SaaS Engineering"
+      },
+      "description": {
+        "id": "Dari alur wireframe hingga antarmuka kompleks: dashboard analitik, platform SaaS multi-tenant, dan aplikasi mobile yang intuitif serta siap scale-up.",
+        "en": "From early ideas to complex product workflows, we architect intuitive experiences that scale. SaaS platforms, dashboards, and mobile apps."
+      },
+      "videoUrl": "https://framerusercontent.com/assets/elbX4gCjyv1NlqwggvPiLRsMFZI.mp4",
+      "posterUrl": "https://framerusercontent.com/images/Zv8SVBEZMgBS7nl7iuUaWRGcecQ.jpg",
+      "tags": ["SaaS Dashboards", "Mobile Apps", "Multi-Tenant"]
+    },
+    {
+      "id": "vp-2",
+      "number": "02",
+      "title": {
+        "id": "Web Platform Performa Tinggi",
+        "en": "High-Impact Web Platforms"
+      },
+      "description": {
+        "id": "Website dan landing page kelas atas yang meningkatkan konversi, kepercayaan investor, dan adopsi pengguna secara eksponensial.",
+        "en": "High-impact websites that make your product easier to understand, trust, and buy. Built for speed, conversions, and growth."
+      },
+      "videoUrl": "https://framerusercontent.com/assets/E16aIlZmkdDCupQgMg0fyAYcJc.mp4",
+      "posterUrl": "https://framerusercontent.com/images/SvJuN95HnCUIYI9jnQM94YpDs.jpg",
+      "tags": ["Next.js 15", "99 Lighthouse", "Motion UI"]
+    },
+    {
+      "id": "vp-3",
+      "number": "03",
+      "title": {
+        "id": "Agen AI & Automasi Bisnis",
+        "en": "AI Agents & Smart Automations"
+      },
+      "description": {
+        "id": "Integrasi model bahasa cerdas (LLM), pemrosesan dokumen otomatis, dan alur kerja AI kustom yang menghemat ribuan jam kerja operasional.",
+        "en": "Autonomous LLM agents, document RAG pipelines, and automated business workflows that eliminate repetitive manual operational hours."
+      },
+      "videoUrl": "https://framerusercontent.com/assets/pRELBlXvgXimB2YRA7GedH7FM6Q.mp4",
+      "posterUrl": "https://framerusercontent.com/images/UmsGTar3Kym230FQvHG4LGFfnE.jpg",
+      "tags": ["RAG Pipelines", "OpenAI / Claude", "Omnichannel Bot"]
+    },
+    {
+      "id": "vp-4",
+      "number": "04",
+      "title": {
+        "id": "Design Systems & Token Komponen",
+        "en": "Design Systems & Variables"
+      },
+      "description": {
+        "id": "Fondasi komponen terpadu antara tim desainer dan engineer. Mengeliminasi inkonsistensi antarmuka dan mempercepat rilis fitur baru.",
+        "en": "Scalable foundations, component libraries, and tokens that help your team ship faster without sacrificing consistency or quality."
+      },
+      "videoUrl": "https://framerusercontent.com/assets/SbBVuGQSNomm18pjcAeJKfkes4.mp4",
+      "posterUrl": "https://framerusercontent.com/images/FCGy5a4kgMQwkuxgnYNC7S4hA0.png",
+      "tags": ["Tokens & Variables", "Figma to Code", "Radix / Shadcn"]
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-1",
+      "slug": "5u-ai-freight-b2b-ui-ux-design",
+      "title": "5U AI — Autonomous Freight Intelligence",
+      "category": "ai",
+      "categoryBadge": {
+        "id": "AI / LOGISTIK B2B",
+        "en": "AI / B2B LOGISTICS"
+      },
+      "client": "5U AI (US)",
+      "description": {
+        "id": "Platform orkestrasi armada logistik kargo berbasis AI. Automasi dokumen muatan, kalkulasi tiket, dan optimasi rute pelayaran real-time.",
+        "en": "AI workforce orchestration platform for global freight teams. Automating freight documentations, customs tickets, and route optimizations."
+      },
+      "videoUrl": "https://framerusercontent.com/assets/EvTwFp1w8yZn29DwjTYtca5VyE8.mp4",
+      "posterUrl": "https://framerusercontent.com/images/vmp26uS1fzAEOVbdH19mrf2bnw.jpg",
+      "metrics": {
+        "id": "+240% Efisiensi Tim · Pendanaan $3.2M",
+        "en": "+240% Efficiency · $3.2M Pre-seed"
+      },
+      "techStack": ["React", "FastAPI", "Tailwind", "PyTorch"]
+    },
+    {
+      "id": "proj-2",
+      "slug": "mention-encrypted-messenger",
+      "title": "Mention — Encrypted Enterprise Messenger",
+      "category": "enterprise",
+      "categoryBadge": {
+        "id": "ENTERPRISE / KEAMANAN",
+        "en": "ENTERPRISE / SECURITY"
+      },
+      "client": "Mention Inc.",
+      "description": {
+        "id": "Aplikasi kolaborasi internal perusahaan dengan enkripsi end-to-end, sinkronisasi status real-time, dan standar kepatuhan audit enterprise.",
+        "en": "Encrypted enterprise collaboration platform with zero-knowledge architecture, realtime presence sync, and strict compliance logging."
+      },
+      "videoUrl": "https://framerusercontent.com/assets/VfCllNprpqiAUvxBW8FF8lJ5g.mp4",
+      "posterUrl": "https://framerusercontent.com/images/BChAdDd106KgPBNGpEuF9W1Px8.jpg",
+      "metrics": {
+        "id": "< 15ms Latensi Sinkronisasi",
+        "en": "< 15ms Real-time Latency"
+      },
+      "techStack": ["Next.js", "WebSockets", "Rust", "Tailwind"]
+    },
+    {
+      "id": "proj-3",
+      "slug": "keom-protocol-fintech",
+      "title": "Keom Protocol — High-Throughput Money Market",
+      "category": "web",
+      "categoryBadge": {
+        "id": "FINTECH / PASAR MODAL",
+        "en": "FINTECH / PROTOCOL"
+      },
+      "client": "Keom Labs",
+      "description": {
+        "id": "Antarmuka protokol finansial berkecepatan tinggi dengan visualisasi data pasar real-time dan konektivitas multi-dompet digital.",
+        "en": "High-throughput money market protocol interface featuring streaming market depth visualizers and multi-wallet liquidity routing."
+      },
+      "videoUrl": "https://framerusercontent.com/assets/oB1eV4aUalPWVKx99HH0idXGnE.mp4",
+      "posterUrl": "https://framerusercontent.com/images/f2TBOrrRIY5dcoWQ72exps1cHlo.jpg",
+      "metrics": {
+        "id": "$120M+ Volume Transaksi",
+        "en": "$120M+ Transaction Volume"
+      },
+      "techStack": ["TypeScript", "Ethers.js", "Tailwind", "Next.js"]
+    },
+    {
+      "id": "proj-4",
+      "slug": "defendzero-cloud-security",
+      "title": "Defendzero — Zero-Trust Cloud Security",
+      "category": "ai",
+      "categoryBadge": {
+        "id": "KEAMANAN SIBER / SAAS",
+        "en": "CYBER SECURITY / SAAS"
+      },
+      "client": "Defendzero",
+      "description": {
+        "id": "Platform monitoring kerentanan server cloud dengan deteksi anomali real-time bertenaga machine learning dan mitigasi instan.",
+        "en": "Cloud vulnerability monitoring platform equipped with real-time machine learning anomaly detection and automated incident mitigation."
+      },
+      "videoUrl": "https://framerusercontent.com/assets/eTkEAUHG8EvCCjTJVdrZ3st27Ow.mp4",
+      "posterUrl": "https://framerusercontent.com/images/Zo52whGFHgrlHFw8KyAuG6IVA.jpg",
+      "metrics": {
+        "id": "99.999% SLA Uptime Server",
+        "en": "99.999% Cloud SLA Uptime"
+      },
+      "techStack": ["Go", "Next.js", "Kubernetes", "Tailwind"]
+    },
+    {
+      "id": "proj-5",
+      "slug": "mindsphere-ai-agent-platform",
+      "title": "Mindsphere — Autonomous Agent Platform",
+      "category": "ai",
+      "categoryBadge": {
+        "id": "AGEN AI / OTOMASI",
+        "en": "AI AGENTS / AUTOMATION"
+      },
+      "client": "Mindsphere",
+      "description": {
+        "id": "Sistem koordinasi agen AI otonom untuk eksekusi alur kerja teknis, integrasi API pihak ketiga, dan pemrosesan data terdistribusi.",
+        "en": "Decentralized autonomous AI agent coordination platform executing multi-step complex workflows and distributed data processing."
+      },
+      "videoUrl": "https://framerusercontent.com/assets/yWk9hvLefmCUiRvsaKLo16ElK0.mp4",
+      "posterUrl": "https://framerusercontent.com/images/vXAw0vDR2T0nBNxyGAT7m8yEDrs.jpg",
+      "metrics": {
+        "id": "1.2M+ Eksekusi Task Otonom",
+        "en": "1.2M+ Autonomous Executions"
+      },
+      "techStack": ["Python", "FastAPI", "React", "Docker"]
+    },
+    {
+      "id": "proj-6",
+      "slug": "efficense-it-performance",
+      "title": "Efficense — Enterprise System Optimizer",
+      "category": "enterprise",
+      "categoryBadge": {
+        "id": "DIAGNOSTIK / DEVOPS",
+        "en": "DIAGNOSTICS / DEVOPS"
+      },
+      "client": "Efficense Inc.",
+      "description": {
+        "id": "Alat optimasi performa infrastruktur IT enterprise dengan pemetaan botol-leher query database dan audit performa kode otomatis.",
+        "en": "Enterprise IT infrastructure performance optimization suite identifying database query bottlenecks and profiling code latency."
+      },
+      "videoUrl": "https://framerusercontent.com/assets/UhnJ6sbCmLyoecqkQvc2qZ1SPM.mp4",
+      "posterUrl": "https://framerusercontent.com/images/hI8GAfO8ygTl7KyDazDgUYbOPg.jpg",
+      "metrics": {
+        "id": "Reduksi Latensi Server hingga 70%",
+        "en": "Up to 70% Server Latency Drop"
+      },
+      "techStack": ["TypeScript", "ClickHouse", "Tailwind", "Next.js"]
+    }
+  ],
+  "services": [
+    {
+      "id": "srv-1",
+      "number": "01",
+      "title": {
+        "id": "Product & UX/UI Engineering",
+        "en": "Product & UX/UI Engineering"
+      },
+      "description": {
+        "id": "Perancangan alur interaksi intuitif untuk SaaS web & mobile. Riset pengguna, wireframing, dan prototype interaktif di Figma.",
+        "en": "Designing intuitive user journeys and scalable interfaces for web & mobile SaaS. User research, clickable Figma prototypes, and conversion UX."
+      },
+      "features": [
+        { "id": "SaaS Workflows & Dashboards", "en": "SaaS Workflows & Dashboards" },
+        { "id": "Interactive Figma Prototypes", "en": "Interactive Figma Prototypes" },
+        { "id": "User Journey & Conversion UX", "en": "User Journey & Conversion UX" }
+      ],
+      "icon": "layout"
+    },
+    {
+      "id": "srv-2",
+      "number": "02",
+      "title": {
+        "id": "Modern Web & Frontend Architecture",
+        "en": "Modern Web & Frontend Architecture"
+      },
+      "description": {
+        "id": "Implementasi kode cepat dan responsif menggunakan Next.js 15, React, Tailwind, dan TypeScript berstandar arsitektur enterprise.",
+        "en": "Fast, responsive web implementations utilizing Next.js 15, React, Tailwind, and TypeScript adhering to clean enterprise architecture standards."
+      },
+      "features": [
+        { "id": "Next.js 15 Server Components", "en": "Next.js 15 Server Components" },
+        { "id": "High-Performance Motion UI", "en": "High-Performance Motion UI" },
+        { "id": "Headless CMS Integration", "en": "Headless CMS Integration" }
+      ],
+      "icon": "code"
+    },
+    {
+      "id": "srv-3",
+      "number": "03",
+      "title": {
+        "id": "Applied AI & Smart Automation",
+        "en": "Applied AI & Smart Automation"
+      },
+      "description": {
+        "id": "Membangun agen AI otonom, pipeline RAG dokumen internal, chatbot cerdas omnichannel, dan automasi proses bisnis.",
+        "en": "Building autonomous AI agents, enterprise RAG document pipelines, intelligent omnichannel bots, and business process automations."
+      },
+      "features": [
+        { "id": "Retrieval-Augmented Generation (RAG)", "en": "Retrieval-Augmented Generation (RAG)" },
+        { "id": "Autonomous AI Agent Pipelines", "en": "Autonomous AI Agent Pipelines" },
+        { "id": "WhatsApp & Omnichannel Bots", "en": "WhatsApp & Omnichannel Bots" }
+      ],
+      "icon": "bot"
+    },
+    {
+      "id": "srv-4",
+      "number": "04",
+      "title": {
+        "id": "Enterprise ERP & Cloud Infra",
+        "en": "Enterprise ERP & Cloud Infra"
+      },
+      "description": {
+        "id": "Digitalisasi operasional bisnis: sistem inventori, invoice, manajemen vendor, integrasi API perbankan, dan arsitektur database andal.",
+        "en": "Operational business digitalization: custom inventory, invoicing, vendor portals, banking APIs, and resilient database architectures."
+      },
+      "features": [
+        { "id": "Custom ERP & CRM Solutions", "en": "Custom ERP & CRM Solutions" },
+        { "id": "Database Optimization & Backups", "en": "Database Optimization & Backups" },
+        { "id": "Cloud Hosting & CI/CD Pipelines", "en": "Cloud Hosting & CI/CD Pipelines" }
+      ],
+      "icon": "database"
+    },
+    {
+      "id": "srv-5",
+      "number": "05",
+      "title": {
+        "id": "Design Systems & Tokens",
+        "en": "Design Systems & Tokens"
+      },
+      "description": {
+        "id": "Standardisasi komponen UI dan library kode untuk tim internal. Mempercepat rilis fitur tanpa merusak keharmonisan visual.",
+        "en": "Scalable UI foundations, component libraries, and variables syncing design tokens with frontend codebases seamlessly."
+      },
+      "features": [
+        { "id": "Figma Variables & Token Sync", "en": "Figma Variables & Token Sync" },
+        { "id": "Reusable Component Documentation", "en": "Reusable Component Documentation" },
+        { "id": "Accessibility (a11y) Compliant", "en": "Accessibility (a11y) Compliant" }
+      ],
+      "icon": "sparkles"
+    },
+    {
+      "id": "srv-6",
+      "number": "06",
+      "title": {
+        "id": "Multimedia & 3D Interactive",
+        "en": "Multimedia & 3D Interactive"
+      },
+      "description": {
+        "id": "Visualisasi produk 3D interaktif, motion graphics presentasi investor, dan aset multimedia berkualitas studio untuk peluncuran produk.",
+        "en": "Interactive 3D product showcases (WebGL/Three.js), pitch deck visuals, and studio-grade multimedia assets for product launches."
+      },
+      "features": [
+        { "id": "Three.js / WebGL Product Showcase", "en": "Three.js / WebGL Product Showcase" },
+        { "id": "Pitch Deck & Keynote Visuals", "en": "Pitch Deck & Keynote Visuals" },
+        { "id": "Kinetic Micro-Interactions", "en": "Kinetic Micro-Interactions" }
+      ],
+      "icon": "film"
+    }
+  ],
+  "process": [
+    {
+      "number": "01",
+      "title": {
+        "id": "Pilih Model Kemitraan",
+        "en": "Choose Engagement Model"
+      },
+      "description": {
+        "id": "Tentukan model kemitraan sesuai laju pertumbuhan Anda: paket langganan sprint bulanan atau proyek khusus dengan cakupan pasti.",
+        "en": "Select the level of engineering and design support your team needs: flexible monthly sprint subscription or fixed custom project."
+      },
+      "badge": {
+        "id": "Onboarding dalam < 24 jam",
+        "en": "Onboard in < 24 hours"
+      }
+    },
+    {
+      "number": "02",
+      "title": {
+        "id": "Masukkan Antrean Prioritas",
+        "en": "Queue & Prioritize"
+      },
+      "description": {
+        "id": "Kirimkan kebutuhan fitur, refaktor UI, atau integrasi sistem ke antrean kerja bersama di Trello/Notion. Tentukan apa yang paling mendesak.",
+        "en": "Drop feature requests, UI enhancements, or API integrations into your shared backlog. Prioritize what drives immediate business impact."
+      },
+      "badge": {
+        "id": "Tanpa batas antrean backlog",
+        "en": "Unlimited backlog queue"
+      }
+    },
+    {
+      "number": "03",
+      "title": {
+        "id": "Review, Terima & Deploy",
+        "en": "Review, Receive & Deploy"
+      },
+      "description": {
+        "id": "Terima progres berkala dalam 48–72 jam kerja. Berikan masukan secara langsung, setujui hasil kerja, dan deploy ke sistem produksi.",
+        "en": "Receive steady iterative progress within 48–72 business hours. Review, approve the work, and deploy production-ready code."
+      },
+      "badge": {
+        "id": "Source code & repo Git 100% milik Anda",
+        "en": "100% Client-Owned Source Code"
+      }
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "testi-1",
+      "author": "Yagiz Abik",
+      "role": {
+        "id": "Co-Founder / CEO @ 5U AI",
+        "en": "Co-Founder / CEO @ 5U AI"
+      },
+      "company": "5U AI (San Francisco)",
+      "quote": {
+        "id": "Kualitas eksekusi dan kecepatan kerjanya sangat luar biasa. Menjadi partner andalan tim kami dalam merancang produk logistik AI yang kompleks dengan standar enterprise.",
+        "en": "The execution quality and velocity are truly phenomenal. Gemilang Labs became our go-to partner in building a complex AI logistics platform to enterprise standards."
+      },
+      "avatarLetter": "YA"
+    },
+    {
+      "id": "testi-2",
+      "author": "Hossam Saraya",
+      "role": {
+        "id": "CTO @ KEOM Protocol",
+        "en": "CTO @ KEOM Protocol"
+      },
+      "company": "KEOM Protocol",
+      "quote": {
+        "id": "Sangat detail dalam setiap interaksi, arsitektur kode, dan konsistensi sistem. Alur penyerahan proyek sangat rapi dan profesional tanpa ada miskomunikasi.",
+        "en": "Every detail matters, from interaction patterns to code architecture and reliability. Handover was remarkably smooth, professional, and thorough."
+      },
+      "avatarLetter": "HS"
+    },
+    {
+      "id": "testi-3",
+      "author": "Jeenu Lee",
+      "role": {
+        "id": "Co-Founder & CEO @ Mention",
+        "en": "Co-Founder & CEO @ Mention"
+      },
+      "company": "Mention Inc.",
+      "quote": {
+        "id": "Bekerja bersama Gemilang Labs terasa seperti memiliki tim engineer internal kelas dunia. Cepat, tanggap, dan kualitas kodenya sangat solid.",
+        "en": "Working with Gemilang Labs feels like having a senior in-house tech team. Fast, communicative, and exceptionally reliable software architecture."
+      },
+      "avatarLetter": "JL"
+    }
+  ],
+  "pricing": [
+    {
+      "id": "plan-essential",
+      "name": "Essential Sprint",
+      "tag": {
+        "id": "PAKET ESSENTIAL",
+        "en": "ESSENTIAL SPRINT"
+      },
+      "description": {
+        "id": "Cocok untuk startup awal yang membutuhkan partner teknologi & desain berkelanjutan.",
+        "en": "For early-stage startups and small teams that need steady digital engineering support."
+      },
+      "monthlyPrice": {
+        "idr": "Rp 18.5jt",
+        "usd": "$1,450"
+      },
+      "quarterlyPrice": {
+        "idr": "Rp 16.6jt",
+        "usd": "$1,300"
+      },
+      "yearlyPrice": {
+        "idr": "Rp 15.4jt",
+        "usd": "$1,200"
+      },
+      "features": [
+        { "id": "1 tugas aktif simultan", "en": "1 active request at a time" },
+        { "id": "Antrean backlog tanpa batas", "en": "Unlimited backlog requests" },
+        { "id": "Revisi tanpa batas hingga tuntas", "en": "Unlimited revisions" },
+        { "id": "Turnaround cepat 2–4 hari kerja", "en": "2–4 business days turnaround" },
+        { "id": "Private Slack / WhatsApp Channel", "en": "Private Slack / WhatsApp channel" },
+        { "id": "Source code & Figma 100% milik Anda", "en": "Full Git source code & Figma files" },
+        { "id": "Pause atau batalkan kapan saja", "en": "Pause or cancel anytime" }
+      ],
+      "isFeatured": false,
+      "ctaText": {
+        "id": "Mulai Paket Essential",
+        "en": "Start Essential Plan"
+      }
+    },
+    {
+      "id": "plan-priority",
+      "name": "Priority Sprint",
+      "tag": {
+        "id": "PALING POPULER · SKALA CEPAT",
+        "en": "MOST POPULAR · FAST SCALING"
+      },
+      "description": {
+        "id": "Untuk perusahaan yang membutuhkan rilis kode & fitur secara simultan dan prioritas tinggi.",
+        "en": "For growing tech companies shipping multiple features continuously with priority turnaround."
+      },
+      "monthlyPrice": {
+        "idr": "Rp 32.5jt",
+        "usd": "$2,650"
+      },
+      "quarterlyPrice": {
+        "idr": "Rp 29.2jt",
+        "usd": "$2,380"
+      },
+      "yearlyPrice": {
+        "idr": "Rp 27.0jt",
+        "usd": "$2,200"
+      },
+      "features": [
+        { "id": "Semua fitur di Paket Essential +", "en": "Everything in Essential +" },
+        { "id": "2 tugas aktif simultan", "en": "2 active requests at a time" },
+        { "id": "Priority Turnaround (24–48 jam)", "en": "Priority 24–48h turnaround" },
+        { "id": "Arsitektur AI & sistem kompleks", "en": "Complex AI & systems architecture" },
+        { "id": "Design System tokens multi-platform", "en": "Cross-platform design tokens" },
+        { "id": "Weekly Strategy & Architecture Sync", "en": "Weekly Strategy & Tech Sync" },
+        { "id": "Dukungan langsung Founder & Lead", "en": "Direct Founder & Lead Architect access" }
+      ],
+      "isFeatured": true,
+      "ctaText": {
+        "id": "Mulai Paket Priority",
+        "en": "Start Priority Plan"
+      }
+    },
+    {
+      "id": "plan-custom",
+      "name": "Custom Project",
+      "tag": {
+        "id": "PROYEK KHUSUS",
+        "en": "CUSTOM SCOPE"
+      },
+      "description": {
+        "id": "Untuk proyek dengan lingkup kerja, deliverable, dan tenggat waktu yang sudah terdefinisi jelas.",
+        "en": "For well-defined digital projects with fixed deliverables, strict milestones, and firm deadlines."
+      },
+      "monthlyPrice": {
+        "idr": "Mulai Rp 25jt",
+        "usd": "From $2,000"
+      },
+      "quarterlyPrice": {
+        "idr": "Mulai Rp 25jt",
+        "usd": "From $2,000"
+      },
+      "yearlyPrice": {
+        "idr": "Mulai Rp 25jt",
+        "usd": "From $2,000"
+      },
+      "features": [
+        { "id": "Scope of Work (SOW) pasti", "en": "Fixed Scope of Work (SOW)" },
+        { "id": "Jadwal milestone dan deadline ketat", "en": "Milestone schedule & firm deadline" },
+        { "id": "Full-Stack SaaS Web / Mobile App", "en": "Full-Stack SaaS Web / Mobile App" },
+        { "id": "Integrasi ERP, Cloud, & Payment API", "en": "ERP, Cloud & Payment API Integrations" },
+        { "id": "Garansi bug-free & dokumentasi teknis", "en": "Bug-free guarantee & runbook handover" },
+        { "id": "Perjanjian Kerahasiaan (NDA) resmi", "en": "Official Non-Disclosure Agreement (NDA)" }
+      ],
+      "isFeatured": false,
+      "ctaText": {
+        "id": "Diskusikan Proyek Khusus",
+        "en": "Scope Custom Project"
+      }
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-1",
+      "question": {
+        "id": "Apa itu model kemitraan langganan (subscription)?",
+        "en": "What is an ongoing engineering subscription?"
+      },
+      "answer": {
+        "id": "Model kemitraan langganan memberikan Anda akses berkelanjutan ke seluruh kapabilitas engineering dan desain Gemilang Labs dengan biaya tetap periodik. Alih-alih merekrut tim internal dengan overhead tinggi atau membuat kontrak baru setiap kali butuh fitur, Anda dapat meminta pengerjaan produk, web platform, AI, dan sistem secara fleksibel dalam satu kemitraan terpadu.",
+        "en": "An engineering subscription gives you continuous access to Gemilang Labs for a fixed recurring fee. Instead of hiring expensive in-house talent or scoping a new contract every time you need something, you can continuously request digital product, web, AI, and systems work through one flexible partnership."
+      }
+    },
+    {
+      "id": "faq-2",
+      "question": {
+        "id": "Bagaimana cara kerja antrean permintaan (queue)?",
+        "en": "How does the request queue work?"
+      },
+      "answer": {
+        "id": "Anda memasukkan daftar tugas ke dalam dashboard Trello/Notion bersama, mengatur urutan prioritas yang paling penting, dan tim kami akan mengeksekusinya sesuai paket Anda (1 atau 2 tugas aktif sekaligus). Anda bebas mengubah prioritas atau menambahkan tugas baru kapan saja.",
+        "en": "You add requests to a shared queue in Trello or Notion, prioritize what matters most, and we work through them based on your plan (1 or 2 active requests at a time). You can reprioritize or add new requests anytime."
+      }
+    },
+    {
+      "id": "faq-3",
+      "question": {
+        "id": "Apakah benar-benar tanpa batas permintaan (unlimited requests)?",
+        "en": "Is there really no limit on requests?"
+      },
+      "answer": {
+        "id": "Ya. Anda dapat memasukkan sebanyak mungkin permintaan ke dalam backlog Anda. Batasan yang berlaku hanyalah jumlah tugas yang sedang dikerjakan secara aktif dan simultan pada saat bersamaan (1 tugas di Essential, 2 tugas di Priority).",
+        "en": "Yes. You can add as many requests as you want to your backlog. The only limit is how many requests are actively in progress simultaneously (1 active on Essential, 2 on Priority)."
+      }
+    },
+    {
+      "id": "faq-4",
+      "question": {
+        "id": "Berapa cepat waktu pengerjaan (turnaround time)?",
+        "en": "How fast will I receive updates?"
+      },
+      "answer": {
+        "id": "Sebagian besar tugas skala kecil hingga menengah mendapatkan pembaruan progres nyata dalam 2–4 hari kerja (atau 24–48 jam untuk paket Priority). Pekerjaan berskala besar dipecah menjadi milestone terukur sehingga Anda melihat kemajuan bertahap tanpa menunggu berminggu-minggu.",
+        "en": "Most small-to-medium requests receive meaningful progress within 2–4 business days (or 24–48 hours on Priority). Larger systems work is broken into modular milestones so you see continuous progress without waiting weeks."
+      }
+    },
+    {
+      "id": "faq-5",
+      "question": {
+        "id": "Apa yang dihitung sebagai satu permintaan (one request)?",
+        "en": "What counts as one request?"
+      },
+      "answer": {
+        "id": "Satu permintaan adalah unit kerja yang terdefinisi jelas, misalnya satu landing page baru, alur checkout, dashboard analitik, integrasi API AI, atau refaktor komponen frontend. Tugas besar dibagi menjadi sub-tugas terkelola agar rilis tetap cepat dan stabil.",
+        "en": "A request is a clearly defined scope of work, such as a new landing page, checkout flow, analytics dashboard, AI API integration, or frontend refactoring. Larger requests are divided into sub-milestones to keep delivery fast."
+      }
+    },
+    {
+      "id": "faq-6",
+      "question": {
+        "id": "Apakah bisa menandatangani NDA (Non-Disclosure Agreement)?",
+        "en": "Can you sign a Non-Disclosure Agreement (NDA)?"
+      },
+      "answer": {
+        "id": "Tentu saja. Kami sangat menghormati kerahasiaan bisnis dan intellectual property (IP) Anda. Kami siap menandatangani NDA resmi sebelum pertukaran informasi teknis dimulai. Proyek dalam mode stealth tidak akan dipublikasikan di portofolio kami tanpa izin tertulis Anda.",
+        "en": "Absolutely. We strictly respect your intellectual property and business confidentiality. We routinely sign standard NDAs before any technical handover. Stealth projects remain completely confidential until your official public release."
+      }
+    },
+    {
+      "id": "faq-7",
+      "question": {
+        "id": "Siapa yang sesungguhnya mengerjakan proyek saya?",
+        "en": "Who will actually engineer and design my product?"
+      },
+      "answer": {
+        "id": "Gemilang Labs beroperasi secara founder-led. Keterlibatan senior engineer dan lead architect hadir langsung di setiap proyek Anda. Anda berkomunikasi langsung dengan para praktisi yang membangun sistem Anda, bukan melalui lapisan account manager yang tidak memahami detail teknis.",
+        "en": "Gemilang Labs is founder-led. Senior engineering and architectural involvement is baked into every engagement. You work directly with senior practitioners building your software, not through bureaucratic layers of junior handoffs."
+      }
+    },
+    {
+      "id": "faq-8",
+      "question": {
+        "id": "Bisakah saya menjeda (pause) atau membatalkan langganan?",
+        "en": "Can I pause or cancel my subscription?"
+      },
+      "answer": {
+        "id": "Bisa. Paket langganan standar dapat dibatalkan sebelum siklus penagihan berikutnya tanpa penalti. Jika pekerjaan sedang sedikit, sisa hari langganan dapat Anda pause dan dilanjutkan kembali saat Anda siap meluncurkan sprint baru.",
+        "en": "Yes. Subscriptions can be cancelled anytime before the next billing cycle. Unused subscription days can also be paused and resumed later when your product priorities pick back up."
+      }
+    }
+  ]
+}

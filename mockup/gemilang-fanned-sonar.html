@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemilang Labs — Fanned Typography & Sonar Radar Studio</title>
+  <meta name="description" content="Gemilang Labs — Studio Rekayasa Sistem Digital & AI Terapan. Solusi website scalable, sistem pintar AI, ERP/CRM, dan otomasi custom untuk bisnis Anda." />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Unbounded, JetBrains Mono, Syne -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@700;800;900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            unbounded: ['"Unbounded"', 'sans-serif'],
+            syne: ['"Syne"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              navy: '#1B3A8C',
+              sky: '#2196F3',
+              cyan: '#00B4D8',
+              gold: '#F5B800',
+              ice: '#F8FAFC',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --brand-navy: #1B3A8C;
+      --brand-sky: #2196F3;
+      --brand-cyan: #00B4D8;
+      --brand-gold: #F5B800;
+      --brand-gold-glow: rgba(245, 184, 0, 0.4);
+      --bg-canvas: #F8FAFC;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      background-color: var(--bg-canvas);
+      color: #0F172A;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Subtle Blueprint Dot-Grid */
+    .blueprint-grid {
+      background-image:
+        radial-gradient(circle, rgba(27, 58, 140, 0.08) 1.2px, transparent 1.2px);
+      background-size: 32px 32px;
+    }
+
+    /* Vertical Architectural Hairlines */
+    .fade-line {
+      position: absolute;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(27, 58, 140, 0.25) 0%,
+        rgba(33, 150, 243, 0.12) 40%,
+        rgba(27, 58, 140, 0.03) 80%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       FANNED LETTER STACK ENGINE (Adapted for GEMILANG)
+    ============================================================ */
+    .letter-stack {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      cursor: pointer;
+      isolation: isolate;
+      flex-shrink: 0;
+      line-height: 0.88;
+      border-radius: 16px;
+      transition: outline 0.15s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .letter-stack:hover {
+      outline: 2.5px dashed rgba(33, 150, 243, 0.6);
+      outline-offset: 8px;
+    }
+
+    .letter-stack.is-selected {
+      outline: 3px dashed var(--brand-sky) !important;
+      outline-offset: 12px !important;
+      background-color: rgba(33, 150, 243, 0.06);
+    }
+
+    /* Floating selection tag above selected letter */
+    .selection-tag {
+      position: absolute;
+      top: -34px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--brand-navy), var(--brand-sky));
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 4px 14px rgba(27, 58, 140, 0.35);
+      z-index: 50;
+      animation: bounceTag 1.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes bounceTag {
+      from { transform: translateX(-50%) translateY(0); }
+      to { transform: translateX(-50%) translateY(-4px); }
+    }
+
+    /* Individual 3D Layer — PURE TYPOGRAPHY GLYPH ONLY (NO RECTANGULAR BOX) */
+    .sticker-layer {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      line-height: 0.88;
+      pointer-events: none;
+      transform-origin: 50% 50%;
+      will-change: transform;
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    /* Layer 0: Front face (Metallic Navy-Sky-Cyan Sheen) */
+    .layer-top {
+      position: relative;
+      z-index: 35;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 1.5px 2px rgba(255, 255, 255, 0.7));
+    }
+
+    /* Layers 1..5: Stacked Letter Sheets (True Glyph Cutouts) */
+    .layer-under {
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    /* Studio Controller Panel */
+    .studio-panel {
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Custom range sliders */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 9999px;
+      outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #2196F3;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(33, 150, 243, 0.8);
+      transition: transform 0.1s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    /* Buttons */
+    .btn-press:active { transform: scale(0.97); }
+    .card-lift {
+      transition: transform 0.24s cubic-bezier(0.16,1,0.3,1), box-shadow 0.24s, border-color 0.24s;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(27, 58, 140, 0.14);
+      border-color: rgba(33, 150, 243, 0.35);
+    }
+  </style>
+</head>
+<body class="selection:bg-brand-sky selection:text-white">
+
+  <!-- ============================================================
+       TOP HEADER (Architectural 5-Col In-Grid Nav)
+  ============================================================ -->
+  <header class="sticky top-0 z-40 bg-[#F8FAFC]/90 backdrop-blur-md border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3">
+        <img src="../gemilang.jpeg" alt="Gemilang Labs" class="h-9 w-auto" />
+      </a>
+
+      <!-- Center Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-xs sm:text-sm font-semibold text-slate-600">
+        <a href="#layanan" class="hover:text-brand-navy transition-colors">Layanan Sistem</a>
+        <a href="#proses" class="hover:text-brand-navy transition-colors">Alur Kerja</a>
+        <a href="#kalkulator" class="hover:text-brand-navy transition-colors">Kalkulator Proyek</a>
+      </nav>
+
+      <!-- Right CTAs -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleStudioDrawer(true)" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50/70 hover:bg-blue-100 text-brand-navy text-xs font-mono font-bold transition-all">
+          <i data-lucide="sliders" class="w-3.5 h-3.5 text-blue-600"></i>
+          <span>Tuning Fanned Studio</span>
+        </button>
+
+        <a
+          href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20konsultasi%20sistem%20digital."
+          target="_blank"
+          rel="noopener"
+          class="btn-press inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-xl text-white text-xs sm:text-sm font-bold shadow-md shadow-blue-600/20 bg-gradient-to-r from-brand-navy to-brand-sky hover:opacity-90 transition-all"
+        >
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Konsultasi WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO SECTION — THE HYBRID:
+       1. CANVAS SONAR GRID (Interactive Wavefield behind)
+       2. GIANT FANNED TYPOGRAPHY: "G E M I L A N G"
+  ============================================================ -->
+  <section id="hero-section" class="relative w-full min-h-[calc(100vh-64px)] flex flex-col justify-between overflow-hidden pt-4 pb-8 px-4 sm:px-8 blueprint-grid">
+    
+    <!-- 1. Interactive Sonar Grid Canvas (Background Wavefield) -->
+    <canvas id="sonar-canvas" class="absolute inset-0 w-full h-full pointer-events-auto z-0"></canvas>
+
+    <!-- 2. Overline Badge + Mission Statement -->
+    <div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center text-center pt-3 sm:pt-6 pointer-events-none">
+      <div class="pointer-events-auto inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/80 shadow-sm mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        <span class="text-[11px] font-mono font-bold tracking-wider text-brand-navy uppercase">
+          Studio Rekayasa Sistem Digital &amp; AI Terapan
+        </span>
+      </div>
+
+      <div class="flex items-center justify-between w-full max-w-4xl px-2 text-[10px] sm:text-xs font-mono font-bold tracking-widest text-slate-500 uppercase">
+        <span>[ 01 • SCALABLE WEB ]</span>
+        <span class="text-blue-600 font-black">★ KLIK HURUF ATAU KLIK AREA MANA SAJA UNTUK EMIT SONAR ★</span>
+        <span>[ 02 • APPLIED AI &amp; ERP ]</span>
+      </div>
+    </div>
+
+    <!-- 3. CENTERPIECE: GIANT FANNED TYPOGRAPHY ("GEMILANG") -->
+    <div class="relative z-10 w-full flex-grow flex items-center justify-center my-auto overflow-visible py-4">
+      <div id="sticker-container" class="w-full max-w-7xl flex items-center justify-between overflow-visible px-2 sm:px-6">
+        <!-- 8 Giant Letters (G-E-M-I-L-A-N-G) dynamically injected here -->
+      </div>
+    </div>
+
+    <!-- 4. BOTTOM HERO STRIP: CLIENT-FRIENDLY COPY & PROMPT -->
+    <div class="relative z-10 w-full max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200/80 bg-white/75 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-sm">
+      <div class="text-center sm:text-left">
+        <h2 class="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
+          Bisnis Anda Butuh Sistem Handal? Kami Rancang Khusus untuk Anda.
+        </h2>
+        <p class="text-xs text-slate-600 mt-0.5">
+          Dari website perusahaan, sistem AI, dashboard ERP, otomasi WhatsApp hingga IoT.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <a
+          href="#kalkulator"
+          class="btn-press inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-navy hover:bg-blue-900 text-white text-xs font-bold transition-all shadow-sm"
+        >
+          <span>Mulai Hitung Estimasi</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+        <button
+          onclick="triggerAmbientSonar()"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-mono font-semibold transition-all"
+          title="Klik untuk menembakkan pulsa sonar gelombang baru"
+        >
+          <i data-lucide="radio" class="w-3.5 h-3.5 text-blue-500"></i>
+          <span>Ping Sonar</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FLOATING DOCK & STUDIO CONTROLLER (Bisa Tuning Huruf Langsung!)
+  ============================================================ -->
+  <aside id="quick-dock" class="fixed bottom-4 right-4 z-50 studio-panel rounded-full px-4 py-2 text-white text-[11px] flex items-center gap-3 shadow-2xl border border-white/20">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+      <span class="font-mono text-[10px] text-blue-300 font-bold uppercase">Target:</span>
+      <span id="dock-active-char" class="px-2 py-0.5 rounded-md bg-blue-600 font-unbounded font-black text-xs text-white">G</span>
+    </div>
+
+    <div class="h-3.5 w-px bg-white/20"></div>
+
+    <!-- Quick Chips Switcher -->
+    <div id="dock-letter-chips" class="flex items-center gap-1">
+      <!-- Injected dynamically: [G] [E] [M] [I] [L] [A] [N] [G] -->
+    </div>
+
+    <div class="h-3.5 w-px bg-white/20"></div>
+
+    <!-- Preset Switcher -->
+    <button onclick="cyclePreset()" class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white font-mono text-[10px] transition-all">
+      <i data-lucide="sparkles" class="w-3 h-3 text-yellow-400"></i>
+      <span id="dock-preset-name">Titanium Glass</span>
+    </button>
+
+    <button onclick="toggleStudioDrawer(true)" class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-gold text-slate-950 font-unbounded font-black text-[10px] hover:bg-yellow-400 transition-transform active:scale-95">
+      <i data-lucide="sliders" class="w-3 h-3"></i>
+      <span>Studio</span>
+    </button>
+  </aside>
+
+  <!-- Tuning Studio Drawer (Floating Right Bottom Modal) -->
+  <div id="studio-drawer" class="fixed bottom-4 right-4 z-50 studio-panel rounded-3xl w-full max-w-md sm:max-w-lg p-5 text-white shadow-2xl border border-white/20 hidden flex-col max-h-[90vh] overflow-hidden">
+    
+    <!-- Drawer Header -->
+    <div class="flex items-center justify-between pb-3 border-b border-white/10 flex-shrink-0">
+      <div class="flex items-center gap-2.5">
+        <div class="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center shadow-md">
+          <i data-lucide="layers" class="w-4 h-4 text-white"></i>
+        </div>
+        <div>
+          <h3 class="font-unbounded font-black text-xs uppercase tracking-wider text-white">
+            GEMILANG FANNED TUNING STUDIO
+          </h3>
+          <p class="text-[10px] text-slate-400 font-mono">
+            Atur kemiringan, elevasi Y, ketebalan fan &amp; palet warna
+          </p>
+        </div>
+      </div>
+      
+      <button onclick="toggleStudioDrawer(false)" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Letter Selector Horizontal Strip -->
+    <div class="py-2.5 flex-shrink-0 border-b border-white/10">
+      <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 mb-1.5">
+        <span>HURUF AKTIF:</span>
+        <span id="selected-char-display" class="text-blue-400 font-bold font-unbounded">G (#1)</span>
+      </div>
+      <div id="drawer-letter-chips" class="flex items-center gap-1 overflow-x-auto pb-1">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="flex items-center gap-1 py-2 flex-shrink-0 border-b border-white/10">
+      <button onclick="switchTab('per-huruf')" id="tab-btn-per-huruf" class="flex-1 py-1.5 rounded-lg text-center font-mono font-bold text-[10px] uppercase bg-blue-600 text-white transition-colors">
+        🎯 Per-Huruf
+      </button>
+      <button onclick="switchTab('global')" id="tab-btn-global" class="flex-1 py-1.5 rounded-lg text-center font-mono font-bold text-[10px] uppercase bg-white/10 text-slate-300 hover:text-white transition-colors">
+        🌐 Global Fan
+      </button>
+      <button onclick="switchTab('presets')" id="tab-btn-presets" class="flex-1 py-1.5 rounded-lg text-center font-mono font-bold text-[10px] uppercase bg-white/10 text-slate-300 hover:text-white transition-colors">
+        ⚡ Presets
+      </button>
+    </div>
+
+    <!-- Tab Content Container -->
+    <div class="overflow-y-auto flex-grow py-3 pr-1 space-y-3.5 text-xs font-medium">
+      
+      <!-- TAB 1: PER HURUF -->
+      <div id="tab-content-per-huruf" class="space-y-3">
+        <!-- Kemiringan (Rotate) -->
+        <div class="bg-white/5 p-3 rounded-2xl border border-white/5 space-y-1">
+          <div class="flex items-center justify-between">
+            <label class="font-mono font-bold text-[10.5px] text-blue-300">Kemiringan Huruf (Rotate)</label>
+            <span id="val-baseRot" class="font-mono text-[11px] text-blue-400 font-bold">0°</span>
+          </div>
+          <input type="range" id="slider-baseRot" min="-25" max="25" step="0.5" value="0" oninput="onLetterParamChange('baseRot', this.value)" class="w-full">
+        </div>
+
+        <!-- Elevasi Y -->
+        <div class="bg-white/5 p-3 rounded-2xl border border-white/5 space-y-1">
+          <div class="flex items-center justify-between">
+            <label class="font-mono font-bold text-[10.5px] text-amber-300">Tinggi / Elevasi (Y Offset)</label>
+            <span id="val-yOffset" class="font-mono text-[11px] text-amber-400 font-bold">0px</span>
+          </div>
+          <input type="range" id="slider-yOffset" min="-60" max="60" step="1" value="0" oninput="onLetterParamChange('yOffset', this.value)" class="w-full">
+        </div>
+
+        <!-- Lebar Fan Spread -->
+        <div class="bg-white/5 p-3 rounded-2xl border border-white/5 space-y-1">
+          <div class="flex items-center justify-between">
+            <label class="font-mono font-bold text-[10.5px] text-emerald-300">Penyebaran Fan Layer</label>
+            <span id="val-fanSpread" class="font-mono text-[11px] text-emerald-400 font-bold">1.0x</span>
+          </div>
+          <input type="range" id="slider-fanSpread" min="0.2" max="2.6" step="0.05" value="1.0" oninput="onLetterParamChange('fanSpread', this.value)" class="w-full">
+        </div>
+
+        <!-- Kemiringan Layer Putaran -->
+        <div class="bg-white/5 p-3 rounded-2xl border border-white/5 space-y-1">
+          <div class="flex items-center justify-between">
+            <label class="font-mono font-bold text-[10.5px] text-violet-300">Spiral Angle (Layer Rot)</label>
+            <span id="val-layerRot" class="font-mono text-[11px] text-violet-400 font-bold">-1.2°</span>
+          </div>
+          <input type="range" id="slider-layerRot" min="-4.0" max="4.0" step="0.1" value="-1.2" oninput="onLetterParamChange('layerRot', this.value)" class="w-full">
+        </div>
+      </div>
+
+      <!-- TAB 2: GLOBAL CONTROLS -->
+      <div id="tab-content-global" class="space-y-3 hidden">
+        <!-- Palet Warna -->
+        <div class="bg-white/5 p-3 rounded-2xl border border-white/5 space-y-2">
+          <span class="block font-mono font-bold text-[10px] uppercase text-slate-300">PALET WARNA BRAND:</span>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="setColorMode('gemilang')" id="palette-gemilang" class="py-2 rounded-xl bg-gradient-to-r from-blue-900 to-sky-500 text-white font-bold text-[10px] border-2 border-white">Gemilang Navy</button>
+            <button onclick="setColorMode('goldNavy')" id="palette-goldNavy" class="py-2 rounded-xl bg-gradient-to-r from-amber-500 to-blue-900 text-white font-bold text-[10px] border-2 border-transparent">Sunburst Gold</button>
+            <button onclick="setColorMode('cyanTech')" id="palette-cyanTech" class="py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-700 text-white font-bold text-[10px] border-2 border-transparent">Cyber Cyan</button>
+          </div>
+        </div>
+
+        <!-- Global Fan Spread -->
+        <div class="bg-white/5 p-3 rounded-2xl border border-white/5 space-y-1">
+          <div class="flex items-center justify-between">
+            <label class="font-mono font-bold text-[10.5px] text-blue-300">Global Fan Multiplier</label>
+            <span id="global-fan-val" class="font-mono text-blue-400 font-bold">1.0x</span>
+          </div>
+          <input type="range" id="global-fan-slider" min="0.4" max="2.4" step="0.05" value="1.0" oninput="onGlobalParamChange('globalFanSpread', this.value)" class="w-full">
+        </div>
+
+        <!-- Global Letter Spacing -->
+        <div class="bg-white/5 p-3 rounded-2xl border border-white/5 space-y-1">
+          <div class="flex items-center justify-between">
+            <label class="font-mono font-bold text-[10.5px] text-cyan-300">Kerning Antar Huruf</label>
+            <span id="global-spacing-val" class="font-mono text-cyan-400 font-bold">0px</span>
+          </div>
+          <input type="range" id="global-spacing-slider" min="-15" max="30" step="1" value="0" oninput="onGlobalParamChange('globalLetterSpacing', this.value)" class="w-full">
+        </div>
+      </div>
+
+      <!-- TAB 3: PRESETS -->
+      <div id="tab-content-presets" class="space-y-2.5 hidden">
+        <button onclick="applyPreset('titanium')" class="w-full text-left p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-400 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="font-unbounded font-black text-xs text-white">💎 Titanium Glass (Default)</span>
+            <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-blue-600 text-white">Corporate</span>
+          </div>
+          <p class="text-[10px] text-slate-400 mt-1">Presisi geometris halus, rotasi organik ringan (-1.5° s/d 2°), sebaran fan disiplin.</p>
+        </button>
+
+        <button onclick="applyPreset('blueprintWave')" class="w-full text-left p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-400 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="font-unbounded font-black text-xs text-white">🌊 Blueprint Wave</span>
+            <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Dynamic Y</span>
+          </div>
+          <p class="text-[10px] text-slate-400 mt-1">Irama naik-turun bertingkat dengan rotasi dinamis memberi kesan ritme arsitektur.</p>
+        </button>
+
+        <button onclick="applyPreset('oceanFan')" class="w-full text-left p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="font-unbounded font-black text-xs text-white">🌪️ Deep Ocean 3D Fan</span>
+            <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">Extruded</span>
+          </div>
+          <p class="text-[10px] text-slate-400 mt-1">Penyebaran layer 1.8x lebar dengan efek bayangan berlapis tebal.</p>
+        </button>
+
+        <button onclick="applyPreset('flatClean')" class="w-full text-left p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-400 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="font-unbounded font-black text-xs text-white">📏 Minimal Pure Straight</span>
+            <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">0° Axis</span>
+          </div>
+          <p class="text-[10px] text-slate-400 mt-1">Semua huruf tegak 0°, sejajar tanpa pergeseran acak, modern presisi.</p>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-slate-400">
+      <span class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Realtime 60FPS Sync</span>
+      </span>
+      <button onclick="toggleStudioDrawer(false)" class="text-blue-400 hover:underline">
+        Tutup Panel ✕
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       LAYANAN SECTION (Asymmetric Modern Bento Grid)
+  ============================================================ -->
+  <section id="layanan" class="py-20 px-5 sm:px-8 max-w-7xl mx-auto border-t border-slate-200">
+    <div class="mb-12">
+      <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-navy">01 • Kapabilitas Utama</span>
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight mt-1">
+        Solusi Nyata yang Kami Bangun untuk Bisnis Anda
+      </h2>
+      <p class="text-sm text-slate-600 max-w-xl mt-2">
+        Kami tidak menjual template jadi. Setiap sistem kami rancang khusus mengikuti alur kerja dan model bisnis Anda.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Card 1: Web & SaaS (Featured 2 rows) -->
+      <div class="card-lift md:row-span-2 rounded-2xl bg-white border border-slate-200 p-8 flex flex-col shadow-sm">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-navy to-brand-sky flex items-center justify-center text-white mb-6 shadow-md shadow-blue-600/20">
+          <i data-lucide="globe" class="w-6 h-6"></i>
+        </div>
+        <span class="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 mb-1">Web &amp; Cloud Platform</span>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Website Perusahaan &amp; Aplikasi Web Custom</h3>
+        <p class="text-sm text-slate-600 leading-relaxed flex-1">
+          Website profesional berkecepatan tinggi dengan skor performa terbaik, portal keanggotaan, dashboard internal, atau platform SaaS siap pakai yang dapat diakses dari perangkat mana saja.
+        </p>
+        <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100 mt-4">
+          <span class="text-[11px] font-mono bg-blue-50 text-brand-navy border border-blue-200 px-2.5 py-1 rounded-lg">Company Profile</span>
+          <span class="text-[11px] font-mono bg-blue-50 text-brand-navy border border-blue-200 px-2.5 py-1 rounded-lg">Web App / SaaS</span>
+          <span class="text-[11px] font-mono bg-blue-50 text-brand-navy border border-blue-200 px-2.5 py-1 rounded-lg">Toko Online</span>
+        </div>
+      </div>
+
+      <!-- Card 2: AI & Otomasi -->
+      <div class="card-lift rounded-2xl bg-white border border-slate-200 p-7 flex flex-col shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center text-slate-950 mb-5 shadow-md shadow-amber-500/20">
+          <i data-lucide="bot" class="w-5 h-5"></i>
+        </div>
+        <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-600 mb-1">AI &amp; Otomasi</span>
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">Sistem AI Pintar &amp; Bot Otomatis</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          Chatbot customer service WhatsApp yang membalas 24/7, pengenalan wajah untuk absensi, otomasi dokumen bisnis, dan pemrosesan data cerdas.
+        </p>
+      </div>
+
+      <!-- Card 3: ERP & CRM -->
+      <div class="card-lift rounded-2xl bg-white border border-slate-200 p-7 flex flex-col shadow-sm">
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 mb-5">
+          <i data-lucide="database" class="w-5 h-5"></i>
+        </div>
+        <span class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-600 mb-1">Sistem Manajemen</span>
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">ERP, CRM &amp; Pengelolaan Bisnis</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          Satu pintu untuk kelola stok gudang, pencatatan transaksi keuangan, laporan penjualan real-time, dan data pelanggan terpusat secara aman.
+        </p>
+      </div>
+
+      <!-- Card 4: IoT & Hardware -->
+      <div class="card-lift md:col-span-2 rounded-2xl bg-white border border-slate-200 p-7 shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-6">
+        <div class="w-10 h-10 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-700 flex-shrink-0">
+          <i data-lucide="cpu" class="w-5 h-5"></i>
+        </div>
+        <div class="flex-1">
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-sky-600 mb-0.5 block">Hardware &amp; IoT</span>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1">Integrasi IoT &amp; Sensor Monitoring</h3>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Menghubungkan alat fisik, sensor suhu gudang, mesin industri, atau sistem gerbang ke dashboard cloud yang bisa dipantau dari smartphone Anda.
+          </p>
+        </div>
+        <div class="flex-shrink-0">
+          <a href="https://wa.me/6281234567890" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-sky font-mono">
+            <span>Konsultasikan Spesifikasi</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROSES 4 TAHAP
+  ============================================================ -->
+  <section id="proses" class="py-20 px-5 sm:px-8 bg-slate-50/70 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-12 text-center max-w-xl mx-auto">
+        <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-navy">02 • Standar Pengerjaan</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight mt-1">
+          Transparan Dari Awal Sampai Selesai
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 mt-2">
+          Anda tidak perlu pusing dengan urusan teknis. Kami dampingi langkah demi langkah.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm relative">
+          <span class="text-3xl font-black font-mono text-slate-200 block mb-2">01</span>
+          <h4 class="text-sm font-bold text-slate-900 mb-1.5">Diskusi &amp; Solusi</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Ceritakan kebutuhan bisnis Anda. Kami bantu terjemahkan ke rencana sistem yang efektif.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm relative">
+          <span class="text-3xl font-black font-mono text-slate-200 block mb-2">02</span>
+          <h4 class="text-sm font-bold text-slate-900 mb-1.5">Rancangan &amp; Mockup</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Kami buatkan prototipe visual dan alur data yang jelas sebelum proses coding dimulai.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm relative">
+          <span class="text-3xl font-black font-mono text-slate-200 block mb-2">03</span>
+          <h4 class="text-sm font-bold text-slate-900 mb-1.5">Pengembangan Sistem</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Pengembangan kode dengan standar industri, tes otomatis, dan laporan progress berkala.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm relative">
+          <span class="text-3xl font-black font-mono text-slate-200 block mb-2">04</span>
+          <h4 class="text-sm font-bold text-slate-900 mb-1.5">Peluncuran &amp; Garansi</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Sistem diluncurkan ke server produksi dan kami dampingi hingga berjalan stabil.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       KALKULATOR WHATSAPP PROYEK
+  ============================================================ -->
+  <section id="kalkulator" class="py-20 px-5 sm:px-8 max-w-4xl mx-auto">
+    <div class="mb-10 text-center">
+      <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-navy">03 • Kalkulator Cepat</span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight mt-1">
+        Siapkan Draf Konsultasi Anda
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-500 mt-2">
+        Pilih modul yang diinginkan, sistem akan membuat pesan WhatsApp siap kirim ke tim engineer Gemilang Labs.
+      </p>
+    </div>
+
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+      <!-- 1. Kategori -->
+      <div>
+        <label class="block text-xs font-mono font-bold uppercase text-slate-600 mb-2">1. Pilih Jenis Sistem:</label>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="calc-svc">
+          <button type="button" data-val="Website atau Aplikasi Web" class="calc-btn active text-left p-3.5 rounded-xl border-2 border-brand-navy bg-blue-50/80 text-xs font-bold font-mono text-brand-navy">
+            Web &amp; SaaS
+          </button>
+          <button type="button" data-val="Sistem AI & Otomasi Bot" class="calc-btn text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold font-mono text-slate-600 hover:border-slate-300">
+            AI &amp; Otomasi
+          </button>
+          <button type="button" data-val="Sistem ERP / CRM Enterprise" class="calc-btn text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold font-mono text-slate-600 hover:border-slate-300">
+            ERP &amp; CRM
+          </button>
+          <button type="button" data-val="Integrasi Perangkat IoT & Sensor" class="calc-btn text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold font-mono text-slate-600 hover:border-slate-300">
+            IoT / Hardware
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Target Waktu -->
+      <div>
+        <label class="block text-xs font-mono font-bold uppercase text-slate-600 mb-2">2. Target Waktu Pengerjaan:</label>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="calc-tier">
+          <button type="button" data-val="MVP Cepat (2-4 Minggu)" class="calc-tier active text-left p-3.5 rounded-xl border-2 border-brand-navy bg-blue-50/80 text-xs font-bold font-mono text-brand-navy">
+            MVP Cepat (2-4 Mgg)
+          </button>
+          <button type="button" data-val="Pengembangan Skala Penuh (1-2 Bulan)" class="calc-tier text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold font-mono text-slate-600 hover:border-slate-300">
+            Skala Penuh (1-2 Bulan)
+          </button>
+          <button type="button" data-val="Konsultasi Terbuka / Belum Tahu" class="calc-tier text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold font-mono text-slate-600 hover:border-slate-300">
+            Konsultasi Dulu
+          </button>
+        </div>
+      </div>
+
+      <!-- Preview Box & WhatsApp Send -->
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="text-[10px] font-mono font-bold uppercase text-slate-500">Draf Pesan WhatsApp Anda:</span>
+          </div>
+          <p id="calc-preview" class="text-xs font-mono text-slate-800 bg-white border border-slate-200 rounded-lg p-3 leading-relaxed">
+            "Halo Gemilang Labs, saya tertarik membangun Website atau Aplikasi Web dengan target MVP Cepat (2-4 Minggu). Boleh diskusi lebih lanjut?"
+          </p>
+        </div>
+
+        <a
+          id="calc-wa-btn"
+          href="#"
+          target="_blank"
+          rel="noopener"
+          class="btn-press flex-shrink-0 w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-95 text-white font-bold text-xs shadow-md"
+        >
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>Kirim ke WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="border-t border-slate-200 bg-white py-8 px-5 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="../gemilang.jpeg" alt="Gemilang Labs" class="h-8 w-auto" />
+        <span class="text-xs text-slate-500">&copy; 2026 Gemilang Labs. All rights reserved.</span>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs font-semibold text-slate-600">
+        <a href="#layanan" class="hover:text-brand-navy transition-colors">Layanan</a>
+        <a href="#proses" class="hover:text-brand-navy transition-colors">Proses</a>
+        <a href="#kalkulator" class="hover:text-brand-navy transition-colors">Kalkulator</a>
+        <a href="https://wa.me/6281234567890" target="_blank" class="text-brand-navy font-bold hover:underline">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       SCRIPTS:
+       1. SONAR GRID CANVAS ENGINE (Smoothstep Waves on Dot Grid)
+       2. FANNED TYPOGRAPHY ENGINE ("G-E-M-I-L-A-N-G")
+       3. INTERACTIVE CONTROLLER
+  ============================================================ -->
+  <script>
+    lucide.createIcons();
+
+    /* ============================================================
+       1. SONAR GRID CANVAS ENGINE (Adapted from sonar-grid.tsx)
+    ============================================================ */
+    const canvas = document.getElementById('sonar-canvas');
+    const ctx = canvas.getContext('2d');
+
+    const MAX_DPR = 2;
+    const TAU = Math.PI * 2;
+
+    const sonarOpts = {
+      spacing: 28,
+      dotRadius: 1.4,
+      baseOpacity: 0.16,
+      color: '#2196F3',
+      speed: 260,
+      ringWidth: 95,
+      amplitude: 2.2,
+      maxRings: 6,
+      pingEvery: 2.8,
+      interactive: true,
+      pingArea: [0.15, 0.2, 0.85, 0.8]
+    };
+
+    let width = 0;
+    let height = 0;
+    let rings = [];
+    let nextPing = performance.now() + 1500;
+
+    function addRing(x, y, born) {
+      rings.push({ x, y, born });
+      while (rings.length > sonarOpts.maxRings) rings.shift();
+    }
+
+    function resizeCanvas() {
+      const parent = canvas.parentElement;
+      width = parent.clientWidth;
+      height = parent.clientHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // Seed first ping
+      if (rings.length === 0) {
+        addRing(width * 0.5, height * 0.45, performance.now() - 400);
+      }
+    }
+
+    function drawSonar(now) {
+      const lifetime = (Math.hypot(width, height) + sonarOpts.ringWidth) / sonarOpts.speed;
+      rings = rings.filter(r => (now - r.born) / 1000 < lifetime);
+
+      const live = rings.map(r => {
+        const age = (now - r.born) / 1000;
+        const radius = age * sonarOpts.speed;
+        return {
+          x: r.x,
+          y: r.y,
+          radius,
+          reach: radius + sonarOpts.ringWidth,
+          fade: Math.max(0, 1 - age / lifetime)
+        };
+      });
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = sonarOpts.color;
+
+      const cols = Math.ceil(width / sonarOpts.spacing) + 1;
+      const rows = Math.ceil(height / sonarOpts.spacing) + 1;
+      const offsetX = (width - (cols - 1) * sonarOpts.spacing) / 2;
+      const offsetY = (height - (rows - 1) * sonarOpts.spacing) / 2;
+
+      // Pass 1: Resting Dots (Batched)
+      const hot = [];
+      ctx.globalAlpha = sonarOpts.baseOpacity;
+      ctx.beginPath();
+
+      for (let i = 0; i < cols; i++) {
+        const cx = offsetX + i * sonarOpts.spacing;
+        for (let j = 0; j < rows; j++) {
+          const cy = offsetY + j * sonarOpts.spacing;
+          let energy = 0;
+
+          for (const r of live) {
+            if (Math.abs(cx - r.x) > r.reach || Math.abs(cy - r.y) > r.reach) continue;
+            const dist = Math.abs(Math.hypot(cx - r.x, cy - r.y) - r.radius);
+            if (dist >= sonarOpts.ringWidth) continue;
+            const t = 1 - dist / sonarOpts.ringWidth;
+            const k = t * t * (3 - 2 * t) * r.fade; // smoothstep wave
+            if (k > energy) energy = k;
+          }
+
+          if (energy < 0.01) {
+            ctx.moveTo(cx + sonarOpts.dotRadius, cy);
+            ctx.arc(cx, cy, sonarOpts.dotRadius, 0, TAU);
+          } else {
+            hot.push(cx, cy, energy);
+          }
+        }
+      }
+      ctx.fill();
+
+      // Pass 2: Energetic Wavefront Dots
+      for (let k = 0; k < hot.length; k += 3) {
+        const energy = hot[k + 2] ?? 0;
+        ctx.globalAlpha = sonarOpts.baseOpacity + (1 - sonarOpts.baseOpacity) * energy;
+        ctx.beginPath();
+        ctx.arc(hot[k] ?? 0, hot[k + 1] ?? 0, sonarOpts.dotRadius * (1 + sonarOpts.amplitude * energy), 0, TAU);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function animateSonar(now) {
+      requestAnimationFrame(animateSonar);
+
+      if (now >= nextPing) {
+        const [x0, y0, x1, y1] = sonarOpts.pingArea;
+        const px = width * (x0 + Math.random() * (x1 - x0));
+        const py = height * (y0 + Math.random() * (y1 - y0));
+        addRing(px, py, now);
+        nextPing = now + sonarOpts.pingEvery * 1000;
+      }
+
+      drawSonar(now);
+    }
+
+    // Tap to emit radar ping
+    canvas.addEventListener('pointerdown', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      addRing(e.clientX - rect.left, e.clientY - rect.top, performance.now());
+    });
+
+    function triggerAmbientSonar() {
+      addRing(width / 2, height / 2, performance.now());
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    requestAnimationFrame(animateSonar);
+
+
+    /* ============================================================
+       2. FANNED TYPOGRAPHY ENGINE ("GEMILANG" - 8 CHARACTERS)
+    ============================================================ */
+    const WORD = "GEMILANG";
+    let selectedIndex = 0;
+    let colorMode = 'gemilang';
+    let globalFanSpread = 1.0;
+    let globalLetterSpacing = 0;
+    let globalLayerRot = 0;
+
+    // Palettes matching Gemilang Labs brand — pure glyph colors, NO rectangular background
+    const PALETTES = {
+      gemilang: {
+        name: 'Gemilang Navy (Default)',
+        topGradient: 'radial-gradient(ellipse at 18% 18%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.45) 24%, rgba(255, 255, 255, 0) 52%), linear-gradient(135deg, #7EC4FD 0%, #2196F3 35%, #1B3A8C 75%, #0F2560 100%)',
+        layers: [
+          '#1E5AD6', // Layer 1 (Cobalt Sky)
+          '#1A4AB8', // Layer 2 (Navy Light)
+          '#163C9A', // Layer 3 (Gemilang Navy)
+          '#132F7C', // Layer 4 (Deep Navy)
+          '#0E215C'  // Layer 5 (Rich Dark Navy)
+        ],
+        shadowBase: 'rgba(15, 37, 96, '
+      },
+      goldNavy: {
+        name: 'Sunburst Gold Accent',
+        topGradient: 'radial-gradient(ellipse at 18% 18%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.45) 24%, rgba(255, 255, 255, 0) 52%), linear-gradient(135deg, #FFF0B3 0%, #FFCA28 35%, #F5B800 75%, #D49000 100%)',
+        layers: [
+          '#F5A623',
+          '#D68814',
+          '#B56E0B',
+          '#1B3A8C',
+          '#0F2560'
+        ],
+        shadowBase: 'rgba(160, 95, 0, '
+      },
+      cyanTech: {
+        name: 'Cyber Cyan Edge',
+        topGradient: 'radial-gradient(ellipse at 18% 18%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.45) 24%, rgba(255, 255, 255, 0) 52%), linear-gradient(135deg, #C5F6FF 0%, #00B4D8 40%, #0077B6 75%, #03045E 100%)',
+        layers: [
+          '#0096C7',
+          '#0077B6',
+          '#023E8A',
+          '#03045E',
+          '#01123D'
+        ],
+        shadowBase: 'rgba(0, 75, 140, '
+      }
+    };
+
+    // Preset configurations for GEMILANG
+    const PRESETS = {
+      titanium: {
+        name: 'Titanium Glass',
+        colorMode: 'gemilang',
+        globalFanSpread: 1.0,
+        globalLetterSpacing: 0,
+        letters: [
+          { char: 'G', baseRot: -2.0, yOffset: 0,   fanSpread: 1.0, layerRot: -1.2, dx: -4.0, dy: 5.5 },
+          { char: 'E', baseRot: 1.0,  yOffset: -4,  fanSpread: 1.0, layerRot: -1.0, dx: -3.8, dy: 5.2 },
+          { char: 'M', baseRot: -1.5, yOffset: 2,   fanSpread: 1.1, layerRot: -1.3, dx: -4.2, dy: 5.6 },
+          { char: 'I', baseRot: 2.0,  yOffset: -6,  fanSpread: 0.9, layerRot: -0.9, dx: -3.5, dy: 5.0 },
+          { char: 'L', baseRot: -1.0, yOffset: 3,   fanSpread: 1.0, layerRot: -1.1, dx: -4.0, dy: 5.4 },
+          { char: 'A', baseRot: 1.5,  yOffset: -2,  fanSpread: 1.0, layerRot: -1.0, dx: -3.8, dy: 5.2 },
+          { char: 'N', baseRot: -2.0, yOffset: 4,   fanSpread: 1.1, layerRot: -1.2, dx: -4.2, dy: 5.5 },
+          { char: 'G', baseRot: 2.5,  yOffset: -5,  fanSpread: 1.2, layerRot: -1.4, dx: -4.5, dy: 5.8 },
+        ]
+      },
+      blueprintWave: {
+        name: 'Blueprint Wave',
+        colorMode: 'gemilang',
+        globalFanSpread: 1.2,
+        globalLetterSpacing: 2,
+        letters: [
+          { char: 'G', baseRot: -4.0, yOffset: -12, fanSpread: 1.1, layerRot: -1.5, dx: -4.2, dy: 6.0 },
+          { char: 'E', baseRot: -2.0, yOffset: 8,   fanSpread: 1.0, layerRot: -1.0, dx: -3.8, dy: 5.4 },
+          { char: 'M', baseRot: 3.0,  yOffset: -16, fanSpread: 1.2, layerRot: -1.6, dx: -4.5, dy: 6.2 },
+          { char: 'I', baseRot: -3.0, yOffset: 12,  fanSpread: 0.9, layerRot: -1.0, dx: -3.5, dy: 5.0 },
+          { char: 'L', baseRot: 4.0,  yOffset: -14, fanSpread: 1.1, layerRot: -1.4, dx: -4.0, dy: 5.8 },
+          { char: 'A', baseRot: -2.5, yOffset: 10,  fanSpread: 1.1, layerRot: -1.2, dx: -4.0, dy: 5.5 },
+          { char: 'N', baseRot: 3.5,  yOffset: -10, fanSpread: 1.2, layerRot: -1.5, dx: -4.4, dy: 6.0 },
+          { char: 'G', baseRot: -5.0, yOffset: 14,  fanSpread: 1.3, layerRot: -1.8, dx: -4.8, dy: 6.5 },
+        ]
+      },
+      oceanFan: {
+        name: 'Deep Ocean 3D',
+        colorMode: 'cyanTech',
+        globalFanSpread: 1.8,
+        globalLetterSpacing: 4,
+        letters: [
+          { char: 'G', baseRot: -1.0, yOffset: 0, fanSpread: 1.5, layerRot: -1.6, dx: -5.0, dy: 6.5 },
+          { char: 'E', baseRot: 0.5,  yOffset: 0, fanSpread: 1.4, layerRot: -1.4, dx: -4.5, dy: 6.0 },
+          { char: 'M', baseRot: -1.0, yOffset: 0, fanSpread: 1.6, layerRot: -1.7, dx: -5.2, dy: 6.8 },
+          { char: 'I', baseRot: 1.0,  yOffset: 0, fanSpread: 1.3, layerRot: -1.2, dx: -4.0, dy: 5.5 },
+          { char: 'L', baseRot: -0.5, yOffset: 0, fanSpread: 1.4, layerRot: -1.4, dx: -4.5, dy: 6.0 },
+          { char: 'A', baseRot: 1.0,  yOffset: 0, fanSpread: 1.5, layerRot: -1.5, dx: -4.8, dy: 6.2 },
+          { char: 'N', baseRot: -1.5, yOffset: 0, fanSpread: 1.6, layerRot: -1.6, dx: -5.0, dy: 6.5 },
+          { char: 'G', baseRot: 2.0,  yOffset: 0, fanSpread: 1.8, layerRot: -1.9, dx: -5.5, dy: 7.0 },
+        ]
+      },
+      flatClean: {
+        name: 'Minimal Pure Straight',
+        colorMode: 'gemilang',
+        globalFanSpread: 0.7,
+        globalLetterSpacing: -1,
+        letters: [
+          { char: 'G', baseRot: 0, yOffset: 0, fanSpread: 0.8, layerRot: 0, dx: -3.0, dy: 4.0 },
+          { char: 'E', baseRot: 0, yOffset: 0, fanSpread: 0.8, layerRot: 0, dx: -3.0, dy: 4.0 },
+          { char: 'M', baseRot: 0, yOffset: 0, fanSpread: 0.8, layerRot: 0, dx: -3.0, dy: 4.0 },
+          { char: 'I', baseRot: 0, yOffset: 0, fanSpread: 0.8, layerRot: 0, dx: -3.0, dy: 4.0 },
+          { char: 'L', baseRot: 0, yOffset: 0, fanSpread: 0.8, layerRot: 0, dx: -3.0, dy: 4.0 },
+          { char: 'A', baseRot: 0, yOffset: 0, fanSpread: 0.8, layerRot: 0, dx: -3.0, dy: 4.0 },
+          { char: 'N', baseRot: 0, yOffset: 0, fanSpread: 0.8, layerRot: 0, dx: -3.0, dy: 4.0 },
+          { char: 'G', baseRot: 0, yOffset: 0, fanSpread: 0.8, layerRot: 0, dx: -3.0, dy: 4.0 },
+        ]
+      }
+    };
+
+    let activePresetKey = 'titanium';
+    let letterConfigs = JSON.parse(JSON.stringify(PRESETS[activePresetKey].letters));
+
+    const stickerContainer = document.getElementById('sticker-container');
+
+    function renderFannedSticker() {
+      stickerContainer.innerHTML = '';
+      const palette = PALETTES[colorMode];
+      const TOTAL_LAYERS = 6;
+      const len = letterConfigs.length;
+
+      // Responsive clamp for 8 letters across wall-to-wall
+      const fontSize = `clamp(2.8rem, min(${88 / len}vw, 22vh), 11.5rem)`;
+
+      letterConfigs.forEach((cfg, idx) => {
+        const stack = document.createElement('div');
+        stack.className = 'letter-stack' + (idx === selectedIndex ? ' is-selected' : '');
+        stack.id = 'stack-' + idx;
+        stack.style.fontSize = fontSize;
+        stack.style.fontFamily = '"Unbounded", "Plus Jakarta Sans", sans-serif';
+        stack.style.marginRight = `${globalLetterSpacing}px`;
+
+        // Base transform (X/Y and rotation)
+        stack.style.transform = `translate(${cfg.xOffset || 0}px, ${cfg.yOffset || 0}px) rotate(${cfg.baseRot || 0}deg)`;
+
+        // Selection Tag
+        if (idx === selectedIndex) {
+          const tag = document.createElement('span');
+          tag.className = 'selection-tag';
+          tag.textContent = `Tuning "${cfg.char}" (#${idx + 1})`;
+          stack.appendChild(tag);
+        }
+
+        // On Click -> Select letter & open studio
+        stack.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectLetter(idx);
+          toggleStudioDrawer(true);
+        });
+
+        // 6 Stacked Layers (Back to Front)
+        for (let l = TOTAL_LAYERS - 1; l >= 0; l--) {
+          const layerSpan = document.createElement('span');
+          layerSpan.className = `sticker-layer`;
+          layerSpan.textContent = cfg.char;
+
+          const totalFan = (cfg.fanSpread || 1.0) * globalFanSpread;
+          const offsetX = (cfg.dx * l) * totalFan;
+          const offsetY = (cfg.dy * l) * totalFan;
+          const offsetRot = ((cfg.layerRot || -1.2) * l * totalFan) + (globalLayerRot * l);
+
+          layerSpan.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${offsetRot}deg)`;
+
+          if (l === 0) {
+            // Front Face: Crisp metallic gradient text
+            layerSpan.classList.add('layer-top');
+            layerSpan.style.backgroundImage = palette.topGradient;
+            layerSpan.style.webkitBackgroundClip = 'text';
+            layerSpan.style.webkitTextFillColor = 'transparent';
+            layerSpan.style.zIndex = '35';
+            layerSpan.style.filter = 'drop-shadow(0 1.5px 2px rgba(255, 255, 255, 0.75))';
+          } else {
+            // Sub-layers (Layers 1-5): PURE TYPOGRAPHY GLYPH SHEETS (NO RECTANGULAR BOX!)
+            layerSpan.classList.add('layer-under');
+            const layerColor = palette.layers[l - 1] || '#1B3A8C';
+            layerSpan.style.color = layerColor;
+            layerSpan.style.zIndex = (30 - l * 4).toString();
+
+            // Precise drop-shadow strictly on the glyph contour
+            if (l === 1) {
+              layerSpan.style.filter = `drop-shadow(1px 1.5px 1px ${palette.shadowBase}0.25))`;
+            } else if (l === 2) {
+              layerSpan.style.filter = `drop-shadow(1.5px 2.5px 2px ${palette.shadowBase}0.38))`;
+            } else if (l === 3) {
+              layerSpan.style.filter = `drop-shadow(2px 4px 3px ${palette.shadowBase}0.50))`;
+            } else if (l === 4) {
+              layerSpan.style.filter = `drop-shadow(3px 6px 4.5px ${palette.shadowBase}0.62))`;
+            } else if (l === TOTAL_LAYERS - 1) {
+              layerSpan.style.filter = `
+                drop-shadow(4px 8px 6px ${palette.shadowBase}0.75))
+                drop-shadow(7px 16px 20px rgba(15, 23, 42, 0.35))
+                drop-shadow(12px 28px 36px rgba(15, 23, 42, 0.18))
+              `;
+            }
+          }
+
+          stack.appendChild(layerSpan);
+        }
+
+        stickerContainer.appendChild(stack);
+      });
+
+      renderChips();
+      syncInputs();
+    }
+
+    /* ── Quick Chips Switcher ── */
+    function renderChips() {
+      const dockChips = document.getElementById('dock-letter-chips');
+      const drawerChips = document.getElementById('drawer-letter-chips');
+      dockChips.innerHTML = '';
+      drawerChips.innerHTML = '';
+
+      letterConfigs.forEach((cfg, idx) => {
+        // Dock Chip
+        const b1 = document.createElement('button');
+        b1.className = `w-5 h-5 rounded flex items-center justify-center font-mono text-[10px] font-bold transition-all ${idx === selectedIndex ? 'bg-blue-600 text-white shadow' : 'bg-white/10 text-slate-300 hover:bg-white/20'}`;
+        b1.textContent = cfg.char;
+        b1.onclick = () => selectLetter(idx);
+        dockChips.appendChild(b1);
+
+        // Drawer Chip
+        const b2 = document.createElement('button');
+        b2.className = `px-2.5 py-1 rounded-lg font-mono text-[10.5px] font-bold transition-all ${idx === selectedIndex ? 'bg-blue-600 text-white shadow' : 'bg-white/10 text-slate-300 hover:bg-white/20'}`;
+        b2.textContent = `${cfg.char} (${idx + 1})`;
+        b2.onclick = () => selectLetter(idx);
+        drawerChips.appendChild(b2);
+      });
+
+      document.getElementById('dock-active-char').textContent = letterConfigs[selectedIndex].char;
+      document.getElementById('selected-char-display').textContent = `${letterConfigs[selectedIndex].char} (#${selectedIndex + 1})`;
+    }
+
+    function selectLetter(idx) {
+      selectedIndex = idx;
+      renderFannedSticker();
+    }
+
+    function syncInputs() {
+      const cfg = letterConfigs[selectedIndex];
+      if (!cfg) return;
+
+      document.getElementById('slider-baseRot').value = cfg.baseRot || 0;
+      document.getElementById('val-baseRot').textContent = `${cfg.baseRot || 0}°`;
+
+      document.getElementById('slider-yOffset').value = cfg.yOffset || 0;
+      document.getElementById('val-yOffset').textContent = `${cfg.yOffset || 0}px`;
+
+      document.getElementById('slider-fanSpread').value = cfg.fanSpread || 1.0;
+      document.getElementById('val-fanSpread').textContent = `${cfg.fanSpread || 1.0}x`;
+
+      document.getElementById('slider-layerRot').value = cfg.layerRot || -1.2;
+      document.getElementById('val-layerRot').textContent = `${cfg.layerRot || -1.2}°`;
+    }
+
+    function onLetterParamChange(param, val) {
+      val = parseFloat(val);
+      letterConfigs[selectedIndex][param] = val;
+      renderFannedSticker();
+    }
+
+    function onGlobalParamChange(param, val) {
+      val = parseFloat(val);
+      if (param === 'globalFanSpread') {
+        globalFanSpread = val;
+        document.getElementById('global-fan-val').textContent = `${val.toFixed(2)}x`;
+      } else if (param === 'globalLetterSpacing') {
+        globalLetterSpacing = val;
+        document.getElementById('global-spacing-val').textContent = `${val}px`;
+      }
+      renderFannedSticker();
+    }
+
+    function setColorMode(mode) {
+      colorMode = mode;
+      ['gemilang', 'goldNavy', 'cyanTech'].forEach(m => {
+        const btn = document.getElementById(`palette-${m}`);
+        if (btn) {
+          if (m === mode) btn.classList.add('border-white');
+          else btn.classList.remove('border-white');
+        }
+      });
+      renderFannedSticker();
+    }
+
+    function applyPreset(key) {
+      activePresetKey = key;
+      const p = PRESETS[key];
+      letterConfigs = JSON.parse(JSON.stringify(p.letters));
+      colorMode = p.colorMode || 'gemilang';
+      globalFanSpread = p.globalFanSpread || 1.0;
+      globalLetterSpacing = p.globalLetterSpacing || 0;
+      document.getElementById('dock-preset-name').textContent = p.name;
+      renderFannedSticker();
+    }
+
+    function cyclePreset() {
+      const keys = Object.keys(PRESETS);
+      const nextIdx = (keys.indexOf(activePresetKey) + 1) % keys.length;
+      applyPreset(keys[nextIdx]);
+    }
+
+    function toggleStudioDrawer(show) {
+      const drawer = document.getElementById('studio-drawer');
+      if (show) drawer.classList.remove('hidden');
+      else drawer.classList.add('hidden');
+    }
+
+    function switchTab(tab) {
+      ['per-huruf', 'global', 'presets'].forEach(t => {
+        const c = document.getElementById(`tab-content-${t}`);
+        const b = document.getElementById(`tab-btn-${t}`);
+        if (t === tab) {
+          c.classList.remove('hidden');
+          b.classList.remove('bg-white/10', 'text-slate-300');
+          b.classList.add('bg-blue-600', 'text-white');
+        } else {
+          c.classList.add('hidden');
+          b.classList.remove('bg-blue-600', 'text-white');
+          b.classList.add('bg-white/10', 'text-slate-300');
+        }
+      });
+    }
+
+    /* ── 3. CALCULATOR WHATSAPP ENGINE ── */
+    const WA_NUM = '6281234567890';
+    let chosenSvc = 'Website atau Aplikasi Web';
+    let chosenTier = 'MVP Cepat (2-4 Minggu)';
+
+    const previewEl = document.getElementById('calc-preview');
+    const waBtn = document.getElementById('calc-wa-btn');
+
+    function updateWAPreview() {
+      const text = `Halo Gemilang Labs, saya tertarik membangun ${chosenSvc} dengan target ${chosenTier}. Boleh diskusi lebih lanjut?`;
+      previewEl.textContent = `"${text}"`;
+      waBtn.href = `https://wa.me/${WA_NUM}?text=${encodeURIComponent(text)}`;
+    }
+
+    document.querySelectorAll('#calc-svc .calc-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#calc-svc .calc-btn').forEach(b => {
+          b.classList.remove('active', 'border-2', 'border-brand-navy', 'bg-blue-50/80', 'text-brand-navy', 'font-bold');
+          b.classList.add('border', 'border-slate-200', 'bg-slate-50', 'text-slate-600', 'font-semibold');
+        });
+        btn.classList.add('active', 'border-2', 'border-brand-navy', 'bg-blue-50/80', 'text-brand-navy', 'font-bold');
+        chosenSvc = btn.getAttribute('data-val');
+        updateWAPreview();
+      });
+    });
+
+    document.querySelectorAll('#calc-tier .calc-tier').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#calc-tier .calc-tier').forEach(b => {
+          b.classList.remove('active', 'border-2', 'border-brand-navy', 'bg-blue-50/80', 'text-brand-navy', 'font-bold');
+          b.classList.add('border', 'border-slate-200', 'bg-slate-50', 'text-slate-600', 'font-semibold');
+        });
+        btn.classList.add('active', 'border-2', 'border-brand-navy', 'bg-blue-50/80', 'text-brand-navy', 'font-bold');
+        chosenTier = btn.getAttribute('data-val');
+        updateWAPreview();
+      });
+    });
+
+    updateWAPreview();
+    renderFannedSticker();
+  </script>
+</body>
+</html>

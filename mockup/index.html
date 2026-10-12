@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id" class="light scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemilang Labs — Digital Engineering, Cloud Systems & Applied AI</title>
+  
+  <!-- Fonts: Space Grotesk & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            blueprint: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7', // Architectural Cobalt-Sky
+              600: '#0369a1',
+              700: '#075985',
+              base: '#f8fafc',
+              surface: '#ffffff',
+              border: '#e2e8f0',
+              borderDark: '#cbd5e1',
+              line: '#0284c7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    /* Architectural Drafting Grid with Coordinate Ticks */
+    .bg-drafting-grid {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(2, 132, 199, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(2, 132, 199, 0.05) 1px, transparent 1px);
+    }
+
+    /* Crosshair Corner Marks */
+    .corner-mark {
+      position: relative;
+    }
+    .corner-mark::before {
+      content: "+";
+      position: absolute;
+      top: -8px;
+      left: -6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #0284c7;
+      opacity: 0.6;
+      line-height: 1;
+    }
+    .corner-mark::after {
+      content: "+";
+      position: absolute;
+      bottom: -8px;
+      right: -6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #0284c7;
+      opacity: 0.6;
+      line-height: 1;
+    }
+
+    /* 3D Canvas */
+    #three-iso {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 52%;
+      height: 100%;
+      z-index: 1;
+      cursor: grab;
+    }
+    #three-iso:active {
+      cursor: grabbing;
+    }
+    @media (max-width: 1024px) {
+      #three-iso {
+        width: 100%;
+        opacity: 0.22;
+        pointer-events: none;
+      }
+    }
+
+    /* Text Wrap Balancing */
+    .text-balance {
+      text-wrap: balance;
+    }
+
+    /* Tabular Nums for System Metrics */
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-blueprint-500/15 selection:text-blueprint-700 bg-drafting-grid">
+
+  <!-- TOP SWITCHER BAR -->
+  <div class="bg-white border-b border-blueprint-border text-xs py-2 px-6 sticky top-0 z-50 flex items-center justify-between shadow-sm">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-sky-50 border border-sky-200 text-sky-700 font-mono text-[10px] font-bold">
+        <span class="w-1.5 h-1.5 rounded-full bg-sky-600 animate-ping"></span>
+        REDESIGNED v3.2
+      </span>
+      <span class="text-slate-500 hidden sm:inline font-mono text-[11px]">| Architectural Precision Light:</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="option-1-light-tech.html" class="px-3 py-1 rounded bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-950 text-xs">Opsi 1: Swiss Precision</a>
+      <a href="option-2-linear-light.html" class="px-3 py-1 rounded bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-950 text-xs">Opsi 2: Linear Editorial</a>
+      <a href="option-3-blueprint-light.html" class="px-3 py-1 rounded bg-sky-600 text-white font-bold text-xs shadow-sm">Opsi 3: Architectural Lab ★</a>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="border-b border-blueprint-border bg-white/95 backdrop-blur-md sticky top-[37px] z-40">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <!-- Monogram & Tech Identity -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-8 h-8 rounded border border-sky-600/40 bg-sky-50 flex items-center justify-center font-mono font-bold text-sky-700 text-xs group-hover:border-sky-600 transition-colors shadow-xs">
+          GL
+        </div>
+        <div>
+          <span class="font-bold text-slate-950 tracking-tight text-sm flex items-center gap-1">
+            GEMILANG LABS
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          </span>
+          <span class="text-[10px] font-mono text-slate-500 block leading-none tracking-tight">ENG_ID: ID-JKT-2026 &bull; READY</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-mono font-medium text-slate-600">
+        <a href="#services" class="hover:text-sky-600 transition-colors">// PILAR_SISTEM</a>
+        <a href="#architecture" class="hover:text-sky-600 transition-colors">// STANDAR_TEKNIS</a>
+        <a href="#calculator" class="hover:text-sky-600 transition-colors">// KALKULATOR_WA</a>
+        <a href="#sdlc" class="hover:text-sky-600 transition-colors">// ALUR_SDLC</a>
+      </nav>
+
+      <!-- CTA WhatsApp -->
+      <a 
+        href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20konsultasi%20rekayasa%20sistem%20%26%20AI." 
+        target="_blank" 
+        class="inline-flex items-center gap-2 px-4 py-2 rounded border border-sky-600 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs font-mono transition-all active:scale-[0.98] shadow-sm"
+      >
+        <span>&gt; KONSULTASI_WA</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION (Fits 100dvh, Split-Screen with Interactive 3D Orthographic Nodes) -->
+  <section class="relative min-h-[calc(100dvh-101px)] flex items-center px-6 max-w-7xl mx-auto overflow-hidden">
+    <!-- 3D Canvas Canvas -->
+    <canvas id="three-iso"></canvas>
+
+    <div class="relative z-10 max-w-xl py-12 lg:py-20">
+      <!-- Architectural Eyebrow -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-sky-200 bg-white text-[11px] font-mono text-sky-700 mb-6 shadow-xs">
+        <span class="w-1.5 h-1.5 rounded-full bg-sky-600 animate-pulse"></span>
+        <span class="font-bold">SPEC_FRAMEWORK 4.2</span>
+        <span class="text-slate-300">|</span>
+        <span>SCALABLE DIGITAL ENGINEERING & APPLIED AI</span>
+      </div>
+
+      <!-- Display Headline (Tightened, Negative Tracking, Balanced) -->
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-slate-950 leading-[1.08] mb-5 text-balance">
+        Rekayasa Solusi Digital & Sistem AI Skala Industri.
+      </h1>
+
+      <!-- Subtext (Max 20 Words, Clear & Sharp) -->
+      <p class="text-base text-slate-600 font-normal leading-relaxed mb-8 max-w-lg text-balance">
+        Partner teknis untuk membangun web app scalable, arsitektur cloud microservices, dan model AI presisi tinggi tanpa dependensi rapuh.
+      </p>
+
+      <!-- Action Button Group -->
+      <div class="flex flex-col sm:flex-row items-center gap-3">
+        <a 
+          href="#calculator" 
+          class="w-full sm:w-auto px-6 py-3.5 rounded bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs font-mono tracking-wider transition-all text-center shadow-md shadow-sky-600/15 active:scale-[0.98]"
+        >
+          [+] ESTIMASI_SPESIFIKASI
+        </a>
+        <a 
+          href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20ingin%20diskusi%20kebutuhan%20teknologi." 
+          target="_blank" 
+          class="w-full sm:w-auto px-6 py-3.5 rounded border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-semibold text-xs font-mono tracking-wider transition-all text-center active:scale-[0.98] shadow-xs"
+        >
+          HUBUNGI_TIM_ENGINEERING
+        </a>
+      </div>
+
+      <!-- Live 3D Status Callout -->
+      <div class="mt-10 p-3.5 rounded border border-blueprint-border bg-white/90 font-mono text-xs text-slate-600 flex flex-wrap items-center justify-between gap-3 shadow-xs corner-mark">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span class="text-slate-900 font-semibold">3D ISOMETRIC MESH ACTIVE</span>
+        </div>
+        <span class="text-sky-600 text-[11px]">Orbit / Drag kursor untuk inspeksi node</span>
+      </div>
+
+      <!-- System Benchmark Metrics -->
+      <div class="mt-8 grid grid-cols-3 gap-4 border-t border-slate-200 pt-6 font-mono text-xs">
+        <div>
+          <span class="block text-xl font-bold text-slate-950 tabular-nums">&lt; 35ms</span>
+          <span class="text-[10px] text-slate-500 uppercase tracking-tight">Latency Edge</span>
+        </div>
+        <div>
+          <span class="block text-xl font-bold text-slate-950 tabular-nums">99.98%</span>
+          <span class="text-[10px] text-slate-500 uppercase tracking-tight">Availability SLA</span>
+        </div>
+        <div>
+          <span class="block text-xl font-bold text-emerald-600 tabular-nums">ZERO</span>
+          <span class="text-[10px] text-slate-500 uppercase tracking-tight">Tech Debt</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURAL STANDARDS RIBBON (Reliability Strip) -->
+  <section class="py-6 border-y border-blueprint-border bg-white">
+    <div class="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-between gap-6">
+      <span class="text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
+        // PROTOKOL & STACK REKAYASA:
+      </span>
+      <div class="flex flex-wrap items-center gap-6 sm:gap-10 font-mono text-xs text-slate-700">
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded bg-sky-600"></span> NEXT.JS 15 (APP ROUTER)</span>
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded bg-slate-900"></span> TYPESCRIPT STRICT</span>
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded bg-emerald-600"></span> POSTGRESQL CLUSTER</span>
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded bg-amber-500"></span> PYTHON RAG PIPELINE</span>
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded bg-blue-600"></span> DOCKER & K8S</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE MATRIX BLUEPRINTS (Deconstructed Architectural Cards) -->
+  <section id="services" class="py-24 px-6 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-sky-600 font-bold block mb-1.5">// CAPABILITY_MATRIX</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-950 tracking-tight">
+          Pilar Arsitektur & Solusi Sistem
+        </h2>
+      </div>
+      <p class="text-xs font-mono text-slate-500 max-w-sm">
+        Dirancang dari fondasi kode bersih, bebas template murahan, siap di-scale secara horizontal dan vertikal.
+      </p>
+    </div>
+
+    <!-- 4 Architectural Cards with Technical Detail -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Card 1: Custom Web & SaaS -->
+      <div class="p-8 rounded-xl border border-blueprint-border bg-white shadow-xs hover:border-sky-500 transition-all corner-mark">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded border border-sky-200">MOD_01 // WEB_ENGINEERING</span>
+          <span class="font-mono text-[11px] text-slate-400">STATUS: PRODUCTION</span>
+        </div>
+        <h3 class="text-xl font-bold text-slate-950 mb-2">High-Throughput Web Apps & SaaS</h3>
+        <p class="text-slate-600 text-xs leading-relaxed mb-6">
+          Pengembangan portal enterprise, dashboard analitik, dan SaaS multitenant dengan sub-second loading time, arsitektur modular, dan skalabilitas jutaan request.
+        </p>
+        <div class="border-t border-slate-100 pt-4 flex flex-wrap items-center gap-2 font-mono text-[11px] text-slate-600">
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">SSR & Edge Middleware</span>
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">PWA Offline Mode</span>
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">Lighthouse 95+</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Applied AI & RAG -->
+      <div class="p-8 rounded-xl border border-blueprint-border bg-white shadow-xs hover:border-sky-500 transition-all corner-mark">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded border border-sky-200">MOD_02 // APPLIED_AI</span>
+          <span class="font-mono text-[11px] text-emerald-600 font-semibold">ACCURACY: 99.4%</span>
+        </div>
+        <h3 class="text-xl font-bold text-slate-950 mb-2">Applied AI Models & RAG Pipelines</h3>
+        <p class="text-slate-600 text-xs leading-relaxed mb-6">
+          Integrasi model kecerdasan buatan berbasis konteks data internal perusahaan. Pencarian vector berlatensi rendah, otomatisasi bot WhatsApp, dan agen otonom.
+        </p>
+        <div class="border-t border-slate-100 pt-4 flex flex-wrap items-center gap-2 font-mono text-[11px] text-slate-600">
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">Custom Embeddings</span>
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">PgVector / Qdrant</span>
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">Zero Hallucination Guard</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Cloud Infrastructure & DevOps -->
+      <div class="p-8 rounded-xl border border-blueprint-border bg-white shadow-xs hover:border-sky-500 transition-all corner-mark">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded border border-sky-200">MOD_03 // CLOUD_INFRA</span>
+          <span class="font-mono text-[11px] text-slate-400">CONTAINER: DOCKER/K8S</span>
+        </div>
+        <h3 class="text-xl font-bold text-slate-950 mb-2">System-as-a-Service & Cloud Architecture</h3>
+        <p class="text-slate-600 text-xs leading-relaxed mb-6">
+          Penyusunan infrastruktur multi-server, database failover otomatis, automated CI/CD pipeline, dan isolasi keamanan berbasis standar OWASP Top 10.
+        </p>
+        <div class="border-t border-slate-100 pt-4 flex flex-wrap items-center gap-2 font-mono text-[11px] text-slate-600">
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">Postgres Clustering</span>
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">Cloudflare Edge Cache</span>
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">Automated Rollbacks</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Code & Security Audit -->
+      <div class="p-8 rounded-xl border border-blueprint-border bg-white shadow-xs hover:border-sky-500 transition-all corner-mark">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded border border-sky-200">MOD_04 // ADVISORY_AUDIT</span>
+          <span class="font-mono text-[11px] text-slate-400">FRACTIONAL CTO</span>
+        </div>
+        <h3 class="text-xl font-bold text-slate-950 mb-2">Modernisasi Sistem Legacy & Security Audit</h3>
+        <p class="text-slate-600 text-xs leading-relaxed mb-6">
+          Sistem Anda lambat atau rapuh? Kami melakukan profiling performa mendalam, refactoring clean-code, optimasi query database berat, dan audit keamanan.
+        </p>
+        <div class="border-t border-slate-100 pt-4 flex flex-wrap items-center gap-2 font-mono text-[11px] text-slate-600">
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">Query Optimization</span>
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">Penetration Test</span>
+          <span class="bg-slate-50 px-2 py-1 rounded border border-slate-200">Clean Architecture Refactor</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INTERACTIVE SPEC CALCULATOR & WHATSAPP GENERATOR (REDESIGNED) -->
+  <section id="calculator" class="py-24 px-6 max-w-5xl mx-auto border-t border-blueprint-border">
+    <div class="mb-10 text-center">
+      <span class="text-xs font-mono text-sky-700 font-bold block mb-1.5">// INTERACTIVE_CONFIGURATOR</span>
+      <h2 class="text-3xl font-bold text-slate-950 tracking-tight">Kalkulator Spesifikasi Proyek</h2>
+      <p class="text-xs text-slate-600 mt-1 max-w-md mx-auto">
+        Tentukan parameter sistem Anda. Sistem akan menghasilkan draf instruksi teknis terstruktur langsung ke WhatsApp tim lead kami.
+      </p>
+    </div>
+
+    <div class="rounded-2xl border border-blueprint-border bg-white p-6 sm:p-10 shadow-sm corner-mark">
+      
+      <!-- Parameter 1: Layanan -->
+      <div class="mb-8">
+        <label class="block text-xs font-mono uppercase tracking-wider text-slate-600 font-semibold mb-3">
+          1. PILIH MODUL UTAMA SISTEM:
+        </label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="param-service">
+          <button type="button" class="spec-btn active p-3.5 rounded-lg border border-sky-600 bg-sky-50 text-sky-800 text-xs font-mono font-bold text-left transition-all" data-val="Web Application Scalable (Next.js 15)">
+            <span class="block text-[10px] text-sky-600 mb-0.5">MOD_01</span>
+            Web & SaaS App
+          </button>
+          <button type="button" class="spec-btn p-3.5 rounded-lg border border-blueprint-border bg-slate-50 text-slate-600 text-xs font-mono text-left hover:border-slate-400 transition-all" data-val="Applied AI & RAG Enterprise Pipeline">
+            <span class="block text-[10px] text-slate-400 mb-0.5">MOD_02</span>
+            Applied AI / LLM
+          </button>
+          <button type="button" class="spec-btn p-3.5 rounded-lg border border-blueprint-border bg-slate-50 text-slate-600 text-xs font-mono text-left hover:border-slate-400 transition-all" data-val="Cloud Infrastructure & DevOps Cluster">
+            <span class="block text-[10px] text-slate-400 mb-0.5">MOD_03</span>
+            Cloud & DevOps
+          </button>
+          <button type="button" class="spec-btn p-3.5 rounded-lg border border-blueprint-border bg-slate-50 text-slate-600 text-xs font-mono text-left hover:border-slate-400 transition-all" data-val="Modernisasi Sistem Legacy & Security Audit">
+            <span class="block text-[10px] text-slate-400 mb-0.5">MOD_04</span>
+            Audit & Refactor
+          </button>
+        </div>
+      </div>
+
+      <!-- Parameter 2: Skala & Kecepatan Pengiriman -->
+      <div class="mb-8">
+        <label class="block text-xs font-mono uppercase tracking-wider text-slate-600 font-semibold mb-3">
+          2. TARGET PELUNCURAN & SKALA INFRASTRUKTUR:
+        </label>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="param-scale">
+          <button type="button" class="scale-btn active p-3.5 rounded-lg border border-sky-600 bg-sky-50 text-sky-800 text-xs font-mono font-bold text-left transition-all" data-val="MVP Speedrun (2-4 Minggu)">
+            <span class="block text-[10px] text-sky-600 mb-0.5">TIER_ALPHA</span>
+            MVP Speedrun (2-4 Mgg)
+          </button>
+          <button type="button" class="scale-btn p-3.5 rounded-lg border border-blueprint-border bg-slate-50 text-slate-600 text-xs font-mono text-left hover:border-slate-400 transition-all" data-val="Scale-Up Production (1-2 Bulan)">
+            <span class="block text-[10px] text-slate-400 mb-0.5">TIER_BETA</span>
+            Scale-Up (1-2 Bulan)
+          </button>
+          <button type="button" class="scale-btn p-3.5 rounded-lg border border-blueprint-border bg-slate-50 text-slate-600 text-xs font-mono text-left hover:border-slate-400 transition-all" data-val="Enterprise Bespoke Architecture">
+            <span class="block text-[10px] text-slate-400 mb-0.5">TIER_ENTERPRISE</span>
+            Enterprise Bespoke
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Preview & WhatsApp Action Box -->
+      <div class="p-6 rounded-xl border border-blueprint-border bg-slate-50 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="w-full">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold">PAYLOAD FORMAT OTOMATIS:</span>
+          </div>
+          <p id="calc-preview" class="text-xs font-mono text-slate-800 leading-relaxed font-semibold bg-white p-3 rounded border border-slate-200">
+            "Halo Gemilang Labs, saya ingin konsultasi implementasi Web Application Scalable (Next.js 15) dengan target MVP Speedrun (2-4 Minggu). Mohon info jadwal telaah teknis."
+          </p>
+        </div>
+        <a 
+          id="calc-submit"
+          href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs" 
+          target="_blank" 
+          class="shrink-0 w-full md:w-auto px-6 py-4 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs font-mono tracking-wider transition-all active:scale-[0.98] shadow-md shadow-sky-600/15 text-center"
+        >
+          KIRIM KE WHATSAPP &rarr;
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SDLC 4-STAGE DELIVERY PROTOCOL -->
+  <section id="sdlc" class="py-24 px-6 max-w-7xl mx-auto border-t border-blueprint-border">
+    <div class="mb-12">
+      <span class="text-xs font-mono uppercase tracking-widest text-sky-700 font-bold block mb-1">// SDLC_PROTOCOL</span>
+      <h2 class="text-3xl font-bold text-slate-950 tracking-tight">Transparansi Pengiriman 4-Tahap</h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="p-6 rounded-xl border border-blueprint-border bg-white shadow-xs">
+        <span class="font-mono text-xs font-bold text-sky-700 block mb-2">01 // PRD & SPEC</span>
+        <h4 class="text-sm font-bold text-slate-950 mb-1">Spesifikasi Kebutuhan</h4>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Penyusunan Product Requirement Document lengkap dan batasan sistem tanpa asumsi sepihak.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-xl border border-blueprint-border bg-white shadow-xs">
+        <span class="font-mono text-xs font-bold text-sky-700 block mb-2">02 // 3D & ARSITEKTUR</span>
+        <h4 class="text-sm font-bold text-slate-950 mb-1">Rancang Arsitektur</h4>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Pembuatan diagram ERD database, spesifikasi API kontrak, dan prototipe interaktif teruji.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-xl border border-blueprint-border bg-white shadow-xs">
+        <span class="font-mono text-xs font-bold text-sky-700 block mb-2">03 // CLEAN SPRINT</span>
+        <h4 class="text-sm font-bold text-slate-950 mb-1">Sprint Rekayasa</h4>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Penulisan kode clean TypeScript/Python berstandar industri dengan pengujian otomatis.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-xl border border-blueprint-border bg-white shadow-xs">
+        <span class="font-mono text-xs font-bold text-sky-700 block mb-2">04 // DEPLOY & SLA</span>
+        <h4 class="text-sm font-bold text-slate-950 mb-1">Rilis & Garansi SLA</h4>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Zero-downtime deployment ke Edge CDN, runbook operasional, dan monitoring pasca-rilis.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CALL TO ACTION -->
+  <section class="py-20 px-6 bg-white border-t border-blueprint-border">
+    <div class="max-w-4xl mx-auto text-center rounded-2xl border border-sky-300 bg-sky-50/50 p-10 sm:p-14 corner-mark">
+      <h2 class="text-3xl sm:text-4xl font-bold text-slate-950 mb-4 tracking-tight">
+        Mulai Bangun Fondasi Sistem Anda Hari Ini.
+      </h2>
+      <p class="text-slate-600 text-sm max-w-lg mx-auto mb-8 leading-relaxed">
+        Diskusikan kebutuhan aplikasi web, arsitektur cloud, atau pipeline AI langsung dengan Lead Engineering Gemilang Labs.
+      </p>
+      <a 
+        href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20siap%20diskusi%20kebutuhan%20teknologi." 
+        target="_blank" 
+        class="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs font-mono tracking-wider transition-all active:scale-[0.98] shadow-md shadow-sky-600/20"
+      >
+        <span>&gt; MULAI_KONSULTASI_WHATSAPP</span>
+      </a>
+      <p class="text-[11px] font-mono text-slate-500 mt-4">
+        Respon cepat &bull; Diskusi langsung dengan Lead Engineer &bull; Tanpa komitmen awal
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 px-6 border-t border-blueprint-border bg-slate-50 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span>&copy; 2026 GEMILANG LABS. ALL RIGHTS RESERVED.</span>
+      <div class="flex items-center gap-6">
+        <a href="#services" class="hover:text-slate-900">PILAR_SISTEM</a>
+        <a href="#calculator" class="hover:text-slate-900">KALKULATOR</a>
+        <a href="https://wa.me/6281234567890" class="text-sky-600 font-bold hover:underline">WHATSAPP_KAMI</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT: THREE.JS INTERACTIVE ISOMETRIC CLUSTER WITH RAYCASTING HOVER -->
+  <script>
+    (function init3DIsometric() {
+      const canvas = document.getElementById('three-iso');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const aspect = canvas.clientWidth / canvas.clientHeight;
+      const d = 13;
+      const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 1, 1000);
+      camera.position.set(22, 22, 22);
+      camera.lookAt(0, 0, 0);
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Isometric Server Node Cluster Group
+      const clusterGroup = new THREE.Group();
+      scene.add(clusterGroup);
+
+      const boxGeo = new THREE.BoxGeometry(2.6, 2.6, 2.6);
+      const edgeGeo = new THREE.EdgesGeometry(boxGeo);
+
+      const nodePositions = [
+        [-3.8, 0, -3.8], [0, 0, -3.8], [3.8, 0, -3.8],
+        [-3.8, 0, 0],    [0, 2.2, 0],   [3.8, 0, 0],
+        [-3.8, 0, 3.8],  [0, 0, 3.8],  [3.8, 0, 3.8]
+      ];
+
+      const cubes = [];
+
+      nodePositions.forEach((pos, i) => {
+        const isCenter = (i === 4);
+        const mat = new THREE.MeshBasicMaterial({
+          color: isCenter ? 0x0284c7 : 0x0369a1,
+          wireframe: true,
+          transparent: true,
+          opacity: isCenter ? 0.45 : 0.2
+        });
+        const cube = new THREE.Mesh(boxGeo, mat);
+        cube.position.set(pos[0], pos[1], pos[2]);
+
+        const line = new THREE.LineSegments(
+          edgeGeo, 
+          new THREE.LineBasicMaterial({ 
+            color: isCenter ? 0x0284c7 : 0x0f172a, 
+            opacity: isCenter ? 0.9 : 0.4, 
+            transparent: true 
+          })
+        );
+        cube.add(line);
+        clusterGroup.add(cube);
+        cubes.push(cube);
+      });
+
+      // Data Conduit Lines connecting the nodes
+      const conduitGeo = new THREE.BufferGeometry();
+      const conduitPoints = [];
+      for (let i = 0; i < nodePositions.length; i++) {
+        if (i !== 4) {
+          conduitPoints.push(nodePositions[i][0], nodePositions[i][1], nodePositions[i][2]);
+          conduitPoints.push(nodePositions[4][0], nodePositions[4][1], nodePositions[4][2]);
+        }
+      }
+      conduitGeo.setAttribute('position', new THREE.Float32BufferAttribute(conduitPoints, 3));
+      const conduitMat = new THREE.LineBasicMaterial({ color: 0x0284c7, transparent: true, opacity: 0.25 });
+      const conduitLines = new THREE.LineSegments(conduitGeo, conduitMat);
+      clusterGroup.add(conduitLines);
+
+      // Mouse drag and hover interaction
+      let isDragging = false;
+      let prevMouseX = 0, prevMouseY = 0;
+      let rotVelocityX = 0, rotVelocityY = 0;
+      let targetRotY = 0;
+
+      window.addEventListener('mousedown', (e) => {
+        if (e.target === canvas) {
+          isDragging = true;
+          prevMouseX = e.clientX;
+          prevMouseY = e.clientY;
+        }
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          const deltaX = e.clientX - prevMouseX;
+          const deltaY = e.clientY - prevMouseY;
+          rotVelocityY = deltaX * 0.005;
+          rotVelocityX = deltaY * 0.005;
+          prevMouseX = e.clientX;
+          prevMouseY = e.clientY;
+        } else {
+          // Subtle hover parallax
+          const normX = (e.clientX / window.innerWidth) * 2 - 1;
+          targetRotY = normX * 0.25;
+        }
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        if (!isDragging) {
+          clusterGroup.rotation.y += 0.002 + (targetRotY - clusterGroup.rotation.y) * 0.03;
+          clusterGroup.rotation.x = Math.sin(Date.now() * 0.0008) * 0.04;
+        } else {
+          clusterGroup.rotation.y += rotVelocityY;
+          clusterGroup.rotation.x += rotVelocityX;
+          rotVelocityX *= 0.92;
+          rotVelocityY *= 0.92;
+        }
+
+        // Float central node subtly
+        cubes[4].position.y = 2.2 + Math.sin(Date.now() * 0.002) * 0.35;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        if (!canvas) return;
+        const newAspect = canvas.clientWidth / canvas.clientHeight;
+        camera.left = -d * newAspect;
+        camera.right = d * newAspect;
+        camera.top = d;
+        camera.bottom = -d;
+        camera.updateProjectionMatrix();
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      });
+    })();
+
+    // Configurator Script
+    let activeService = "Web Application Scalable (Next.js 15)";
+    let activeScale = "MVP Speedrun (2-4 Minggu)";
+
+    const serviceButtons = document.querySelectorAll('.spec-btn');
+    const scaleButtons = document.querySelectorAll('.scale-btn');
+    const previewEl = document.getElementById('calc-preview');
+    const submitBtn = document.getElementById('calc-submit');
+
+    function refreshPayload() {
+      const msg = `Halo Gemilang Labs, saya ingin konsultasi implementasi ${activeService} dengan target ${activeScale}. Mohon info jadwal telaah teknis dan ketersediaan slot.`;
+      previewEl.innerText = `"${msg}"`;
+      submitBtn.href = `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
+    }
+
+    serviceButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        serviceButtons.forEach(b => {
+          b.classList.remove('active', 'border-sky-600', 'bg-sky-50', 'text-sky-800', 'font-bold');
+          b.classList.add('border-blueprint-border', 'bg-slate-50', 'text-slate-600');
+        });
+        btn.classList.remove('border-blueprint-border', 'bg-slate-50', 'text-slate-600');
+        btn.classList.add('active', 'border-sky-600', 'bg-sky-50', 'text-sky-800', 'font-bold');
+        activeService = btn.getAttribute('data-val');
+        refreshPayload();
+      });
+    });
+
+    scaleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        scaleButtons.forEach(b => {
+          b.classList.remove('active', 'border-sky-600', 'bg-sky-50', 'text-sky-800', 'font-bold');
+          b.classList.add('border-blueprint-border', 'bg-slate-50', 'text-slate-600');
+        });
+        btn.classList.remove('border-blueprint-border', 'bg-slate-50', 'text-slate-600');
+        btn.classList.add('active', 'border-sky-600', 'bg-sky-50', 'text-sky-800', 'font-bold');
+        activeScale = btn.getAttribute('data-val');
+        refreshPayload();
+      });
+    });
+
+    refreshPayload();
+  </script>
+</body>
+</html>

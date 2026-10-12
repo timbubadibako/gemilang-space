@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemilang Labs — Linear Motion &amp; Spatial Glass Playground</title>
+  <meta name="description" content="Showcase tema Linear & Spatial Glass untuk Gemilang Labs: GSAP horizontal scroll, multi-layer parallax, glowing border beam, magnetic buttons, command palette, dan hover physics." />
+
+  <!-- Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP 3.12.5 & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            linear: {
+              bg: '#F8FAFC',
+              surface: 'rgba(255, 255, 255, 0.78)',
+              border: 'rgba(15, 23, 42, 0.09)',
+              borderActive: 'rgba(33, 150, 243, 0.45)',
+              navy: '#1B3A8C',
+              dark: '#0B1938',
+              sky: '#2196F3',
+              cyan: '#00B4D8',
+              gold: '#F5B800',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --sp-navy: #1B3A8C;
+      --sp-sky: #2196F3;
+      --sp-cyan: #00B4D8;
+      --sp-gold: #F5B800;
+      --sp-dark: #0B1938;
+      --sp-bg: #F8FAFC;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      background-color: var(--sp-bg);
+      color: #0B1938;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Linear Precision Drafting Grid with Crosshairs */
+    .linear-grid {
+      background-size: 36px 36px;
+      background-image:
+        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    }
+
+    /* Linear Spec Corner Marks (+) */
+    .crosshair-corner {
+      position: relative;
+    }
+    .crosshair-corner::before {
+      content: "+";
+      position: absolute;
+      top: -7px; left: -6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--sp-sky);
+      opacity: 0.7;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .crosshair-corner::after {
+      content: "+";
+      position: absolute;
+      bottom: -7px; right: -6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--sp-sky);
+      opacity: 0.7;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* Linear Frosted Glass Cards */
+    .linear-glass {
+      background: rgba(255, 255, 255, 0.76);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-top: 1px solid rgba(255, 255, 255, 1);
+      box-shadow:
+        0 14px 34px -10px rgba(15, 23, 42, 0.06),
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .linear-glass:hover {
+      border-color: rgba(33, 150, 243, 0.45);
+      box-shadow:
+        0 24px 50px -12px rgba(27, 58, 140, 0.14),
+        0 0 0 1px rgba(33, 150, 243, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    }
+
+    /* Kinetic Border Beam (Orbiting Light Trail ala Linear.app) */
+    .border-beam-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+    }
+    .border-beam-container::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: conic-gradient(from 0deg, transparent 0 320deg, var(--sp-sky) 345deg, var(--sp-cyan) 360deg);
+      animation: rotateBeam 4s linear infinite;
+      z-index: 0;
+      opacity: 0.85;
+    }
+    .border-beam-inner {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      margin: 1.5px;
+      border-radius: 20px;
+    }
+    @keyframes rotateBeam {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Command Menu Backdrop */
+    #cmd-k-palette {
+      transform-origin: top center;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    }
+    #cmd-k-palette.is-hidden {
+      transform: scale(0.94) translateY(-14px);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Horizontal Scroll Rail */
+    #horizontal-strip {
+      display: flex;
+      flex-wrap: nowrap;
+      width: 400%; /* 4 Panels */
+      will-change: transform;
+    }
+    .horizontal-panel {
+      width: 100vw;
+      flex-shrink: 0;
+    }
+
+    /* Keyboard Shortcut Tag */
+    .kbd-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      color: #475569;
+    }
+
+    /* Accordions */
+    .linear-accordion-body {
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+    .linear-accordion-row.is-expanded .linear-accordion-body {
+      height: auto;
+      opacity: 1;
+    }
+    .linear-accordion-row.is-expanded .acc-chevron {
+      transform: rotate(90deg);
+    }
+  </style>
+</head>
+<body class="linear-grid selection:bg-blue-600 selection:text-white">
+
+  <!-- ============================================================
+       TOP FLOATING LINEAR COMMAND BAR (With Cmd+K Trigger)
+  ============================================================ -->
+  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-6xl">
+    <div class="linear-glass px-5 sm:px-7 py-3 flex items-center justify-between gap-4 border border-white/90 shadow-lg">
+      
+      <!-- Brand Logo + Version Tag -->
+      <a href="#" class="flex items-center gap-3">
+        <img src="../gemilang.jpeg" alt="Gemilang Labs" class="h-8 sm:h-9 w-auto" />
+        <span class="font-heading font-extrabold text-sm sm:text-base tracking-tight text-spatial-navy hidden sm:inline">
+          GEMILANG LABS
+        </span>
+        <span class="kbd-tag hidden md:inline">SYSTEM_V4 // LINEAR</span>
+      </a>
+
+      <!-- Center Jump Anchors -->
+      <nav class="hidden lg:flex items-center gap-6 text-xs font-mono font-semibold text-slate-600">
+        <a href="#section-hero" class="hover:text-spatial-sky transition-colors">// HERO_ENGINE</a>
+        <a href="#section-horizontal" class="hover:text-spatial-sky transition-colors">// HORIZONTAL_SCROLL</a>
+        <a href="#section-parallax" class="hover:text-spatial-sky transition-colors">// PARALLAX_DEPTH</a>
+        <a href="#section-borderbeam" class="hover:text-spatial-sky transition-colors">// BEAM_GRAPHIC</a>
+      </nav>
+
+      <!-- Right CTAs: Cmd+K & WhatsApp -->
+      <div class="flex items-center gap-2.5">
+        <button
+          onclick="openCommandPalette()"
+          class="linear-glass px-3.5 py-1.5 text-xs font-mono font-medium text-slate-700 hover:text-spatial-navy flex items-center gap-2 border border-slate-200/80 cursor-pointer"
+          title="Tekan ⌘K untuk membuka Command Palette"
+        >
+          <i data-lucide="search" class="w-3.5 h-3.5 text-blue-500"></i>
+          <span class="hidden sm:inline">Cari Solusi</span>
+          <span class="kbd-tag">⌘K</span>
+        </button>
+
+        <a
+          href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20dengan%20sistem%20Linear%20Glass."
+          target="_blank"
+          class="px-4 sm:px-5 py-2 rounded-full text-white text-xs font-bold font-heading shadow-md shadow-blue-600/25 bg-gradient-to-r from-spatial-navy to-spatial-sky hover:opacity-95 transition-all"
+        >
+          <span>Diskusi WA</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       SECTION 1: LINEAR HERO + MAGNETIC BUTTONS + 3D TILT
+  ============================================================ -->
+  <section id="section-hero" class="pt-32 sm:pt-40 pb-20 px-5 sm:px-8 max-w-6xl mx-auto">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      
+      <!-- Left Column: Linear Typography & Value Prop -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full linear-glass text-xs font-mono font-bold text-spatial-navy border border-slate-200/80">
+          <span class="w-2 h-2 rounded-full bg-spatial-sky animate-pulse"></span>
+          <span>LINEAR GLASS ARCHITECTURE // 01</span>
+        </div>
+
+        <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-spatial-dark leading-[1.08]" style="text-wrap: balance;">
+          Rekayasa Digital Presisi.<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-spatial-navy via-spatial-sky to-spatial-cyan">
+            Dampak Bisnis Nyata.
+          </span>
+        </h1>
+
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl">
+          Pengalaman web kelas dunia dengan arsitektur Linear: perpaduan frosted glass, micro-hairlines, responsif tanpa jeda, dan animasi GSAP yang memikat tanpa memberatkan browser.
+        </p>
+
+        <!-- Magnetic Button Group (GSAP Physics) -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <!-- Button 1: Magnetic Primary -->
+          <div class="magnetic-wrap inline-block">
+            <a
+              href="#section-horizontal"
+              class="magnetic-btn px-6 py-3.5 rounded-full text-white text-xs sm:text-sm font-bold font-heading shadow-lg shadow-blue-600/30 bg-gradient-to-r from-spatial-navy to-spatial-sky flex items-center gap-2"
+            >
+              <span>Uji Scroll Menyamping</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+
+          <!-- Button 2: Magnetic Secondary Glass -->
+          <div class="magnetic-wrap inline-block">
+            <button
+              onclick="openCommandPalette()"
+              class="magnetic-btn linear-glass px-5 py-3.5 rounded-full text-slate-800 text-xs sm:text-sm font-bold font-heading flex items-center gap-2 hover:border-spatial-sky"
+            >
+              <i data-lucide="terminal" class="w-4 h-4 text-spatial-sky"></i>
+              <span>Buka Menu Command</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Metric Linear Strip -->
+        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/80 max-w-lg">
+          <div class="crosshair-corner p-2">
+            <span class="font-mono text-lg font-extrabold text-spatial-navy block">&lt; 0.1s</span>
+            <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Interaksi Cepat</span>
+          </div>
+          <div class="crosshair-corner p-2">
+            <span class="font-mono text-lg font-extrabold text-spatial-navy block">GSAP 3.12</span>
+            <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Scroll Physics</span>
+          </div>
+          <div class="crosshair-corner p-2">
+            <span class="font-mono text-lg font-extrabold text-amber-600 block">60 FPS</span>
+            <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Hardware Sync</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive 3D Cursor Tilt Card -->
+      <div class="lg:col-span-5">
+        <div class="linear-glass p-7 space-y-5 cursor-pointer relative group" data-tilt>
+          <div class="flex items-center justify-between border-b border-slate-200/60 pb-3.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+              <span class="font-mono text-xs font-bold text-spatial-dark">ENGINE_NODE // ACTIVE</span>
+            </div>
+            <span class="kbd-tag">HOVER_3D_TILT</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-4 rounded-xl bg-white/70 border border-white flex items-center justify-between shadow-sm">
+              <div class="flex items-center gap-3">
+                <i data-lucide="layers" class="w-5 h-5 text-spatial-sky"></i>
+                <div>
+                  <h4 class="font-heading font-bold text-xs text-spatial-dark">Web App &amp; Core Engine</h4>
+                  <p class="text-[10.5px] text-slate-500">Next.js 15 App Router Architecture</p>
+                </div>
+              </div>
+              <span class="font-mono text-xs font-bold text-emerald-600">LIVE</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white/70 border border-white flex items-center justify-between shadow-sm">
+              <div class="flex items-center gap-3">
+                <i data-lucide="bot" class="w-5 h-5 text-amber-500"></i>
+                <div>
+                  <h4 class="font-heading font-bold text-xs text-spatial-dark">AI Automation Pipeline</h4>
+                  <p class="text-[10.5px] text-slate-500">LLM Reasoning &amp; WhatsApp Bot</p>
+                </div>
+              </div>
+              <span class="font-mono text-xs font-bold text-blue-600">SYNCED</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white/70 border border-white flex items-center justify-between shadow-sm">
+              <div class="flex items-center gap-3">
+                <i data-lucide="database" class="w-5 h-5 text-emerald-600"></i>
+                <div>
+                  <h4 class="font-heading font-bold text-xs text-spatial-dark">ERP &amp; Management Data</h4>
+                  <p class="text-[10.5px] text-slate-500">Zero Leak Financial &amp; Stock Tracking</p>
+                </div>
+              </div>
+              <span class="font-mono text-xs font-bold text-slate-700">STABLE</span>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-blue-50/70 border border-blue-200/80 flex items-center justify-between text-xs">
+            <span class="text-spatial-navy font-medium">Arahkan mouse untuk melihat fisika kemiringan</span>
+            <i data-lucide="compass" class="w-4 h-4 text-spatial-sky animate-spin" style="animation-duration: 8s;"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 2: GSAP HORIZONTAL SCROLL (Scroll Menyamping Pinned)
+  ============================================================ -->
+  <section id="section-horizontal" class="relative w-full bg-slate-900 text-white overflow-hidden">
+    
+    <!-- Top Indicator Header -->
+    <div class="sticky top-0 z-30 bg-slate-950/90 backdrop-blur-md px-6 sm:px-12 py-4 border-b border-slate-800 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="w-2.5 h-2.5 rounded-full bg-spatial-sky"></span>
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-slate-300">
+          FEATURE 02: GSAP HORIZONTAL SCROLL RAIL (GULIR KE BAWAH UNTUK JALAN MENYAMPING)
+        </span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Live Scroll Progress Bar -->
+        <div class="w-32 sm:w-48 bg-slate-800 h-1.5 rounded-full overflow-hidden">
+          <div id="h-progress-bar" class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full w-0"></div>
+        </div>
+        <span id="h-panel-indicator" class="font-mono text-xs text-slate-400 font-bold">01 / 04</span>
+      </div>
+    </div>
+
+    <!-- Pinned Rail Container -->
+    <div id="horizontal-pin-wrapper" class="relative w-full h-screen overflow-hidden">
+      
+      <!-- Strip of 4 Horizontal Panels (Width: 400vw) -->
+      <div id="horizontal-strip" class="h-full flex items-center">
+        
+        <!-- Panel 1: Web Scale -->
+        <div class="horizontal-panel h-full flex items-center justify-center p-6 sm:p-12">
+          <div class="max-w-xl w-full p-8 sm:p-10 rounded-3xl bg-slate-800/80 border border-slate-700 backdrop-blur-xl space-y-6 shadow-2xl">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-xs text-blue-400 font-bold uppercase">[ 01 • SCALABLE WEB ]</span>
+              <span class="kbd-tag bg-blue-950/80 text-blue-300 border-blue-800">NEXT.JS 15</span>
+            </div>
+            <h3 class="font-heading text-2xl sm:text-4xl font-extrabold text-white">
+              Website &amp; Aplikasi Web Kustom Tanpa Batas Skalabilitas
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Arsitektur web yang dimuat secepat kilat dengan skor Lighthouse 98+. Bukan sekadar tampilan estetis, tapi sistem yang siap menangani lonjakan pengunjung dan transaksi secara aman.
+            </p>
+            <div class="pt-4 border-t border-slate-700 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>Kecepatan: &lt; 0.6s FCP</span>
+              <span>Uptime: 99.9%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2: AI Automation -->
+        <div class="horizontal-panel h-full flex items-center justify-center p-6 sm:p-12 bg-slate-900/50">
+          <div class="max-w-xl w-full p-8 sm:p-10 rounded-3xl bg-slate-800/80 border border-slate-700 backdrop-blur-xl space-y-6 shadow-2xl">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-xs text-amber-400 font-bold uppercase">[ 02 • APPLIED AI & BOT ]</span>
+              <span class="kbd-tag bg-amber-950/80 text-amber-300 border-amber-800">24/7 WHATSAPP</span>
+            </div>
+            <h3 class="font-heading text-2xl sm:text-4xl font-extrabold text-white">
+              Sistem AI yang Bekerja Nyata Melayani Bisnis Anda
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Otomasi cerdas yang membalas ribuan pesan pelanggan, mengekstrak data dari faktur, dan mengenali wajah karyawan untuk presensi harian tanpa manipulasi.
+            </p>
+            <div class="pt-4 border-t border-slate-700 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>Efisiensi Tim: +70%</span>
+              <span>Integrasi: Direct WhatsApp</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Enterprise ERP -->
+        <div class="horizontal-panel h-full flex items-center justify-center p-6 sm:p-12">
+          <div class="max-w-xl w-full p-8 sm:p-10 rounded-3xl bg-slate-800/80 border border-slate-700 backdrop-blur-xl space-y-6 shadow-2xl">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-xs text-emerald-400 font-bold uppercase">[ 03 • CENTRALIZED ERP ]</span>
+              <span class="kbd-tag bg-emerald-950/80 text-emerald-300 border-emerald-800">ZERO LEAK</span>
+            </div>
+            <h3 class="font-heading text-2xl sm:text-4xl font-extrabold text-white">
+              ERP &amp; Manajemen Bisnis Terpusat yang Aman
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Kelola stok multi-gudang, rekapitulasi kas masuk-keluar, dan pantau grafik keuntungan harian dalam satu layar terpadu yang dapat diakses pemilik bisnis dari mana saja.
+            </p>
+            <div class="pt-4 border-t border-slate-700 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>Akurasi Laporan: 100%</span>
+              <span>Role Akses: Bertingkat</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4: IoT & Hardware -->
+        <div class="horizontal-panel h-full flex items-center justify-center p-6 sm:p-12 bg-slate-900/50">
+          <div class="max-w-xl w-full p-8 sm:p-10 rounded-3xl bg-slate-800/80 border border-slate-700 backdrop-blur-xl space-y-6 shadow-2xl">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-xs text-cyan-400 font-bold uppercase">[ 04 • HARDWARE & IOT ]</span>
+              <span class="kbd-tag bg-cyan-950/80 text-cyan-300 border-cyan-800">REALTIME SENSOR</span>
+            </div>
+            <h3 class="font-heading text-2xl sm:text-4xl font-extrabold text-white">
+              Menghubungkan Perangkat Fisik ke Layar Anda
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Sensor suhu penyimpanan, saklar gerbang otomatis, hingga pemantauan mesin pabrik terhubung langsung ke dashboard cloud dengan notifikasi instan.
+            </p>
+            <div class="pt-4 border-t border-slate-700 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>Protokol: MQTT / Websockets</span>
+              <span>Latensi: &lt; 80ms</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 3: PARALLAX DEPTH STACK (GSAP Multi-Layer Floating)
+  ============================================================ -->
+  <section id="section-parallax" class="py-28 px-5 sm:px-8 max-w-6xl mx-auto space-y-12">
+    
+    <div class="text-center space-y-3 max-w-2xl mx-auto">
+      <span class="text-xs font-mono font-bold uppercase text-spatial-sky">FEATURE 03 • PARALLAX DEPTH LAYERS</span>
+      <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-spatial-dark">
+        Efek Kedalaman Multi-Layer Parallax
+      </h2>
+      <p class="text-sm text-slate-600">
+        Saat Anda menggulir halaman, elemen-elemen di bawah bergerak dengan kecepatan (*velocity*) berbeda untuk menciptakan ilusi kedalaman 3D yang halus.
+      </p>
+    </div>
+
+    <!-- Parallax Stage Container -->
+    <div id="parallax-stage" class="relative min-h-[460px] sm:min-h-[520px] rounded-3xl linear-glass p-8 overflow-hidden flex items-center justify-center">
+      
+      <!-- Layer 1 (Slow Deep Layer): Blueprint Drafting Grid & Coordinates -->
+      <div class="parallax-layer absolute inset-0 linear-grid opacity-60" data-speed="0.2">
+        <div class="absolute top-6 left-6 font-mono text-[10px] text-slate-400">
+          COORDINATE: [LAT: 42.109, LNG: 71.022] // ELEVATION: +120m
+        </div>
+        <div class="absolute bottom-6 right-6 font-mono text-[10px] text-slate-400">
+          RENDER_PASS: DEPTH_BUFFER_ACTIVE
+        </div>
+      </div>
+
+      <!-- Layer 2 (Medium Depth Layer): Ambient Luminous Glowing Aura -->
+      <div class="parallax-layer absolute w-80 h-80 rounded-full bg-blue-400/20 blur-[90px] pointer-events-none" data-speed="0.5"></div>
+      <div class="parallax-layer absolute w-72 h-72 rounded-full bg-amber-400/15 blur-[80px] pointer-events-none translate-x-32" data-speed="0.35"></div>
+
+      <!-- Layer 3 (Foreground Main Card): Linear High-Precision Showcase -->
+      <div class="parallax-layer relative z-10 max-w-md w-full p-8 rounded-2xl bg-white/90 border border-white shadow-2xl space-y-5" data-speed="0.85">
+        <div class="flex items-center justify-between border-b pb-3 border-slate-200">
+          <span class="font-heading font-bold text-sm text-spatial-navy">Kemitraan Jangka Panjang</span>
+          <span class="kbd-tag text-emerald-600 bg-emerald-50 border-emerald-200">BERDAMPAK</span>
+        </div>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          "Kami tidak menjual template jadi dan tidak memandang Anda sebagai sekadar proyek. Kami berjalan bersama untuk merapikan sistem bisnis Anda."
+        </p>
+        <div class="pt-2 flex items-center justify-between text-[11px] font-mono text-slate-500">
+          <span>Gemilang Labs Manifesto</span>
+          <i data-lucide="shield-check" class="w-4 h-4 text-spatial-sky"></i>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 4: KINETIC BORDER BEAM MOTION GRAPHIC
+  ============================================================ -->
+  <section id="section-borderbeam" class="py-20 px-5 sm:px-8 max-w-6xl mx-auto space-y-8">
+    
+    <div class="flex items-center justify-between border-b border-slate-300/60 pb-3">
+      <div>
+        <span class="text-xs font-mono font-bold uppercase text-spatial-sky">FEATURE 04 • MOTION GRAPHIC</span>
+        <h2 class="font-heading text-xl sm:text-2xl font-bold text-spatial-dark">
+          Kinetic Border Beam (Cahaya Orbit Tepi Kaca)
+        </h2>
+      </div>
+      <span class="text-xs font-mono text-slate-500">Linear Iconic Effect</span>
+    </div>
+
+    <!-- 2 Cards with Border Beam -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- Beam Card 1: WhatsApp Rapid Inquiry -->
+      <div class="border-beam-container">
+        <div class="border-beam-inner p-8 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold text-spatial-sky">// RAPID_CONSULTATION</span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-spatial-dark">Konsultasi Awal Langsung ke Lead Engineer</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Tidak ada form berbelit-belit. Cukup ceritakan apa kebutuhan bisnis Anda lewat WhatsApp, tim engineer kami akan merespons langsung dalam &lt; 15 menit.
+          </p>
+          <div class="pt-2">
+            <a
+              href="https://wa.me/6281234567890?text=Halo%20Lead%20Engineer%20Gemilang%20Labs%2C%20saya%20ingin%20konsultasi."
+              target="_blank"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-spatial-navy hover:bg-spatial-sky text-white text-xs font-bold font-heading transition-all shadow-md"
+            >
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+              <span>Mulai WhatsApp Chat</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beam Card 2: Interactive Spec Accordion -->
+      <div class="border-beam-container">
+        <div class="border-beam-inner p-8 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold text-amber-600">// TRANSPARENT_SPECS</span>
+            <span class="kbd-tag">EXPANDABLE</span>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-spatial-dark">Alur Transparan Dari Hari Pertama</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Anda tahu persis kemajuan pengerjaan sistem Anda di setiap tahap. Tidak ada biaya siluman atau janji kosong.
+          </p>
+          <div class="space-y-2 pt-1">
+            <div class="linear-accordion-row p-3 rounded-xl bg-white border border-slate-200 cursor-pointer" onclick="toggleLinearAccordion(this)">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-800">
+                <span>Tahap 1: Desain &amp; Mockup Terbuka</span>
+                <i data-lucide="chevron-right" class="acc-chevron w-3.5 h-3.5 transition-transform"></i>
+              </div>
+              <div class="linear-accordion-body text-[11.5px] text-slate-600 pt-2 border-t mt-2 border-slate-100">
+                Kami buatkan prototipe tampilan dan alur sistemnya terlebih dahulu sampai Anda yakin sebelum penulisan kode dimulai.
+              </div>
+            </div>
+
+            <div class="linear-accordion-row p-3 rounded-xl bg-white border border-slate-200 cursor-pointer" onclick="toggleLinearAccordion(this)">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-800">
+                <span>Tahap 2: Laporan Berkala Mingguan</span>
+                <i data-lucide="chevron-right" class="acc-chevron w-3.5 h-3.5 transition-transform"></i>
+              </div>
+              <div class="linear-accordion-body text-[11.5px] text-slate-600 pt-2 border-t mt-2 border-slate-100">
+                Setiap minggu Anda mendapatkan ringkasan fitur apa saja yang sudah rampung dan dapat diuji coba langsung di staging server.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 5: COMMAND PALETTE MODAL (⌘K Triggered)
+  ============================================================ -->
+  <div
+    id="cmd-k-palette"
+    class="is-hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-md flex items-start justify-center pt-24 px-4"
+    onclick="if(event.target===this) closeCommandPalette()"
+  >
+    <div class="max-w-xl w-full linear-glass p-5 rounded-2xl border border-white/90 shadow-2xl space-y-4">
+      
+      <!-- Search Input Bar -->
+      <div class="flex items-center gap-3 border-b border-slate-200/80 pb-3">
+        <i data-lucide="search" class="w-5 h-5 text-spatial-sky"></i>
+        <input
+          type="text"
+          id="cmd-input"
+          placeholder="Cari solusi atau navigasi cepat... (cth: web, ai, erp, wa)"
+          class="w-full bg-transparent text-sm font-heading font-medium text-slate-800 outline-none placeholder:text-slate-400"
+          oninput="filterCommandItems(this.value)"
+        />
+        <span class="kbd-tag">ESC</span>
+      </div>
+
+      <!-- Action Items List -->
+      <div id="cmd-items-list" class="space-y-1.5 max-h-64 overflow-y-auto">
+        
+        <a href="#section-hero" onclick="closeCommandPalette()" class="cmd-item p-2.5 rounded-xl hover:bg-blue-50 flex items-center justify-between text-xs transition-colors cursor-pointer group">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="cpu" class="w-4 h-4 text-spatial-navy"></i>
+            <span class="font-bold text-slate-800 group-hover:text-spatial-navy">Lompat ke Hero Engine</span>
+          </div>
+          <span class="kbd-tag">01</span>
+        </a>
+
+        <a href="#section-horizontal" onclick="closeCommandPalette()" class="cmd-item p-2.5 rounded-xl hover:bg-blue-50 flex items-center justify-between text-xs transition-colors cursor-pointer group">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="arrow-right-left" class="w-4 h-4 text-spatial-sky"></i>
+            <span class="font-bold text-slate-800 group-hover:text-spatial-navy">Uji Horizontal Scroll Menyamping</span>
+          </div>
+          <span class="kbd-tag">02</span>
+        </a>
+
+        <a href="#section-parallax" onclick="closeCommandPalette()" class="cmd-item p-2.5 rounded-xl hover:bg-blue-50 flex items-center justify-between text-xs transition-colors cursor-pointer group">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="layers" class="w-4 h-4 text-amber-500"></i>
+            <span class="font-bold text-slate-800 group-hover:text-spatial-navy">Lihat Parallax Multi-Depth</span>
+          </div>
+          <span class="kbd-tag">03</span>
+        </a>
+
+        <a href="#section-borderbeam" onclick="closeCommandPalette()" class="cmd-item p-2.5 rounded-xl hover:bg-blue-50 flex items-center justify-between text-xs transition-colors cursor-pointer group">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="sparkles" class="w-4 h-4 text-cyan-500"></i>
+            <span class="font-bold text-slate-800 group-hover:text-spatial-navy">Kinetic Border Beam Cards</span>
+          </div>
+          <span class="kbd-tag">04</span>
+        </a>
+
+        <a href="https://wa.me/6281234567890" target="_blank" onclick="closeCommandPalette()" class="cmd-item p-2.5 rounded-xl hover:bg-emerald-50 flex items-center justify-between text-xs transition-colors cursor-pointer group">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="message-circle" class="w-4 h-4 text-emerald-600"></i>
+            <span class="font-bold text-emerald-800">Hubungi Langsung via WhatsApp</span>
+          </div>
+          <span class="kbd-tag text-emerald-700 bg-emerald-100">WA_DIRECT</span>
+        </a>
+
+      </div>
+
+      <div class="pt-2 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+        <span>Gunakan tombol panah &amp; Enter untuk memilih</span>
+        <span>ESC untuk keluar</span>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="border-t border-slate-200 bg-white py-10 px-5 sm:px-8">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="../gemilang.jpeg" alt="Gemilang Labs" class="h-8 w-auto" />
+        <span class="text-xs text-slate-500">&copy; 2026 Gemilang Labs. Linear Motion &amp; Spatial Glass Playground.</span>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs font-mono text-slate-600">
+        <a href="#section-hero" class="hover:text-spatial-sky">TOP</a>
+        <a href="#section-horizontal" class="hover:text-spatial-sky">HORIZONTAL</a>
+        <a href="#section-parallax" class="hover:text-spatial-sky">PARALLAX</a>
+        <a href="https://wa.me/6281234567890" target="_blank" class="text-spatial-navy font-bold hover:underline">WHATSAPP</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       SCRIPTS:
+       1. GSAP HORIZONTAL SCROLL (ScrollTrigger.pin + xPercent)
+       2. GSAP PARALLAX MULTI-DEPTH
+       3. GSAP MAGNETIC BUTTONS
+       4. COMMAND PALETTE (Cmd+K)
+       5. 3D TILT MOUSE PHYSICS
+  ============================================================ -->
+  <script>
+    lucide.createIcons();
+
+    /* ── 1. GSAP Horizontal Scroll Setup ── */
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      const strip = document.getElementById('horizontal-strip');
+      const progressBar = document.getElementById('h-progress-bar');
+      const indicator = document.getElementById('h-panel-indicator');
+
+      // ScrollTrigger: Convert vertical scroll into horizontal translation
+      const horizTween = gsap.to(strip, {
+        xPercent: -75, // 4 panels -> shift by 3 full widths (3/4 = 75%)
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#horizontal-pin-wrapper',
+          start: 'top top',
+          end: '+=2500', // 2500px of vertical scrolling converts to horizontal panning
+          pin: true,
+          scrub: 0.8,
+          onUpdate: (self) => {
+            // Update progress bar
+            const prog = self.progress;
+            progressBar.style.width = `${prog * 100}%`;
+
+            // Update panel indicator (01 / 04)
+            const panelNum = Math.min(4, Math.floor(prog * 4) + 1);
+            indicator.textContent = `0${panelNum} / 04`;
+          }
+        }
+      });
+
+      /* ── 2. Parallax Multi-Depth Effect ── */
+      gsap.utils.toArray('.parallax-layer').forEach((layer) => {
+        const speed = parseFloat(layer.getAttribute('data-speed')) || 0.5;
+        gsap.to(layer, {
+          y: (i, target) => -150 * speed,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#parallax-stage',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      });
+
+      /* ── 3. Magnetic Buttons (GSAP Physics) ── */
+      document.querySelectorAll('.magnetic-wrap').forEach((wrap) => {
+        const btn = wrap.querySelector('.magnetic-btn');
+        if (!btn) return;
+
+        const xTo = gsap.quickTo(btn, 'x', { duration: 0.3, ease: 'power3.out' });
+        const yTo = gsap.quickTo(btn, 'y', { duration: 0.3, ease: 'power3.out' });
+
+        wrap.addEventListener('mousemove', (e) => {
+          const rect = wrap.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (e.clientX - cx) * 0.35;
+          const dy = (e.clientY - cy) * 0.35;
+
+          xTo(dx);
+          yTo(dy);
+        });
+
+        wrap.addEventListener('mouseleave', () => {
+          xTo(0);
+          yTo(0);
+        });
+      });
+    });
+
+    /* ── 4. 3D Tilt Cursor Physics on Mouse Move ── */
+    document.querySelectorAll('[data-tilt]').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+
+        const rotX = ((y - cy) / cy) * -8;
+        const rotY = ((x - cx) / cx) * 8;
+
+        card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)';
+      });
+    });
+
+    /* ── 5. Linear Accordion Logic ── */
+    function toggleLinearAccordion(row) {
+      const isExpanded = row.classList.contains('is-expanded');
+      row.parentElement.querySelectorAll('.linear-accordion-row').forEach((r) => {
+        r.classList.remove('is-expanded');
+      });
+      if (!isExpanded) {
+        row.classList.add('is-expanded');
+      }
+    }
+
+    /* ── 6. Command Palette (Cmd+K) Controls ── */
+    function openCommandPalette() {
+      const p = document.getElementById('cmd-k-palette');
+      p.classList.remove('is-hidden');
+      setTimeout(() => document.getElementById('cmd-input').focus(), 100);
+    }
+
+    function closeCommandPalette() {
+      const p = document.getElementById('cmd-k-palette');
+      p.classList.add('is-hidden');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      // ⌘K or Ctrl+K
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        const p = document.getElementById('cmd-k-palette');
+        if (p.classList.contains('is-hidden')) openCommandPalette();
+        else closeCommandPalette();
+      }
+      // ESC
+      if (e.key === 'Escape') {
+        closeCommandPalette();
+      }
+    });
+
+    function filterCommandItems(query) {
+      const q = query.toLowerCase().trim();
+      document.querySelectorAll('#cmd-items-list .cmd-item').forEach((item) => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(q)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

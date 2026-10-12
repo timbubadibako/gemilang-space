@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Gemilang Labs - Bangun Sistem Digital Bisnis Anda</title>
+<meta name="description" content="Gemilang Labs membantu bisnis Anda tumbuh dengan solusi digital custom: website, aplikasi, AI, IoT, ERP, CRM, dan otomasi proses."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<!-- Three.js FIRST, before anything else -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:#f8fafc;color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+}
+
+:root{
+  --navy:#1b3a8c;
+  --sky:#2196f3;
+  --cyan:#00b4d8;
+  --gold:#f5b800;
+}
+
+/* NAV */
+#nav{
+  position:sticky;top:0;z-index:50;
+  height:66px;
+  background:rgba(248,250,252,.92);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid #e2e8f0;
+}
+.nav-in{
+  max-width:1280px;margin:0 auto;
+  padding:0 28px;height:100%;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.nav-logo img{height:36px;width:auto;display:block}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:14px;font-weight:600;color:#475569;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--navy)}
+@media(max-width:768px){.nav-links{display:none}}
+.btn-nav{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 20px;border-radius:11px;
+  font-size:13px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--navy),var(--sky));
+  text-decoration:none;
+  box-shadow:0 6px 20px rgba(27,58,140,.28);
+  transition:opacity .15s,transform .12s;
+}
+.btn-nav:hover{opacity:.9}
+.btn-nav:active{transform:scale(.97)}
+
+/* HERO */
+#hero{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:calc(100dvh - 66px);
+  background:
+    radial-gradient(ellipse 60% 70% at 75% 50%, rgba(33,150,243,.07) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 80% 25%, rgba(245,184,0,.05) 0%, transparent 55%),
+    #f8fafc;
+}
+@media(max-width:1024px){
+  #hero{grid-template-columns:1fr}
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 40px 80px 60px;
+  max-width:600px;
+}
+@media(max-width:1280px){.hero-left{padding:60px 28px 60px 36px}}
+@media(max-width:1024px){.hero-left{padding:56px 24px;max-width:100%}}
+
+.hero-right{
+  position:relative;
+  /* The canvas fills this cell completely */
+}
+@media(max-width:1024px){.hero-right{display:none}}
+
+/* Canvas is position:absolute inside hero-right which has position:relative */
+#gl-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  cursor:grab;
+}
+#gl-canvas:active{cursor:grabbing}
+
+/* EYEBROW */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 13px;border-radius:999px;
+  background:rgba(27,58,140,.07);border:1px solid rgba(27,58,140,.16);
+  font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:600;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--navy);
+  margin-bottom:20px;width:fit-content;
+}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--sky);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero-h1{
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:800;
+  letter-spacing:-.025em;line-height:1.1;
+  color:#0f172a;margin-bottom:18px;text-wrap:balance;
+}
+.grad-text{
+  background:linear-gradient(130deg,var(--navy) 0%,var(--sky) 65%,var(--cyan) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:1rem;color:#475569;line-height:1.75;
+  max-width:480px;margin-bottom:32px;
+}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:44px}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 26px;border-radius:12px;font-size:14px;font-weight:700;
+  color:#fff;text-decoration:none;
+  background:linear-gradient(135deg,var(--navy),var(--sky));
+  box-shadow:0 8px 24px rgba(27,58,140,.26);
+  transition:opacity .15s,transform .12s;
+}
+.btn-primary:hover{opacity:.9}.btn-primary:active{transform:scale(.97)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;border-radius:12px;font-size:14px;font-weight:700;
+  color:var(--navy);text-decoration:none;
+  border:2px solid var(--navy);
+  transition:background .15s,color .15s,transform .12s;
+}
+.btn-outline:hover{background:var(--navy);color:#fff}.btn-outline:active{transform:scale(.97)}
+
+.hero-stats{
+  display:flex;flex-wrap:wrap;gap:24px;
+  padding-top:24px;border-top:1px solid #e2e8f0;
+}
+.stat-v{display:block;font-size:1.3rem;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}
+.stat-v.gold{color:var(--gold)}
+.stat-l{font-size:10.5px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8}
+
+/* STACK STRIP */
+.stack-strip{
+  border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;
+  background:#fff;padding:13px 28px;
+}
+.stack-in{
+  max-width:1280px;margin:0 auto;
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;
+}
+.stack-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8}
+.badge{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;color:#475569}
+.bdot{width:6px;height:6px;border-radius:2px;flex-shrink:0}
+
+/* SECTION */
+.sec{padding:88px 28px}
+.sec-in{max-width:1280px;margin:0 auto}
+.sec-eye{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--navy);margin-bottom:10px;
+}
+.sec-h2{font-size:clamp(1.75rem,3vw,2.4rem);font-weight:800;letter-spacing:-.022em;line-height:1.15;color:#0f172a;text-wrap:balance;margin-bottom:12px}
+.sec-sub{font-size:15px;color:#64748b;line-height:1.7;max-width:520px}
+
+/* SERVICES */
+.svc-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:18px;margin-top:52px;
+}
+@media(max-width:960px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.svc-grid{grid-template-columns:1fr}}
+.card{
+  background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:30px;
+  display:flex;flex-direction:column;
+  transition:transform .22s cubic-bezier(.16,1,.3,1),box-shadow .22s,border-color .22s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 44px -12px rgba(27,58,140,.13);border-color:rgba(33,150,243,.28)}
+.card.tall{grid-row:span 2}
+@media(max-width:960px){.card.tall{grid-row:span 1}}
+.card-icon{
+  width:46px;height:46px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;flex-shrink:0;
+}
+.card-icon svg{width:22px;height:22px}
+.card-tag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:7px}
+.card-title{font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:10px}
+.card-body{font-size:13.5px;color:#64748b;line-height:1.72;flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;padding-top:16px;border-top:1px solid #f1f5f9}
+.chip{font-size:11px;font-family:'JetBrains Mono',monospace;padding:3px 9px;border-radius:7px;border:1px solid}
+.card-link{display:inline-flex;align-items:center;gap:5px;margin-top:16px;font-size:13px;font-weight:700;color:var(--navy);text-decoration:none;transition:color .15s}
+.card-link:hover{color:var(--sky)}
+.card-link svg{width:13px;height:13px}
+
+/* PROCESS */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px}
+@media(max-width:768px){.proc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.proc-grid{grid-template-columns:1fr}}
+.proc-card{
+  background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:26px;
+  position:relative;overflow:hidden;
+}
+.proc-card::before{
+  content:'';position:absolute;inset:0 auto 0 0;width:3px;
+  background:linear-gradient(180deg,var(--navy),var(--sky));border-radius:18px 0 0 18px;
+}
+.proc-num{font-size:2.2rem;font-weight:800;font-family:'JetBrains Mono',monospace;color:#f1f5f9;line-height:1;display:block;margin-bottom:12px}
+.proc-title{font-size:14.5px;font-weight:700;color:#0f172a;margin-bottom:7px}
+.proc-body{font-size:13px;color:#64748b;line-height:1.65}
+
+/* CONFIGURATOR */
+.cfg-wrap{
+  background:#fff;border:1px solid #e2e8f0;border-radius:22px;
+  padding:42px 46px;box-shadow:0 8px 40px -8px rgba(27,58,140,.08);
+}
+@media(max-width:640px){.cfg-wrap{padding:26px 20px}}
+.cfg-lbl{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.09em;color:#64748b;margin-bottom:12px;
+}
+.sel-grid{display:grid;gap:8px;margin-bottom:24px}
+.sg4{grid-template-columns:repeat(4,1fr)}
+.sg2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:640px){.sg4{grid-template-columns:1fr 1fr}}
+@media(max-width:440px){.sg2{grid-template-columns:1fr}}
+.sel-btn{
+  text-align:left;padding:13px 15px;border-radius:13px;
+  border:1.5px solid #e2e8f0;background:#f8fafc;
+  cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;
+  transition:border-color .15s,background .15s;
+}
+.sel-btn:hover{border-color:var(--sky)}
+.sel-btn.on{border-color:var(--navy);background:rgba(27,58,140,.06)}
+.sel-mod{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;text-transform:uppercase;color:#94a3b8;margin-bottom:3px;letter-spacing:.06em}
+.sel-name{font-size:13px;font-weight:700;color:#0f172a}
+.sel-btn.on .sel-name{color:var(--navy)}
+.wa-row{display:flex;align-items:flex-end;gap:14px;margin-top:20px}
+@media(max-width:640px){.wa-row{flex-direction:column}}
+.wa-prev-wrap{flex:1;background:#f8fafc;border:1px solid #e2e8f0;border-radius:13px;padding:16px 18px}
+.wa-prev-lbl{
+  display:flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;margin-bottom:8px;
+}
+.wa-prev-dot{width:7px;height:7px;border-radius:50%;background:#22c55e}
+#wa-prev{
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:#1e293b;line-height:1.7;
+  background:#fff;border:1px solid #e2e8f0;border-radius:9px;padding:12px 14px;
+}
+.btn-wa{
+  flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:15px 28px;border-radius:13px;font-size:14px;font-weight:700;color:#fff;
+  text-decoration:none;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  box-shadow:0 10px 28px rgba(37,211,102,.28);
+  transition:opacity .15s,transform .12s;white-space:nowrap;
+}
+.btn-wa:hover{opacity:.9}.btn-wa:active{transform:scale(.97)}
+.btn-wa svg{width:17px;height:17px;fill:#fff;flex-shrink:0}
+
+/* FINAL CTA */
+.cta-sec{padding:88px 28px;border-top:1px solid #e2e8f0}
+.cta-in{max-width:720px;margin:0 auto;text-align:center}
+.cta-icon{
+  width:62px;height:62px;border-radius:18px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--navy),var(--sky));
+  box-shadow:0 12px 34px rgba(27,58,140,.28);margin-bottom:22px;
+}
+.cta-icon svg{width:30px;height:30px;color:#fff}
+.cta-h2{font-size:clamp(1.7rem,3.2vw,2.6rem);font-weight:800;letter-spacing:-.025em;color:#0f172a;line-height:1.12;text-wrap:balance;margin-bottom:14px}
+.cta-sub{font-size:15px;color:#64748b;line-height:1.7;max-width:480px;margin:0 auto 32px}
+.cta-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.cta-note{font-family:'JetBrains Mono',monospace;font-size:11px;color:#94a3b8;margin-top:20px}
+
+/* FOOTER */
+footer{border-top:1px solid #e2e8f0;background:#fff;padding:22px 28px}
+.foot-in{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+.foot-copy{font-size:13px;color:#94a3b8}
+.foot-links{display:flex;gap:22px}
+.foot-links a{font-size:13px;font-weight:600;color:#64748b;text-decoration:none;transition:color .15s}
+.foot-links a:hover{color:var(--navy)}
+
+/* REVEALS */
+.rev{opacity:0;transform:translateY(26px)}
+@media(prefers-reduced-motion:reduce){.rev{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header id="nav">
+  <div class="nav-in">
+    <a href="#" style="text-decoration:none">
+      <img src="../gemilang.jpeg" alt="Gemilang Labs" style="height:36px"/>
+    </a>
+    <nav class="nav-links">
+      <a href="#layanan">Layanan</a>
+      <a href="#proses">Cara Kerja</a>
+      <a href="#mulai">Mulai Proyek</a>
+    </nav>
+    <a href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20ingin%20konsultasi%20gratis." target="_blank" rel="noopener" class="btn-nav">
+      <svg style="width:14px;height:14px;fill:#fff;flex-shrink:0" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+      Konsultasi Gratis
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- Left: copy -->
+  <div class="hero-left rev">
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Studio Sistem Digital
+    </div>
+    <h1 class="hero-h1">
+      Bisnis Anda Butuh Sistem Digital.<br>
+      <span class="grad-text">Kami Yang Bangun.</span>
+    </h1>
+    <p class="hero-sub">
+      Dari website profesional hingga sistem AI, otomasi proses, IoT, ERP, dan CRM enterprise, kami kerjakan dari nol sesuai kebutuhan bisnis Anda yang sesungguhnya.
+    </p>
+    <div class="hero-btns">
+      <a href="#mulai" class="btn-primary">
+        Mulai Proyek Sekarang
+        <svg style="width:13px;height:13px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#layanan" class="btn-outline">Lihat Layanan</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-v gold">&lt; 3 Hari</span><span class="stat-l">Respons Proposal</span></div>
+      <div><span class="stat-v">99.9%</span><span class="stat-l">Sistem Berjalan Stabil</span></div>
+      <div><span class="stat-v">Full Custom</span><span class="stat-l">Tidak Pakai Template</span></div>
+    </div>
+  </div>
+
+  <!-- Right: Three.js lives here as a REAL positioned cell -->
+  <div class="hero-right" id="hero-right">
+    <canvas id="gl-canvas"></canvas>
+  </div>
+</section>
+
+<!-- STACK STRIP -->
+<div class="stack-strip">
+  <div class="stack-in">
+    <span class="stack-lbl">Teknologi Kami:</span>
+    <span class="badge"><span class="bdot" style="background:#0f172a"></span>Next.js / React</span>
+    <span class="badge"><span class="bdot" style="background:#3178c6"></span>TypeScript</span>
+    <span class="badge"><span class="bdot" style="background:#4db33d"></span>Node.js / Python</span>
+    <span class="badge"><span class="bdot" style="background:var(--gold)"></span>AI / ML</span>
+    <span class="badge"><span class="bdot" style="background:#ff6b35"></span>IoT / Embedded</span>
+    <span class="badge"><span class="bdot" style="background:#0ea5e9"></span>Cloud / Docker</span>
+    <span class="badge"><span class="bdot" style="background:#8b5cf6"></span>PostgreSQL / Redis</span>
+  </div>
+</div>
+
+<!-- LAYANAN -->
+<section id="layanan" class="sec" style="background:#f8fafc">
+  <div class="sec-in">
+    <div class="rev" style="max-width:580px;margin-bottom:0">
+      <span class="sec-eye">Apa yang Kami Bangun</span>
+      <h2 class="sec-h2">Semua Sistem Digital yang Bisnis Anda Butuhkan</h2>
+      <p class="sec-sub">Tidak perlu tahu istilah teknis. Ceritakan masalah bisnis Anda, kami yang terjemahkan ke sistem yang benar-benar berjalan.</p>
+    </div>
+
+    <div class="svc-grid">
+
+      <!-- Tile besar: Web -->
+      <div class="card tall rev">
+        <div class="card-icon" style="background:linear-gradient(135deg,var(--navy),var(--sky));box-shadow:0 6px 18px rgba(27,58,140,.24)">
+          <svg fill="none" stroke="#fff" viewBox="0 0 24 24" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+        </div>
+        <span class="card-tag" style="color:var(--navy)">Website &amp; Aplikasi</span>
+        <div class="card-title">Website Profesional hingga Aplikasi Bisnis Custom</div>
+        <p class="card-body">
+          Butuh website company profile yang cepat dan meyakinkan? Atau aplikasi web untuk mengelola stok, pesanan, anggota, atau laporan keuangan bisnis Anda?
+          <br><br>
+          Kami bangun dari nol, bukan template jadi. Cocok untuk portal layanan, dashboard internal, platform berlangganan, toko online, atau sistem pendaftaran online.
+        </p>
+        <div class="chips">
+          <span class="chip" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe">Website Company</span>
+          <span class="chip" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe">Toko Online</span>
+          <span class="chip" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe">Portal SaaS</span>
+          <span class="chip" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe">Aplikasi Web</span>
+        </div>
+        <a href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20ingin%20membangun%20website%20atau%20aplikasi%20web." target="_blank" class="card-link">
+          Diskusi Kebutuhan Ini
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- AI & Otomasi -->
+      <div class="card rev">
+        <div class="card-icon" style="background:linear-gradient(135deg,#f5b800,#ffd54f);box-shadow:0 6px 18px rgba(245,184,0,.25)">
+          <svg fill="none" stroke="#7c5a00" viewBox="0 0 24 24" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <span class="card-tag" style="color:#b45309">AI &amp; Otomasi</span>
+        <div class="card-title">Sistem Cerdas yang Bekerja untuk Anda</div>
+        <p class="card-body">Chatbot WhatsApp otomatis, sistem pengenalan wajah untuk absensi, analisis dokumen, rekomendasi produk, atau pipeline data, kami bangun sesuai proses bisnis Anda.</p>
+        <div class="chips">
+          <span class="chip" style="background:#fefce8;color:#a16207;border-color:#fde68a">Chatbot Otomatis</span>
+          <span class="chip" style="background:#fefce8;color:#a16207;border-color:#fde68a">Pengenalan Wajah</span>
+          <span class="chip" style="background:#fefce8;color:#a16207;border-color:#fde68a">Analisis Data</span>
+        </div>
+      </div>
+
+      <!-- ERP & CRM -->
+      <div class="card rev">
+        <div class="card-icon" style="background:#f0fdf4;border:1px solid #bbf7d0">
+          <svg fill="none" stroke="#15803d" viewBox="0 0 24 24" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0H5m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        </div>
+        <span class="card-tag" style="color:#15803d">Manajemen Bisnis</span>
+        <div class="card-title">ERP, CRM &amp; Platform Enterprise</div>
+        <p class="card-body">Kelola stok, keuangan, SDM, dan hubungan pelanggan dalam satu sistem terpadu yang aman dan scalable untuk perusahaan Anda.</p>
+        <div class="chips">
+          <span class="chip" style="background:#f0fdf4;color:#166534;border-color:#bbf7d0">ERP Custom</span>
+          <span class="chip" style="background:#f0fdf4;color:#166534;border-color:#bbf7d0">CRM / HRM</span>
+        </div>
+      </div>
+
+      <!-- IoT -->
+      <div class="card rev" style="grid-column:span 2">
+        <div style="display:flex;gap:24px;flex-wrap:wrap">
+          <div class="card-icon" style="background:#eff6ff;border:1px solid #bfdbfe;flex-shrink:0">
+            <svg fill="none" stroke="#1d4ed8" viewBox="0 0 24 24" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg>
+          </div>
+          <div style="flex:1;min-width:200px">
+            <span class="card-tag" style="color:#1d4ed8">IoT &amp; Hardware</span>
+            <div class="card-title">Perangkat Pintar Terhubung ke Sistem Anda</div>
+            <p class="card-body">Sensor monitoring gudang, mesin pabrik, atau alat pertanian yang terhubung langsung ke dashboard bisnis Anda secara real-time dan bisa dikontrol jarak jauh.</p>
+            <div class="chips">
+              <span class="chip" style="background:#eff6ff;color:#1e40af;border-color:#bfdbfe">Monitoring Real-time</span>
+              <span class="chip" style="background:#eff6ff;color:#1e40af;border-color:#bfdbfe">Kontrol Jarak Jauh</span>
+              <span class="chip" style="background:#eff6ff;color:#1e40af;border-color:#bfdbfe">Integrasi Dashboard</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROSES -->
+<section id="proses" class="sec" style="background:#fff;border-top:1px solid #e2e8f0">
+  <div class="sec-in">
+    <div class="rev" style="max-width:520px;margin-bottom:52px">
+      <span class="sec-eye">Cara Kami Bekerja</span>
+      <h2 class="sec-h2">Transparan dari Awal Sampai Selesai</h2>
+      <p class="sec-sub">Anda tahu persis apa yang kami kerjakan, kapan selesai, dan berapa biayanya, sejak hari pertama.</p>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-card rev">
+        <span class="proc-num">01</span>
+        <div class="proc-title">Ceritakan Kebutuhan Anda</div>
+        <p class="proc-body">Tidak perlu dokumen teknis. Cukup ceritakan masalah atau tujuan bisnis Anda, kami yang susun spesifikasinya.</p>
+      </div>
+      <div class="proc-card rev">
+        <span class="proc-num">02</span>
+        <div class="proc-title">Desain &amp; Rencana Detail</div>
+        <p class="proc-body">Kami siapkan tampilan awal, rencana pengerjaan, dan estimasi biaya yang jelas sebelum mulai. Anda setujui dulu.</p>
+      </div>
+      <div class="proc-card rev">
+        <span class="proc-num">03</span>
+        <div class="proc-title">Pengembangan Berkala</div>
+        <p class="proc-body">Proses dibagi tahap. Anda bisa melihat kemajuan di setiap tahapnya dan memberi masukan langsung.</p>
+      </div>
+      <div class="proc-card rev">
+        <span class="proc-num">04</span>
+        <div class="proc-title">Peluncuran &amp; Pendampingan</div>
+        <p class="proc-body">Sistem diluncurkan dan dipastikan berjalan stabil. Dukungan teknis tersedia setelah serah terima.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIGURATOR -->
+<section id="mulai" class="sec" style="background:#f8fafc;border-top:1px solid #e2e8f0">
+  <div class="sec-in">
+    <div class="rev" style="max-width:520px;margin-bottom:38px">
+      <span class="sec-eye">Mulai Konsultasi</span>
+      <h2 class="sec-h2">Ceritakan Kebutuhan Bisnis Anda</h2>
+      <p class="sec-sub">Pilih kategori dan skala proyek. Kami siapkan pesan konsultasi untuk WhatsApp tim kami.</p>
+    </div>
+    <div class="cfg-wrap rev">
+      <label class="cfg-lbl">1. Sistem apa yang Anda butuhkan?</label>
+      <div class="sel-grid sg4" id="s1">
+        <button class="sel-btn on" data-v="Website atau Aplikasi Web"><span class="sel-mod">Layanan 01</span><span class="sel-name">Website / Aplikasi</span></button>
+        <button class="sel-btn" data-v="AI dan Otomasi Bisnis"><span class="sel-mod">Layanan 02</span><span class="sel-name">AI &amp; Otomasi</span></button>
+        <button class="sel-btn" data-v="ERP, CRM, atau Sistem Manajemen"><span class="sel-mod">Layanan 03</span><span class="sel-name">ERP / CRM</span></button>
+        <button class="sel-btn" data-v="IoT dan Perangkat Pintar"><span class="sel-mod">Layanan 04</span><span class="sel-name">IoT / Hardware</span></button>
+      </div>
+      <label class="cfg-lbl">2. Skala dan urgensi:</label>
+      <div class="sel-grid sg2" id="s2">
+        <button class="sel-btn on" data-v="MVP dalam 2-4 minggu"><span class="sel-mod">Skala Alpha</span><span class="sel-name">Butuh Cepat (2-4 Minggu)</span></button>
+        <button class="sel-btn" data-v="pengembangan penuh 1-2 bulan"><span class="sel-mod">Skala Beta</span><span class="sel-name">Pengembangan Penuh (1-2 Bulan)</span></button>
+        <button class="sel-btn" data-v="sistem enterprise jangka panjang"><span class="sel-mod">Enterprise</span><span class="sel-name">Enterprise / Jangka Panjang</span></button>
+        <button class="sel-btn" data-v="konsultasi awal untuk estimasi biaya dan waktu"><span class="sel-mod">Eksplorasi</span><span class="sel-name">Konsultasi Dulu</span></button>
+      </div>
+      <div class="wa-row">
+        <div class="wa-prev-wrap">
+          <div class="wa-prev-lbl"><span class="wa-prev-dot"></span>Draf pesan WhatsApp:</div>
+          <p id="wa-prev"></p>
+        </div>
+        <a id="wa-go" href="#" target="_blank" rel="noopener" class="btn-wa">
+          <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          Kirim ke WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-sec">
+  <div class="cta-in rev">
+    <div class="cta-icon">
+      <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+    <h2 class="cta-h2">Ada Sistem yang Sudah Lama Ingin Anda Bangun?</h2>
+    <p class="cta-sub">Konsultasi pertama gratis. Tim kami memahami kebutuhan Anda dan memberi gambaran solusi nyata, tanpa basa-basi teknis.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20ingin%20konsultasi%20gratis%20untuk%20sistem%20digital%20bisnis%20saya." target="_blank" rel="noopener" class="btn-wa">
+        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        Mulai Konsultasi via WhatsApp
+      </a>
+      <a href="#mulai" class="btn-outline" style="text-decoration:none">Coba Kalkulator</a>
+    </div>
+    <p class="cta-note">Respons &lt; 15 menit di jam kerja (08.00-17.00 WIB)</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-in">
+    <div style="display:flex;align-items:center;gap:10px">
+      <img src="../gemilang.jpeg" alt="Gemilang Labs" style="height:30px;width:auto"/>
+      <span class="foot-copy">&copy; 2026 Gemilang Labs. All rights reserved.</span>
+    </div>
+    <div class="foot-links">
+      <a href="#layanan">Layanan</a>
+      <a href="#proses">Cara Kerja</a>
+      <a href="https://wa.me/6281234567890" target="_blank" style="color:var(--navy);font-weight:700">WhatsApp Kami</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   THREE.JS — Node Graph Visualisation
+   Run AFTER DOM is ready so hero-right has real dimensions
+══════════════════════════════════════════════════════════ */
+window.addEventListener('load', function () {
+  if (typeof THREE === 'undefined') { console.error('Three.js failed to load'); return; }
+
+  var container = document.getElementById('hero-right');
+  var canvas    = document.getElementById('gl-canvas');
+  if (!container || !canvas) return;
+
+  // --- Renderer ---
+  var W = container.clientWidth;
+  var H = container.clientHeight;
+
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W, H);
+  renderer.setClearColor(0x000000, 0);
+
+  // --- Scene + Camera ---
+  var scene  = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 200);
+  camera.position.set(0, 0, 20);
+
+  // --- Colors (brand palette) ---
+  var C_NAVY  = 0x1b3a8c;
+  var C_SKY   = 0x2196f3;
+  var C_CYAN  = 0x00b4d8;
+  var C_GOLD  = 0xf5b800;
+  var C_LINE  = 0x2196f3;
+  var C_LINE2 = 0xaecbf0;
+
+  // --- Nodes ---
+  // Each node: [x, y, z, color, radius, isHub]
+  var ND = [
+    [  0.0,  0.0,  0.0, C_NAVY, 0.55, true  ], // Hub
+    [ -4.2,  2.2,  0.4, C_SKY,  0.38, false ],
+    [  4.2,  2.2,  0.4, C_GOLD, 0.40, false ],
+    [ -4.5, -2.0,  0.6, C_CYAN, 0.36, false ],
+    [  4.4, -1.8,  0.5, C_SKY,  0.36, false ],
+    [  0.0,  4.2, -0.3, C_GOLD, 0.32, false ],
+    [  0.0, -4.2, -0.2, C_CYAN, 0.32, false ],
+    [ -2.4,  0.3,  1.8, C_SKY,  0.28, false ],
+    [  2.4,  0.3,  1.8, C_NAVY, 0.28, false ],
+  ];
+
+  var nodeGroup = new THREE.Group();
+  var meshes = [];
+
+  ND.forEach(function (d) {
+    var geo  = new THREE.SphereGeometry(d[4], d[5] ? 22 : 14, d[5] ? 22 : 14);
+    var mat  = new THREE.MeshBasicMaterial({ color: d[3], transparent: true, opacity: d[5] ? 0.90 : 0.78 });
+    var mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(d[0], d[1], d[2]);
+    nodeGroup.add(mesh);
+    meshes.push(mesh);
+
+    // Hub decorations
+    if (d[5]) {
+      var r1g = new THREE.TorusGeometry(d[4] + 0.30, 0.035, 8, 40);
+      var r1m = new THREE.MeshBasicMaterial({ color: C_SKY, transparent: true, opacity: 0.40 });
+      var r1  = new THREE.Mesh(r1g, r1m);
+      mesh.add(r1);
+
+      var r2g = new THREE.TorusGeometry(d[4] + 0.68, 0.022, 8, 40);
+      var r2m = new THREE.MeshBasicMaterial({ color: C_GOLD, transparent: true, opacity: 0.28 });
+      var r2  = new THREE.Mesh(r2g, r2m);
+      r2.rotation.x = Math.PI / 2.8;
+      mesh.add(r2);
+    }
+  });
+
+  scene.add(nodeGroup);
+
+  // --- Edges ---
+  var EDGES = [
+    [0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],
+    [1,5],[1,7],[2,6],[2,8],[3,7],[4,8],[5,6]
+  ];
+
+  var edgeGroup = new THREE.Group();
+  EDGES.forEach(function (e) {
+    var a = ND[e[0]], b = ND[e[1]];
+    var pts = [new THREE.Vector3(a[0],a[1],a[2]), new THREE.Vector3(b[0],b[1],b[2])];
+    var geo = new THREE.BufferGeometry().setFromPoints(pts);
+    var isHub = e[0] === 0;
+    var mat = new THREE.LineBasicMaterial({
+      color: isHub ? C_LINE : C_LINE2,
+      transparent: true,
+      opacity: isHub ? 0.22 : 0.11
+    });
+    edgeGroup.add(new THREE.Line(geo, mat));
+  });
+  nodeGroup.add(edgeGroup);
+
+  // --- Particles ---
+  var PC = 70;
+  var pPos = new Float32Array(PC * 3);
+  var pSpd = [];
+  for (var i = 0; i < PC; i++) {
+    pPos[i*3  ] = (Math.random()-0.5)*18;
+    pPos[i*3+1] = (Math.random()-0.5)*12;
+    pPos[i*3+2] = (Math.random()-0.5)*8;
+    pSpd.push({ x:(Math.random()-0.5)*0.005, y:(Math.random()-0.5)*0.005 });
+  }
+  var pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  var pMat = new THREE.PointsMaterial({ color: C_SKY, size: 0.06, transparent: true, opacity: 0.32 });
+  scene.add(new THREE.Points(pGeo, pMat));
+
+  // --- Interaction ---
+  var rotX = 0, rotY = 0;
+  var tgtX = 0, tgtY = 0;
+  var velX = 0, velY = 0;
+  var drag = false, lastX = 0, lastY = 0;
+
+  canvas.addEventListener('mousedown', function (e) {
+    drag = true; lastX = e.clientX; lastY = e.clientY; velX = 0; velY = 0;
+  });
+  window.addEventListener('mouseup', function () { drag = false; });
+  window.addEventListener('mousemove', function (e) {
+    if (drag) {
+      velY = (e.clientX - lastX) * 0.006;
+      velX = (e.clientY - lastY) * 0.006;
+      lastX = e.clientX; lastY = e.clientY;
+    } else {
+      var rect = container.getBoundingClientRect();
+      tgtY = ((e.clientX - rect.left) / rect.width * 2 - 1) *  0.28;
+      tgtX = ((e.clientY - rect.top)  / rect.height * 2 - 1) * -0.16;
+    }
+  });
+
+  // Touch
+  canvas.addEventListener('touchstart', function (e) {
+    drag=true; lastX=e.touches[0].clientX; lastY=e.touches[0].clientY; velX=0; velY=0;
+  });
+  canvas.addEventListener('touchend', function () { drag=false; });
+  canvas.addEventListener('touchmove', function (e) {
+    if (!drag) return;
+    velY = (e.touches[0].clientX - lastX) * 0.005;
+    velX = (e.touches[0].clientY - lastY) * 0.005;
+    lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
+    e.preventDefault();
+  }, { passive: false });
+
+  // Resize
+  window.addEventListener('resize', function () {
+    var nw = container.clientWidth;
+    var nh = container.clientHeight;
+    renderer.setSize(nw, nh);
+    camera.aspect = nw / nh;
+    camera.updateProjectionMatrix();
+  });
+
+  // --- Animate ---
+  var t0 = performance.now();
+  function tick() {
+    requestAnimationFrame(tick);
+    var t = (performance.now() - t0) * 0.001;
+
+    // Hub float + ring rotation
+    meshes[0].position.y = Math.sin(t * 0.7) * 0.20;
+    if (meshes[0].children[0]) meshes[0].children[0].rotation.z = t * 0.55;
+    if (meshes[0].children[1]) meshes[0].children[1].rotation.y = t * 0.38;
+
+    // Outer node gentle drift
+    for (var i = 1; i < meshes.length; i++) {
+      meshes[i].position.y = ND[i][1] + Math.sin(t*(0.38+i*0.07)+i)*0.16;
+    }
+
+    // Particle drift
+    for (var j = 0; j < PC; j++) {
+      pPos[j*3  ] += pSpd[j].x;
+      pPos[j*3+1] += pSpd[j].y;
+      if (Math.abs(pPos[j*3  ]) > 10) pSpd[j].x *= -1;
+      if (Math.abs(pPos[j*3+1]) > 7)  pSpd[j].y *= -1;
+    }
+    pGeo.attributes.position.needsUpdate = true;
+
+    // Rotation
+    if (drag) {
+      rotX += velX; rotY += velY;
+    } else {
+      velX *= 0.90; velY *= 0.90;
+      rotX += velX; rotY += velY;
+      rotX += (tgtX - rotX) * 0.035;
+      rotY += (tgtY - rotY) * 0.035;
+    }
+    rotY += 0.0014; // slow auto-rotate
+
+    nodeGroup.rotation.x = rotX;
+    nodeGroup.rotation.y = rotY;
+
+    renderer.render(scene, camera);
+  }
+  tick();
+});
+
+
+/* ══════════════════════════════════════════════════════════
+   GSAP Reveals
+══════════════════════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', function () {
+  if (typeof gsap === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero reveal on load
+  gsap.to('.hero-left', { opacity:1, y:0, duration:0.85, ease:'power3.out', delay:0.1 });
+
+  gsap.utils.toArray('.rev').forEach(function (el) {
+    if (el.classList.contains('hero-left')) return; // handled above
+    gsap.to(el, {
+      opacity:1, y:0, duration:0.7, ease:'power3.out',
+      scrollTrigger:{ trigger:el, start:'top 88%', once:true }
+    });
+  });
+});
+
+
+/* ══════════════════════════════════════════════════════════
+   WhatsApp Configurator
+══════════════════════════════════════════════════════════ */
+(function () {
+  var WA  = '6281234567890';
+  var svc = 'Website atau Aplikasi Web';
+  var scl = 'MVP dalam 2-4 minggu';
+  var prev = document.getElementById('wa-prev');
+  var go   = document.getElementById('wa-go');
+
+  function upd() {
+    var msg = 'Halo Gemilang Labs, saya membutuhkan ' + svc + ' dengan skala ' + scl + '. Bisa diskusi lebih lanjut?';
+    prev.textContent = '"' + msg + '"';
+    go.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+  }
+
+  document.querySelectorAll('#s1 .sel-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('#s1 .sel-btn').forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      svc = btn.getAttribute('data-v');
+      upd();
+    });
+  });
+
+  document.querySelectorAll('#s2 .sel-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('#s2 .sel-btn').forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      scl = btn.getAttribute('data-v');
+      upd();
+    });
+  });
+
+  upd();
+})();
+</script>
+</body>
+</html>

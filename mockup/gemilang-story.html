@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemilang Labs — Rekan Tumbuh &amp; Solusi Sistem Digital</title>
+  <meta name="description" content="Gemilang Labs — Kami bukan sekadar vendor, melainkan kawan bertumbuh yang merancang sistem web, AI, otomasi, dan ERP berorientasi dampak nyata untuk bisnis Anda." />
+
+  <!-- Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Three.js (r128) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              navy: '#1B3A8C',
+              dark: '#0F2560',
+              sky: '#2196F3',
+              cyan: '#00B4D8',
+              gold: '#F5B800',
+              ice: '#F8FAFC',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --brand-navy: #1B3A8C;
+      --brand-dark: #0F2560;
+      --brand-sky: #2196F3;
+      --brand-cyan: #00B4D8;
+      --brand-gold: #F5B800;
+      --bg-ice: #F8FAFC;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { font-size: 16px; }
+    body {
+      background-color: var(--bg-ice);
+      color: #0F172A;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Subtle Radar Grid */
+    .radar-grid {
+      background-image:
+        radial-gradient(circle, rgba(27, 58, 140, 0.08) 1.2px, transparent 1.2px);
+      background-size: 32px 32px;
+    }
+
+    /* Brand Gradients */
+    .gradient-gemilang-text {
+      background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-sky) 65%, var(--brand-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .btn-press:active { transform: scale(0.97); }
+
+    .card-lift {
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s, border-color 0.22s;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(27, 58, 140, 0.12);
+      border-color: rgba(33, 150, 243, 0.35);
+    }
+
+    /* Storytelling styling */
+    .story-line {
+      opacity: 0.12;
+      transform: translateY(18px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .story-line.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="selection:bg-brand-sky selection:text-white">
+
+  <!-- ============================================================
+       TOP NAVBAR
+  ============================================================ -->
+  <header class="sticky top-0 z-50 bg-[#F8FAFC]/90 backdrop-blur-md border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3">
+        <img src="../gemilang.jpeg" alt="Gemilang Labs" class="h-9 w-auto" />
+      </a>
+
+      <!-- Center Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-xs sm:text-sm font-semibold text-slate-600">
+        <a href="#cerita" class="hover:text-brand-navy transition-colors">Kisah Kolaborasi</a>
+        <a href="#solusi" class="hover:text-brand-navy transition-colors">Solusi Bersama</a>
+        <a href="#cara-kerja" class="hover:text-brand-navy transition-colors">Prinsip Kerja</a>
+        <a href="#ngobrol" class="hover:text-brand-navy transition-colors">Mulai Obrolan</a>
+      </nav>
+
+      <!-- Right CTAs -->
+      <div class="flex items-center gap-3">
+        <a
+          href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20untuk%20ngobrol%20santai%20tentang%20rencana%20sistem%20bisnis%20saya."
+          target="_blank"
+          rel="noopener"
+          class="btn-press inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-white text-xs sm:text-sm font-bold shadow-md shadow-blue-600/20 bg-gradient-to-r from-brand-navy to-brand-sky hover:opacity-95 transition-all"
+        >
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Ajak Ngobrol Santai</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       HERO SECTION — DUAL ENGINE:
+       1. Background Canvas: Sonar Grid Wavefield (Interactive tap pings)
+       2. Foreground Right: Three.js Interactive 3D Core with Orbiting Service Nodes
+  ============================================================ -->
+  <section id="hero" class="relative w-full min-h-[calc(100vh-64px)] flex items-center overflow-hidden radar-grid px-5 sm:px-8 py-12 lg:py-0">
+    
+    <!-- 1. Sonar Grid Wave Canvas (Background Layer) -->
+    <canvas id="sonar-canvas" class="absolute inset-0 w-full h-full z-0 pointer-events-auto cursor-crosshair"></canvas>
+
+    <!-- Main Content Container -->
+    <div class="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      
+      <!-- Left Column: Business-First Human Warmth -->
+      <div class="lg:col-span-6 flex flex-col justify-center pointer-events-none">
+        <div class="pointer-events-auto inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/95 border border-blue-200/80 shadow-sm w-fit mb-5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-[11px] font-mono font-bold tracking-wider text-brand-navy uppercase">
+            Rekan Rekayasa Digital &amp; AI
+          </span>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-slate-950 tracking-tight leading-[1.1] mb-5 pointer-events-auto" style="text-wrap: balance;">
+          Bukan Sekadar Vendor.<br>
+          <span class="gradient-gemilang-text">Kawan Bertumbuh</span> untuk Sistem Digital Anda.
+        </h1>
+
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mb-8 pointer-events-auto">
+          Kami di Gemilang Labs merancang website, sistem cerdas AI, ERP manajemen, dan otomasi proses yang disesuaikan seutuhnya dengan alur bisnis Anda. Bukan sekadar mengejar transaksi, melainkan menciptakan dampak nyata yang membebaskan waktu Anda.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center gap-3.5 pointer-events-auto mb-10">
+          <a
+            href="#cerita"
+            class="btn-press inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-white text-xs sm:text-sm font-bold shadow-lg shadow-blue-600/25 bg-gradient-to-r from-brand-navy to-brand-sky hover:opacity-95 transition-all"
+          >
+            <span>Kenali Cerita Kami</span>
+            <i data-lucide="arrow-down" class="w-4 h-4"></i>
+          </a>
+
+          <a
+            href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20ingin%20konsultasi%20kebutuhan%20teknologi."
+            target="_blank"
+            rel="noopener"
+            class="btn-press inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border-2 border-slate-300 hover:border-brand-navy bg-white/80 backdrop-blur-sm text-slate-800 hover:text-brand-navy text-xs sm:text-sm font-bold transition-all"
+          >
+            <i data-lucide="message-circle" class="w-4 h-4 text-emerald-600"></i>
+            <span>Diskusi WhatsApp</span>
+          </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="pointer-events-auto flex flex-wrap items-center gap-6 pt-6 border-t border-slate-200/80">
+          <div>
+            <span class="block text-xl font-extrabold text-brand-navy font-mono">100% Custom</span>
+            <span class="text-[11px] font-mono uppercase text-slate-500 tracking-wider">Sesuai Alur Bisnis</span>
+          </div>
+          <div class="h-8 w-px bg-slate-200 hidden sm:block"></div>
+          <div>
+            <span class="block text-xl font-extrabold text-brand-navy font-mono">Tanpa Birokrasi</span>
+            <span class="text-[11px] font-mono uppercase text-slate-500 tracking-wider">Komunikasi Langsung</span>
+          </div>
+          <div class="h-8 w-px bg-slate-200 hidden sm:block"></div>
+          <div>
+            <span class="block text-xl font-extrabold text-amber-600 font-mono">Berdampak Nyata</span>
+            <span class="text-[11px] font-mono uppercase text-slate-500 tracking-wider">Fokus Hasil Usaha</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive 3D Spatial Core -->
+      <div class="lg:col-span-6 relative flex items-center justify-center min-h-[380px] sm:min-h-[480px]">
+        
+        <!-- 3D WebGL Canvas Container -->
+        <div id="three-container" class="relative w-full h-[400px] sm:h-[500px] flex items-center justify-center">
+          <canvas id="three-canvas" class="w-full h-full cursor-grab active:cursor-grabbing z-10"></canvas>
+
+          <!-- Floating Orbit Node Badges (HTML Overlays tied to nodes) -->
+          <div class="absolute top-4 left-4 z-20 pointer-events-none bg-white/85 backdrop-blur-md border border-slate-200/80 rounded-xl px-3 py-1.5 shadow-sm text-center">
+            <span class="text-[10px] font-mono font-bold text-slate-500 block">SIMPUL INTI:</span>
+            <span class="text-xs font-bold text-brand-navy">Gemilang Core Engine</span>
+          </div>
+
+          <div class="absolute bottom-4 right-4 z-20 pointer-events-none bg-white/85 backdrop-blur-md border border-slate-200/80 rounded-xl px-3 py-1.5 shadow-sm">
+            <span class="text-[10px] font-mono text-slate-500 flex items-center gap-1.5">
+              <i data-lucide="hand" class="w-3 h-3 text-blue-500"></i>
+              <span>Drag / Hover untuk memutar</span>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PINNED GSAP STORYTELLING SECTION:
+       "Kami Tidak Mengejar Angka di Invoice, Tapi Dampak & Kemitraan"
+  ============================================================ -->
+  <section id="cerita" class="relative w-full bg-slate-900 text-white overflow-hidden">
+    
+    <!-- Pinned Viewport Container -->
+    <div id="story-pin-container" class="relative w-full min-h-screen flex items-center justify-center px-6 sm:px-12 py-24">
+      
+      <!-- Ambient Glow Orbs -->
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-blue-600/15 blur-[120px] pointer-events-none"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-amber-500/10 blur-[120px] pointer-events-none"></div>
+
+      <!-- Narrative Frame -->
+      <div class="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center">
+        
+        <!-- Chapter Indicator -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 mb-8">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-slate-300">
+            BABAK CERITA KITA
+          </span>
+        </div>
+
+        <!-- Stage 1: The Frustration & Reality -->
+        <div id="story-stage-1" class="story-line active mb-8">
+          <h3 class="text-xs sm:text-sm font-mono uppercase tracking-widest text-blue-400 font-bold mb-2">
+            01 • REALITAS BISNIS HARI INI
+          </h3>
+          <p class="text-xl sm:text-2xl lg:text-3xl font-bold leading-relaxed text-slate-200" style="text-wrap: balance;">
+            Banyak pemilik usaha hebat punya visi yang luar biasa. Namun langkah mereka kerap tertahan oleh sistem manual yang melelahkan, data yang berantakan, atau software vendor yang kaku dan rumit dipahami.
+          </p>
+        </div>
+
+        <!-- Stage 2: Our Core Philosophy -->
+        <div id="story-stage-2" class="story-line mb-8">
+          <h3 class="text-xs sm:text-sm font-mono uppercase tracking-widest text-amber-400 font-bold mb-2">
+            02 • FILOSOFI KEMITRAAN KAMI
+          </h3>
+          <p class="text-xl sm:text-2xl lg:text-3xl font-bold leading-relaxed text-slate-200" style="text-wrap: balance;">
+            Bagi kami di Gemilang Labs, teknologi bukanlah soal mengejar angka invoice sebesar-besarnya. Ini tentang duduk bersama Anda, mendengarkan apa yang menghambat usaha Anda, dan memecahkannya dari akar masalah.
+          </p>
+        </div>
+
+        <!-- Stage 3: The Tangible Impact -->
+        <div id="story-stage-3" class="story-line mb-8">
+          <h3 class="text-xs sm:text-sm font-mono uppercase tracking-widest text-emerald-400 font-bold mb-2">
+            03 • DAMPAK BERSAMA
+          </h3>
+          <p class="text-xl sm:text-2xl lg:text-3xl font-bold leading-relaxed text-slate-200" style="text-wrap: balance;">
+            Kami tidak sekadar menyerahkan kode lalu pergi. Kami memastikan sistem Anda benar-benar berjalan, membebaskan waktu operasional Anda, dan membuat usaha Anda berkembang tanpa beban teknis.
+          </p>
+        </div>
+
+        <!-- Stage 4: Conclusion -->
+        <div id="story-stage-4" class="story-line">
+          <p class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-sky-200 to-amber-300 mb-6" style="text-wrap: balance;">
+            "Ketika teknologi bekerja tanpa celah, bisnis Anda bisa bersinar sepenuhnya."
+          </p>
+          <a
+            href="#solusi"
+            class="btn-press inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-slate-900 font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-slate-100 transition-all"
+          >
+            <span>Lihat Solusi yang Kita Bangun</span>
+            <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SOLUSI BERSAMA (Human-Centric Service Matrix)
+  ============================================================ -->
+  <section id="solusi" class="py-24 px-5 sm:px-8 max-w-7xl mx-auto">
+    <div class="mb-14 max-w-2xl">
+      <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-navy">
+        KAPABILITAS SISTEM KAMI
+      </span>
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight mt-1" style="text-wrap: balance;">
+        Apa Saja yang Bisa Kita Bangun Bersama?
+      </h2>
+      <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+        Anda tidak perlu memikirkan istilah pemrograman. Ceritakan apa alur bisnis yang ingin Anda rapikan atau otomatisasikan, tim engineer kami yang akan merancangnya.
+      </p>
+    </div>
+
+    <!-- 4 Pillar Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Pilar 1: Website & Aplikasi Bisnis -->
+      <div class="card-lift rounded-2xl bg-white border border-slate-200 p-8 flex flex-col justify-between shadow-sm">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-navy to-brand-sky flex items-center justify-center text-white mb-6 shadow-md shadow-blue-600/20">
+            <i data-lucide="layout" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 mb-1 block">Solusi 01</span>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Website &amp; Aplikasi Bisnis Khusus</h3>
+          <p class="text-sm text-slate-600 leading-relaxed mb-6">
+            Mulai dari website profil perusahaan yang cepat dan berwibawa, platform pendaftaran online, portal keanggotaan, hingga aplikasi web yang bisa diakses seluruh tim Anda dari mana saja.
+          </p>
+        </div>
+
+        <div class="pt-5 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-xs font-mono text-slate-500">Hasil: Kredibilitas tinggi &amp; akses lancar</span>
+          <a
+            href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20dengan%20Website%20atau%20Aplikasi%20Bisnis."
+            target="_blank"
+            class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-sky font-mono"
+          >
+            <span>Bahas Ini</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pilar 2: AI & Otomasi Cerdas -->
+      <div class="card-lift rounded-2xl bg-white border border-slate-200 p-8 flex flex-col justify-between shadow-sm">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center text-slate-950 mb-6 shadow-md shadow-amber-500/20">
+            <i data-lucide="sparkles" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-600 mb-1 block">Solusi 02</span>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Sistem AI &amp; Otomasi Proses</h3>
+          <p class="text-sm text-slate-600 leading-relaxed mb-6">
+            Chatbot WhatsApp pintar yang membalas pertanyaan pelanggan 24 jam nonstop, sistem pembacaan dokumen otomatis, presensi pengenalan wajah, hingga analisis data penjualan tanpa perlu entri manual.
+          </p>
+        </div>
+
+        <div class="pt-5 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-xs font-mono text-slate-500">Hasil: Hemat waktu tim hingga 70%</span>
+          <a
+            href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20dengan%20Sistem%20AI%20dan%20Otomasi."
+            target="_blank"
+            class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-sky font-mono"
+          >
+            <span>Bahas Ini</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pilar 3: ERP & CRM Terpadu -->
+      <div class="card-lift rounded-2xl bg-white border border-slate-200 p-8 flex flex-col justify-between shadow-sm">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 mb-6">
+            <i data-lucide="database" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-600 mb-1 block">Solusi 03</span>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">ERP, CRM &amp; Pengelolaan Bisnis</h3>
+          <p class="text-sm text-slate-600 leading-relaxed mb-6">
+            Satu sistem terintegrasi untuk melacak stok gudang, mencatat kas masuk dan keluar, mengelola data pelanggan, hingga laporan laba-rugi yang bisa dilihat langsung oleh pemilik bisnis.
+          </p>
+        </div>
+
+        <div class="pt-5 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-xs font-mono text-slate-500">Hasil: Keputusan bisnis berbasis data akurat</span>
+          <a
+            href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20dengan%20ERP%20atau%20CRM."
+            target="_blank"
+            class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-sky font-mono"
+          >
+            <span>Bahas Ini</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pilar 4: IoT & Integrasi Perangkat -->
+      <div class="card-lift rounded-2xl bg-white border border-slate-200 p-8 flex flex-col justify-between shadow-sm">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-700 mb-6">
+            <i data-lucide="cpu" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-sky-600 mb-1 block">Solusi 04</span>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">IoT, Sensor &amp; Perangkat Keras</h3>
+          <p class="text-sm text-slate-600 leading-relaxed mb-6">
+            Menghubungkan alat fisik, sensor suhu ruangan, mesin pabrik, atau akses pintu otomatis langsung ke layar ponsel atau komputer Anda dengan data real-time.
+          </p>
+        </div>
+
+        <div class="pt-5 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-xs font-mono text-slate-500">Hasil: Kendali penuh di ujung jari</span>
+          <a
+            href="https://wa.me/6281234567890?text=Halo%20Gemilang%20Labs%2C%20saya%20tertarik%20dengan%20IoT%20dan%20Hardware."
+            target="_blank"
+            class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-sky font-mono"
+          >
+            <span>Bahas Ini</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PRINSIP KERJA KITA (Transparan & Menyenangkan)
+  ============================================================ -->
+  <section id="cara-kerja" class="py-20 px-5 sm:px-8 bg-slate-50 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-xl mx-auto mb-14">
+        <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-navy">
+          CARA KERJA KITA
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight mt-1">
+          Langkah Kolaborasi yang Jelas
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 mt-2">
+          Tidak ada bahasa teknis yang membuat bingung. Kami jelaskan setiap tahap secara lugas.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative">
+          <span class="text-3xl font-extrabold font-mono text-slate-200 block mb-2">01</span>
+          <h4 class="text-sm font-bold text-slate-900 mb-1">Ngobrol Kebutuhan</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Cukup ceritakan apa masalah yang dihadapi. Kami bantu rumuskan sistem apa yang paling masuk akal.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative">
+          <span class="text-3xl font-extrabold font-mono text-slate-200 block mb-2">02</span>
+          <h4 class="text-sm font-bold text-slate-900 mb-1">Lihat Bentuknya Dulu</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Kami siapkan rancangan tampilan dan skenario cara kerja sistemnya. Anda setujui sebelum coding berjalan.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative">
+          <span class="text-3xl font-extrabold font-mono text-slate-200 block mb-2">03</span>
+          <h4 class="text-sm font-bold text-slate-900 mb-1">Pengerjaan Terbuka</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Pengerjaan dibagi bertahap. Anda bisa melihat perkembangannya secara berkala dan memberi masukan.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative">
+          <span class="text-3xl font-extrabold font-mono text-slate-200 block mb-2">04</span>
+          <h4 class="text-sm font-bold text-slate-900 mb-1">Jalan &amp; Didampingi</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Sistem resmi berjalan. Kami tetap siap sedia mendampingi jika ada kendala pasca-peluncuran.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       MULAI OBROLAN SANTAI (WhatsApp Inquiry Engine)
+  ============================================================ -->
+  <section id="ngobrol" class="py-24 px-5 sm:px-8 max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-navy to-brand-sky flex items-center justify-center text-white mx-auto mb-4 shadow-lg shadow-blue-600/20">
+        <i data-lucide="coffee" class="w-7 h-7"></i>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+        Punya Rencana atau Masalah yang Ingin Diselesaikan?
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto mt-2 leading-relaxed">
+        Tidak perlu sungkan. Konsultasi awal 100% bebas biaya. Pilih topik yang ingin Anda bicarakan, lalu kirimkan langsung ke WhatsApp kami.
+      </p>
+    </div>
+
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-md space-y-6">
+      <!-- Pilihan Topik -->
+      <div>
+        <label class="block text-xs font-mono font-bold uppercase text-slate-600 mb-3">
+          1. Topik yang Ingin Anda Bahas:
+        </label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="topic-selector">
+          <button type="button" data-val="membuat website atau aplikasi bisnis baru" class="topic-btn active text-left p-3.5 rounded-xl border-2 border-brand-navy bg-blue-50/80 text-xs font-bold text-brand-navy">
+            Ingin membuat website / aplikasi bisnis baru
+          </button>
+          <button type="button" data-val="mengotomatiskan proses chat / CS atau data dengan AI" class="topic-btn text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-700 hover:border-slate-300">
+            Ingin otomasi chat / data dengan sistem AI
+          </button>
+          <button type="button" data-val="merapikan pencatatan stok, transaksi, dan ERP perusahaan" class="topic-btn text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-700 hover:border-slate-300">
+            Ingin merapikan stok, kas, &amp; data bisnis (ERP)
+          </button>
+          <button type="button" data-val="konsultasi santai dulu untuk mencari solusi terbaik" class="topic-btn text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-700 hover:border-slate-300">
+            Mau ngobrol &amp; curhat kendala bisnis dulu
+          </button>
+        </div>
+      </div>
+
+      <!-- Preview Box -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="text-[10px] font-mono font-bold uppercase text-slate-500">Draf Pesan WhatsApp:</span>
+          </div>
+          <p id="chat-preview" class="text-xs font-mono text-slate-800 bg-white border border-slate-200 rounded-xl p-3.5 leading-relaxed">
+            "Halo kawan Gemilang Labs, saya ingin ngobrol santai tentang rencana membuat website atau aplikasi bisnis baru. Kapan ada waktu luang untuk berdiskusi?"
+          </p>
+        </div>
+
+        <a
+          id="chat-wa-submit"
+          href="#"
+          target="_blank"
+          rel="noopener"
+          class="btn-press flex-shrink-0 w-full md:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-95 text-white font-bold text-xs shadow-lg shadow-emerald-600/20"
+        >
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>Kirim Obrolan ke WhatsApp</span>
+        </a>
+      </div>
+
+      <p class="text-center text-[11px] font-mono text-slate-400">
+        Biasanya kami merespons dalam &lt; 15 menit pada jam kerja.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="border-t border-slate-200 bg-white py-8 px-5 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="../gemilang.jpeg" alt="Gemilang Labs" class="h-8 w-auto" />
+        <span class="text-xs text-slate-500">&copy; 2026 Gemilang Labs. Kawan Tumbuh Solusi Digital.</span>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs font-semibold text-slate-600">
+        <a href="#cerita" class="hover:text-brand-navy transition-colors">Cerita</a>
+        <a href="#solusi" class="hover:text-brand-navy transition-colors">Solusi</a>
+        <a href="#cara-kerja" class="hover:text-brand-navy transition-colors">Cara Kerja</a>
+        <a href="https://wa.me/6281234567890" target="_blank" class="text-brand-navy font-bold hover:underline">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       SCRIPTS:
+       1. SONAR GRID CANVAS ENGINE (Smoothstep Waves)
+       2. THREE.JS SPATIAL 3D CORE (Lab Engine + 4 Orbit Nodes)
+       3. GSAP PINNED STORYTELLING SCROLLER
+       4. WHATSAPP INQUIRY GENERATOR
+  ============================================================ -->
+  <script>
+    lucide.createIcons();
+
+    /* ============================================================
+       1. SONAR GRID CANVAS (Background Interactive Radar)
+    ============================================================ */
+    const sonarCanvas = document.getElementById('sonar-canvas');
+    const sonarCtx = sonarCanvas.getContext('2d');
+
+    const MAX_DPR = 2;
+    const TAU = Math.PI * 2;
+
+    const sonarOpts = {
+      spacing: 28,
+      dotRadius: 1.4,
+      baseOpacity: 0.16,
+      color: '#2196F3',
+      speed: 260,
+      ringWidth: 95,
+      amplitude: 2.2,
+      maxRings: 5,
+      pingEvery: 3.2,
+      pingArea: [0.15, 0.2, 0.85, 0.8]
+    };
+
+    let sWidth = 0;
+    let sHeight = 0;
+    let sRings = [];
+    let sNextPing = performance.now() + 1200;
+
+    function addSonarRing(x, y, born) {
+      sRings.push({ x, y, born });
+      while (sRings.length > sonarOpts.maxRings) sRings.shift();
+    }
+
+    function resizeSonar() {
+      const parent = sonarCanvas.parentElement;
+      sWidth = parent.clientWidth;
+      sHeight = parent.clientHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+
+      sonarCanvas.width = Math.round(sWidth * dpr);
+      sonarCanvas.height = Math.round(sHeight * dpr);
+      sonarCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      if (sRings.length === 0) {
+        addSonarRing(sWidth * 0.45, sHeight * 0.5, performance.now() - 300);
+      }
+    }
+
+    function drawSonar(now) {
+      const lifetime = (Math.hypot(sWidth, sHeight) + sonarOpts.ringWidth) / sonarOpts.speed;
+      sRings = sRings.filter(r => (now - r.born) / 1000 < lifetime);
+
+      const live = sRings.map(r => {
+        const age = (now - r.born) / 1000;
+        const radius = age * sonarOpts.speed;
+        return {
+          x: r.x,
+          y: r.y,
+          radius,
+          reach: radius + sonarOpts.ringWidth,
+          fade: Math.max(0, 1 - age / lifetime)
+        };
+      });
+
+      sonarCtx.clearRect(0, 0, sWidth, sHeight);
+      sonarCtx.fillStyle = sonarOpts.color;
+
+      const cols = Math.ceil(sWidth / sonarOpts.spacing) + 1;
+      const rows = Math.ceil(sHeight / sonarOpts.spacing) + 1;
+      const offsetX = (sWidth - (cols - 1) * sonarOpts.spacing) / 2;
+      const offsetY = (sHeight - (rows - 1) * sonarOpts.spacing) / 2;
+
+      // Pass 1: Resting Dots
+      const hot = [];
+      sonarCtx.globalAlpha = sonarOpts.baseOpacity;
+      sonarCtx.beginPath();
+
+      for (let i = 0; i < cols; i++) {
+        const cx = offsetX + i * sonarOpts.spacing;
+        for (let j = 0; j < rows; j++) {
+          const cy = offsetY + j * sonarOpts.spacing;
+          let energy = 0;
+
+          for (const r of live) {
+            if (Math.abs(cx - r.x) > r.reach || Math.abs(cy - r.y) > r.reach) continue;
+            const dist = Math.abs(Math.hypot(cx - r.x, cy - r.y) - r.radius);
+            if (dist >= sonarOpts.ringWidth) continue;
+            const t = 1 - dist / sonarOpts.ringWidth;
+            const k = t * t * (3 - 2 * t) * r.fade;
+            if (k > energy) energy = k;
+          }
+
+          if (energy < 0.01) {
+            sonarCtx.moveTo(cx + sonarOpts.dotRadius, cy);
+            sonarCtx.arc(cx, cy, sonarOpts.dotRadius, 0, TAU);
+          } else {
+            hot.push(cx, cy, energy);
+          }
+        }
+      }
+      sonarCtx.fill();
+
+      // Pass 2: Wavefront Dots
+      for (let k = 0; k < hot.length; k += 3) {
+        const energy = hot[k + 2] ?? 0;
+        sonarCtx.globalAlpha = sonarOpts.baseOpacity + (1 - sonarOpts.baseOpacity) * energy;
+        sonarCtx.beginPath();
+        sonarCtx.arc(hot[k] ?? 0, hot[k + 1] ?? 0, sonarOpts.dotRadius * (1 + sonarOpts.amplitude * energy), 0, TAU);
+        sonarCtx.fill();
+      }
+      sonarCtx.globalAlpha = 1;
+    }
+
+    function animateSonar(now) {
+      requestAnimationFrame(animateSonar);
+
+      if (now >= sNextPing) {
+        const [x0, y0, x1, y1] = sonarOpts.pingArea;
+        const px = sWidth * (x0 + Math.random() * (x1 - x0));
+        const py = sHeight * (y0 + Math.random() * (y1 - y0));
+        addSonarRing(px, py, now);
+        sNextPing = now + sonarOpts.pingEvery * 1000;
+      }
+
+      drawSonar(now);
+    }
+
+    sonarCanvas.addEventListener('pointerdown', (e) => {
+      const rect = sonarCanvas.getBoundingClientRect();
+      addSonarRing(e.clientX - rect.left, e.clientY - rect.top, performance.now());
+    });
+
+    window.addEventListener('resize', resizeSonar);
+    resizeSonar();
+    requestAnimationFrame(animateSonar);
+
+
+    /* ============================================================
+       2. THREE.JS SPATIAL 3D CORE (Lab Engine + 4 Orbiting Nodes)
+    ============================================================ */
+    (function initThreeCore() {
+      const container = document.getElementById('three-container');
+      const canvas3d = document.getElementById('three-canvas');
+      if (!container || !canvas3d) return;
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas3d, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(container.clientWidth, container.clientHeight);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 100);
+      camera.position.set(0, 0, 15);
+
+      // Group that will hold the entire core + orbit nodes
+      const mainGroup = new THREE.Group();
+      scene.add(mainGroup);
+
+      // Colors from brand
+      const COLOR_NAVY = 0x1B3A8C;
+      const COLOR_SKY  = 0x2196F3;
+      const COLOR_GOLD = 0xF5B800;
+
+      // 1. Central Lab Crystal Core (Icosahedron + Wireframe)
+      const coreGeo = new THREE.IcosahedronGeometry(1.5, 1);
+      const coreMat = new THREE.MeshBasicMaterial({
+        color: COLOR_NAVY,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.65
+      });
+      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      mainGroup.add(coreMesh);
+
+      // Inner Core Glow
+      const innerCoreGeo = new THREE.SphereGeometry(0.85, 16, 16);
+      const innerCoreMat = new THREE.MeshBasicMaterial({
+        color: COLOR_SKY,
+        transparent: true,
+        opacity: 0.85
+      });
+      const innerCore = new THREE.Mesh(innerCoreGeo, innerCoreMat);
+      coreMesh.add(innerCore);
+
+      // Gold Orbit Rings around Core
+      const ring1Geo = new THREE.TorusGeometry(2.3, 0.035, 12, 64);
+      const ring1Mat = new THREE.MeshBasicMaterial({ color: COLOR_GOLD, transparent: true, opacity: 0.5 });
+      const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+      ring1.rotation.x = Math.PI / 3;
+      mainGroup.add(ring1);
+
+      const ring2Geo = new THREE.TorusGeometry(3.6, 0.025, 12, 64);
+      const ring2Mat = new THREE.MeshBasicMaterial({ color: COLOR_SKY, transparent: true, opacity: 0.35 });
+      const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+      ring2.rotation.y = Math.PI / 4;
+      mainGroup.add(ring2);
+
+      // 2. 4 Orbit Nodes (Representing: Web, AI, ERP, IoT)
+      const ORBIT_RADIUS = 4.2;
+      const nodeData = [
+        { name: 'Web',   color: COLOR_SKY,  size: 0.42, angle: 0 },
+        { name: 'AI',    color: COLOR_GOLD, size: 0.45, angle: Math.PI * 0.5 },
+        { name: 'ERP',   color: 0x10B981,   size: 0.40, angle: Math.PI },
+        { name: 'IoT',   color: 0x00B4D8,   size: 0.38, angle: Math.PI * 1.5 }
+      ];
+
+      const nodeMeshes = [];
+      const nodeGroup = new THREE.Group();
+      mainGroup.add(nodeGroup);
+
+      nodeData.forEach((d) => {
+        const nGeo = new THREE.SphereGeometry(d.size, 16, 16);
+        const nMat = new THREE.MeshBasicMaterial({ color: d.color, transparent: true, opacity: 0.9 });
+        const nMesh = new THREE.Mesh(nGeo, nMat);
+        
+        // Initial position along orbital ring
+        nMesh.position.x = Math.cos(d.angle) * ORBIT_RADIUS;
+        nMesh.position.z = Math.sin(d.angle) * ORBIT_RADIUS;
+        nMesh.userData = d;
+        nodeGroup.add(nMesh);
+        nodeMeshes.push(nMesh);
+
+        // Connection data line to central core
+        const pts = [new THREE.Vector3(0, 0, 0), nMesh.position];
+        const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+        const lineMat = new THREE.LineBasicMaterial({ color: d.color, transparent: true, opacity: 0.25 });
+        const conduit = new THREE.Line(lineGeo, lineMat);
+        mainGroup.add(conduit);
+        nMesh.userData.conduit = conduit;
+      });
+
+      // Mouse drag & parallax
+      let isDragging = false;
+      let lastMouseX = 0, lastMouseY = 0;
+      let targetRotX = 0.2, targetRotY = 0.3;
+      let currentRotX = 0.2, currentRotY = 0.3;
+      let velX = 0, velY = 0;
+
+      canvas3d.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+        velX = 0; velY = 0;
+      });
+
+      window.addEventListener('mouseup', () => { isDragging = false; });
+
+      window.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          velY = (e.clientX - lastMouseX) * 0.005;
+          velX = (e.clientY - lastMouseY) * 0.005;
+          lastMouseX = e.clientX;
+          lastMouseY = e.clientY;
+        } else {
+          const rect = container.getBoundingClientRect();
+          if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+            targetRotY = ((e.clientX - rect.left) / rect.width * 2 - 1) * 0.4;
+            targetRotX = ((e.clientY - rect.top) / rect.height * 2 - 1) * 0.25;
+          }
+        }
+      });
+
+      // Click on canvas emits wave
+      canvas3d.addEventListener('click', (e) => {
+        const rect = sonarCanvas.getBoundingClientRect();
+        addSonarRing(e.clientX - rect.left, e.clientY - rect.top, performance.now());
+      });
+
+      // Resize
+      window.addEventListener('resize', () => {
+        const nw = container.clientWidth;
+        const nh = container.clientHeight;
+        renderer.setSize(nw, nh);
+        camera.aspect = nw / nh;
+        camera.updateProjectionMatrix();
+      });
+
+      // Render Loop
+      const clock = new THREE.Clock();
+
+      function render3D() {
+        requestAnimationFrame(render3D);
+        const t = clock.getElapsedTime();
+
+        // Core pulsating rotation
+        coreMesh.rotation.y = t * 0.3;
+        coreMesh.rotation.x = Math.sin(t * 0.2) * 0.2;
+        ring1.rotation.z = t * 0.4;
+        ring2.rotation.z = -t * 0.3;
+
+        // Orbit nodes revolve around center
+        nodeMeshes.forEach((mesh, idx) => {
+          const baseAngle = mesh.userData.angle;
+          const currentAngle = baseAngle + t * 0.35;
+          mesh.position.x = Math.cos(currentAngle) * ORBIT_RADIUS;
+          mesh.position.z = Math.sin(currentAngle) * (ORBIT_RADIUS * 0.7);
+          mesh.position.y = Math.sin(t * 1.2 + idx) * 0.4;
+
+          // Update data conduit positions
+          if (mesh.userData.conduit) {
+            const positions = mesh.userData.conduit.geometry.attributes.position.array;
+            positions[3] = mesh.position.x;
+            positions[4] = mesh.position.y;
+            positions[5] = mesh.position.z;
+            mesh.userData.conduit.geometry.attributes.position.needsUpdate = true;
+          }
+        });
+
+        // Rotation physics & decay
+        if (isDragging) {
+          currentRotX += velX;
+          currentRotY += velY;
+        } else {
+          velX *= 0.92;
+          velY *= 0.92;
+          currentRotX += velX + (targetRotX - currentRotX) * 0.04;
+          currentRotY += velY + (targetRotY - currentRotY) * 0.04;
+        }
+
+        mainGroup.rotation.x = currentRotX;
+        mainGroup.rotation.y = currentRotY + t * 0.05;
+
+        renderer.render(scene, camera);
+      }
+
+      render3D();
+    })();
+
+
+    /* ============================================================
+       3. GSAP PINNED STORYTELLING SCROLLER
+    ============================================================ */
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Pin the story section during scroll
+      const pinTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#cerita',
+          start: 'top top',
+          end: '+=200%',
+          pin: true,
+          scrub: 0.8,
+        }
+      });
+
+      // Stage reveals linked to scroll progress
+      pinTimeline
+        .to('#story-stage-1', { opacity: 0.25, scale: 0.98, duration: 1 })
+        .to('#story-stage-2', { opacity: 1, y: 0, duration: 1.5 }, '-=0.5')
+        .to('#story-stage-2', { opacity: 0.25, scale: 0.98, duration: 1 })
+        .to('#story-stage-3', { opacity: 1, y: 0, duration: 1.5 }, '-=0.5')
+        .to('#story-stage-3', { opacity: 0.25, scale: 0.98, duration: 1 })
+        .to('#story-stage-4', { opacity: 1, y: 0, duration: 1.5 }, '-=0.5');
+
+      // Global fade-ins for cards
+      gsap.utils.toArray('.card-lift').forEach((card) => {
+        gsap.from(card, {
+          y: 28,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 88%',
+            once: true
+          }
+        });
+      });
+    });
+
+
+    /* ============================================================
+       4. WHATSAPP INQUIRY GENERATOR
+    ============================================================ */
+    const WA_PHONE = '6281234567890';
+    let currentTopic = 'membuat website atau aplikasi bisnis baru';
+
+    const previewElement = document.getElementById('chat-preview');
+    const submitBtn = document.getElementById('chat-wa-submit');
+
+    function syncWhatsAppText() {
+      const message = `Halo kawan Gemilang Labs, saya ingin ngobrol santai tentang rencana ${currentTopic}. Kapan ada waktu luang untuk berdiskusi?`;
+      previewElement.textContent = `"${message}"`;
+      submitBtn.href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(message)}`;
+    }
+
+    document.querySelectorAll('#topic-selector .topic-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#topic-selector .topic-btn').forEach((b) => {
+          b.classList.remove('active', 'border-2', 'border-brand-navy', 'bg-blue-50/80', 'text-brand-navy', 'font-bold');
+          b.classList.add('border', 'border-slate-200', 'bg-slate-50', 'text-slate-700', 'font-semibold');
+        });
+        btn.classList.add('active', 'border-2', 'border-brand-navy', 'bg-blue-50/80', 'text-brand-navy', 'font-bold');
+        currentTopic = btn.getAttribute('data-val');
+        syncWhatsAppText();
+      });
+    });
+
+    syncWhatsAppText();
+  </script>
+</body>
+</html>

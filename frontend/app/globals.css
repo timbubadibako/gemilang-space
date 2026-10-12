@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  --background: #04060A;
+  --foreground: #ffffff;
+}
+
+@font-face {
+  font-family: "Brockmann Medium";
+  src: url("/fonts/Brockmann-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), sans-serif;
+  --font-brockmann: "Brockmann Medium", sans-serif;
+}
+
+body {
+  background-color: #04060A;
+  color: #ffffff;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #335CFF;
+  color: #ffffff;
+}
+
+/* Custom smooth dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #04060A;
+}
+::-webkit-scrollbar-thumb {
+  background: #262930;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3E424D;
+}
+
+/* Infinite continuous running ticker for Works Slider */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Smooth vertical slide transitions for Rotating Solutions Text (Naik Atas Bawah) */
+@keyframes solutionSlideOut {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+@keyframes solutionSlideIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+.animate-solution-slide-out {
+  animation: solutionSlideOut 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-solution-slide-in {
+  animation: solutionSlideIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
