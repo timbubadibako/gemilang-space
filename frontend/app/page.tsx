@@ -31,22 +31,21 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#04060A] text-white selection:bg-[#00E1BA] selection:text-neutral-950 relative overflow-x-clip flex flex-col">
-      
+      {/* Full-Width Sticky Navbar with Edge-to-Edge Bottom Border (#28282B) */}
+      <Navbar
+        navItems={navItems}
+        currentLang={lang}
+        onLangChange={setLang}
+        whatsappNumber={siteSettings.whatsappNumber}
+        onOpenEstimator={() => handleOpenEstimator("starter")}
+      />
+
       {/* 
-        1. Hero Viewport (Exact 90% / 90vh of the screen height):
+        1. Hero Viewport (Exact 90% / 90vh of the screen height minus navbar):
         - Navbar (84px) + Hero Section = Exact 90vh on desktop
         - Margin left & right aligned 1:1 between Navbar and Hero Section (max-w-[1440px] px-5 sm:px-7 lg:px-8)
       */}
-      <div className="w-full lg:h-[90vh] lg:min-h-[620px] flex flex-col shrink-0">
-        {/* Full-Width Navbar with Edge-to-Edge Bottom Border (#28282B) */}
-        <Navbar
-          navItems={navItems}
-          currentLang={lang}
-          onLangChange={setLang}
-          whatsappNumber={siteSettings.whatsappNumber}
-          onOpenEstimator={() => handleOpenEstimator("starter")}
-        />
-
+      <div className="w-full lg:h-[calc(90vh-84px)] lg:min-h-[540px] flex flex-col shrink-0">
         {/* Hero Section Container */}
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8 flex-1 flex flex-col justify-stretch py-2.5 sm:py-3.5 min-h-0">
           <HeroSection

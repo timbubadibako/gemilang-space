@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import { GemilangLogo } from "@/components/ui/GemilangLogo";
@@ -39,6 +39,54 @@ export function Navbar({
   const [isVisible, setIsVisible] = useState(false);
   const closeTimer = useRef<NodeJS.Timeout | null>(null);
 
+  // Smart Hide/Show State
+  const [navVisible, setNavVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const delta = currentScrollY - lastScrollY.current;
+
+          // Always visible at the very top of page
+          if (currentScrollY <= 40) {
+            setNavVisible(true);
+          } else if (delta > 8 && currentScrollY > 80) {
+            // Scrolling down -> hide navbar (unless mobile menu or dropdown is open)
+            if (!mobileMenuOpen && !activeMenu) {
+              setNavVisible(false);
+            }
+          } else if (delta < -4) {
+            // Scrolling up even slightly -> show navbar
+            setNavVisible(true);
+          }
+
+          lastScrollY.current = currentScrollY;
+          ticking.current = false;
+        });
+        ticking.current = true;
+      }
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      // Cursor searching towards the top edge of viewport (within 70px) -> show navbar
+      if (e.clientY <= 70) {
+        setNavVisible(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [mobileMenuOpen, activeMenu]);
+
   const isLight = theme === "light";
   const ctaLabel = currentLang === "id" ? "Konsultasi" : "Let's Talk";
   const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
@@ -55,7 +103,9 @@ export function Navbar({
     setActiveMenu(id);
     setIsRendered(true);
     requestAnimationFrame(() => {
-      setIsVisible(true);
+      requestAnimationFrame(() => {
+        setIsVisible(true);
+      });
     });
   };
 
@@ -66,8 +116,8 @@ export function Navbar({
       setTimeout(() => {
         setIsRendered(false);
         setActiveMenu(null);
-      }, 150);
-    }, 100);
+      }, 300);
+    }, 160);
   };
 
   const cancelClose = () => {
@@ -141,10 +191,12 @@ export function Navbar({
 
   return (
     <header
-      className={`relative w-full border-b transition-colors z-50 shrink-0 ${
+      className={`sticky top-0 w-full border-b transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] z-50 shrink-0 ${
+        navVisible ? "translate-y-0" : "-translate-y-full"
+      } ${
         isLight
-          ? "border-neutral-200/80 bg-[#F3F3F5]/95 text-neutral-950 backdrop-blur-md"
-          : "border-[#28282B] bg-[#04060A]/95 text-white backdrop-blur-md"
+          ? "border-neutral-200/80 bg-[#FFFFFF]/95 text-neutral-950 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
+          : "border-[#28282B] bg-[#04060A]/95 text-white backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
       }`}
       onMouseLeave={handleClose}
     >
@@ -178,7 +230,7 @@ export function Navbar({
               >
                 <Link
                   href={item.href}
-                  className={`inline-flex items-center gap-1.5 transition-colors duration-150 py-2 cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 transition-colors duration-200 py-2 cursor-pointer ${
                     isOpen
                       ? isLight ? "text-neutral-950 font-bold" : "text-white font-bold"
                       : isLight ? "hover:text-neutral-950" : "hover:text-white"
@@ -194,7 +246,7 @@ export function Navbar({
 
                   {item.hasDropdown && (
                     <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      className={`w-3.5 h-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                         isOpen ? "rotate-180 text-[var(--theme-accent)]" : "opacity-50"
                       }`}
                     />
@@ -273,14 +325,18 @@ export function Navbar({
       {/* ============================================================== */}
       {isRendered && activeMenu && linearData[activeMenu] && (
         <div
-          className={`hidden md:block absolute left-0 right-0 top-full w-full border-b backdrop-blur-2xl z-40 transition-all duration-150 ease-out ${
+          className={`hidden md:block absolute left-0 right-0 top-full w-full border-b backdrop-blur-2xl z-40 origin-top transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             isVisible
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 -translate-y-1 pointer-events-none"
+              ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
+              : "opacity-0 -translate-y-3 scale-[0.99] pointer-events-none"
+          } ${
+            isLight
+              ? "shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)]"
+              : "shadow-[0_24px_48px_-12px_rgba(0,0,0,0.55)]"
           }`}
           style={{
-            backgroundColor: isLight ? "rgba(255, 255, 255, 0.96)" : "rgba(8, 10, 15, 0.96)",
-            borderColor: isLight ? "rgba(229, 231, 235, 0.9)" : "rgba(255, 255, 255, 0.08)",
+            backgroundColor: isLight ? "rgba(255, 255, 255, 0.97)" : "rgba(8, 10, 15, 0.97)",
+            borderColor: isLight ? "rgba(229, 231, 235, 0.95)" : "rgba(255, 255, 255, 0.1)",
           }}
           onMouseEnter={cancelClose}
           onMouseLeave={handleClose}
@@ -303,13 +359,13 @@ export function Navbar({
                             setIsVisible(false);
                             setActiveMenu(null);
                           }}
-                          className={`group/lnk inline-flex items-center gap-2 text-[13px] font-medium transition-colors ${
+                          className={`group/lnk inline-flex items-center gap-2 text-[13.5px] font-medium transition-all duration-200 ${
                             isLight
-                              ? "text-neutral-700 hover:text-black"
-                              : "text-neutral-300 hover:text-white"
+                              ? "text-neutral-700 hover:text-black hover:translate-x-0.5"
+                              : "text-neutral-300 hover:text-white hover:translate-x-0.5"
                           }`}
                         >
-                          <span className="group-hover/lnk:text-[var(--theme-accent)] transition-colors">
+                          <span className="group-hover/lnk:text-[var(--theme-accent)] transition-colors duration-200">
                             {lnk.label[currentLang]}
                           </span>
                           {lnk.tag && (
@@ -317,7 +373,7 @@ export function Navbar({
                               {lnk.tag}
                             </span>
                           )}
-                          <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover/lnk:opacity-100 group-hover/lnk:translate-x-0 transition-all text-[var(--theme-accent)]" />
+                          <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-1.5 group-hover/lnk:opacity-100 group-hover/lnk:translate-x-0 transition-all duration-200 text-[var(--theme-accent)]" />
                         </Link>
                       </li>
                     ))}
@@ -331,13 +387,21 @@ export function Navbar({
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden w-full bg-[#0D1017] border-b border-white/10 px-6 py-6 shadow-2xl flex flex-col gap-4 text-sm font-medium text-neutral-300 animate-in fade-in duration-200">
+        <div
+          className={`md:hidden w-full border-b px-6 py-6 shadow-2xl flex flex-col gap-4 text-sm font-medium transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            isLight
+              ? "bg-white border-neutral-200 text-neutral-800"
+              : "bg-[#0D1017] border-white/10 text-neutral-300"
+          }`}
+        >
           {navItems.map((item) => (
             <a
               key={item.id}
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-between py-2 hover:text-white border-b border-white/5"
+              className={`flex items-center justify-between py-2 border-b ${
+                isLight ? "border-neutral-100 hover:text-black" : "border-white/5 hover:text-white"
+              }`}
             >
               <span>{item.label[currentLang]}</span>
               {item.badge && (
