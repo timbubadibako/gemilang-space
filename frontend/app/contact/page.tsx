@@ -12,13 +12,14 @@ export default function ContactPage() {
   const [lang, setLang] = useState<"id" | "en">(siteSettings.defaultLanguage);
 
   return (
-    <div className="min-h-screen bg-[#04060A] text-white selection:bg-[#00E1BA] selection:text-neutral-950 flex flex-col font-sans">
-      {/* Dark Navbar */}
+    <div className="min-h-screen bg-[#F3F3F5] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
+      {/* Light Navbar */}
       <Navbar
         navItems={navItems}
         currentLang={lang}
         onLangChange={setLang}
         whatsappNumber={siteSettings.whatsappNumber}
+        theme="light"
       />
 
       {/* Main Interactive Contact Section */}

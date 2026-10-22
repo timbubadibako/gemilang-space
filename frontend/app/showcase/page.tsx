@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { LayoutGrid, Columns, Smartphone } from "lucide-react";
+import { LayoutGrid, Columns } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -21,75 +21,75 @@ interface ShowcaseItem {
 const showcaseItems: ShowcaseItem[] = [
   {
     id: "sc-1",
-    title: "B2B Product Detail",
-    client: "ENORM TECHNOLOGY",
-    type: "WEB",
-    category: "SaaS",
-    imageUrl: "https://framerusercontent.com/images/f2TBOrrRIY5dcoWQ72exps1cHlo.jpg?width=3200&height=2400",
-  },
-  {
-    id: "sc-2",
-    title: "Web3 Reward System Component",
-    client: "KEOM PROTOCOL",
-    type: "WEB",
-    category: "Web3",
-    imageUrl: "https://framerusercontent.com/images/SvJuN95HnCUIYI9jnQM94YpDs.jpg?width=3200&height=2400",
-  },
-  {
-    id: "sc-3",
-    title: "B2B Landing Page Sections",
-    client: "EFFICENSE",
-    type: "WEB",
-    category: "SaaS",
-    imageUrl: "https://framerusercontent.com/images/vXAw0vDR2T0nBNxyGAT7m8yEDrs.jpg?width=3200&height=2400",
-  },
-  {
-    id: "sc-4",
-    title: "Autonomous AI Dispatching UI",
-    client: "5U LOGISTICS",
-    type: "AI & WEB",
+    title: "Autonomous Freight Automation",
+    client: "5U AI",
+    type: "AI WORKFORCE",
     category: "AI",
     imageUrl: "https://framerusercontent.com/images/UmsGTar3Kym230FQvHG4LGFfnE.jpg?width=3200&height=2400",
   },
   {
-    id: "sc-5",
-    title: "Real-Time Cyber Security Radar",
-    client: "SPEX DEFENSE",
-    type: "PLATFORM",
+    id: "sc-2",
+    title: "Industrial Palm Oil Weighing Terminal",
+    client: "PT DAVID BECKHAM",
+    type: "WEB POS RS232",
     category: "SaaS",
-    imageUrl: "https://framerusercontent.com/images/vmp26uS1fzAEOVbdH19mrf2bnw.jpg?width=3200&height=2400",
+    imageUrl: "https://framerusercontent.com/images/vXAw0vDR2T0nBNxyGAT7m8yEDrs.jpg?width=3200&height=2400",
   },
   {
-    id: "sc-6",
-    title: "DeFi Cross-Chain Asset Swap",
-    client: "GUARD PROTOCOL",
-    type: "MOBILE",
-    category: "Fintech",
-    imageUrl: "https://framerusercontent.com/images/Nu0cRFLjMAItqhIVN0g649mMTM.jpg?width=3200&height=2400",
-  },
-  {
-    id: "sc-7",
-    title: "Gamified Onboarding Flow",
-    client: "GIGCEP APP",
-    type: "PRODUCT & MOBILE",
+    id: "sc-3",
+    title: "Specialty Roastery E-Commerce",
+    client: "FERMION ROASTERY",
+    type: "SPECIALTY COMMERCE",
     category: "eCommerce",
-    imageUrl: "https://framerusercontent.com/images/BChAdDd106KgPBNGpEuF9W1Px8.jpg?width=3200&height=2400",
-  },
-  {
-    id: "sc-8",
-    title: "Enterprise Pipeline Monitor",
-    client: "CLOUDRIVER",
-    type: "CLOUD WEB",
-    category: "SaaS",
     imageUrl: "https://framerusercontent.com/images/glIJQjGjPLjFvclK2dzCQMcXXU.jpg?width=3200&height=2400",
   },
   {
-    id: "sc-9",
-    title: "Decentralized AI Agent Console",
+    id: "sc-4",
+    title: "Citizen Governance Self-Service",
+    client: "DESA DIGITAL",
+    type: "CIVIC TECH",
+    category: "Fintech",
+    imageUrl: "https://framerusercontent.com/images/f2TBOrrRIY5dcoWQ72exps1cHlo.jpg?width=3200&height=2400",
+  },
+  {
+    id: "sc-5",
+    title: "Murajaah Voice AI Assistant",
+    client: "PESANTREN OS",
+    type: "VOICE AI / EDTECH",
+    category: "AI",
+    imageUrl: "https://framerusercontent.com/images/Nu0cRFLjMAItqhIVN0g649mMTM.jpg?width=3200&height=2400",
+  },
+  {
+    id: "sc-6",
+    title: "Cinematic Agency Showreel",
+    client: "FOURJECTIVE",
+    type: "CREATIVE PRODUCTION",
+    category: "SaaS",
+    imageUrl: "https://framerusercontent.com/images/SvJuN95HnCUIYI9jnQM94YpDs.jpg?width=3200&height=2400",
+  },
+  {
+    id: "sc-7",
+    title: "High-Concurrency News Publishing",
+    client: "QIYAR MEDIA",
+    type: "EDGE CACHING",
+    category: "eCommerce",
+    imageUrl: "https://framerusercontent.com/images/vmp26uS1fzAEOVbdH19mrf2bnw.jpg?width=3200&height=2400",
+  },
+  {
+    id: "sc-8",
+    title: "Next-Gen Decentralized Console",
     client: "MINDSPHERE",
-    type: "AI & WEB3",
+    type: "WEB3 INTERACTION",
     category: "Web3",
     imageUrl: "https://framerusercontent.com/images/khoFnued04hLkd3MGQ5lafIfAbA.jpg?width=3200&height=2400",
+  },
+  {
+    id: "sc-9",
+    title: "Cross-Border Settlement Engine",
+    client: "GLOBAL PAY",
+    type: "FINTECH RAILS",
+    category: "Fintech",
+    imageUrl: "https://framerusercontent.com/images/f2TBOrrRIY5dcoWQ72exps1cHlo.jpg?width=3200&height=2400",
   },
 ];
 
@@ -105,13 +105,14 @@ export default function ShowcasePage() {
     : showcaseItems.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-[#04060A] text-white selection:bg-[#00E1BA] selection:text-neutral-950 flex flex-col font-sans">
-      {/* Dark Navbar */}
+    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
+      {/* Light-Themed Navbar */}
       <Navbar
         navItems={navItems}
         currentLang={lang}
         onLangChange={setLang}
         whatsappNumber={siteSettings.whatsappNumber}
+        theme="light"
       />
 
       {/* Main Showcase Hero & Feed */}
@@ -119,15 +120,15 @@ export default function ShowcasePage() {
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
           {/* Eyebrow & Title */}
           <div className="max-w-[760px] mx-auto text-center mb-10 sm:mb-14 select-none">
-            <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-3">
+            <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-neutral-400 mb-3">
               SHOWCASE
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-[52px] font-bold text-white tracking-tight leading-[1.12]">
+            <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-bold text-neutral-950 tracking-tight leading-[1.12]">
               {lang === "id" ? "Eksplorasi lebih dekat karya kami." : "A closer look at our craft."}
             </h1>
 
-            <p className="text-sm sm:text-base text-neutral-400 mt-4 leading-relaxed max-w-xl mx-auto font-normal">
+            <p className="text-sm sm:text-[15px] text-neutral-600 mt-4 leading-relaxed max-w-xl mx-auto font-normal">
               {lang === "id"
                 ? "Koleksi antarmuka, interaksi, visual, dan eksperimen yang diciptakan untuk menjelajahi rasa dan potensi produk digital modern."
                 : "A collection of interfaces, interactions, visuals and experiments created to explore what modern digital products can feel like."}
@@ -137,7 +138,7 @@ export default function ShowcasePage() {
           {/* Filter Pills Bar & View Switcher */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 sm:mb-12 max-w-[880px] mx-auto">
             {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-full bg-white/[0.04] border border-white/10 shadow-sm">
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-full bg-[#F3F4F6] border border-neutral-200/80 shadow-2xs">
               {categories.map((cat) => {
                 const isActive = selectedCategory === cat;
                 return (
@@ -147,8 +148,8 @@ export default function ShowcasePage() {
                     onClick={() => setSelectedCategory(cat)}
                     className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer select-none ${
                       isActive
-                        ? "bg-[var(--theme-accent)] text-neutral-950 font-bold shadow-xs"
-                        : "text-neutral-400 hover:text-white hover:bg-white/[0.06]"
+                        ? "bg-white text-neutral-950 font-bold shadow-xs ring-1 ring-neutral-200/60"
+                        : "text-neutral-600 hover:text-neutral-950 hover:bg-white/50"
                     }`}
                   >
                     {cat}
@@ -158,12 +159,12 @@ export default function ShowcasePage() {
             </div>
 
             {/* Layout Toggles */}
-            <div className="hidden sm:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/10">
+            <div className="hidden sm:flex items-center gap-1 p-1 rounded-full bg-[#F3F4F6] border border-neutral-200/80">
               <button
                 type="button"
                 onClick={() => setColumnsCount(3)}
                 className={`p-1.5 rounded-full transition-colors cursor-pointer ${
-                  columnsCount === 3 ? "bg-white/[0.12] text-white" : "text-neutral-500 hover:text-white"
+                  columnsCount === 3 ? "bg-white shadow-2xs text-neutral-950" : "text-neutral-500 hover:text-neutral-950"
                 }`}
                 title="3 Columns Grid"
               >
@@ -173,7 +174,7 @@ export default function ShowcasePage() {
                 type="button"
                 onClick={() => setColumnsCount(2)}
                 className={`p-1.5 rounded-full transition-colors cursor-pointer ${
-                  columnsCount === 2 ? "bg-white/[0.12] text-white" : "text-neutral-500 hover:text-white"
+                  columnsCount === 2 ? "bg-white shadow-2xs text-neutral-950" : "text-neutral-500 hover:text-neutral-950"
                 }`}
                 title="2 Columns Grid"
               >
@@ -193,7 +194,7 @@ export default function ShowcasePage() {
             {filteredItems.map((item) => (
               <article key={item.id} className="group flex flex-col cursor-pointer">
                 {/* Visual Card Box */}
-                <div className="relative w-full aspect-[16/11] rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:border-[var(--theme-accent)]/50 transition-all duration-300">
+                <div className="relative w-full aspect-[16/11] rounded-2xl overflow-hidden bg-[#F2F3F5] border border-neutral-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)] group-hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
                   <Image
                     src={item.imageUrl}
                     alt={item.title}
@@ -206,10 +207,10 @@ export default function ShowcasePage() {
 
                 {/* Typography below image */}
                 <div className="mt-4 flex flex-col">
-                  <h3 className="text-base sm:text-[17px] font-bold text-white tracking-tight group-hover:text-[var(--theme-accent)] transition-colors leading-snug">
+                  <h3 className="text-base sm:text-[17px] font-bold text-neutral-950 tracking-tight group-hover:text-[#00E1BA] transition-colors leading-snug">
                     {item.title}
                   </h3>
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-neutral-400 mt-1 font-semibold">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 mt-1 font-semibold">
                     {item.client} • {item.type}
                   </div>
                 </div>
@@ -219,7 +220,7 @@ export default function ShowcasePage() {
         </div>
       </main>
 
-      {/* Integrated Contact Section (Per user request) */}
+      {/* Integrated Contact Section */}
       <ContactSection lang={lang} whatsappNumber={siteSettings.whatsappNumber} />
 
       {/* Aurora Call To Action Banner */}

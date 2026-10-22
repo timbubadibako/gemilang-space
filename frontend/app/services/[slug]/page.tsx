@@ -12,7 +12,6 @@ import {
   Code2,
   Gauge,
   Sparkles,
-  Award,
   Layers,
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
@@ -43,50 +42,51 @@ export default function ServiceDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#04060A] text-white selection:bg-[#00E1BA] selection:text-neutral-950 flex flex-col font-sans">
-      {/* Dark Navbar */}
+    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
+      {/* Light-Themed Navbar */}
       <Navbar
         navItems={navItems}
         currentLang={lang}
         onLangChange={setLang}
         whatsappNumber={siteSettings.whatsappNumber}
+        theme="light"
       />
 
       <main className="w-full flex-1">
         {/* ==================================================================== */}
-        {/* 1. HERO SECTION                                                      */}
+        {/* 1. HERO SECTION (Silver Editorial Card)                              */}
         {/* ==================================================================== */}
         <section className="w-full pt-8 sm:pt-12 pb-16 sm:pb-20">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
-            {/* Giant Dark Card */}
-            <div className="relative rounded-3xl bg-[#080C14] border border-white/10 p-8 sm:p-12 lg:p-16 overflow-hidden shadow-2xl">
+            {/* Giant Silver/Noise Card */}
+            <div className="relative rounded-3xl bg-gradient-to-br from-[#ECECED] via-[#E2E2E6] to-[#D4D4DA] border border-neutral-300/80 p-8 sm:p-12 lg:p-16 overflow-hidden shadow-xs">
               {/* Subtle stipple background */}
-              <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03] pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(#000000_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03] pointer-events-none" />
 
               {/* Engineering Studio Badge on Top-Right */}
-              <div className="hidden sm:flex absolute top-8 right-8 lg:top-12 lg:right-12 flex-col items-center bg-white/[0.04] backdrop-blur-md rounded-2xl p-4 border border-white/10 text-center select-none w-40">
-                <div className="text-[9px] font-mono font-bold tracking-widest text-[var(--theme-accent)] uppercase mb-1.5">
+              <div className="hidden sm:flex absolute top-8 right-8 lg:top-12 lg:right-12 flex-col items-center bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-sm border border-neutral-200/80 text-center select-none w-40">
+                <div className="text-[9px] font-mono font-bold tracking-widest text-neutral-500 uppercase mb-1.5">
                   ENGINEERING STUDIO
                 </div>
-                <div className="font-sans font-bold text-base text-white">
+                <div className="font-sans font-bold text-base text-neutral-950">
                   Gemilang Space
                 </div>
-                <div className="mt-1 bg-white/[0.08] text-neutral-300 text-[9px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">
+                <div className="mt-1 bg-neutral-950 text-white text-[9px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full font-bold">
                   DIRECT ACCESS
                 </div>
               </div>
 
               {/* Hero Content */}
               <div className="relative z-10 max-w-2xl">
-                <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-4">
+                <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-neutral-500 mb-4">
                   {service.eyebrow}
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-white tracking-tight leading-[1.12] mb-6">
+                <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold text-neutral-950 tracking-tight leading-[1.1] mb-6">
                   {service.title[lang]}
                 </h1>
 
-                <p className="text-sm sm:text-base text-neutral-300 leading-relaxed font-normal mb-8 max-w-xl">
+                <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal mb-8 max-w-xl">
                   {service.description[lang]}
                 </p>
 
@@ -94,17 +94,17 @@ export default function ServiceDetailPage() {
                 <div className="flex flex-wrap items-center gap-3.5">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2.5 bg-[var(--theme-accent)] hover:brightness-110 text-neutral-950 text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-200 shadow-md active:scale-95 group"
+                    className="inline-flex items-center gap-2.5 bg-neutral-950 hover:bg-black text-white text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-200 shadow-sm active:scale-95 group"
                   >
-                    <div className="w-5 h-5 rounded-full bg-black/10 flex items-center justify-center">
-                      <ArrowRight className="w-3 h-3 text-neutral-950 group-hover:translate-x-0.5 transition-transform" />
+                    <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                      <ArrowRight className="w-3 h-3 text-white group-hover:translate-x-0.5 transition-transform" />
                     </div>
                     <span>{lang === "id" ? "Mulai Proyek" : "Start a Project"}</span>
                   </Link>
 
                   <Link
                     href="/works"
-                    className="inline-flex items-center justify-center bg-white/[0.05] hover:bg-white/[0.1] text-white border border-white/10 text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-200"
+                    className="inline-flex items-center justify-center bg-white/80 hover:bg-white text-neutral-900 border border-neutral-300 text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-200 shadow-2xs"
                   >
                     {lang === "id" ? "Lihat Portofolio" : "Works Portfolio"}
                   </Link>
@@ -113,13 +113,13 @@ export default function ServiceDetailPage() {
             </div>
 
             {/* 4-Column Value Props Below Hero Card */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pt-12 sm:pt-16 pb-12 border-b border-white/10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pt-12 sm:pt-16 pb-12 border-b border-neutral-200/80">
               <div className="space-y-2">
-                <Crown className="w-5 h-5 text-[var(--theme-accent)]" />
-                <h2 className="text-sm sm:text-[15px] font-bold text-white">
+                <Crown className="w-5 h-5 text-neutral-900" />
+                <h2 className="text-sm sm:text-[15px] font-bold text-neutral-950">
                   Founder-Led
                 </h2>
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <p className="text-xs text-neutral-600 leading-relaxed">
                   {lang === "id"
                     ? "Keterlibatan langsung founder senior dari audit sistem hingga arsitektur final."
                     : "Direct senior involvement from audit to system architecture."}
@@ -127,11 +127,11 @@ export default function ServiceDetailPage() {
               </div>
 
               <div className="space-y-2">
-                <Maximize2 className="w-5 h-5 text-[var(--theme-accent)]" />
-                <h2 className="text-sm sm:text-[15px] font-bold text-white">
+                <Maximize2 className="w-5 h-5 text-neutral-900" />
+                <h2 className="text-sm sm:text-[15px] font-bold text-neutral-950">
                   Built for Scale
                 </h2>
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <p className="text-xs text-neutral-600 leading-relaxed">
                   {lang === "id"
                     ? "Dirancang untuk mendukung produk yang berkembang pesat, tim multidisiplin, dan fitur baru."
                     : "Designed to support growing products, teams and feature sets."}
@@ -139,11 +139,11 @@ export default function ServiceDetailPage() {
               </div>
 
               <div className="space-y-2">
-                <Code2 className="w-5 h-5 text-[var(--theme-accent)]" />
-                <h2 className="text-sm sm:text-[15px] font-bold text-white">
+                <Code2 className="w-5 h-5 text-neutral-900" />
+                <h2 className="text-sm sm:text-[15px] font-bold text-neutral-950">
                   Design + Dev Mindset
                 </h2>
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <p className="text-xs text-neutral-600 leading-relaxed">
                   {lang === "id"
                     ? "Sistem dirancang sesuai cara desainer dan developer benar-benar mengeksekusi kode di produksi."
                     : "Systems shaped around how designers and engineers actually work."}
@@ -151,11 +151,11 @@ export default function ServiceDetailPage() {
               </div>
 
               <div className="space-y-2">
-                <Gauge className="w-5 h-5 text-[var(--theme-accent)]" />
-                <h2 className="text-sm sm:text-[15px] font-bold text-white">
+                <Gauge className="w-5 h-5 text-neutral-900" />
+                <h2 className="text-sm sm:text-[15px] font-bold text-neutral-950">
                   Faster Delivery
                 </h2>
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <p className="text-xs text-neutral-600 leading-relaxed">
                   {lang === "id"
                     ? "Fondasi komponen siap pakai memotong keputusan repetitif dan menghilangkan eksekusi inkonsisten."
                     : "Reusable foundations reduce repetitive decisions and inconsistent execution."}
@@ -169,7 +169,7 @@ export default function ServiceDetailPage() {
                 {clientLogos.map((logo, idx) => (
                   <span
                     key={idx}
-                    className="text-xs sm:text-[12px] font-mono tracking-widest text-neutral-400 uppercase"
+                    className="text-xs sm:text-[13px] font-mono font-bold tracking-wider text-neutral-800 uppercase"
                   >
                     {logo}
                   </span>
@@ -182,13 +182,13 @@ export default function ServiceDetailPage() {
         {/* ==================================================================== */}
         {/* 2. SELECTED WORK / SHOWCASE FOR THIS SERVICE                         */}
         {/* ==================================================================== */}
-        <section className="w-full py-16 sm:py-24 bg-[#06080E] border-t border-white/10">
+        <section className="w-full py-16 sm:py-24 bg-[#FAFAFC] border-t border-neutral-200/80">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
             <div className="max-w-2xl mb-10 sm:mb-12">
-              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-2.5">
+              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-neutral-400 mb-2.5">
                 {service.selectedWorkEyebrow}
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-bold text-neutral-950 tracking-tight">
                 {service.selectedWorkTitle[lang]}
               </h2>
             </div>
@@ -198,7 +198,7 @@ export default function ServiceDetailPage() {
               {service.selectedWorkImages.map((img, idx) => (
                 <div
                   key={idx}
-                  className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 group"
+                  className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-neutral-200 shadow-2xs group"
                 >
                   <Image
                     src={img}
@@ -216,10 +216,10 @@ export default function ServiceDetailPage() {
             <div className="flex justify-center pt-2">
               <Link
                 href="/works"
-                className="inline-flex items-center gap-2 bg-white/[0.05] hover:bg-white/[0.1] text-white border border-white/10 text-xs sm:text-sm font-semibold px-7 py-3.5 rounded-full transition-all duration-200 active:scale-95 group"
+                className="inline-flex items-center gap-2 bg-neutral-950 hover:bg-black text-white text-xs sm:text-sm font-semibold px-7 py-3.5 rounded-full transition-all duration-200 shadow-sm active:scale-95 group"
               >
-                <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
-                  <ArrowRight className="w-3 h-3 text-[var(--theme-accent)] group-hover:translate-x-0.5 transition-transform" />
+                <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                  <ArrowRight className="w-3 h-3 text-white group-hover:translate-x-0.5 transition-transform" />
                 </div>
                 <span>{lang === "id" ? "Lihat Semua Karya" : "View All Works"}</span>
               </Link>
@@ -230,13 +230,13 @@ export default function ServiceDetailPage() {
         {/* ==================================================================== */}
         {/* 3. BEST FIT SECTION                                                  */}
         {/* ==================================================================== */}
-        <section className="w-full py-16 sm:py-24 bg-[#04060A] border-t border-white/10">
+        <section className="w-full py-16 sm:py-24 bg-white border-t border-neutral-200/80">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
             <div className="max-w-2xl mb-12 sm:mb-14">
-              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-2.5">
+              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#00E1BA] mb-2.5">
                 {service.bestFitEyebrow}
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight leading-[1.15]">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-neutral-950 tracking-tight leading-[1.15]">
                 {service.bestFitTitle[lang]}
               </h2>
             </div>
@@ -246,16 +246,16 @@ export default function ServiceDetailPage() {
               {service.bestFitCards.map((card) => (
                 <div
                   key={card.num}
-                  className="p-6 sm:p-7 rounded-2xl bg-[#080C14] border border-white/10 flex flex-col justify-between hover:border-white/20 transition-colors"
+                  className="p-6 sm:p-7 rounded-2xl bg-[#F8F9FB] border border-neutral-200/80 flex flex-col justify-between"
                 >
                   <div>
-                    <div className="text-xs font-mono font-bold text-[var(--theme-accent)] mb-4">
+                    <div className="text-xs font-mono font-bold text-neutral-400 mb-4">
                       {card.num}
                     </div>
-                    <h3 className="text-base sm:text-lg font-bold text-white tracking-tight mb-2.5">
+                    <h3 className="text-base sm:text-lg font-bold text-neutral-950 tracking-tight mb-2.5">
                       {card.title[lang]}
                     </h3>
-                    <p className="text-xs sm:text-[13px] text-neutral-400 leading-relaxed font-normal">
+                    <p className="text-xs sm:text-[13px] text-neutral-600 leading-relaxed font-normal">
                       {card.desc[lang]}
                     </p>
                   </div>
@@ -263,7 +263,7 @@ export default function ServiceDetailPage() {
               ))}
             </div>
 
-            <p className="text-xs text-neutral-400 font-normal">
+            <p className="text-xs text-neutral-500 font-normal">
               {lang === "id"
                 ? "Sangat berguna ketika produk sudah berfungsi, tetapi pengalamannya belum mencerminkan potensi sebenarnya."
                 : "Especially useful when the product works, but the experience no longer reflects its potential."}
@@ -272,12 +272,12 @@ export default function ServiceDetailPage() {
         </section>
 
         {/* ==================================================================== */}
-        {/* 4. WHY IT MATTERS (DARK SECTION)                                     */}
+        {/* 4. WHY IT MATTERS (DARK ACCENT SECTION)                              */}
         {/* ==================================================================== */}
-        <section className="w-full py-16 sm:py-24 bg-[#06080E] text-white border-t border-white/10">
+        <section className="w-full py-16 sm:py-24 bg-[#0A0B0E] text-white">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
             <div className="max-w-2xl mb-12 sm:mb-16">
-              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-2.5">
+              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#00E1BA] mb-2.5">
                 {service.whyMattersEyebrow}
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight leading-[1.15]">
@@ -290,7 +290,7 @@ export default function ServiceDetailPage() {
               {service.problems.map((item) => (
                 <div
                   key={item.num}
-                  className="p-6 sm:p-8 rounded-2xl bg-[#080C14] border border-white/10 grid grid-cols-1 md:grid-cols-12 gap-6 items-start"
+                  className="p-6 sm:p-8 rounded-2xl bg-[#12141B] border border-white/10 grid grid-cols-1 md:grid-cols-12 gap-6 items-start"
                 >
                   {/* Left: Problem */}
                   <div className="md:col-span-6 space-y-2 pr-0 md:pr-6 border-b md:border-b-0 md:border-r border-white/10 pb-4 md:pb-0">
@@ -307,7 +307,7 @@ export default function ServiceDetailPage() {
 
                   {/* Right: Outcome */}
                   <div className="md:col-span-6 space-y-2 pl-0 md:pl-2">
-                    <div className="text-[11px] font-mono font-bold tracking-widest text-[var(--theme-accent)] uppercase">
+                    <div className="text-[11px] font-mono font-bold tracking-widest text-[#00E1BA] uppercase">
                       OUTCOME
                     </div>
                     <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed font-normal">
@@ -323,34 +323,34 @@ export default function ServiceDetailPage() {
         {/* ==================================================================== */}
         {/* 5. PROCESS                                                           */}
         {/* ==================================================================== */}
-        <section className="w-full py-16 sm:py-24 bg-[#04060A] border-t border-white/10">
+        <section className="w-full py-16 sm:py-24 bg-white border-t border-neutral-200/80">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
             <div className="max-w-2xl mb-12 sm:mb-16">
-              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-2.5">
+              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-neutral-400 mb-2.5">
                 {service.processEyebrow}
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight leading-[1.15]">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-neutral-950 tracking-tight leading-[1.15]">
                 {service.processTitle[lang]}
               </h2>
             </div>
 
             {/* Numbered Steps */}
-            <div className="divide-y divide-white/10 border-y border-white/10 mb-10">
+            <div className="divide-y divide-neutral-200/80 border-y border-neutral-200/80 mb-10">
               {service.processSteps.map((step) => (
                 <div
                   key={step.num}
                   className="py-6 sm:py-8 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-8 items-start"
                 >
                   <div className="md:col-span-4 flex items-center gap-4">
-                    <span className="text-xs font-mono font-bold text-[var(--theme-accent)]">
+                    <span className="text-xs font-mono font-bold text-neutral-400">
                       {step.num}
                     </span>
-                    <h3 className="text-base sm:text-lg font-bold text-white">
+                    <h3 className="text-base sm:text-lg font-bold text-neutral-950">
                       {step.step[lang]}
                     </h3>
                   </div>
                   <div className="md:col-span-8">
-                    <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-normal">
+                    <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
                       {step.desc[lang]}
                     </p>
                   </div>
@@ -358,7 +358,7 @@ export default function ServiceDetailPage() {
               ))}
             </div>
 
-            <p className="text-xs text-neutral-400 font-normal">
+            <p className="text-xs text-neutral-500 font-normal">
               {lang === "id"
                 ? "Perlu produk ditranslasikan ke design system terukur atau handoff siap develop? Gemilang siap mendampingi hingga fase implementasi dan QA desain."
                 : "Need the product translated into a scalable design system or developer-ready handoff? Gemilang can continue through implementation support and design QA."}
@@ -369,13 +369,13 @@ export default function ServiceDetailPage() {
         {/* ==================================================================== */}
         {/* 6. WHAT YOU GET (DELIVERABLES PILLS)                                 */}
         {/* ==================================================================== */}
-        <section className="w-full py-16 sm:py-24 bg-[#06080E] border-t border-white/10">
+        <section className="w-full py-16 sm:py-24 bg-[#F8F9FA] border-t border-neutral-200/80">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
             <div className="max-w-2xl mb-10 sm:mb-12">
-              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-2.5">
+              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#00E1BA] mb-2.5">
                 {service.whatYouGetEyebrow}
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight leading-[1.15]">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-neutral-950 tracking-tight leading-[1.15]">
                 {service.whatYouGetTitle[lang]}
               </h2>
             </div>
@@ -385,15 +385,15 @@ export default function ServiceDetailPage() {
               {service.deliverables.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-2.5 px-4 py-3.5 rounded-xl bg-[#080C14] border border-white/10 text-xs sm:text-[13px] font-medium text-neutral-200"
+                  className="flex items-center gap-2.5 px-4 py-3.5 rounded-xl bg-white border border-neutral-200/80 shadow-2xs text-xs sm:text-[13px] font-medium text-neutral-800"
                 >
-                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0 stroke-[2.5]" />
+                  <Check className="w-4 h-4 text-[#00E1BA] shrink-0 stroke-[2.5]" />
                   <span>{item}</span>
                 </div>
               ))}
             </div>
 
-            <p className="text-xs text-neutral-400 font-normal">
+            <p className="text-xs text-neutral-500 font-normal">
               {lang === "id"
                 ? "Deliverable aktual disesuaikan secara presisi dengan tahap produk, cakupan, dan kompleksitas teknis tim Anda."
                 : "Exact deliverables are tailored to the product stage, scope and technical complexity."}
@@ -404,13 +404,13 @@ export default function ServiceDetailPage() {
         {/* ==================================================================== */}
         {/* 7. WHY GEMILANG                                                      */}
         {/* ==================================================================== */}
-        <section className="w-full py-16 sm:py-24 bg-[#04060A] border-t border-white/10">
+        <section className="w-full py-16 sm:py-24 bg-white border-t border-neutral-200/80">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
             <div className="max-w-2xl mb-12 sm:mb-14">
-              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-2.5">
+              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-neutral-400 mb-2.5">
                 WHY GEMILANG
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight leading-[1.15]">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-neutral-950 tracking-tight leading-[1.15]">
                 {lang === "id"
                   ? "Pemikiran brand dengan pengalaman rekayasa riil di baliknya."
                   : "Brand thinking with real engineering depth behind it."}
@@ -419,40 +419,40 @@ export default function ServiceDetailPage() {
 
             {/* 4 Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#080C14] border border-white/10 space-y-3">
-                <Crown className="w-5 h-5 text-[var(--theme-accent)]" />
-                <h3 className="text-base font-bold text-white">Founder-Led</h3>
-                <p className="text-xs sm:text-[13px] text-neutral-400 leading-relaxed font-normal">
+              <div className="p-6 sm:p-7 rounded-2xl bg-[#F8F9FA] border border-neutral-200/80 space-y-3">
+                <Crown className="w-5 h-5 text-neutral-900" />
+                <h3 className="text-base font-bold text-neutral-950">Founder-Led</h3>
+                <p className="text-xs sm:text-[13px] text-neutral-600 leading-relaxed font-normal">
                   {lang === "id"
                     ? "Bekerja langsung dengan engineer senior berpengalaman dari obrolan pertama hingga pengiriman akhir."
                     : "Work directly with senior engineers from first conversation to final delivery."}
                 </p>
               </div>
 
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#080C14] border border-white/10 space-y-3">
-                <Layers className="w-5 h-5 text-[var(--theme-accent)]" />
-                <h3 className="text-base font-bold text-white">Product Thinking</h3>
-                <p className="text-xs sm:text-[13px] text-neutral-400 leading-relaxed font-normal">
+              <div className="p-6 sm:p-7 rounded-2xl bg-[#F8F9FA] border border-neutral-200/80 space-y-3">
+                <Layers className="w-5 h-5 text-neutral-900" />
+                <h3 className="text-base font-bold text-neutral-950">Product Thinking</h3>
+                <p className="text-xs sm:text-[13px] text-neutral-600 leading-relaxed font-normal">
                   {lang === "id"
                     ? "Kami memahami bahwa brand teknologi harus hidup di UI produk, sistem offline, dan kecepatan nyata."
                     : "We understand that tech brands live in fast interfaces, robust offline modes, and real-world reliability."}
                 </p>
               </div>
 
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#080C14] border border-white/10 space-y-3">
-                <Sparkles className="w-5 h-5 text-[var(--theme-accent)]" />
-                <h3 className="text-base font-bold text-white">Exceptional Craft</h3>
-                <p className="text-xs sm:text-[13px] text-neutral-400 leading-relaxed font-normal">
+              <div className="p-6 sm:p-7 rounded-2xl bg-[#F8F9FA] border border-neutral-200/80 space-y-3">
+                <Sparkles className="w-5 h-5 text-neutral-900" />
+                <h3 className="text-base font-bold text-neutral-950">Exceptional Craft</h3>
+                <p className="text-xs sm:text-[13px] text-neutral-600 leading-relaxed font-normal">
                   {lang === "id"
                     ? "Tipografi, komposisi, sistem desain, dan detail mikro diperlakukan sebagai esensi pengalaman produk."
                     : "Typography, composition, systems and detail are treated as part of the product experience."}
                 </p>
               </div>
 
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#080C14] border border-white/10 space-y-3">
-                <Gauge className="w-5 h-5 text-[var(--theme-accent)]" />
-                <h3 className="text-base font-bold text-white">Faster Turnaround</h3>
-                <p className="text-xs sm:text-[13px] text-neutral-400 leading-relaxed font-normal">
+              <div className="p-6 sm:p-7 rounded-2xl bg-[#F8F9FA] border border-neutral-200/80 space-y-3">
+                <Gauge className="w-5 h-5 text-neutral-900" />
+                <h3 className="text-base font-bold text-neutral-950">Faster Turnaround</h3>
+                <p className="text-xs sm:text-[13px] text-neutral-600 leading-relaxed font-normal">
                   {lang === "id"
                     ? "Proses langsung yang memangkas presentasi bertele-tele, hambatan birokrasi, dan lapisan agensi tradisional."
                     : "A focused process removes unnecessary presentations, handoffs and agency layers."}
@@ -463,15 +463,15 @@ export default function ServiceDetailPage() {
         </section>
 
         {/* ==================================================================== */}
-        {/* 8. WAYS TO WORK TOGETHER                                             */}
+        {/* 8. WAYS TO WORK TOGETHER (Signature Cards)                           */}
         {/* ==================================================================== */}
-        <section className="w-full py-16 sm:py-24 bg-[#06080E] border-t border-white/10">
+        <section className="w-full py-16 sm:py-24 bg-[#FAFAFC] border-t border-neutral-200/80">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
             <div className="max-w-2xl mb-12 sm:mb-14">
-              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-2.5">
+              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-neutral-400 mb-2.5">
                 OPSI KERJASAMA
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight leading-[1.15]">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-neutral-950 tracking-tight leading-[1.15]">
                 {lang === "id"
                   ? "Satu proyek terdefinisi atau mitra tim IT berkelanjutan."
                   : "One defined project or an ongoing engineering partner."}
@@ -481,35 +481,35 @@ export default function ServiceDetailPage() {
             {/* 2 Big Cards: Custom Project vs Dedicated Squad */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
               {/* Card 1: Custom Project */}
-              <div className="rounded-3xl bg-[#080C14] border border-white/10 p-8 sm:p-10 flex flex-col justify-between shadow-xl">
+              <div className="rounded-3xl bg-white border border-neutral-200/90 p-8 sm:p-10 flex flex-col justify-between shadow-2xs">
                 <div>
                   <div className="text-xs font-mono uppercase tracking-wider text-neutral-400 font-bold mb-3">
                     CUSTOM PROJECT
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-neutral-950 mb-3">
                     {lang === "id" ? "Butuh satu kali proyek?" : "Need this once?"}
                   </h3>
-                  <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-8">
+                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-8">
                     {lang === "id"
                       ? "Paling cocok untuk keterlibatan produk terdefinisi dengan ruang lingkup, jadwal, dan deliverable yang jelas."
                       : "Best for a defined product engagement with a clear scope, timeline and outcome."}
                   </p>
 
-                  <ul className="space-y-3 text-xs sm:text-sm text-neutral-300 font-medium mb-10">
+                  <ul className="space-y-3 text-xs sm:text-sm text-neutral-700 font-medium mb-10">
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--theme-accent)]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-neutral-900" />
                       <span>Ruang lingkup terdefinisi (Fixed scope)</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--theme-accent)]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-neutral-900" />
                       <span>Timeline pasti (2-6 minggu)</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--theme-accent)]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-neutral-900" />
                       <span>100% kepemilikan kode sumber</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--theme-accent)]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-neutral-900" />
                       <span>Runbook & dokumentasi lengkap</span>
                     </li>
                   </ul>
@@ -517,19 +517,19 @@ export default function ServiceDetailPage() {
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2.5 bg-white/[0.08] hover:bg-white/[0.15] text-white text-xs sm:text-sm font-semibold px-7 py-4 rounded-full transition-all duration-200 self-start group shadow-sm active:scale-95 border border-white/10"
+                  className="inline-flex items-center gap-2.5 bg-neutral-950 hover:bg-black text-white text-xs sm:text-sm font-semibold px-7 py-4 rounded-full transition-all duration-200 self-start group shadow-sm active:scale-95"
                 >
-                  <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
-                    <ArrowRight className="w-3 h-3 text-[var(--theme-accent)] group-hover:translate-x-0.5 transition-transform" />
+                  <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                    <ArrowRight className="w-3 h-3 text-white group-hover:translate-x-0.5 transition-transform" />
                   </div>
                   <span>{lang === "id" ? "Mulai Proyek Spesifik" : "Start a Project"}</span>
                 </Link>
               </div>
 
-              {/* Card 2: Dedicated Squad */}
-              <div className="rounded-3xl bg-gradient-to-br from-[#0B132B] via-[#0E1E38] to-[#004B49] text-white p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden shadow-xl border border-white/15">
+              {/* Card 2: Dedicated Squad with Cosmic Gradient */}
+              <div className="rounded-3xl bg-gradient-to-br from-[#12131A] via-[#1B1D36] to-[#0A2E6E] text-white p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden shadow-md">
                 <div className="relative z-10">
-                  <div className="text-xs font-mono uppercase tracking-wider text-[var(--theme-accent)] font-bold mb-3">
+                  <div className="text-xs font-mono uppercase tracking-wider text-[#7999FF] font-bold mb-3">
                     DEDICATED SQUAD IT
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
@@ -543,19 +543,19 @@ export default function ServiceDetailPage() {
 
                   <ul className="space-y-3 text-xs sm:text-sm text-neutral-200 font-medium mb-10">
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--theme-accent)]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E1BA]" />
                       <span>Mulai Rp 6.500.000 / bulan</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--theme-accent)]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E1BA]" />
                       <span>Fleksibel, bisa jeda (pause) kapan saja</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--theme-accent)]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E1BA]" />
                       <span>Akses langsung WhatsApp ke Lead Engineer</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--theme-accent)]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E1BA]" />
                       <span>Dukungan Web, Mobile, POS, & Otomasi</span>
                     </li>
                   </ul>
@@ -563,7 +563,7 @@ export default function ServiceDetailPage() {
 
                 <Link
                   href="/contact"
-                  className="relative z-10 inline-flex items-center gap-2.5 bg-[var(--theme-accent)] hover:brightness-110 text-neutral-950 text-xs sm:text-sm font-semibold px-7 py-4 rounded-full transition-all duration-200 self-start group shadow-md active:scale-95"
+                  className="relative z-10 inline-flex items-center gap-2.5 bg-white hover:bg-neutral-100 text-neutral-950 text-xs sm:text-sm font-semibold px-7 py-4 rounded-full transition-all duration-200 self-start group shadow-sm active:scale-95"
                 >
                   <div className="w-5 h-5 rounded-full bg-neutral-900/10 flex items-center justify-center">
                     <ArrowRight className="w-3 h-3 text-neutral-950 group-hover:translate-x-0.5 transition-transform" />

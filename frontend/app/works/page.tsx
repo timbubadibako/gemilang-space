@@ -3,12 +3,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Cpu, Layers, ExternalLink, Sparkles, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CallToActionSection } from "@/components/sections/CallToActionSection";
 import { navItems, siteSettings } from "@/data/site-content";
-import { Button } from "@/components/ui/button";
 
 interface WorkProject {
   id: string;
@@ -173,13 +172,14 @@ export default function WorksPage() {
       : workProjects.filter((p) => p.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-[#04060A] text-white selection:bg-[#00E1BA] selection:text-neutral-950 flex flex-col font-sans">
-      {/* Dark Navbar */}
+    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
+      {/* Light Navbar */}
       <Navbar
         navItems={navItems}
         currentLang={lang}
         onLangChange={setLang}
         whatsappNumber={siteSettings.whatsappNumber}
+        theme="light"
       />
 
       {/* Main Selected Works Gallery */}
@@ -188,18 +188,18 @@ export default function WorksPage() {
           
           {/* Eyebrow & Title */}
           <div className="max-w-[820px] mx-auto text-center mb-12 sm:mb-16 select-none">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono font-medium text-neutral-300 uppercase mb-4 tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--theme-accent)]" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200/80 text-xs font-mono font-medium text-neutral-600 uppercase mb-4 tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-neutral-800" />
               {lang === "id" ? "Portofolio Sistem Riil" : "Real Production Systems"}
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-white tracking-tight leading-[1.12]">
+            <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-neutral-950 tracking-tight leading-[1.12]">
               {lang === "id"
                 ? "Sistem digital yang benar-benar beroperasi di lapangan."
                 : "Digital systems actually operating in production."}
             </h1>
 
-            <p className="text-sm sm:text-base text-neutral-400 mt-4 leading-relaxed max-w-2xl mx-auto font-normal">
+            <p className="text-sm sm:text-base text-neutral-600 mt-4 leading-relaxed max-w-2xl mx-auto font-normal">
               {lang === "id"
                 ? "Dari POS timbangan pabrik industri sawit hingga platform e-commerce dan sistem informasi desa. Dibangun dengan standar rekayasa bersih, kecepatan maksimal, dan arsitektur hemat biaya."
                 : "From industrial hardware-integrated POS to high-velocity e-commerce and civic governance platforms. Built with clean engineering, maximum speed, and ultra-lean architecture."}
@@ -216,8 +216,8 @@ export default function WorksPage() {
                     onClick={() => setSelectedCategory(cat)}
                     className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer select-none ${
                       isActive
-                        ? "bg-[var(--theme-accent)] text-neutral-950 font-semibold shadow-[0_0_15px_rgba(0,225,186,0.25)]"
-                        : "bg-white/[0.04] text-neutral-400 hover:text-white border border-white/10 hover:border-white/20"
+                        ? "bg-neutral-950 text-white font-semibold shadow-xs"
+                        : "bg-[#F3F4F6] text-neutral-600 hover:text-neutral-950 hover:bg-neutral-200/80 border border-neutral-200/60"
                     }`}
                   >
                     {cat}
@@ -232,10 +232,10 @@ export default function WorksPage() {
             {filteredProjects.map((project) => (
               <article
                 key={project.id}
-                className="group flex flex-col rounded-2xl bg-[#080C14] border border-white/10 hover:border-[var(--theme-accent)]/50 p-6 sm:p-7 transition-all duration-500 shadow-xl relative overflow-hidden"
+                className="group flex flex-col rounded-2xl bg-white border border-neutral-200/90 hover:border-neutral-400 p-6 sm:p-7 transition-all duration-300 shadow-xs hover:shadow-md relative overflow-hidden"
               >
                 {/* Visual Image Preview Box */}
-                <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-neutral-900 border border-white/10 mb-6">
+                <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200/80 mb-6">
                   <Image
                     src={project.imageUrl}
                     alt={project.title[lang]}
@@ -246,7 +246,7 @@ export default function WorksPage() {
                   />
                   
                   {/* Category Pill Tag on Top Left */}
-                  <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[11px] font-mono font-medium text-white shadow-sm">
+                  <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-neutral-200 text-[11px] font-mono font-medium text-neutral-800 shadow-xs">
                     {project.category}
                   </div>
 
@@ -257,41 +257,41 @@ export default function WorksPage() {
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute top-3.5 right-3.5 w-9 h-9 rounded-full bg-black/80 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm hover:scale-110"
+                    className="absolute top-3.5 right-3.5 w-9 h-9 rounded-full bg-white/95 backdrop-blur-md border border-neutral-200 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xs hover:scale-110"
                     aria-label="Tanya tentang proyek ini"
                   >
-                    <ArrowUpRight className="w-4 h-4 text-[var(--theme-accent)]" />
+                    <ArrowUpRight className="w-4 h-4 text-neutral-900" />
                   </a>
                 </div>
 
                 {/* Client & Title Header */}
                 <div className="space-y-2 mb-4">
-                  <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-[var(--theme-accent)] font-semibold">
+                  <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 font-semibold">
                     {project.client}
                   </div>
 
-                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-[var(--theme-accent)] transition-colors leading-snug">
+                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight group-hover:text-neutral-700 transition-colors leading-snug">
                     {project.title[lang]}
                   </h2>
 
-                  <p className="text-xs sm:text-[13.5px] text-neutral-400 font-normal leading-relaxed">
+                  <p className="text-xs sm:text-[13.5px] text-neutral-600 font-normal leading-relaxed">
                     {project.description[lang]}
                   </p>
                 </div>
 
                 {/* Impact Highlight Box */}
-                <div className="p-3 rounded-lg bg-white/[0.03] border border-white/5 text-xs text-neutral-300 flex items-start gap-2 mb-5">
-                  <span className="text-[var(--theme-accent)] font-bold shrink-0">✦ Dampak:</span>
+                <div className="p-3 rounded-lg bg-neutral-50 border border-neutral-200/80 text-xs text-neutral-700 flex items-start gap-2 mb-5">
+                  <span className="text-neutral-950 font-bold shrink-0">✦ Dampak:</span>
                   <span className="leading-relaxed">{project.impact[lang]}</span>
                 </div>
 
                 {/* Tech Stack Pills */}
-                <div className="mt-auto pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                <div className="mt-auto pt-4 border-t border-neutral-200/80 flex flex-wrap items-center justify-between gap-3">
                   <div className="flex flex-wrap gap-1.5">
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="text-[10.5px] font-mono px-2.5 py-0.5 rounded-md bg-white/[0.04] text-neutral-300 border border-white/5"
+                        className="text-[10.5px] font-mono px-2.5 py-0.5 rounded-md bg-neutral-100 text-neutral-700 border border-neutral-200/60"
                       >
                         {tech}
                       </span>
@@ -304,7 +304,7 @@ export default function WorksPage() {
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--theme-accent)] hover:underline shrink-0"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-950 hover:underline shrink-0"
                   >
                     <span>Konsultasi Pola Ini</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
