@@ -105,40 +105,39 @@ export default function ShowcasePage() {
     : showcaseItems.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
-      {/* Light-Themed Navbar matching reference */}
+    <div className="min-h-screen bg-[#04060A] text-white selection:bg-[#00E1BA] selection:text-neutral-950 flex flex-col font-sans">
+      {/* Dark Navbar */}
       <Navbar
         navItems={navItems}
         currentLang={lang}
         onLangChange={setLang}
         whatsappNumber={siteSettings.whatsappNumber}
-        theme="light"
       />
 
       {/* Main Showcase Hero & Feed */}
       <main className="w-full flex-1 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-24">
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
-          {/* Eyebrow & Title (1:1 with Screenshot 0) */}
+          {/* Eyebrow & Title */}
           <div className="max-w-[760px] mx-auto text-center mb-10 sm:mb-14 select-none">
-            <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-neutral-400 mb-3">
+            <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-3">
               SHOWCASE
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-bold text-neutral-950 tracking-tight leading-[1.12]">
+            <h1 className="text-3xl sm:text-4xl lg:text-[52px] font-bold text-white tracking-tight leading-[1.12]">
               {lang === "id" ? "Eksplorasi lebih dekat karya kami." : "A closer look at our craft."}
             </h1>
 
-            <p className="text-sm sm:text-[15px] text-neutral-600 mt-4 leading-relaxed max-w-xl mx-auto font-normal">
+            <p className="text-sm sm:text-base text-neutral-400 mt-4 leading-relaxed max-w-xl mx-auto font-normal">
               {lang === "id"
                 ? "Koleksi antarmuka, interaksi, visual, dan eksperimen yang diciptakan untuk menjelajahi rasa dan potensi produk digital modern."
                 : "A collection of interfaces, interactions, visuals and experiments created to explore what modern digital products can feel like."}
             </p>
           </div>
 
-          {/* Filter Pills Bar & View Switcher (1:1 with Screenshot 0) */}
+          {/* Filter Pills Bar & View Switcher */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 sm:mb-12 max-w-[880px] mx-auto">
             {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-full bg-[#F3F4F6] border border-neutral-200/80 shadow-2xs">
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-full bg-white/[0.04] border border-white/10 shadow-sm">
               {categories.map((cat) => {
                 const isActive = selectedCategory === cat;
                 return (
@@ -148,8 +147,8 @@ export default function ShowcasePage() {
                     onClick={() => setSelectedCategory(cat)}
                     className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer select-none ${
                       isActive
-                        ? "bg-white text-neutral-950 font-bold shadow-xs ring-1 ring-neutral-200/60"
-                        : "text-neutral-600 hover:text-neutral-950 hover:bg-white/50"
+                        ? "bg-[var(--theme-accent)] text-neutral-950 font-bold shadow-xs"
+                        : "text-neutral-400 hover:text-white hover:bg-white/[0.06]"
                     }`}
                   >
                     {cat}
@@ -159,12 +158,12 @@ export default function ShowcasePage() {
             </div>
 
             {/* Layout Toggles */}
-            <div className="hidden sm:flex items-center gap-1 p-1 rounded-full bg-[#F3F4F6] border border-neutral-200/80">
+            <div className="hidden sm:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/10">
               <button
                 type="button"
                 onClick={() => setColumnsCount(3)}
-                className={`p-1.5 rounded-full transition-colors ${
-                  columnsCount === 3 ? "bg-white shadow-2xs text-neutral-950" : "text-neutral-500 hover:text-neutral-950"
+                className={`p-1.5 rounded-full transition-colors cursor-pointer ${
+                  columnsCount === 3 ? "bg-white/[0.12] text-white" : "text-neutral-500 hover:text-white"
                 }`}
                 title="3 Columns Grid"
               >
@@ -173,8 +172,8 @@ export default function ShowcasePage() {
               <button
                 type="button"
                 onClick={() => setColumnsCount(2)}
-                className={`p-1.5 rounded-full transition-colors ${
-                  columnsCount === 2 ? "bg-white shadow-2xs text-neutral-950" : "text-neutral-500 hover:text-neutral-950"
+                className={`p-1.5 rounded-full transition-colors cursor-pointer ${
+                  columnsCount === 2 ? "bg-white/[0.12] text-white" : "text-neutral-500 hover:text-white"
                 }`}
                 title="2 Columns Grid"
               >
@@ -194,7 +193,7 @@ export default function ShowcasePage() {
             {filteredItems.map((item) => (
               <article key={item.id} className="group flex flex-col cursor-pointer">
                 {/* Visual Card Box */}
-                <div className="relative w-full aspect-[16/11] rounded-2xl overflow-hidden bg-[#F2F3F5] border border-neutral-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)] group-hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
+                <div className="relative w-full aspect-[16/11] rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:border-[var(--theme-accent)]/50 transition-all duration-300">
                   <Image
                     src={item.imageUrl}
                     alt={item.title}
@@ -205,12 +204,12 @@ export default function ShowcasePage() {
                   />
                 </div>
 
-                {/* Typography below image (1:1 with Screenshot 0) */}
+                {/* Typography below image */}
                 <div className="mt-4 flex flex-col">
-                  <h3 className="text-base sm:text-[17px] font-bold text-neutral-950 tracking-tight group-hover:text-[#00E1BA] transition-colors leading-snug">
+                  <h3 className="text-base sm:text-[17px] font-bold text-white tracking-tight group-hover:text-[var(--theme-accent)] transition-colors leading-snug">
                     {item.title}
                   </h3>
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 mt-1 font-semibold">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-neutral-400 mt-1 font-semibold">
                     {item.client} • {item.type}
                   </div>
                 </div>

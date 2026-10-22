@@ -164,58 +164,57 @@ export default function FAQPage() {
   const currentCategory = faqCategories.find((c) => c.id === activeTab) || faqCategories[0];
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
-      {/* Light-Themed Navbar */}
+    <div className="min-h-screen bg-[#04060A] text-white selection:bg-[#00E1BA] selection:text-neutral-950 flex flex-col font-sans">
+      {/* Dark Navbar */}
       <Navbar
         navItems={navItems}
         currentLang={lang}
         onLangChange={setLang}
         whatsappNumber={siteSettings.whatsappNumber}
-        theme="light"
       />
 
       <main className="w-full flex-1 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-24">
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
-          {/* Eyebrow & Headline (1:1 with Beew FAQ) */}
+          {/* Eyebrow & Headline */}
           <div className="max-w-[780px] mb-12 sm:mb-16">
-            <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-neutral-400 mb-3 select-none">
+            <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[var(--theme-accent)] mb-3 select-none">
               FAQ
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-bold text-neutral-950 tracking-tight leading-[1.12] mb-5">
+            <h1 className="text-3xl sm:text-4xl lg:text-[52px] font-bold text-white tracking-tight leading-[1.12] mb-5">
               {lang === "id"
-                ? "Semua yang perlu Anda ketahui sebelum bekerja bersama Gemilang."
+                ? "Semua yang perlu Anda ketahui sebelum bermitra bersama Gemilang."
                 : "Everything you need to know before working with Gemilang."}
             </h1>
 
-            <p className="text-base sm:text-lg text-neutral-600 leading-relaxed font-normal max-w-2xl mb-8">
+            <p className="text-base sm:text-lg text-neutral-400 leading-relaxed font-normal max-w-2xl mb-8">
               {lang === "id"
-                ? "Dari langganan desain dan proyek khusus hingga jadwal, biaya, kerahasiaan, dan alur kolaborasi — inilah cara kerja kemitraan kami secara nyata."
-                : "From design subscriptions and custom projects to timelines, pricing, Framer, confidentiality and collaboration, here’s how working with Gemilang actually works."}
+                ? "Dari dedicated IT squad bulanan, proyek khusus POS offline-first, timeline delivery, hingga kepemilikan kode sumber 100% dan kerahasiaan NDA."
+                : "From monthly dedicated squads, custom offline-first POS systems, delivery timelines, to 100% IP ownership and mutual NDAs."}
             </p>
 
             <div className="flex flex-wrap items-center gap-3.5">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 bg-neutral-950 hover:bg-black text-white text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-200 shadow-sm active:scale-95 group"
+                className="inline-flex items-center gap-2.5 bg-[var(--theme-accent)] hover:brightness-110 text-neutral-950 text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-200 shadow-md active:scale-95 group"
               >
-                <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
-                  <ArrowRight className="w-3 h-3 text-white group-hover:translate-x-0.5 transition-transform" />
+                <div className="w-5 h-5 rounded-full bg-black/10 flex items-center justify-center">
+                  <ArrowRight className="w-3 h-3 text-neutral-950 group-hover:translate-x-0.5 transition-transform" />
                 </div>
                 <span>{lang === "id" ? "Mulai Proyek" : "Start a Project"}</span>
               </Link>
 
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center bg-[#F3F3F5] hover:bg-neutral-200 text-neutral-900 text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-200"
+                className="inline-flex items-center justify-center bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/10 text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-200"
               >
-                {lang === "id" ? "Jadwalkan Panggilan" : "Book an Intro Call"}
+                {lang === "id" ? "Jadwalkan Konsultasi Teknis" : "Book a Technical Call"}
               </Link>
             </div>
           </div>
 
           {/* 2-Column FAQ Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start pt-6 border-t border-neutral-200/80">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start pt-6 border-t border-white/10">
             {/* Left Column: Category Tabs & Different Question Card */}
             <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-28">
               {/* Category Nav Pills */}
@@ -229,8 +228,8 @@ export default function FAQPage() {
                       onClick={() => setActiveTab(cat.id)}
                       className={`text-left px-4 py-3 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer whitespace-nowrap lg:whitespace-normal ${
                         isActive
-                          ? "bg-neutral-950 text-white font-semibold shadow-xs"
-                          : "text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100"
+                          ? "bg-white/[0.08] text-[var(--theme-accent)] font-semibold border border-[var(--theme-accent)]/30"
+                          : "text-neutral-400 hover:text-white hover:bg-white/[0.03]"
                       }`}
                     >
                       {cat.label[lang]}
@@ -239,32 +238,32 @@ export default function FAQPage() {
                 })}
               </div>
 
-              {/* Have a Different Question Card (1:1 with Beew) */}
-              <div className="p-6 rounded-2xl bg-[#F8F9FA] border border-neutral-200/80 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-neutral-400">
-                  <HelpCircle className="w-4 h-4 text-[#00E1BA]" />
+              {/* Have a Different Question Card */}
+              <div className="p-6 rounded-2xl bg-[#080C14] border border-white/10 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-[var(--theme-accent)]">
+                  <HelpCircle className="w-4 h-4 text-[var(--theme-accent)]" />
                   <span>{lang === "id" ? "Punya pertanyaan lain?" : "Have a different question?"}</span>
                 </div>
-                <p className="text-xs text-neutral-600 leading-relaxed font-normal">
+                <p className="text-xs text-neutral-400 leading-relaxed font-normal">
                   {lang === "id"
-                    ? "Hubungi tim kami langsung melalui WhatsApp atau kirim email, kami biasanya merespons dalam hitungan jam."
-                    : "Reach out to us directly via WhatsApp or email, we typically respond within a few hours."}
+                    ? "Hubungi engineer kami langsung via WhatsApp. Kami merespons cepat tanpa perantara admin."
+                    : "Reach out to our lead engineer directly via WhatsApp. Fast responses, zero middlemen."}
                 </p>
                 <div className="pt-2 space-y-2 text-xs font-medium">
                   <a
                     href={`https://wa.me/${siteSettings.whatsappNumber}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-neutral-900 hover:text-[#00E1BA] transition-colors"
+                    className="flex items-center gap-2 text-white hover:text-[var(--theme-accent)] transition-colors"
                   >
-                    <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+                    <MessageCircle className="w-3.5 h-3.5 text-[var(--theme-accent)]" />
                     <span>WhatsApp: +{siteSettings.whatsappNumber}</span>
                   </a>
                   <a
                     href="mailto:hi@gemilangspace.com"
-                    className="flex items-center gap-2 text-neutral-900 hover:text-[#00E1BA] transition-colors"
+                    className="flex items-center gap-2 text-neutral-300 hover:text-[var(--theme-accent)] transition-colors"
                   >
-                    <Mail className="w-3.5 h-3.5 text-neutral-500" />
+                    <Mail className="w-3.5 h-3.5 text-neutral-400" />
                     <span>hi@gemilangspace.com</span>
                   </a>
                 </div>
@@ -273,7 +272,7 @@ export default function FAQPage() {
 
             {/* Right Column: Accordion Questions */}
             <div className="lg:col-span-8 space-y-4">
-              <div className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-400 mb-2">
+              <div className="text-xs font-mono font-bold uppercase tracking-wider text-[var(--theme-accent)] mb-2">
                 {currentCategory.label[lang]}
               </div>
 
@@ -284,27 +283,27 @@ export default function FAQPage() {
                   return (
                     <div
                       key={key}
-                      className="rounded-2xl border border-neutral-200/80 bg-white overflow-hidden shadow-2xs transition-all"
+                      className="rounded-2xl border border-white/10 bg-[#080C14] overflow-hidden transition-all hover:border-white/20"
                     >
                       <button
                         type="button"
                         onClick={() => toggleAccordion(key)}
-                        className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50/50 transition-colors"
+                        className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-white/[0.02] transition-colors"
                       >
-                        <span className="text-sm sm:text-base font-bold text-neutral-950 tracking-tight">
+                        <span className="text-sm sm:text-base font-bold text-white tracking-tight">
                           {item.q[lang]}
                         </span>
                         <div
-                          className={`w-7 h-7 rounded-full bg-neutral-100 flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                            isOpen ? "rotate-180 bg-neutral-200" : ""
+                          className={`w-7 h-7 rounded-full bg-white/[0.05] flex items-center justify-center shrink-0 transition-transform duration-200 ${
+                            isOpen ? "rotate-180 bg-[var(--theme-accent)] text-neutral-950" : "text-neutral-400"
                           }`}
                         >
-                          <ChevronDown className="w-4 h-4 text-neutral-600" />
+                          <ChevronDown className={`w-4 h-4 ${isOpen ? "text-neutral-950" : "text-neutral-400"}`} />
                         </div>
                       </button>
 
                       {isOpen && (
-                        <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal border-t border-neutral-100">
+                        <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-neutral-300 leading-relaxed font-normal border-t border-white/5">
                           {item.a[lang]}
                         </div>
                       )}
