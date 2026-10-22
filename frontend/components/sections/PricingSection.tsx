@@ -1,38 +1,45 @@
 "use client";
 
-import React, { useState } from "react";
-import { Check } from "lucide-react";
+import React from "react";
+import { Check, Sparkles, ShieldCheck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface PricingSectionProps {
   lang: "id" | "en";
   whatsappNumber?: string;
+  onOpenEstimator?: (tier?: string) => void;
 }
 
 export function PricingSection({
   lang,
-  whatsappNumber = "6281234567890",
+  whatsappNumber = "6285722045801",
+  onOpenEstimator,
 }: PricingSectionProps) {
-  const [modelType, setModelType] = useState<"project" | "contract">("contract");
-
   const getWaUrl = (plan: string) => {
     return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       lang === "id"
-        ? `Halo Gemilang, saya ingin berkonsultasi mengenai model kerjasama: ${plan}.`
-        : `Hello Gemilang, I want to discuss the engagement model: ${plan}.`
+        ? `Halo Gemilang Space, saya ingin berkonsultasi mengenai paket: ${plan}.`
+        : `Hello Gemilang Space, I want to discuss the package: ${plan}.`
     )}`;
   };
 
   const clientLogos = [
-    "screenloop",
-    "uptech",
-    "5u",
-    "polygon",
-    "codeaweb",
-    "efficense",
-    "hostware",
-    "hospitable",
+    "Fermion Roastery",
+    "David Beckham POS",
+    "Desa Digital",
+    "Lari App",
+    "Kopi Nusantara",
+    "Berkah Abadi Retail",
+    "Gemilang Space",
   ];
+
+  const handleCardClick = (tier: string) => {
+    if (onOpenEstimator) {
+      onOpenEstimator(tier);
+    } else {
+      window.open(getWaUrl(tier), "_blank");
+    }
+  };
 
   return (
     <section
@@ -46,14 +53,14 @@ export function PricingSection({
         {/* ============================================================== */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 lg:gap-8">
           {/* Left: Eyebrow + Headline */}
-          <div className="min-w-0">
+          <div className="min-w-0 max-w-2xl">
             <p className="text-xs sm:text-[13px] font-mono font-medium tracking-[0.06em] text-neutral-400 uppercase">
-              {lang === "id" ? "MODEL KERJASAMA & BIAYA" : "ENGAGEMENT MODELS & PRICING"}
+              {lang === "id" ? "BIAYA TRANSPARAN & MASUK AKAL" : "TRANSPARENT PRICING"}
             </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-bold tracking-[-0.04em] text-neutral-950 leading-tight mt-2 whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-bold tracking-[-0.04em] text-neutral-950 leading-tight mt-2">
               {lang === "id"
-                ? "Dua skema fleksibel untuk kebutuhan IT Anda."
-                : "Flexible engagement models built for your scale."}
+                ? "Investasi sistem digital tanpa boncos. Mulai Rp 1.5 Juta."
+                : "Honest digital engineering investments. Starting at IDR 1.5M."}
             </h2>
           </div>
 
@@ -61,222 +68,288 @@ export function PricingSection({
           <div className="text-neutral-600 text-xs sm:text-[13.5px] leading-relaxed max-w-sm lg:text-right font-normal pb-0.5">
             <p>
               {lang === "id"
-                ? "Pilih kontrak bulanan untuk tim engineering berkelanjutan, atau project-based dengan milestone terukur."
-                : "Choose monthly dedicated contract squads or fixed-scope project development."}
+                ? "Pilih paket sekali bayar untuk UMKM & toko, atau sewa tim IT bulanan on-demand tanpa pusing biaya rekrutmen."
+                : "Choose one-time delivery for MSMEs & stores, or hire an on-demand monthly tech squad."}
             </p>
           </div>
         </div>
 
         {/* ============================================================== */}
-        {/* MODEL TOGGLE SWITCHER                                          */}
+        {/* 3 COMPREHENSIVE CARDS (Starter vs Solusi Bisnis vs Dedicated)  */}
         {/* ============================================================== */}
-        <div className="mt-10 sm:mt-12">
-          <div className="w-full max-w-[500px] bg-[#E4E4E8] p-1 sm:p-1.5 rounded-full grid grid-cols-2 gap-1 select-none">
-            <button
-              type="button"
-              onClick={() => setModelType("contract")}
-              className={`py-3 sm:py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer text-center ${
-                modelType === "contract"
-                  ? "bg-white text-neutral-950 shadow-xs"
-                  : "text-neutral-600 hover:text-neutral-950"
-              }`}
-            >
-              {lang === "id" ? "Dedicated Contract Team" : "Dedicated Contract Team"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setModelType("project")}
-              className={`py-3 sm:py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer text-center ${
-                modelType === "project"
-                  ? "bg-white text-neutral-950 shadow-xs"
-                  : "text-neutral-600 hover:text-neutral-950"
-              }`}
-            >
-              {lang === "id" ? "Project-Based Solution" : "Project-Based Solution"}
-            </button>
-          </div>
-        </div>
-
-        {/* ============================================================== */}
-        {/* 2 COMPREHENSIVE CARDS (Contract Squad vs Project-Based)        */}
-        {/* ============================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-12 items-stretch">
           
           {/* ------------------------------------------------------------ */}
-          {/* CARD 1: Dedicated Contract Team (Light Slate Card)           */}
+          {/* CARD 1: Starter UMKM (Rp 1.500.000)                          */}
           {/* ------------------------------------------------------------ */}
-          <div className={`rounded-xl bg-[#F7F7F8] p-7 sm:p-8 flex flex-col justify-between border ${modelType === "contract" ? "border-blue-500/50 ring-2 ring-blue-500/20" : "border-neutral-200/60"} shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all`}>
+          <div className="rounded-2xl bg-[#0C1019] text-white p-7 sm:p-8 flex flex-col justify-between border border-white/10 hover:border-[var(--theme-accent)]/50 shadow-xl transition-all duration-300">
             <div>
               {/* Header Row */}
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-blue-600">
-                    {lang === "id" ? "RETAINER BULANAN" : "MONTHLY RETAINER"}
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-[var(--theme-accent)]/15 text-[var(--theme-accent)] border border-[var(--theme-accent)]/30">
+                    {lang === "id" ? "STARTER UMKM" : "STARTER MSME"}
                   </span>
-                  <h3 className="text-2xl font-bold text-neutral-950 mt-1">
-                    Dedicated Contract Squad
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mt-3">
+                    Website &amp; Toko Cepat
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-neutral-500 mt-1.5 leading-relaxed max-w-md">
+                  <p className="text-xs sm:text-[13px] text-neutral-400 mt-1.5 leading-relaxed">
                     {lang === "id"
-                      ? "Tim engineer senior penuh waktu yang bertindak sebagai perpanjangan tim in-house Anda, siap sprint setiap minggu tanpa beban rekrutmen."
-                      : "A dedicated senior engineering team working as an extension of your company with weekly agile sprints and zero hiring friction."}
+                      ? "Cocok untuk profil bisnis, etalase produk, atau toko yang ingin mulai jualan online dengan cepat."
+                      : "Perfect for business profiles, product showcase, or sellers looking for fast digital presence."}
                   </p>
                 </div>
-                {/* Glowing Blue Orb */}
-                <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#2563EB] to-[#38BDF8] shadow-[0_0_20px_rgba(37,99,235,0.45)] shrink-0 animate-pulse" />
               </div>
 
               {/* Price */}
-              <div className="mt-8 mb-6">
-                <span className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-950">
-                  {lang === "id" ? "Kontrak Fleksibel" : "Flexible Monthly"}
-                </span>
-                <span className="text-xs sm:text-[13px] text-neutral-500 ml-2 font-medium">
-                  {lang === "id" ? "/bulan (Sesuai jumlah engineer)" : "/month (Scoped by squad size)"}
-                </span>
-              </div>
-
-              {/* CTA Pill Button with expanding animation */}
-              <div className="mb-8">
-                <Button
-                  variant="expand"
-                  size="md"
-                  href={getWaUrl("Dedicated Contract Squad")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  fullWidth
-                >
-                  {lang === "id" ? "Hire Dedicated Squad" : "Hire Dedicated Squad"}
-                </Button>
+              <div className="mt-7 mb-6 pb-6 border-b border-white/10">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-3xl sm:text-4xl font-black tracking-tight text-white">
+                    Rp 1.500.000
+                  </span>
+                  <span className="text-xs text-neutral-400 font-medium">/sekali</span>
+                </div>
+                <p className="text-[11px] text-[var(--theme-accent)] font-medium mt-1">
+                  ✓ Tanpa biaya tersembunyi. Siap pakai dalam 3-5 hari kerja.
+                </p>
               </div>
 
               {/* Features List */}
-              <div className="pt-6 border-t border-neutral-200/60 space-y-3.5 text-xs sm:text-[13.5px] text-neutral-700 font-normal">
-                <div className="flex items-center gap-2.5 font-semibold text-neutral-950">
-                  <Check className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>{lang === "id" ? "Senior Full-Stack Engineers & Tech Lead" : "Senior Full-Stack Engineers & Tech Lead"}</span>
+              <div className="space-y-3 text-xs sm:text-[13px] text-neutral-300 font-normal">
+                <div className="flex items-center gap-2.5 font-semibold text-white">
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Landing Page Responsif (Mobile, Tablet, Desktop)</span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>{lang === "id" ? "Siklus Sprint mingguan dengan demo langsung" : "Weekly sprint cycles & live demo reviews"}</span>
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Kecepatan load super kilat (Lighthouse 95+)</span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>{lang === "id" ? "Standup harian & integrasi Slack/Discord privat" : "Daily standups & private Slack/Discord integration"}</span>
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Integrasi Tombol Order Langsung ke WhatsApp</span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>{lang === "id" ? "Akses repository langsung (GitHub/GitLab Anda)" : "Direct commit access to your GitHub/GitLab repo"}</span>
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Setup Domain &amp; Hosting Siap Akses</span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>{lang === "id" ? "Bebas atur prioritas backlog & pivoting cepat" : "Flexible backlog priority & fast pivoting"}</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>{lang === "id" ? "Jeda atau sesuaikan kapasitas tim tiap bulan" : "Pause or scale squad capacity monthly"}</span>
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Garansi Bug-Free 30 Hari Resmi</span>
                 </div>
               </div>
+            </div>
+
+            {/* CTA Button */}
+            <div className="mt-8 pt-4">
+              <Button
+                variant="translucent"
+                size="md"
+                onClick={() => handleCardClick("starter")}
+                fullWidth
+              >
+                {lang === "id" ? "Pilih Paket Starter (1.5 Jt)" : "Choose Starter (1.5M)"}
+              </Button>
             </div>
           </div>
 
           {/* ------------------------------------------------------------ */}
-          {/* CARD 2: Project-Based Solution (Dark Card)                   */}
+          {/* CARD 2: Solusi Bisnis & POS Kasir (Rp 3.500.000) - FEATURED  */}
           {/* ------------------------------------------------------------ */}
-          <div className={`rounded-xl bg-[#0A0D14] text-white p-7 sm:p-8 flex flex-col justify-between border ${modelType === "project" ? "border-cyan-500/50 ring-2 ring-cyan-500/20" : "border-white/10"} shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-all`}>
+          <div className="rounded-2xl bg-[#090C14] text-white p-7 sm:p-8 flex flex-col justify-between border-2 border-[var(--theme-accent)] shadow-2xl relative transition-all duration-300">
+            {/* Top Recommended Tag */}
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[var(--theme-accent)] text-[var(--theme-accent-text)] text-[10px] font-mono font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1.5 select-none">
+              <Sparkles className="w-3 h-3 fill-current" />
+              <span>PALING BANYAK DIPILIH</span>
+            </div>
+
+            <div>
+              {/* Header Row */}
+              <div className="flex items-start justify-between gap-4 mt-1">
+                <div>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-[var(--theme-accent)]/15 text-[var(--theme-accent)] border border-[var(--theme-accent)]/30">
+                    {lang === "id" ? "SISTEM OPERASIONAL" : "OPERATIONAL SYSTEM"}
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mt-3">
+                    Sistem Kasir &amp; POS Toko
+                  </h3>
+                  <p className="text-xs sm:text-[13px] text-neutral-400 mt-1.5 leading-relaxed">
+                    {lang === "id"
+                      ? "Software kasir, scan barcode, rekap stok produk, dan cetak nota struk thermal untuk toko & retail."
+                      : "Complete point-of-sale: barcode scan, stock ledger, receipt printing, and daily cashier summary."}
+                  </p>
+                </div>
+              </div>
+
+              {/* Price */}
+              <div className="mt-7 mb-6 pb-6 border-b border-white/10">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-3xl sm:text-4xl font-black tracking-tight text-[var(--theme-accent)]">
+                    Rp 3.500.000
+                  </span>
+                  <span className="text-xs text-neutral-400 font-medium">/sekali</span>
+                </div>
+                <p className="text-[11px] text-[var(--theme-accent)] font-medium mt-1">
+                  ✓ Sudah termasuk pelatihan penggunaan &amp; serah terima kode.
+                </p>
+              </div>
+
+              {/* Features List */}
+              <div className="space-y-3 text-xs sm:text-[13px] text-neutral-300 font-normal">
+                <div className="flex items-center gap-2.5 font-semibold text-white">
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Aplikasi Kasir (POS) Toko &amp; Scan Barcode</span>
+                </div>
+                <div className="flex items-center gap-2.5 font-semibold text-white">
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Cetak Struk Thermal (Bluetooth &amp; USB)</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Manajemen Stok Inventori &amp; Peringatan Habis</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Rekap Laporan Keuangan &amp; Laba-Rugi Otomatis</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Multi-Kasir dengan Pembatasan Hak Akses</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Garansi Resmi 30 Hari + Dukungan Teknis</span>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <div className="mt-8 pt-4">
+              <Button
+                variant="primary"
+                size="md"
+                onClick={() => handleCardClick("bisnis")}
+                fullWidth
+              >
+                {lang === "id" ? "Pilih Solusi Bisnis (3.5 Jt)" : "Choose Business POS (3.5M)"}
+              </Button>
+            </div>
+          </div>
+
+          {/* ------------------------------------------------------------ */}
+          {/* CARD 3: Dedicated IT Partner (Rp 6.500.000 / bln)            */}
+          {/* ------------------------------------------------------------ */}
+          <div className="rounded-2xl bg-[#0C1019] text-white p-7 sm:p-8 flex flex-col justify-between border border-white/10 hover:border-[var(--theme-accent)]/50 shadow-xl transition-all duration-300">
             <div>
               {/* Header Row */}
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#38BDF8]">
-                    {lang === "id" ? "FIXED SCOPE & MILESTONE" : "FIXED SCOPE & MILESTONE"}
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-[var(--theme-accent)]/15 text-[var(--theme-accent)] border border-[var(--theme-accent)]/30">
+                    {lang === "id" ? "TIM IT BULANAN" : "MONTHLY RETAINER"}
                   </span>
-                  <h3 className="text-2xl font-bold text-white mt-1">
-                    Project-Based Solution
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mt-3">
+                    Dedicated IT Partner
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-neutral-400 mt-1.5 leading-relaxed max-w-md">
+                  <p className="text-xs sm:text-[13px] text-neutral-400 mt-1.5 leading-relaxed">
                     {lang === "id"
-                      ? "Untuk pembuatan software, aplikasi mobile, sistem AI, atau perombakan sistem lama dengan target output, tenggat waktu, dan anggaran terdefinisi."
-                      : "For custom software, mobile apps, AI automation, or infrastructure overhaul with clearly defined scopes, timelines, and budgets."}
+                      ? "Punya tim engineer senior sendiri tanpa beban rekrutmen kantor. Bebas request fitur setiap bulan."
+                      : "Your dedicated engineering squad without the overhead of hiring. Request features anytime."}
                   </p>
                 </div>
-                {/* Glowing White-Cyan Orb */}
-                <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#0284C7] to-white shadow-[0_0_20px_rgba(56,189,248,0.5)] shrink-0" />
               </div>
 
               {/* Price */}
-              <div className="mt-8 mb-6">
-                <span className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                  {lang === "id" ? "Milestone-Based" : "Milestone-Based"}
-                </span>
-                <span className="text-xs sm:text-[13px] text-neutral-400 ml-2 font-medium">
-                  {lang === "id" ? "(Berdasarkan ruang lingkup PRD)" : "(Scoped per project PRD)"}
-                </span>
-              </div>
-
-              {/* CTA White Pill Button with expanding animation */}
-              <div className="mb-8">
-                <Button
-                  variant="expand"
-                  size="md"
-                  href={getWaUrl("Project-Based Solution")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  fullWidth
-                  className="bg-neutral-800"
-                >
-                  {lang === "id" ? "Diskusikan Scope Proyek" : "Scope Your Project"}
-                </Button>
+              <div className="mt-7 mb-6 pb-6 border-b border-white/10">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-3xl sm:text-4xl font-black tracking-tight text-white">
+                    Rp 6.500.000
+                  </span>
+                  <span className="text-xs text-neutral-400 font-medium">/bulan</span>
+                </div>
+                <p className="text-[11px] text-[var(--theme-accent)] font-medium mt-1">
+                  ✓ Kontrak fleksibel. Bisa jeda (pause) atau stop kapan saja.
+                </p>
               </div>
 
               {/* Features List */}
-              <div className="pt-6 border-t border-neutral-800 space-y-3.5 text-xs sm:text-[13.5px] text-neutral-300 font-normal">
+              <div className="space-y-3 text-xs sm:text-[13px] text-neutral-300 font-normal">
                 <div className="flex items-center gap-2.5 font-semibold text-white">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>{lang === "id" ? "Spesifikasi Teknis (PRD & Arsitektur) lengkap" : "Complete PRD & Architecture specifications"}</span>
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Full-Stack Engineer Khusus Menangani Bisnis Anda</span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>{lang === "id" ? "Jaminan garansi bug fixing & masa pemeliharaan" : "Guaranteed bug-fixing & post-launch warranty"}</span>
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Unlimited Antrean Permintaan Fitur &amp; Bug Fixing</span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>{lang === "id" ? "Pembayaran bertahap berbasis approval milestone" : "Milestone-based staged milestone payments"}</span>
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Integrasi Otomasi AI &amp; Bot WhatsApp Lanjutan</span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>{lang === "id" ? "Serah terima source code 100% hak milik klien" : "100% full IP & source code ownership transfer"}</span>
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Monitoring Server 24/7 &amp; Maintenance Rutin</span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>{lang === "id" ? "Setup server produksi & CI/CD zero-downtime" : "Production server setup & CI/CD deployment"}</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>{lang === "id" ? "Dokumentasi API & manual operasional sistem" : "API documentation & system operations handbook"}</span>
+                  <Check className="w-4 h-4 text-[var(--theme-accent)] shrink-0" />
+                  <span>Grup WhatsApp Khusus &amp; Progres Mingguan</span>
                 </div>
               </div>
+            </div>
+
+            {/* CTA Button */}
+            <div className="mt-8 pt-4">
+              <Button
+                variant="translucent"
+                size="md"
+                onClick={() => handleCardClick("dedicated")}
+                fullWidth
+              >
+                {lang === "id" ? "Sewa Tim IT (6.5 Jt/bln)" : "Hire Tech Squad (6.5M/mo)"}
+              </Button>
             </div>
           </div>
 
         </div>
 
         {/* ============================================================== */}
-        {/* CLIENT LOGOS RUNNING MARQUEE (with smooth white edge fades)    */}
+        {/* CUSTOM ENTERPRISE CALLOUT                                      */}
         {/* ============================================================== */}
-        <div className="mt-16 sm:mt-20 pt-10 border-t border-neutral-100 relative overflow-hidden select-none">
-          {/* Left Smooth White Fade Gradient */}
-          <div className="absolute top-0 bottom-0 left-0 w-24 sm:w-36 lg:w-48 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none z-20" />
+        <div className="mt-8 p-6 sm:p-7 rounded-2xl bg-neutral-100 border border-neutral-200 flex flex-col md:flex-row items-center justify-between gap-5">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-neutral-200 flex items-center justify-center text-neutral-800 shrink-0">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-sm sm:text-base font-bold text-neutral-950">
+                Butuh Sistem Multi-Cabang atau Arsitektur Skala Besar?
+              </h4>
+              <p className="text-xs text-neutral-600 mt-0.5">
+                Kami siap bantu audit sistem lama, integrasi API perbankan/logistik, atau custom ERP perusahaan.
+              </p>
+            </div>
+          </div>
 
-          {/* Right Smooth White Fade Gradient */}
-          <div className="absolute top-0 bottom-0 right-0 w-24 sm:w-36 lg:w-48 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none z-20" />
+          <Button
+            variant="expand"
+            size="sm"
+            onClick={() => handleCardClick("custom")}
+            className="shrink-0"
+          >
+            Konsultasi Custom Enterprise
+          </Button>
+        </div>
 
-          {/* Infinite Running Marquee Track */}
-          <div className="animate-marquee gap-8 sm:gap-14 lg:gap-20 items-center py-2 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-opacity">
+        {/* ============================================================== */}
+        {/* CLIENT LOGOS RUNNING MARQUEE                                   */}
+        {/* ============================================================== */}
+        <div className="mt-14 pt-8 border-t border-neutral-100 relative overflow-hidden select-none">
+          <div className="absolute top-0 bottom-0 left-0 w-24 sm:w-36 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none z-20" />
+          <div className="absolute top-0 bottom-0 right-0 w-24 sm:w-36 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none z-20" />
+
+          <div className="animate-marquee gap-8 sm:gap-14 items-center py-2 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-opacity">
             {[...clientLogos, ...clientLogos].map((logo, idx) => (
               <span
                 key={`${logo}-${idx}`}
-                className="font-sans font-bold text-sm sm:text-base tracking-tight text-neutral-800 uppercase shrink-0 px-4"
+                className="font-sans font-bold text-xs sm:text-sm tracking-tight text-neutral-700 uppercase shrink-0 px-4"
               >
                 {logo}
               </span>
@@ -288,5 +361,3 @@ export function PricingSection({
     </section>
   );
 }
-
-export default PricingSection;

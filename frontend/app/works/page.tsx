@@ -117,7 +117,7 @@ export default function WorksPage() {
   const [lang, setLang] = useState<"id" | "en">(siteSettings.defaultLanguage);
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#335CFF] selection:text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
       {/* Light-Themed Navbar matching Beew Studio */}
       <Navbar
         navItems={navItems}
@@ -185,7 +185,7 @@ export default function WorksPage() {
                   </div>
 
                   {/* Project Title */}
-                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight group-hover:text-[#335CFF] transition-colors leading-snug">
+                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight group-hover:text-[#00E1BA] transition-colors leading-snug">
                     {project.title[lang]}
                   </h2>
                 </div>

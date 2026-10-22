@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { ArrowRight, Clock, Loader2, CircleDashed, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GradientWave } from "@/components/ui/gradient-wave";
+import { useDaytimeTheme } from "@/lib/daytime-context";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -25,38 +26,38 @@ interface QueueItem {
 const queueItems: QueueItem[] = [
   {
     status: "review",
-    statusLabel: { id: "Code Review / QA", en: "Code Review / QA" },
-    task: { id: "Payment Gateway API", en: "Payment Gateway API" },
+    statusLabel: { id: "Demo Siap", en: "Demo Ready" },
+    task: { id: "Review Fitur & Panduan Kasir", en: "Feature Review & Walkthrough" },
   },
   {
     status: "progress",
-    statusLabel: { id: "Sprint Active", en: "Sprint Active" },
-    task: { id: "Mobile App Flutter v1.2", en: "Mobile App Flutter v1.2" },
+    statusLabel: { id: "Dikerjakan", en: "In Progress" },
+    task: { id: "Testing Struk Thermal Bluetooth", en: "Thermal Bluetooth Receipt Test" },
   },
   {
     status: "queued",
-    statusLabel: { id: "Next Sprint", en: "Next Sprint" },
-    task: { id: "AI Agent Automation", en: "AI Agent Automation" },
+    statusLabel: { id: "Antrean", en: "Queued" },
+    task: { id: "Sinkronisasi Stok Multi-Gudang", en: "Multi-Warehouse Stock Sync" },
   },
   {
     status: "queued",
-    statusLabel: { id: "Backlog", en: "Backlog" },
-    task: { id: "Cloud Migration AWS", en: "Cloud Migration AWS" },
+    statusLabel: { id: "Antrean", en: "Queued" },
+    task: { id: "Setup Notifikasi WhatsApp Resi", en: "WhatsApp Tracking Notification" },
   },
   {
     status: "completed",
-    statusLabel: { id: "Production Live", en: "Production Live" },
-    task: { id: "Enterprise Auth & RBAC", en: "Enterprise Auth & RBAC" },
+    statusLabel: { id: "Selesai", en: "Completed" },
+    task: { id: "Setup Domain & Hosting SSL", en: "Domain & SSL Hosting Setup" },
   },
   {
     status: "completed",
-    statusLabel: { id: "Production Live", en: "Production Live" },
-    task: { id: "SaaS Multi-tenant DB", en: "SaaS Multi-tenant DB" },
+    statusLabel: { id: "Selesai", en: "Completed" },
+    task: { id: "Katalog Produk & Kasir POS", en: "Product Catalog & Retail POS" },
   },
   {
     status: "completed",
-    statusLabel: { id: "Production Live", en: "Production Live" },
-    task: { id: "CI/CD Docker Pipeline", en: "CI/CD Docker Pipeline" },
+    statusLabel: { id: "Selesai", en: "Completed" },
+    task: { id: "Checkout WhatsApp Otomatis", en: "Automated WhatsApp Checkout" },
   },
 ];
 
@@ -66,6 +67,7 @@ export function DesignSubscriptionProcess({
 }: DesignSubscriptionProcessProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const { currentTheme } = useDaytimeTheme();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -135,21 +137,21 @@ export function DesignSubscriptionProcess({
         <div className="workflow-header flex flex-col md:flex-row md:items-end justify-between gap-6 lg:gap-12">
           {/* Left: Eyebrow + Headline */}
           <div className="max-w-2xl">
-            <p className="text-xs sm:text-[13px] font-mono font-semibold tracking-[0.08em] text-[#CAD0DC]/70 uppercase">
-              {lang === "id" ? "ALUR KERJA IT SOLUTIONS & CONTRACT TEAM" : "HOW OUR IT & CONTRACT TEAMS WORK"}
+            <p className="text-xs sm:text-[13px] font-mono font-semibold tracking-[0.08em] text-[#00E1BA] uppercase">
+              {lang === "id" ? "ALUR PROYEK & EKSEKUSI PRAKTIS" : "PRACTICAL BUSINESS WORKFLOW"}
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-[46px] xl:text-[50px] font-bold tracking-[-0.04em] text-white leading-[1.12] mt-3">
               {lang === "id" ? (
                 <>
-                  Rekayasa software tangguh
+                  Bangun sistem bisnis Anda
                   <br />
-                  dengan kecepatan sprint tinggi.
+                  tanpa alur yang rumit.
                 </>
               ) : (
                 <>
-                  High-velocity engineering
+                  Build your business systems
                   <br />
-                  without the hiring headache.
+                  without the complicated process.
                 </>
               )}
             </h2>
@@ -160,15 +162,15 @@ export function DesignSubscriptionProcess({
             <p>
               {lang === "id" ? (
                 <>
-                  Pilih model kontrak bulanan atau milestone proyek.
+                  Dari konsultasi kebutuhan hingga sistem online siap pakai.
                   <br />
-                  Tim engineer senior siap langsung deploy ke roadmap Anda.
+                  Cepat, transparan, dan bergaransi resmi.
                 </>
               ) : (
                 <>
-                  Choose monthly contract teams or project milestones.
+                  From WhatsApp consultation to production-ready systems.
                   <br />
-                  Senior engineers deploy directly to your codebase.
+                  Fast, transparent, with official warranty.
                 </>
               )}
             </p>
@@ -190,56 +192,80 @@ export function DesignSubscriptionProcess({
                 01
               </span>
               <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-bold tracking-[-0.035em] text-neutral-950 mt-2 mb-2">
-                {lang === "id" ? "Pilih Skema" : "Engagement"}
+                {lang === "id" ? "Pilih Paket & Konsultasi" : "Choose Plan & Consult"}
               </h3>
               <p className="text-xs sm:text-[13.5px] text-neutral-600 leading-relaxed max-w-xs">
                 {lang === "id"
-                  ? "Tentukan apakah Anda butuh dedicated contract squad atau pengembangan proyek spesifik."
-                  : "Decide whether you need a dedicated contract squad or targeted project development."}
+                  ? "Ceritakan alur bisnis Anda via WhatsApp. Kami berikan rekomendasi paket yang paling pas dan hemat biaya."
+                  : "Share your operational flow on WhatsApp. We recommend the best fit and most cost-effective package."}
               </p>
             </div>
 
-            {/* Inner Pricing Card */}
-            <div className="bg-[#E5E5E8] rounded-xl p-5 sm:p-6 mt-8 flex flex-col justify-between border border-neutral-300/60 shadow-inner">
-              <div className="flex items-start justify-between gap-4">
+            {/* Inner Pricing Card (Themed Gradient Wave Surface with Punch-Through White Dots) */}
+            <div
+              className="relative rounded-xl p-5 sm:p-6 mt-8 flex flex-col justify-between overflow-hidden shadow-2xl border border-white/20 select-none text-white bg-[#060910]"
+              style={{
+                background: `linear-gradient(135deg, ${currentTheme.waveColors[0]} 0%, ${currentTheme.waveColors[1]} 30%, ${currentTheme.waveColors[2]} 65%, ${currentTheme.waveColors[3]} 100%)`,
+              }}
+            >
+              {/* Ambient radial glow from theme accent */}
+              <div
+                className="absolute -right-6 -bottom-6 w-36 h-36 rounded-full blur-2xl opacity-40 pointer-events-none"
+                style={{ backgroundColor: currentTheme.waveColors[4] || "var(--theme-accent)" }}
+              />
+
+              {/* Ambient Vignette for text contrast */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none z-0" />
+
+              {/* Punch-through white dot matrix */}
+              <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1.4px,transparent_1.4px)] [background-size:14px_14px] opacity-35 pointer-events-none z-0 mix-blend-overlay" />
+
+              <div className="relative z-10 flex items-start justify-between gap-4">
                 <div>
-                  <span className="font-bold text-base sm:text-lg text-neutral-950 block">
-                    Dedicated Tech Squad
+                  <span className="font-bold text-base sm:text-lg text-white block">
+                    Starter, POS &amp; Squad
                   </span>
-                  <p className="text-xs text-neutral-500 mt-1 leading-normal">
+                  <p className="text-xs text-white/85 mt-1 leading-normal font-medium">
                     {lang === "id"
-                      ? "1 Tech Lead + Senior Full-Stack Engineers full-time untuk produk Anda."
-                      : "1 Tech Lead + Senior Full-Stack Engineers dedicated to your product."}
+                      ? "Website toko mulai 1.5 Jt, kasir POS 3.5 Jt, atau sewa tim bulanan 6.5 Jt."
+                      : "Web stores from 1.5M, POS retail 3.5M, or dedicated squad 6.5M/mo."}
                   </p>
                 </div>
 
-                {/* Glowing Multi-Color Orb */}
+                {/* White Check Badge */}
                 <div className="relative shrink-0">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#3B82F6] via-[#2563EB] to-[#0284C7] shadow-[0_0_18px_rgba(37,99,235,0.6)] animate-pulse" />
+                  <div
+                    className="w-8 h-8 rounded-full bg-white flex items-center justify-center font-black text-xs shadow-md"
+                    style={{ color: currentTheme.waveColors[2] || "#008B7A" }}
+                  >
+                    ✓
+                  </div>
                 </div>
               </div>
 
               {/* Price Row */}
-              <div className="mt-6 mb-5">
-                <span className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-950">
-                  Custom Contract
+              <div className="relative z-10 mt-6 mb-5">
+                <span className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+                  Transparan &amp; Jelas
                 </span>
-                <span className="text-xs sm:text-[13px] text-neutral-500 ml-1.5 font-medium">
-                  {lang === "id" ? "/bulan atau milestone" : "/month or milestone"}
+                <span className="text-xs sm:text-[13px] text-white/80 ml-1.5 font-semibold">
+                  {lang === "id" ? "tanpa biaya tersembunyi" : "no hidden fees"}
                 </span>
               </div>
 
               {/* Join Today Pill Button */}
-              <Button
-                variant="expand"
-                size="md"
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                fullWidth
-              >
-                {lang === "id" ? "Konsultasi Tim" : "Hire Tech Squad"}
-              </Button>
+              <div className="relative z-10">
+                <Button
+                  variant="translucent"
+                  size="md"
+                  href={waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  fullWidth
+                >
+                  {lang === "id" ? "Konsultasi Sekarang" : "Consult Now"}
+                </Button>
+              </div>
             </div>
           </div>
 
@@ -253,12 +279,12 @@ export function DesignSubscriptionProcess({
                 02
               </span>
               <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-bold tracking-[-0.035em] text-neutral-950 mt-2 mb-2">
-                {lang === "id" ? "Sprint & Backlog" : "Sprint & Backlog"}
+                {lang === "id" ? "Pengerjaan Kilat 3-5 Hari" : "Fast 3-5 Days Delivery"}
               </h3>
               <p className="text-xs sm:text-[13.5px] text-neutral-600 leading-relaxed max-w-xs">
                 {lang === "id"
-                  ? "Atur prioritas fitur produk ke dalam sprint mingguan yang transparan dan terukur."
-                  : "Organize feature requirements into transparent, predictable weekly engineering sprints."}
+                  ? "Tim engineer langsung membangun sistem (web toko, scan kasir, atau bot WA) dengan standar kode bersih."
+                  : "Engineers build your system (web store, cashier scanner, or WA bot) with clean architecture."}
               </p>
             </div>
 
@@ -275,8 +301,8 @@ export function DesignSubscriptionProcess({
                   icon = <Clock className="w-3.5 h-3.5 text-[#D97706] shrink-0" />;
                   badgeClass = "text-[#D97706] font-medium";
                 } else if (item.status === "progress") {
-                  icon = <Loader2 className="w-3.5 h-3.5 text-[#2563EB] animate-spin shrink-0" />;
-                  badgeClass = "text-[#2563EB] font-medium";
+                  icon = <Loader2 className="w-3.5 h-3.5 text-[#008B7A] animate-spin shrink-0" />;
+                  badgeClass = "text-[#008B7A] font-medium";
                 } else if (item.status === "queued") {
                   icon = <CircleDashed className="w-3.5 h-3.5 text-neutral-500 shrink-0" />;
                   badgeClass = "text-neutral-500 font-medium";
@@ -314,9 +340,9 @@ export function DesignSubscriptionProcess({
           {/* ------------------------------------------------------------ */}
           <div className="workflow-card relative rounded-xl sm:rounded-2xl p-7 sm:p-9 flex flex-col justify-between shadow-2xl border border-white/20 overflow-hidden min-h-[520px] transition-transform duration-300 hover:-translate-y-1 bg-[#090C15] text-white select-none">
             
-            {/* Living WebGL Gradient Wave matching Hero */}
+            {/* Living WebGL Gradient Wave matching Daytime Theme */}
             <GradientWave
-              colors={["#080C1E", "#1D2B64", "#2563EB", "#38BDF8", "#60A5FA", "#0284C7"]}
+              colors={currentTheme.waveColors}
               shadowPower={4}
               noiseSpeed={0.00004}
               deform={{ incline: 0.5, noiseAmp: 300, noiseFlow: 5, noiseSpeed: 12 }}
@@ -331,16 +357,16 @@ export function DesignSubscriptionProcess({
 
             {/* Top Text */}
             <div className="relative z-10">
-              <span className="font-mono text-xs sm:text-sm font-semibold text-[#8B98D9]">
+              <span className="font-mono text-xs sm:text-sm font-semibold text-[#00E1BA]">
                 03
               </span>
               <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-bold tracking-[-0.035em] text-white mt-2 mb-2">
-                {lang === "id" ? "Deploy & Skalabilitas" : "Deploy & Scale"}
+                {lang === "id" ? "Uji Coba & Terima Beres" : "Test, Launch & Handover"}
               </h3>
               <p className="text-xs sm:text-[13.5px] text-white/85 leading-relaxed max-w-xs">
                 {lang === "id"
-                  ? "Kode teruji otomatis, ditinjau ketat, dan dideploy ke server produksi dengan SLA keandalan tinggi."
-                  : "Automated tests, strict code reviews, and zero-downtime deployment to production servers."}
+                  ? "Review langsung sistem Anda, panduan staf hingga mahir, garansi 30 hari bug-free, dan sistem live siap pakai tanpa pusing teknis."
+                  : "Live system walkthrough, staff onboarding, 30-day bug-free warranty, and fully managed live systems without server hassles."}
               </p>
             </div>
 

@@ -15,7 +15,7 @@ export function RotatingSolutionsText({
   interval = 3000,
   effect = "slide",
   className = "",
-  cursorColor = "#335CFF",
+  cursorColor = "#00E1BA",
 }: RotatingSolutionsTextProps) {
   const [index, setIndex] = useState(0);
 

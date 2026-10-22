@@ -49,3 +49,12 @@ export interface SiteSettings {
   contactEmail: string;
   defaultLanguage: "id" | "en";
 }
+
+export interface SquadMember {
+  id: string;
+  name: string;
+  role: BilingualString;
+  description: BilingualString;
+  image: string;
+  accentColor?: string;
+}

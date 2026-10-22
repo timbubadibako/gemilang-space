@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Globe, CheckSquare2, Gauge, Zap, PauseCircle, Award } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { squadMembers } from "@/data/site-content";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -13,45 +14,6 @@ if (typeof window !== "undefined") {
 interface WhyTeamsChooseUsProps {
   lang: "id" | "en";
 }
-
-// 5 Squad Member Profiles (No Interns, 100% Core Senior Builders)
-const squadMembers = [
-  {
-    role: "Founder & Lead Architect",
-    name: "Chatto",
-    tag: "@itschatto",
-    image: "/founder.png",
-    pos: "col-1-top", // Kiri Atas
-  },
-  {
-    role: "Principal Backend & DevOps",
-    name: "Devon",
-    tag: "Go / Cloud / Security",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
-    pos: "col-1-bottom", // Kiri Bawah
-  },
-  {
-    role: "Full-Stack & Web Architect",
-    name: "Alex",
-    tag: "Next.js / TypeScript",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
-    pos: "col-2-center", // Tengah
-  },
-  {
-    role: "Mobile & Core Systems",
-    name: "Rian",
-    tag: "Flutter / iOS / Android",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
-    pos: "col-3-top", // Kanan Atas
-  },
-  {
-    role: "AI & Data Engineer",
-    name: "Maya",
-    tag: "Python / LLMs / Agents",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
-    pos: "col-3-bottom", // Kanan Bawah
-  },
-];
 
 // Exact Beew ticker items
 const tickerItems = [
@@ -230,7 +192,7 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
           <div className="flex flex-col gap-3 h-full min-h-0">
             
             {/* 1.1 Kiri Atas: Founder & Lead Architect */}
-            <div className="bento-card flex-[1.4] min-h-[320px] lg:min-h-0 relative rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-950 text-white p-6 sm:p-7 flex flex-col justify-between border border-neutral-300/60 group select-none">
+            <div className="bento-card flex-[1.4] min-h-[320px] lg:min-h-0 relative rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-950 text-white p-6 sm:p-7 flex flex-col justify-end border border-neutral-300/60 group select-none">
               <div className="absolute inset-0 z-0">
                 <Image
                   src={squadMembers[0].image}
@@ -244,29 +206,21 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
               </div>
 
-              <div className="relative z-10 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 bg-black/70 backdrop-blur-md border border-white/15 px-3 py-1 rounded-full text-[11px] font-mono font-medium text-white">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                  {squadMembers[0].tag}
-                </span>
-                <span className="text-[10px] font-mono text-neutral-400">SQUAD 01</span>
-              </div>
-
               <div className="relative z-10">
-                <span className="text-[11px] font-mono font-semibold text-[#38BDF8] uppercase tracking-wider block mb-1">
-                  {squadMembers[0].role}
+                <span className={`text-[11px] font-mono font-semibold ${squadMembers[0].accentColor || "text-[#00E1BA]"} uppercase tracking-wider block mb-1`}>
+                  {squadMembers[0].role[lang]}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
                   {squadMembers[0].name}
                 </h3>
                 <p className="text-xs text-neutral-300 mt-1 leading-relaxed">
-                  {lang === "id" ? "Memimpin arah arsitektur & delivery langsung." : "Leading overall architecture and code delivery."}
+                  {squadMembers[0].description[lang]}
                 </p>
               </div>
             </div>
 
             {/* 1.2 Kiri Bawah: Principal Backend & DevOps */}
-            <div className="bento-card flex-1 min-h-[260px] lg:min-h-0 relative rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-950 text-white p-6 sm:p-7 flex flex-col justify-between border border-neutral-300/60 group select-none">
+            <div className="bento-card flex-1 min-h-[260px] lg:min-h-0 relative rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-950 text-white p-6 sm:p-7 flex flex-col justify-end border border-neutral-300/60 group select-none">
               <div className="absolute inset-0 z-0">
                 <Image
                   src={squadMembers[1].image}
@@ -279,23 +233,15 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
               </div>
 
-              <div className="relative z-10 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 bg-black/70 backdrop-blur-md border border-white/15 px-3 py-1 rounded-full text-[11px] font-mono font-medium text-white">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  {squadMembers[1].tag}
-                </span>
-                <span className="text-[10px] font-mono text-neutral-400">SQUAD 02</span>
-              </div>
-
               <div className="relative z-10">
-                <span className="text-[11px] font-mono font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
-                  {squadMembers[1].role}
+                <span className={`text-[11px] font-mono font-semibold ${squadMembers[1].accentColor || "text-emerald-400"} uppercase tracking-wider block mb-1`}>
+                  {squadMembers[1].role[lang]}
                 </span>
                 <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">
                   {squadMembers[1].name}
                 </h3>
                 <p className="text-xs text-neutral-300 mt-0.5 leading-relaxed">
-                  {lang === "id" ? "Arsitektur cloud, skalabilitas server & keamanan." : "Cloud infrastructure, scalability & security."}
+                  {squadMembers[1].description[lang]}
                 </p>
               </div>
             </div>
@@ -339,7 +285,7 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
             </div>
 
             {/* 2.3 Tengah: Foto 3 - Full-Stack & Web Architect */}
-            <div className="bento-card flex-1 min-h-[220px] lg:min-h-0 relative rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-950 text-white p-6 sm:p-7 flex flex-col justify-between border border-neutral-300/60 group select-none">
+            <div className="bento-card flex-1 min-h-[220px] lg:min-h-0 relative rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-950 text-white p-6 sm:p-7 flex flex-col justify-end border border-neutral-300/60 group select-none">
               <div className="absolute inset-0 z-0">
                 <Image
                   src={squadMembers[2].image}
@@ -352,23 +298,15 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
               </div>
 
-              <div className="relative z-10 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 bg-black/70 backdrop-blur-md border border-white/15 px-3 py-1 rounded-full text-[11px] font-mono font-medium text-white">
-                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                  {squadMembers[2].tag}
-                </span>
-                <span className="text-[10px] font-mono text-neutral-400">SQUAD 03</span>
-              </div>
-
               <div className="relative z-10">
-                <span className="text-[11px] font-mono font-semibold text-purple-400 uppercase tracking-wider block mb-1">
-                  {squadMembers[2].role}
+                <span className={`text-[11px] font-mono font-semibold ${squadMembers[2].accentColor || "text-purple-400"} uppercase tracking-wider block mb-1`}>
+                  {squadMembers[2].role[lang]}
                 </span>
                 <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">
                   {squadMembers[2].name}
                 </h3>
                 <p className="text-xs text-neutral-300 mt-0.5 leading-relaxed">
-                  {lang === "id" ? "Rekayasa web enterprise & performa frontend tajam." : "Enterprise web applications & reactive performance."}
+                  {squadMembers[2].description[lang]}
                 </p>
               </div>
             </div>
@@ -407,7 +345,7 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
           <div className="flex flex-col gap-3 h-full min-h-0 md:col-span-2 lg:col-span-1">
             
             {/* 3.1 Kanan Atas: Mobile & Core Systems */}
-            <div className="bento-card flex-[1.4] min-h-[320px] lg:min-h-0 relative rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-950 text-white p-6 sm:p-7 flex flex-col justify-between border border-neutral-300/60 group select-none">
+            <div className="bento-card flex-[1.4] min-h-[320px] lg:min-h-0 relative rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-950 text-white p-6 sm:p-7 flex flex-col justify-end border border-neutral-300/60 group select-none">
               <div className="absolute inset-0 z-0">
                 <Image
                   src={squadMembers[3].image}
@@ -420,29 +358,21 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
               </div>
 
-              <div className="relative z-10 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 bg-black/70 backdrop-blur-md border border-white/15 px-3 py-1 rounded-full text-[11px] font-mono font-medium text-white">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  {squadMembers[3].tag}
-                </span>
-                <span className="text-[10px] font-mono text-neutral-400">SQUAD 04</span>
-              </div>
-
               <div className="relative z-10">
-                <span className="text-[11px] font-mono font-semibold text-cyan-400 uppercase tracking-wider block mb-1">
-                  {squadMembers[3].role}
+                <span className={`text-[11px] font-mono font-semibold ${squadMembers[3].accentColor || "text-cyan-400"} uppercase tracking-wider block mb-1`}>
+                  {squadMembers[3].role[lang]}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
                   {squadMembers[3].name}
                 </h3>
                 <p className="text-xs text-neutral-300 mt-1 leading-relaxed">
-                  {lang === "id" ? "Aplikasi mobile lintas platform, offline-sync & native UX." : "Cross-platform mobile apps, offline sync & native UX."}
+                  {squadMembers[3].description[lang]}
                 </p>
               </div>
             </div>
 
             {/* 3.2 Kanan Bawah: AI & Data Engineer */}
-            <div className="bento-card flex-1 min-h-[260px] lg:min-h-0 relative rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-950 text-white p-6 sm:p-7 flex flex-col justify-between border border-neutral-300/60 group select-none">
+            <div className="bento-card flex-1 min-h-[260px] lg:min-h-0 relative rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-950 text-white p-6 sm:p-7 flex flex-col justify-end border border-neutral-300/60 group select-none">
               <div className="absolute inset-0 z-0">
                 <Image
                   src={squadMembers[4].image}
@@ -455,23 +385,15 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
               </div>
 
-              <div className="relative z-10 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 bg-black/70 backdrop-blur-md border border-white/15 px-3 py-1 rounded-full text-[11px] font-mono font-medium text-white">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  {squadMembers[4].tag}
-                </span>
-                <span className="text-[10px] font-mono text-neutral-400">SQUAD 05</span>
-              </div>
-
               <div className="relative z-10">
-                <span className="text-[11px] font-mono font-semibold text-amber-400 uppercase tracking-wider block mb-1">
-                  {squadMembers[4].role}
+                <span className={`text-[11px] font-mono font-semibold ${squadMembers[4].accentColor || "text-amber-400"} uppercase tracking-wider block mb-1`}>
+                  {squadMembers[4].role[lang]}
                 </span>
                 <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">
                   {squadMembers[4].name}
                 </h3>
                 <p className="text-xs text-neutral-300 mt-0.5 leading-relaxed">
-                  {lang === "id" ? "Integrasi LLM, agen otonom & data pipeline cerdas." : "LLM integrations, autonomous agents & intelligent pipelines."}
+                  {squadMembers[4].description[lang]}
                 </p>
               </div>
             </div>

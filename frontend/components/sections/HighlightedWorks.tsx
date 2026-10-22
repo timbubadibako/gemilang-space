@@ -254,7 +254,7 @@ export function HighlightedWorks({ lang, whatsappNumber }: HighlightedWorksProps
                       </h3>
 
                       {/* Impact / Funding Pill Badge */}
-                      <div className="inline-block bg-[#2E51FF]/10 text-[#2E51FF] font-bold text-xs sm:text-[13px] px-3.5 py-1.5 rounded-full font-mono">
+                      <div className="inline-block bg-[#00E1BA]/15 text-[#007D6D] border border-[#00E1BA]/30 font-bold text-xs sm:text-[13px] px-3.5 py-1.5 rounded-full font-mono">
                         {proj.badge[lang]}
                       </div>
                     </div>

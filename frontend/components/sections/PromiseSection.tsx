@@ -10,18 +10,18 @@ interface PromiseSectionProps {
 
 const copyData = {
   en: {
-    line1: "Think of us as",
-    highlight: "your senior design team.",
-    line2: "Without hiring one.",
-    sub1: "You bring the priorities.",
-    sub2: "We bring the thinking, craft and execution.",
+    line1: "One dedicated tech partner",
+    highlight: "for all your digital business systems.",
+    line2: "Fast, turnkey, hassle-free.",
+    sub1: "You get the turnkey results.",
+    sub2: "Fully managed deployment & systems. Zero technical headache.",
   },
   id: {
-    line1: "Anggap kami sebagai",
-    highlight: "tim rekayasa & desain senior Anda.",
-    line2: "Tanpa repot merekrut.",
-    sub1: "Anda tentukan prioritas bisnis.",
-    sub2: "Kami hadirkan pemikiran, keahlian teknis, dan eksekusi.",
+    line1: "Satu partner teknologi",
+    highlight: "untuk semua sistem digital bisnis Anda.",
+    line2: "Cepat, beres, tanpa ribet.",
+    sub1: "Anda tinggal terima beres.",
+    sub2: "Deployment & sistem kami yang kelola penuh. Tanpa pusing urusan teknis.",
   },
 };
 
@@ -103,7 +103,7 @@ export function PromiseSection({ lang }: PromiseSectionProps) {
           <span
             key={`c-${char}-${cIdx}`}
             className={`${className} inline-block will-change-[opacity,filter] ${
-              isHighlight ? "text-[#335CFF]" : "text-white"
+              isHighlight ? "text-[#00E1BA]" : "text-white"
             }`}
             style={{
               opacity: 0.12,
@@ -123,8 +123,8 @@ export function PromiseSection({ lang }: PromiseSectionProps) {
       ref={sectionRef}
       className="relative w-full h-[50vh] min-h-[380px] max-h-[620px] bg-[#04060A] text-white flex items-center justify-center px-6 sm:px-8 overflow-hidden z-30 my-8 sm:my-12"
     >
-      {/* Subtle ambient glow in center matching Beew deep space background */}
-      <div className="absolute w-[450px] h-[260px] bg-[#335CFF]/10 blur-[130px] rounded-full pointer-events-none -z-0" />
+      {/* Subtle ambient glow in center matching Gemilang tosca deep space background */}
+      <div className="absolute w-[450px] h-[260px] bg-[#00E1BA]/10 blur-[130px] rounded-full pointer-events-none -z-0" />
 
       <div
         ref={containerRef}

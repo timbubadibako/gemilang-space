@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Sparkles, BookOpen, Clock } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CallToActionSection } from "@/components/sections/CallToActionSection";
-import { blogPosts } from "@/data/blog-posts";
+import { ArticleCard } from "@/components/ui/ArticleCard";
+import { blogPosts, getLocalizedText } from "@/data/blog-posts";
 import { navItems, siteSettings } from "@/data/site-content";
 
 export default function BlogArchivePage() {
@@ -14,21 +14,25 @@ export default function BlogArchivePage() {
   const [activeCategory, setActiveCategory] = useState("All");
 
   const categories = [
-    "All",
-    "Design Philosophy",
-    "UX & Emotion",
-    "Web3 & Tech",
-    "Interface Design",
-    "Brand Strategy",
+    { id: "Semua", en: "All" },
+    { id: "Filosofi Desain", en: "Design Philosophy" },
+    { id: "UX & Emosi", en: "UX & Emotion" },
+    { id: "Web3 & Tech", en: "Web3 & Tech" },
+    { id: "Desain Antarmuka", en: "Interface Design" },
+    { id: "Strategi Brand", en: "Brand Strategy" },
   ];
 
   const filteredPosts =
-    activeCategory === "All"
+    activeCategory === "All" || activeCategory === "Semua"
       ? blogPosts
-      : blogPosts.filter((p) => p.category === activeCategory);
+      : blogPosts.filter(
+          (p) =>
+            getLocalizedText(p.category, "en") === activeCategory ||
+            getLocalizedText(p.category, "id") === activeCategory
+        );
 
   return (
-    <div className="min-h-screen bg-[#04060A] text-white selection:bg-[#335CFF] selection:text-white flex flex-col">
+    <div className="min-h-screen bg-[#04060A] text-white selection:bg-[#00E1BA] selection:text-white flex flex-col">
       {/* Navbar */}
       <Navbar
         navItems={navItems}
@@ -44,7 +48,7 @@ export default function BlogArchivePage() {
           {/* Header */}
           <div className="max-w-[760px] mb-12 sm:mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono font-medium text-neutral-300 uppercase mb-4 tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-[#38bdf8]" />
+              <Sparkles className="w-3.5 h-3.5 text-[var(--theme-accent)]" />
               {lang === "id" ? "Wawasan & Esai" : "Perspectives & Essays"}
             </div>
 
@@ -63,70 +67,38 @@ export default function BlogArchivePage() {
 
           {/* Category Filter Pills */}
           <div className="flex flex-wrap gap-2 mb-10 sm:mb-14 pb-4 border-b border-white/10">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setActiveCategory(cat)}
-                className={`text-xs font-medium px-4 py-2 rounded-full border transition-all cursor-pointer ${
-                  activeCategory === cat
-                    ? "bg-white text-neutral-950 border-white shadow-sm font-semibold"
-                    : "bg-white/[0.04] text-neutral-300 border-white/10 hover:bg-white/10 hover:text-white"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+            {categories.map((catObj) => {
+              const label = catObj[lang];
+              const isSelected =
+                activeCategory === catObj.en || activeCategory === catObj.id;
+
+              return (
+                <button
+                  key={catObj.en}
+                  type="button"
+                  onClick={() => setActiveCategory(catObj.en)}
+                  className={`text-xs font-medium px-4 py-2 rounded-full border transition-all cursor-pointer ${
+                    isSelected
+                      ? "bg-white text-neutral-950 border-white shadow-sm font-semibold"
+                      : "bg-white/[0.04] text-neutral-300 border-white/10 hover:bg-white/10 hover:text-white"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Articles Feed */}
-          <div className="divide-y divide-white/10 border-y border-white/10">
+          {/* Reusable Articles Feed */}
+          <div className="border-t border-white/10">
             {filteredPosts.map((post, idx) => (
-              <article
+              <ArticleCard
                 key={post.slug}
-                className="py-10 sm:py-12 group transition-all relative"
-              >
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start"
-                >
-                  {/* Left Column: Number & Metadata */}
-                  <div className="lg:col-span-3 flex flex-row lg:flex-col items-center lg:items-start justify-between lg:justify-start gap-3">
-                    <span className="text-xs font-mono font-bold text-neutral-500">
-                      0{idx + 1}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-mono uppercase bg-white/[0.06] border border-white/10 text-neutral-300 px-2.5 py-1 rounded-full">
-                        {post.category}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs text-neutral-400 font-mono mt-1">
-                      <Clock className="w-3.5 h-3.5" />
-                      <span>{post.readTime}</span>
-                    </div>
-                  </div>
-
-                  {/* Middle Column: Title & Excerpt */}
-                  <div className="lg:col-span-7 space-y-3">
-                    <h2 className="text-xl sm:text-2xl lg:text-[28px] font-bold text-white tracking-tight leading-snug group-hover:text-blue-400 transition-colors">
-                      {post.title}
-                    </h2>
-                    <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-2xl font-normal">
-                      {post.excerpt}
-                    </p>
-                    <div className="text-[11px] text-neutral-500 font-mono pt-1">
-                      {post.date} • By {post.author.name}
-                    </div>
-                  </div>
-
-                  {/* Right Column: Arrow Action */}
-                  <div className="lg:col-span-2 flex justify-end lg:pt-2">
-                    <div className="w-10 h-10 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black group-hover:scale-110 transition-all duration-300">
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                    </div>
-                  </div>
-                </Link>
-              </article>
+                post={post}
+                index={idx}
+                lang={lang}
+                variant="row"
+              />
             ))}
           </div>
 

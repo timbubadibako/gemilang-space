@@ -17,12 +17,20 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { CallToActionSection } from "@/components/sections/CallToActionSection";
 import { heroContent, navItems, siteSettings } from "@/data/site-content";
+import { EstimateDrawer } from "@/components/ui/EstimateDrawer";
 
 export default function HomePage() {
   const [lang, setLang] = useState<"id" | "en">(siteSettings.defaultLanguage);
+  const [isEstimatorOpen, setIsEstimatorOpen] = useState(false);
+  const [estimatorTier, setEstimatorTier] = useState<string>("starter");
+
+  const handleOpenEstimator = (tier: string = "starter") => {
+    setEstimatorTier(tier);
+    setIsEstimatorOpen(true);
+  };
 
   return (
-    <main className="min-h-screen bg-[#04060A] text-white selection:bg-[#335CFF] selection:text-white relative overflow-x-clip flex flex-col">
+    <main className="min-h-screen bg-[#04060A] text-white selection:bg-[#00E1BA] selection:text-neutral-950 relative overflow-x-clip flex flex-col">
       
       {/* 
         1. Hero Viewport (Exact 90% / 90vh of the screen height):
@@ -36,6 +44,7 @@ export default function HomePage() {
           currentLang={lang}
           onLangChange={setLang}
           whatsappNumber={siteSettings.whatsappNumber}
+          onOpenEstimator={() => handleOpenEstimator("starter")}
         />
 
         {/* Hero Section Container */}
@@ -44,6 +53,7 @@ export default function HomePage() {
             content={heroContent}
             lang={lang}
             whatsappNumber={siteSettings.whatsappNumber}
+            onOpenEstimator={handleOpenEstimator}
           />
         </div>
       </div>
@@ -108,7 +118,11 @@ export default function HomePage() {
         - Interactive billing period toggle (monthly, quarterly, yearly with discount chips)
         - Essential ($4,500/mo), Priority ($7,500/mo), and Custom scope cards with pre-filled WhatsApp links
       */}
-      <PricingSection lang={lang} whatsappNumber={siteSettings.whatsappNumber} />
+      <PricingSection
+        lang={lang}
+        whatsappNumber={siteSettings.whatsappNumber}
+        onOpenEstimator={handleOpenEstimator}
+      />
 
       {/* 
         11. Frequently Asked Questions (FAQ):
@@ -133,6 +147,17 @@ export default function HomePage() {
         - Iconic signature display, direct channel links, status indicators, and legal attribution
       */}
       <Footer lang={lang} />
+
+      {/* 
+        15. Interactive Estimate & WhatsApp Checkout Drawer
+      */}
+      <EstimateDrawer
+        isOpen={isEstimatorOpen}
+        onClose={() => setIsEstimatorOpen(false)}
+        whatsappNumber={siteSettings.whatsappNumber}
+        defaultTier={estimatorTier}
+        lang={lang}
+      />
 
     </main>
   );

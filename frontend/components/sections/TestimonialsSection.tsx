@@ -113,7 +113,7 @@ const testimonialsData: Testimonial[] = [
     author: "Hossam Saraya",
     role: "CTO @ KEOM Protocol",
     initials: "HS",
-    brandColor: "bg-[#335CFF]",
+    brandColor: "bg-[#00E1BA]",
   },
   {
     id: "gizatech",
@@ -371,7 +371,7 @@ export function TestimonialsSection({ lang }: TestimonialsSectionProps) {
                       {/* Badge */}
                       {item.badge && (
                         <div className="mt-4">
-                          <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10.5px] font-mono font-bold bg-[#335CFF]/10 text-[#335CFF]">
+                          <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10.5px] font-mono font-bold bg-[#00E1BA]/15 text-[#008B7A]">
                             {item.badge}
                           </span>
                         </div>

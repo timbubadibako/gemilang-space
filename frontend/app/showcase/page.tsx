@@ -105,7 +105,7 @@ export default function ShowcasePage() {
     : showcaseItems.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#335CFF] selection:text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
       {/* Light-Themed Navbar matching reference */}
       <Navbar
         navItems={navItems}
@@ -207,7 +207,7 @@ export default function ShowcasePage() {
 
                 {/* Typography below image (1:1 with Screenshot 0) */}
                 <div className="mt-4 flex flex-col">
-                  <h3 className="text-base sm:text-[17px] font-bold text-neutral-950 tracking-tight group-hover:text-[#335CFF] transition-colors leading-snug">
+                  <h3 className="text-base sm:text-[17px] font-bold text-neutral-950 tracking-tight group-hover:text-[#00E1BA] transition-colors leading-snug">
                     {item.title}
                   </h3>
                   <div className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 mt-1 font-semibold">

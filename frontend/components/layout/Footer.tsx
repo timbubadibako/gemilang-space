@@ -4,6 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { siteSettings } from "@/data/site-content";
+import { GemilangLogo } from "@/components/ui/GemilangLogo";
+import { Button } from "@/components/ui/button";
 
 interface FooterProps {
   lang: "id" | "en";
@@ -11,23 +13,21 @@ interface FooterProps {
 
 export function Footer({ lang }: FooterProps) {
   const categories = [
-    "ARTIFICIAL INTELLIGENCE",
-    "WEB3 & BLOCKCHAIN",
-    "FINTECH",
-    "SAAS",
-    "B2B",
-    "ECOMMERCE",
-    "IT",
-    "TECH",
+    "SISTEM KASIR (POS)",
+    "WEBSITE TOKO CEPAT",
+    "OTOMASI WHATSAPP",
+    "APLIKASI MOBILE",
+    "CHATBOT AI",
+    "TIM IT ON-DEMAND",
+    "SUPABASE & POSTGRES",
+    "NEXT.JS & FLUTTER",
   ];
 
   const caseStudies = [
-    { title: "5U AI — Freight B2B UI/UX Design.", highlight: "(Raised $3.2M)" },
-    { title: "Efficense — B2B Web Design and Framer Development", highlight: "" },
-    { title: "Enorm — B2B Web Design and Framer Development", highlight: "" },
-    { title: "Defendzero — SaaS Web Design and Framer Development", highlight: "" },
-    { title: "Mindsphere — AI Web Design, Brand Design and Framer Development", highlight: "" },
-    { title: "Spex Software — Development & Cyber Security Landing Page Design", highlight: "" },
+    { title: "Fermion Roastery — E-Commerce Kopi Specialty & Multi-Gudang", highlight: "(+300% Sales)" },
+    { title: "David Beckham Store — Sistem Kasir POS & Rekap Struk Thermal", highlight: "(Hemat 12 Jam/Pekan)" },
+    { title: "Portal Desa Digital — Pelayanan Surat Online Warga & Administrasi", highlight: "(10.000+ Warga)" },
+    { title: "Lari App — Pelacak Rute GPS, Leaderboard & Offline Sync", highlight: "(Ringan & Presisi)" },
   ];
 
   const socialPills = [
@@ -42,8 +42,8 @@ export function Footer({ lang }: FooterProps) {
 
   const waUrl = `https://wa.me/${siteSettings.whatsappNumber}?text=${encodeURIComponent(
     lang === "id"
-      ? "Halo Gemilang Space, saya ingin mendiskusikan proyek digital."
-      : "Hello Gemilang Space, I would like to discuss a digital project."
+      ? "Halo Gemilang, saya ingin mendiskusikan proyek digital."
+      : "Hello Gemilang, I would like to discuss a digital project."
   )}`;
 
   return (
@@ -53,7 +53,7 @@ export function Footer({ lang }: FooterProps) {
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[#04060A]/40 pointer-events-none" />
 
       {/* Background Subtle Ambient Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-[#335CFF]/15 to-transparent blur-[140px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-[var(--theme-accent)]/15 to-transparent blur-[140px] pointer-events-none" />
 
       <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8 relative z-10">
         
@@ -64,55 +64,36 @@ export function Footer({ lang }: FooterProps) {
           
           {/* Left Column: Brand, Description, CTA Button */}
           <div className="lg:col-span-4 flex flex-col items-start">
-            {/* Logo: Icon + Brand Name */}
-            <Link href="/" className="flex items-center gap-2.5 group mb-6">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-white via-neutral-200 to-neutral-400 flex items-center justify-center p-1 shadow-sm">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="w-5 h-5 text-black"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                  <path d="M2 17l10 5 10-5" />
-                  <path d="M2 12l10 5 10-5" />
-                </svg>
-              </div>
-              <span className="text-xl font-bold tracking-tight text-white font-['Brockmann_Medium',sans-serif]">
-                gemilang
-              </span>
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2.5 group mb-6" aria-label="Gemilang Home">
+              <GemilangLogo className="h-[34px] sm:h-[40px]" alt="Gemilang" />
             </Link>
 
             {/* Studio Narrative Description */}
             <p className="text-xs sm:text-[13px] text-neutral-400 leading-relaxed max-w-sm mb-8 font-normal">
               {lang === "id"
-                ? "Gemilang Space adalah studio desain produk dan rekayasa digital founder-led yang membantu startup membangun produk digital, website, brand, dan design system melalui kemitraan langganan dan proyek kustom."
-                : "Gemilang Space is a founder-led product design and engineering studio helping startups build digital products, websites, brands and design systems through subscription-based partnerships and custom projects."}
+                ? "Gemilang adalah studio rekayasa teknologi dan produk digital founder-led. Kami membangun website toko cepat, sistem kasir (POS), integrasi WhatsApp, dan menyediakan tim IT on-demand bulanan untuk UMKM & bisnis berkembang."
+                : "Gemilang is a founder-led engineering studio delivering fast web stores, retail POS systems, WhatsApp automation, and dedicated on-demand tech squads for growing businesses."}
             </p>
 
-            {/* Start a Project Pill Button (1:1 with reference) */}
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#F2F2F5] hover:bg-black text-neutral-950 hover:text-white border-2 border-transparent hover:border-white p-1 pl-1 pr-5 rounded-[16px] text-xs sm:text-[13.5px] font-semibold transition-all duration-300 group/btn cursor-pointer shadow-sm select-none"
-            >
-              <div className="w-8 h-8 rounded-[10px] bg-black group-hover/btn:bg-transparent text-white flex items-center justify-center shrink-0 transition-colors duration-300">
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
-              </div>
-              <span className="font-semibold tracking-tight">
-                {lang === "id" ? "Mulai Proyek" : "Start a Project"}
-              </span>
-            </a>
+            {/* Start a Project Pill Button */}
+            <div className="pt-1">
+              <Button
+                variant="expand-primary"
+                size="md"
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {lang === "id" ? "Diskusi WhatsApp" : "Discuss on WhatsApp"}
+              </Button>
+            </div>
           </div>
 
-          {/* Column 1: Gemilang Space Nav */}
+          {/* Column 1: Gemilang Nav */}
           <div className="lg:col-span-3 space-y-3.5">
             <h4 className="text-sm sm:text-[15px] font-semibold text-white tracking-tight mb-4">
-              Gemilang Space
+              Gemilang
             </h4>
             <div className="space-y-2.5 text-xs sm:text-[13px] text-neutral-300 font-normal">
               <div>
@@ -134,7 +115,7 @@ export function Footer({ lang }: FooterProps) {
                 <a href="#showcase" className="hover:text-white transition-colors">
                   Showcase
                 </a>
-                <span className="text-[9px] font-mono uppercase bg-[#335CFF] text-white px-1.5 py-0.5 rounded font-bold leading-none">
+                <span className="text-[9px] font-mono uppercase bg-[var(--theme-accent)] text-[var(--theme-accent-text)] px-1.5 py-0.5 rounded font-bold leading-none">
                   NEW
                 </span>
               </div>
@@ -211,7 +192,7 @@ export function Footer({ lang }: FooterProps) {
               <h4 className="text-sm sm:text-[15px] font-semibold text-white tracking-tight">
                 {lang === "id" ? "Langganan" : "Design Subscription"}
               </h4>
-              <span className="text-[9px] font-mono uppercase bg-[#335CFF] text-white px-1.5 py-0.5 rounded font-bold leading-none">
+              <span className="text-[9px] font-mono uppercase bg-[var(--theme-accent)] text-[var(--theme-accent-text)] px-1.5 py-0.5 rounded font-bold leading-none">
                 NEW
               </span>
             </div>
@@ -324,26 +305,26 @@ export function Footer({ lang }: FooterProps) {
         <div className="pt-8 pb-10 sm:pb-14 flex flex-col md:flex-row md:items-center justify-between gap-6 text-xs text-neutral-400 font-normal">
           <div>
             <p className="font-semibold text-white text-[13px] sm:text-sm">
-              © 2026 Gemilang Space LLC | All rights reserved.
+              © 2026 Gemilang | All rights reserved.
             </p>
             <p className="text-[11px] text-neutral-400 mt-1.5">
-              Sudirman Central Business District, Jakarta, Indonesia • Worldwide Remote
+              Kuningan &amp; Cirebon, Jawa Barat • Layanan Remote Seluruh Indonesia
             </p>
           </div>
 
           <div className="flex flex-col md:items-end gap-2 text-[11px]">
             <p className="font-semibold text-white flex items-center gap-1.5">
-              Crafted with precision &amp; pixel love <span className="text-[#38bdf8]">🩵</span>
+              Dibangun dengan presisi rekayasa &amp; integritas <span className="text-[var(--theme-accent)]">⚡</span>
             </p>
             <div className="flex items-center gap-4 text-neutral-400">
-              <Link href="#terms" className="hover:text-white transition-colors">
-                Terms of Service
+              <Link href="#pricing" className="hover:text-white transition-colors">
+                Paket Mulai 1.5 Jt
               </Link>
-              <Link href="#cookie" className="hover:text-white transition-colors">
-                Cookie Policy
+              <Link href="#services" className="hover:text-white transition-colors">
+                Layanan
               </Link>
-              <Link href="#privacy" className="hover:text-white transition-colors">
-                Privacy Policy
+              <Link href="#works" className="hover:text-white transition-colors">
+                Portofolio
               </Link>
             </div>
           </div>
@@ -352,34 +333,24 @@ export function Footer({ lang }: FooterProps) {
       </div>
 
       {/* ============================================================== */}
-      {/* ROW 5: GIANT SIGNATURE DISPLAY: "gemilang space" (1:1 Beew)      */}
+      {/* ROW 5: GIANT SIGNATURE DISPLAY: GEMILANG LOGO                  */}
       {/* ============================================================== */}
       <div 
-        className="w-full max-w-[1400px] mx-auto select-none overflow-hidden flex justify-center items-start aspect-[8.24615] relative -mb-1"
+        className="w-full max-w-[1440px] mx-auto select-none overflow-hidden flex justify-end items-end px-5 sm:px-7 lg:px-8 pt-4 pb-6 relative -mb-1"
       >
-        <svg
-          viewBox="0 0 1708 260"
-          className="w-full h-auto select-none pointer-events-none"
+        <div
+          className="w-full flex justify-end items-center"
           style={{
-            maskImage: "linear-gradient(0deg, rgba(0,0,0,0) 25%, rgba(0,0,0,1) 85%)",
-            WebkitMaskImage: "linear-gradient(0deg, rgba(0,0,0,0) 25%, rgba(0,0,0,1) 85%)",
+            maskImage: "linear-gradient(0deg, rgba(0,0,0,0) 5%, rgba(0,0,0,1) 90%)",
+            WebkitMaskImage: "linear-gradient(0deg, rgba(0,0,0,0) 5%, rgba(0,0,0,1) 90%)",
           }}
         >
-          <text
-            x="50%"
-            y="198"
-            textAnchor="middle"
-            fill="#FFFFFF"
-            style={{
-              fontFamily: "'Brockmann Medium', 'Brockmann Medium Placeholder', sans-serif",
-              fontSize: "216px",
-              fontWeight: 500,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            gemilang space
-          </text>
-        </svg>
+          <GemilangLogo
+            className="h-16 sm:h-20 md:h-24 lg:h-28 ml-auto opacity-85 pointer-events-none"
+            textColor="rgba(255, 255, 255, 0.75)"
+            alt="Gemilang"
+          />
+        </div>
       </div>
 
     </footer>

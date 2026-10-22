@@ -164,7 +164,7 @@ export default function FAQPage() {
   const currentCategory = faqCategories.find((c) => c.id === activeTab) || faqCategories[0];
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#335CFF] selection:text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
       {/* Light-Themed Navbar */}
       <Navbar
         navItems={navItems}
@@ -242,7 +242,7 @@ export default function FAQPage() {
               {/* Have a Different Question Card (1:1 with Beew) */}
               <div className="p-6 rounded-2xl bg-[#F8F9FA] border border-neutral-200/80 space-y-3">
                 <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-neutral-400">
-                  <HelpCircle className="w-4 h-4 text-[#335CFF]" />
+                  <HelpCircle className="w-4 h-4 text-[#00E1BA]" />
                   <span>{lang === "id" ? "Punya pertanyaan lain?" : "Have a different question?"}</span>
                 </div>
                 <p className="text-xs text-neutral-600 leading-relaxed font-normal">
@@ -255,14 +255,14 @@ export default function FAQPage() {
                     href={`https://wa.me/${siteSettings.whatsappNumber}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-neutral-900 hover:text-[#335CFF] transition-colors"
+                    className="flex items-center gap-2 text-neutral-900 hover:text-[#00E1BA] transition-colors"
                   >
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
                     <span>WhatsApp: +{siteSettings.whatsappNumber}</span>
                   </a>
                   <a
                     href="mailto:hi@gemilangspace.com"
-                    className="flex items-center gap-2 text-neutral-900 hover:text-[#335CFF] transition-colors"
+                    className="flex items-center gap-2 text-neutral-900 hover:text-[#00E1BA] transition-colors"
                   >
                     <Mail className="w-3.5 h-3.5 text-neutral-500" />
                     <span>hi@gemilangspace.com</span>

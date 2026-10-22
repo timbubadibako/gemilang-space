@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Plus } from "lucide-react";
 import { GradientWave } from "@/components/ui/gradient-wave";
+import { useDaytimeTheme } from "@/lib/daytime-context";
 
 interface ServicesSectionProps {
   lang: "id" | "en";
@@ -20,107 +21,124 @@ const servicesData: ServiceItem[] = [
   {
     number: "01",
     title: {
-      id: "Custom Software & Web Development",
-      en: "Custom Software & Web Development",
+      id: "Website & Toko Online Cepat",
+      en: "Fast Websites & Online Stores",
     },
     col1: {
-      id: ["Web App Enterprise", "Platform SaaS Skalabel", "Portal Internal & ERP"],
-      en: ["Enterprise Web Apps", "Scalable SaaS Platforms", "Internal Portals & ERP"],
+      id: ["Landing Page Konversi Tinggi", "Katalog Produk & Toko Online", "Setup Domain & Hosting SSL"],
+      en: ["High-Converting Landing Pages", "Product Catalogs & Online Stores", "Domain Setup & SSL Hosting"],
     },
     col2: {
-      id: ["Full-Stack Next.js / Node", "API Gateway & Integrasi", "Modern Database Architecture"],
-      en: ["Full-Stack Next.js / Node", "API Gateway & Integrations", "Modern Database Architecture"],
+      id: ["Integrasi Checkout WhatsApp", "Kecepatan Super Kilat (95+)", "Optimasi SEO & Mobile Friendly"],
+      en: ["WhatsApp Checkout Integration", "Lightning Fast (Lighthouse 95+)", "SEO & Mobile Optimization"],
     },
     description: {
-      id: "Kami merekayasa sistem software khusus dan aplikasi web berkinerja tinggi yang dirancang tangguh untuk kebutuhan bisnis unik Anda. Mulai dari sistem ERP kustom, SaaS multi-tenant, hingga portal data interaktif.",
-      en: "We engineer custom high-performance software systems and web platforms designed to solve complex business operations. From custom enterprise ERPs and multi-tenant SaaS to mission-critical portals.",
+      id: "Mulai dari Rp 1.500.000. Website bisnis profesional yang langsung siap jualan dalam 3-5 hari. Tampilan elegan, enteng dibuka di HP pembeli, dan langsung terhubung ke WhatsApp bisnis Anda.",
+      en: "Starting at IDR 1,500,000. Professional business websites ready to convert in 3-5 days. Lightweight, responsive, and directly integrated with your WhatsApp sales team.",
     },
   },
   {
     number: "02",
     title: {
-      id: "Mobile App Development",
-      en: "Mobile App Development",
+      id: "Sistem Kasir (POS) & Inventori Gudang",
+      en: "Point-of-Sale (POS) & Inventory Systems",
     },
     col1: {
-      id: ["Aplikasi iOS & Android", "Cross-Platform (Flutter / React Native)", "Native Performance Optimization"],
-      en: ["iOS & Android Apps", "Cross-Platform (Flutter / React Native)", "Native Performance Optimization"],
+      id: ["Aplikasi Kasir Toko & Barcode", "Cetak Struk Thermal Bluetooth", "Manajemen Stok Multi-Gudang"],
+      en: ["Retail POS & Barcode Scanner", "Bluetooth Thermal Receipt Print", "Multi-Warehouse Stock Ledger"],
     },
     col2: {
-      id: ["Offline-first Architecture", "Push Notification & Realtime", "App Store & Play Store Deployment"],
-      en: ["Offline-first Architecture", "Push Notification & Realtime", "App Store & Play Store Deployment"],
+      id: ["Rekap Laba-Rugi Realtime", "Hak Akses Multi-Kasir", "Mode Offline-First Tanpa Lag"],
+      en: ["Realtime P&L Ledger", "Multi-Cashier Role Access", "Offline-First No-Lag Architecture"],
     },
     description: {
-      id: "Aplikasi mobile yang responsif, mulus, dan kaya fitur untuk pengguna consumer maupun operasional enterprise. Dibangun dengan kode bersih, arsitektur modular, dan integrasi backend tanpa celah.",
-      en: "Fast, sleek, and feature-rich mobile applications for consumers and enterprise field operations. Engineered with clean architecture, offline synchronization, and seamless backend integration.",
+      id: "Rp 3.500.000 sekali bayar. Solusi tuntas bagi pemilik toko retail, kafe, dan gudang untuk menghentikan selisih stok dan mempercepat proses tutup kasir harian dari jam menjadi menit.",
+      en: "IDR 3,500,000 one-time investment. Complete operational solution for retail shops, cafes, and warehouses to eliminate stock discrepancies and speed up closing.",
     },
   },
   {
     number: "03",
     title: {
-      id: "AI Solutions & Workflow Automation",
-      en: "AI Solutions & Workflow Automation",
+      id: "Aplikasi Web & Mobile Custom",
+      en: "Custom Web & Mobile Apps",
     },
     col1: {
-      id: ["Integrasi LLM & Agentik AI", "Automasi Proses Bisnis (RPA)", "Custom RAG & Knowledge Base"],
-      en: ["LLM & Agentic AI Integration", "Business Workflow Automation", "Custom RAG & Knowledge Bases"],
+      id: ["Frontend Modern Next.js / React", "Aplikasi Mobile Flutter iOS & Android", "Dashboard Admin & Multi-User"],
+      en: ["Modern Next.js / React Frontends", "Flutter iOS & Android Mobile Apps", "Admin Multi-User Dashboards"],
     },
     col2: {
-      id: ["Computer Vision & OCR", "AI Assistant Internal", "Model Fine-tuning & Deployment"],
-      en: ["Computer Vision & OCR", "Internal AI Assistants", "Model Fine-tuning & Deployment"],
+      id: ["Database Supabase / Postgres", "API Gateway & Webhook Aman", "Arsitektur Modular & Source Code Penuh"],
+      en: ["Supabase / Postgres DB", "Secure API & Webhook Gateways", "Clean Architecture & 100% Code Ownership"],
     },
     description: {
-      id: "Otomatisasi alur kerja manual dan integrasikan kecerdasan buatan terapan ke dalam operasional perusahaan. Kami membangun bot asisten cerdas, sistem dokumen berbasis RAG, dan otomasi alur data otomatis.",
-      en: "Automate repetitive manual operations and integrate practical generative AI into your core business. We build intelligent agent assistants, enterprise RAG knowledge engines, and autonomous data pipelines.",
+      id: "Sistem khusus bisnis yang dibangun persis sesuai standar proses operasional Anda. Tidak perlu lagi memakai software kaku yang fiturnya tidak cocok. Source code 100% milik Anda.",
+      en: "Custom-tailored business software matching your exact operational workflow. Stop forcing rigid SaaS templates. Full source code ownership guaranteed.",
     },
   },
   {
     number: "04",
     title: {
-      id: "Cloud, DevOps & Infrastructure",
-      en: "Cloud, DevOps & Infrastructure",
+      id: "Otomasi WhatsApp Bisnis",
+      en: "WhatsApp Business Automation",
     },
     col1: {
-      id: ["Cloud Architecture (AWS / GCP / VPS)", "CI/CD Pipeline Otomatis", "Docker & Kubernetes Container"],
-      en: ["Cloud Architecture (AWS / GCP / VPS)", "Automated CI/CD Pipelines", "Docker & Kubernetes Container"],
+      id: ["Notifikasi Invoice Otomatis", "Broadcast Promo & Pengingat", "Konfirmasi Order & Nomor Resi"],
+      en: ["Automated Invoice Notifications", "Promo Broadcasts & Reminders", "Order & Tracking Confirmation"],
     },
     col2: {
-      id: ["Supabase / Postgres Optimization", "Keamanan & OWASP Hardening", "Monitoring & 99.9% Uptime SLA"],
-      en: ["Supabase / Postgres Optimization", "Security & OWASP Hardening", "Monitoring & 99.9% Uptime SLA"],
+      id: ["Integrasi API WhatsApp Resmi", "Sinkronisasi ke Database Toko", "Anti-Banned Safety Mechanism"],
+      en: ["Official & Baileys WA Gateways", "Store Database Sync", "Anti-Ban Delivery Safeguards"],
     },
     description: {
-      id: "Fondasi server, cloud, dan arsitektur data yang aman, hemat biaya, dan mampu menahan lonjakan trafik tinggi. Otomasi deployment dari kode ke produksi dengan zero downtime.",
-      en: "Robust, cost-efficient, and secure cloud infrastructure designed to sustain traffic spikes without downtime. Complete with automated deployment pipelines, proactive monitoring, and enterprise hardening.",
+      id: "Kirim pesan konfirmasi pesanan, resi pengiriman kurir, dan nota pembayaran ke pembeli secara otomatis tanpa perlu tim Anda mengetik ulang satu per satu di WhatsApp.",
+      en: "Deliver automated order receipts, shipping tracking updates, and invoices straight to customer WhatsApp chats without manual copy-pasting.",
     },
   },
   {
     number: "05",
     title: {
-      id: "IT Consulting & Tech Modernization",
-      en: "IT Consulting & Tech Modernization",
+      id: "Chatbot AI CS 24/7",
+      en: "24/7 AI Customer Service Chatbots",
     },
     col1: {
-      id: ["Audit Kode & Keamanan Sistem", "Refactoring Legacy System", "Desain Arsitektur Solusi"],
-      en: ["Code & Security Audits", "Legacy System Modernization", "Solution Architecture Design"],
+      id: ["Pelatihan Berdasarkan Katalog Produk", "Menjawab Tanya-Jawab Pembeli Otomatis", "Eskalasi Mulus ke CS Manusia"],
+      en: ["Trained on Your Product Catalog", "Automated FAQ Answering", "Seamless Human Agent Handoff"],
     },
     col2: {
-      id: ["Tech Stack Migration", "Rekomendasi Skalabilitas", "Technical Due Diligence"],
-      en: ["Tech Stack Migration", "Scalability Roadmapping", "Technical Due Diligence"],
+      id: ["Integrasi WhatsApp & Website", "Bahasa Indonesia Luwes & Ramah", "Log Percakapan & Insight Konsumen"],
+      en: ["WhatsApp & Web Widget Integration", "Natural Indonesian Conversational Flow", "Chat Transcripts & Customer Insights"],
     },
     description: {
-      id: "Bimbingan strategis bagi para pemimpin teknologi dan manajemen bisnis. Kami mengaudit kode lama, mendesain ulang arsitektur monolit ke modular mikro, dan menyusun roadmap digital terukur.",
-      en: "Strategic engineering advisory for business and technical leaders. We audit legacy codebases, refactor monolithic architectures, ensure strict cybersecurity compliance, and map technical roadmaps.",
+      id: "Asisten kecerdasan buatan cerdas yang siaga membalas pertanyaan pembeli tengah malam sekalipun. Paham katalog usaha, ramah, dan sigap merekomendasikan produk yang tepat.",
+      en: "Intelligent AI assistant working 24/7 to answer customer inquiries. Understands your product specs, pricing, and guides customers to checkout anytime.",
+    },
+  },
+  {
+    number: "06",
+    title: {
+      id: "Tim IT On-Demand & Maintenance",
+      en: "On-Demand Tech Squad & Maintenance",
+    },
+    col1: {
+      id: ["Full-Stack Engineer Khusus", "Unlimited Permintaan Fitur", "Monitoring Server & Backup 24/7"],
+      en: ["Dedicated Full-Stack Engineer", "Unlimited Feature Requests", "24/7 Server Monitoring & Backups"],
+    },
+    col2: {
+      id: ["Rp 6.5 Juta / Bulan", "Bisa Jeda / Stop Kapan Saja", "Grup Koordinasi WhatsApp Khusus"],
+      en: ["IDR 6.5M / Month Retainer", "Pause or Cancel Anytime", "Dedicated WhatsApp Sprint Channel"],
+    },
+    description: {
+      id: "Punya tim IT sendiri tanpa pusing biaya rekrutmen, BPJS, dan THR kantor. Kami menjadi mitra engineering bulanan yang siap mengeksekusi semua ide dan perbaikan teknis bisnis Anda.",
+      en: "Your own senior engineering team without hiring overhead, payroll, or benefits. We act as your monthly tech partner executing roadmaps and ongoing maintenance.",
     },
   },
 ];
 
 export function ServicesSection({ lang }: ServicesSectionProps) {
-  // Default: Item 01 (index 0) is open as requested ("bawaannya nomor satu open bro")
-  // Single expand rule: ("saat satu expand satunya close")
+  const { currentTheme } = useDaytimeTheme();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleAccordion = (index: number) => {
-    // If clicking the currently open item, close it; otherwise open this one and close all others
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
@@ -136,9 +154,9 @@ export function ServicesSection({ lang }: ServicesSectionProps) {
         {/* ============================================================== */}
         <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden p-8 sm:p-12 lg:p-14 bg-[#090C15] text-white shadow-2xl border border-white/10 select-none">
           
-          {/* Living WebGL Dynamic GradientWave synced with Gemilang palette */}
+          {/* Living WebGL Dynamic GradientWave matching Daytime Theme */}
           <GradientWave
-            colors={["#080C1E", "#16204B", "#1D4ED8", "#38BDF8", "#60A5FA", "#0284C7"]}
+            colors={currentTheme.waveColors}
             shadowPower={4}
             noiseSpeed={0.00003}
             deform={{ incline: 0.4, noiseAmp: 260, noiseFlow: 4, noiseSpeed: 10 }}
@@ -151,13 +169,13 @@ export function ServicesSection({ lang }: ServicesSectionProps) {
           <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6 lg:gap-12">
             {/* Left: Eyebrow + Headline */}
             <div className="max-w-xl">
-              <p className="text-xs sm:text-[13px] font-mono font-semibold tracking-[0.08em] text-[#CAD0DC] uppercase">
-                {lang === "id" ? "LAYANAN IT REKAYASA" : "IT ENGINEERING SERVICES"}
+              <p className="text-xs sm:text-[13px] font-mono font-semibold tracking-[0.08em] text-[#00E1BA] uppercase">
+                {lang === "id" ? "KATALOG LAYANAN DIGITAL" : "DIGITAL SERVICES CATALOG"}
               </p>
-              <h2 className="text-3xl sm:text-4xl lg:text-[46px] xl:text-[50px] font-bold tracking-[-0.04em] text-white leading-[1.12] mt-3">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-bold tracking-[-0.04em] text-white leading-[1.12] mt-3">
                 {lang === "id"
-                  ? "Solusi teknologi komprehensif untuk membangun dan mengembangkan produk."
-                  : "Comprehensive technology solutions to engineer and scale your product."}
+                  ? "Solusi teknologi tepat sasaran untuk memajukan bisnis Anda."
+                  : "Precise technology solutions to accelerate your business growth."}
               </h2>
             </div>
 
@@ -166,15 +184,15 @@ export function ServicesSection({ lang }: ServicesSectionProps) {
               <p>
                 {lang === "id" ? (
                   <>
-                    Anda tentukan visi dan target bisnis.
+                    Fokus kembangkan penjualan dan operasional.
                     <br />
-                    Kami hadirkan arsitektur, rekayasa kode, dan deployment tanpa cela.
+                    Urusan coding, server, kasir, dan otomasi serahkan pada tim kami.
                   </>
                 ) : (
                   <>
-                    You define the business roadmap.
+                    Focus on scaling your revenue.
                     <br />
-                    We deliver the architecture, clean code, and robust deployment.
+                    Leave software, servers, POS, and automation to our squad.
                   </>
                 )}
               </p>
@@ -208,7 +226,7 @@ export function ServicesSection({ lang }: ServicesSectionProps) {
                     </span>
 
                     {/* Service Title */}
-                    <h3 className="text-2xl sm:text-4xl lg:text-[40px] font-bold tracking-[-0.035em] text-neutral-950 transition-colors group-hover:text-neutral-700 truncate">
+                    <h3 className="text-xl sm:text-3xl lg:text-[36px] font-bold tracking-[-0.035em] text-neutral-950 transition-colors group-hover:text-neutral-700 truncate">
                       {service.title[lang]}
                     </h3>
                   </div>
@@ -217,7 +235,7 @@ export function ServicesSection({ lang }: ServicesSectionProps) {
                   <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center shrink-0 text-neutral-900">
                     <Plus
                       className={`w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] ${
-                        isOpen ? "rotate-45 text-[#335CFF]" : "group-hover:scale-110"
+                        isOpen ? "rotate-45 text-[#00E1BA]" : "group-hover:scale-110"
                       }`}
                     />
                   </div>

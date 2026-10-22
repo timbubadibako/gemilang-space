@@ -276,7 +276,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     value={pName}
                     onChange={(e) => setPName(e.target.value)}
                     placeholder="John Doe"
-                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all"
+                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all"
                   />
                   <input
                     type="email"
@@ -284,7 +284,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     value={pEmail}
                     onChange={(e) => setPEmail(e.target.value)}
                     placeholder="hi@gemilangspace.com"
-                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all"
+                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all"
                   />
                 </div>
 
@@ -295,14 +295,14 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     value={pCompany}
                     onChange={(e) => setPCompany(e.target.value)}
                     placeholder="Acme Inc."
-                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all"
+                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all"
                   />
                   <input
                     type="url"
                     value={pWebsite}
                     onChange={(e) => setPWebsite(e.target.value)}
                     placeholder="https://gemilangspace.com"
-                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all"
+                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all"
                   />
                 </div>
 
@@ -312,7 +312,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     <select
                       value={pService}
                       onChange={(e) => setPService(e.target.value)}
-                      className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all cursor-pointer"
+                      className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all cursor-pointer"
                     >
                       <option value="" disabled>Select Service</option>
                       <option value="Landing Page Design">Landing Page Design</option>
@@ -330,7 +330,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     <select
                       value={pBudget}
                       onChange={(e) => setPBudget(e.target.value)}
-                      className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all cursor-pointer"
+                      className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all cursor-pointer"
                     >
                       <option value="" disabled>Select Budget Range</option>
                       <option value="$5K - $10K">$5K - $10K</option>
@@ -346,7 +346,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     <select
                       value={pTimeline}
                       onChange={(e) => setPTimeline(e.target.value)}
-                      className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all cursor-pointer"
+                      className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all cursor-pointer"
                     >
                       <option value="" disabled>Select Timeline</option>
                       <option value="ASAP / 1-2 weeks">ASAP / 1-2 weeks</option>
@@ -365,7 +365,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     value={pMessage}
                     onChange={(e) => setPMessage(e.target.value)}
                     placeholder="Tell us more about your project"
-                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all resize-y"
+                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all resize-y"
                   />
                 </div>
 
@@ -377,7 +377,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     </div>
                     <a
                       href="mailto:hi@gemilangspace.com"
-                      className="text-sm font-bold text-neutral-950 underline underline-offset-2 hover:text-[#335CFF] transition-colors"
+                      className="text-sm font-bold text-neutral-950 underline underline-offset-2 hover:text-[#00E1BA] transition-colors"
                     >
                       hi@gemilangspace.com
                     </a>
@@ -404,7 +404,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     value={sName}
                     onChange={(e) => setSName(e.target.value)}
                     placeholder="John Doe"
-                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all"
+                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all"
                   />
                   <input
                     type="email"
@@ -412,7 +412,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     value={sEmail}
                     onChange={(e) => setSEmail(e.target.value)}
                     placeholder="hi@gemilangspace.com"
-                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all"
+                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all"
                   />
                 </div>
 
@@ -421,7 +421,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                   <select
                     value={sPlan}
                     onChange={(e) => setSPlan(e.target.value)}
-                    className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all cursor-pointer"
+                    className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all cursor-pointer"
                   >
                     <option value="" disabled>Which plan are you interested in?</option>
                     <option value="Essential ($4,500/mo)">Essential ($4,500/mo) - 1 Request at a time</option>
@@ -436,7 +436,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                   <select
                     value={sFrequency}
                     onChange={(e) => setSFrequency(e.target.value)}
-                    className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all cursor-pointer"
+                    className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all cursor-pointer"
                   >
                     <option value="" disabled>How often do you expect to need design?</option>
                     <option value="Ongoing (3+ months)">Ongoing (3+ months)</option>
@@ -451,7 +451,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                   <select
                     value={sStartDate}
                     onChange={(e) => setSStartDate(e.target.value)}
-                    className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all cursor-pointer"
+                    className="w-full appearance-none bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 pr-10 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all cursor-pointer"
                   >
                     <option value="" disabled>When would you like to start?</option>
                     <option value="Immediately">Immediately</option>
@@ -478,7 +478,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                         >
                           <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
                             checked 
-                              ? "bg-[#335CFF] border-[#335CFF] text-white" 
+                              ? "bg-[#00E1BA] border-[#00E1BA] text-white" 
                               : "bg-[#F8F9FA] border-neutral-300 group-hover:border-neutral-400"
                           }`}>
                             {checked && <Check className="w-3 h-3 stroke-[3]" />}
@@ -497,7 +497,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     value={sMessage}
                     onChange={(e) => setSMessage(e.target.value)}
                     placeholder="Tell us what you're working on"
-                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:border-transparent transition-all resize-y"
+                    className="w-full bg-[#F8F9FA] border border-neutral-200 rounded-lg px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00E1BA] focus:border-transparent transition-all resize-y"
                   />
                 </div>
 
@@ -509,7 +509,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                     </div>
                     <a
                       href="mailto:hi@gemilangspace.com"
-                      className="text-sm font-bold text-neutral-950 underline underline-offset-2 hover:text-[#335CFF] transition-colors"
+                      className="text-sm font-bold text-neutral-950 underline underline-offset-2 hover:text-[#00E1BA] transition-colors"
                     >
                       hi@gemilangspace.com
                     </a>
@@ -643,7 +643,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                           onClick={() => setSelectedDate(22)}
                           className={`p-2 rounded-lg font-bold transition-all ${
                             selectedDate === 22 
-                              ? "bg-[#335CFF] text-white shadow-sm" 
+                              ? "bg-[#00E1BA] text-white shadow-sm" 
                               : "bg-neutral-100 hover:bg-neutral-200 text-neutral-800"
                           }`}
                         >
@@ -657,7 +657,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                             onClick={() => setSelectedDate(d)}
                             className={`p-2 rounded-lg font-medium transition-all ${
                               selectedDate === d
-                                ? "bg-[#335CFF] text-white"
+                                ? "bg-[#00E1BA] text-white"
                                 : "bg-neutral-100 hover:bg-neutral-200 text-neutral-800"
                             }`}
                           >
@@ -720,7 +720,7 @@ export function ContactSection({ lang, whatsappNumber }: ContactSectionProps) {
                             onClick={() => setSelectedSlot(slot)}
                             className={`w-full py-2.5 px-4 rounded-lg text-xs font-medium border text-center transition-all cursor-pointer ${
                               isSelected
-                                ? "border-[#335CFF] text-[#335CFF] bg-[#335CFF]/5 font-bold ring-1 ring-[#335CFF]"
+                                ? "border-[#00E1BA] text-[#00E1BA] bg-[#00E1BA]/5 font-bold ring-1 ring-[#00E1BA]"
                                 : "border-neutral-200/90 hover:border-neutral-400 bg-white text-neutral-800"
                             }`}
                           >

@@ -12,7 +12,7 @@ export default function ContactPage() {
   const [lang, setLang] = useState<"id" | "en">(siteSettings.defaultLanguage);
 
   return (
-    <div className="min-h-screen bg-[#F3F3F5] text-neutral-900 selection:bg-[#335CFF] selection:text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F3F3F5] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
       {/* Light-Themed Navbar matching Beew Studio */}
       <Navbar
         navItems={navItems}

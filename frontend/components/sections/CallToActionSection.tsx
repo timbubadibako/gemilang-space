@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GradientWave } from "@/components/ui/gradient-wave";
+import { useDaytimeTheme } from "@/lib/daytime-context";
 
 interface CallToActionSectionProps {
   lang: "id" | "en";
@@ -50,90 +51,20 @@ const ctaLogos = [
   }
 ];
 
-function InteractiveRippleGrid() {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = React.useState({ cols: 24, rows: 14 });
-
-  React.useEffect(() => {
-    const updateSize = () => {
-      if (!containerRef.current) return;
-      const { clientWidth, clientHeight } = containerRef.current;
-      const cellSize = 48;
-      const cols = Math.ceil(clientWidth / cellSize);
-      const rows = Math.ceil(clientHeight / cellSize);
-      setDimensions({ cols, rows });
-    };
-
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
-  const handleCellClick = (r: number, c: number) => {
-    if (!containerRef.current) return;
-    const cells = containerRef.current.querySelectorAll<HTMLDivElement>("[data-cell]");
-    const speed = 28; // ms per block distance
-
-    cells.forEach((cell) => {
-      const cr = Number(cell.dataset.row);
-      const cc = Number(cell.dataset.col);
-      // Euclidean distance for smooth circular ripple wave
-      const dist = Math.hypot(cr - r, cc - c);
-      const delay = Math.round(dist * speed);
-
-      // Trigger wave glow
-      setTimeout(() => {
-        cell.classList.add("bg-white/[0.22]", "border-white/30", "shadow-[0_0_12px_rgba(255,255,255,0.2)]");
-        setTimeout(() => {
-          cell.classList.remove("bg-white/[0.22]", "border-white/30", "shadow-[0_0_12px_rgba(255,255,255,0.2)]");
-        }, 320);
-      }, delay);
-    });
-  };
-
-  const totalCells = dimensions.cols * dimensions.rows;
-
-  return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full z-10 overflow-hidden pointer-events-none">
-      <div
-        className="w-full h-full grid pointer-events-auto cursor-default"
-        style={{
-          gridTemplateColumns: `repeat(${dimensions.cols}, minmax(0, 1fr))`,
-          gridTemplateRows: `repeat(${dimensions.rows}, minmax(0, 1fr))`,
-        }}
-      >
-        {Array.from({ length: totalCells }).map((_, i) => {
-          const r = Math.floor(i / dimensions.cols);
-          const c = i % dimensions.cols;
-          return (
-            <div
-              key={i}
-              data-cell
-              data-row={r}
-              data-col={c}
-              onClick={() => handleCellClick(r, c)}
-              className="border-r border-b border-white/[0.08] bg-transparent hover:bg-white/[0.18] hover:border-white/20 transition-all duration-200 cursor-default"
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 export function CallToActionSection({ lang, whatsappNumber }: CallToActionSectionProps) {
+  const { currentTheme } = useDaytimeTheme();
   const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     lang === "id"
-      ? "Halo Gemilang Space, saya ingin berkonsultasi mengenai kebutuhan desain & rekayasa produk kami."
-      : "Hello Gemilang Space, I would like to discuss our product design and engineering backlog."
+      ? "Halo Gemilang, saya ingin berkonsultasi mengenai kebutuhan desain & rekayasa produk kami."
+      : "Hello Gemilang, I would like to discuss our product design and engineering backlog."
   )}`;
 
   return (
     <section className="relative w-full overflow-hidden bg-[#090C15] pt-24 sm:pt-32 lg:pt-36 pb-36 sm:pb-44 lg:pb-52 text-white flex flex-col items-center justify-between select-none">
-      {/* 1. Dynamic WebGL GradientWave Background */}
+      {/* 1. Dynamic WebGL GradientWave Background matching Daytime Theme */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
         <GradientWave
-          colors={["#080C1E", "#1D2B64", "#2563EB", "#38BDF8", "#60A5FA", "#0284C7"]}
+          colors={currentTheme.waveColors}
           shadowPower={4}
           noiseSpeed={0.00004}
           deform={{ incline: 0.5, noiseAmp: 300, noiseFlow: 5, noiseSpeed: 12 }}
@@ -143,61 +74,58 @@ export function CallToActionSection({ lang, whatsappNumber }: CallToActionSectio
         <div className="absolute inset-0 bg-gradient-to-t from-[#04060A]/80 via-black/30 to-[#04060A]/60 pointer-events-none" />
       </div>
 
-      {/* 2. Interactive Translucent Grid Blocks Layer with Ripple Wave */}
-      <InteractiveRippleGrid />
-
       {/* Main Content Container */}
-      <div className="relative z-20 w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8 flex flex-col items-center text-center pointer-events-none">
+      <div className="relative z-20 w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8 flex flex-col items-center text-center">
         
-        {/* Center Text Wrapper (max-w-[740px]) - pointer-events-none so grid behind can be hovered */}
-        <div className="max-w-[740px] mx-auto flex flex-col items-center gap-5 sm:gap-6 pointer-events-none">
-          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-tight text-white leading-[1.12] sm:leading-[1.15] pointer-events-none">
+        {/* Center Text Wrapper (max-w-[740px]) */}
+        <div className="max-w-[740px] mx-auto flex flex-col items-center gap-5 sm:gap-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-tight text-white leading-[1.12] sm:leading-[1.15]">
             {lang === "id" ? (
               <>
-                Antrean backlog desain Anda<br className="hidden sm:inline" /> tidak akan selesai sendiri.
+                Bisnis Anda butuh sistem yang beres,<br className="hidden sm:inline" /> bukan janji manis.
               </>
             ) : (
               <>
-                Your design backlog<br className="hidden sm:inline" /> isn&apos;t getting any shorter.
+                Your business needs reliable systems,<br className="hidden sm:inline" /> not empty promises.
               </>
             )}
           </h2>
 
-          <p className="text-sm sm:text-base lg:text-[17px] text-white/90 font-normal leading-relaxed max-w-xl pointer-events-none">
+          <p className="text-sm sm:text-base lg:text-[17px] text-white/90 font-normal leading-relaxed max-w-xl">
             {lang === "id"
-              ? "Produk, web, brand, dan Framer. Satu mitra desain, satu langganan bulanan fleksibel."
-              : "Product, web, brand and Framer. One design partner, one monthly subscription."}
+              ? "Dari website toko cepat Rp 1.5 Jt, kasir POS, hingga tim IT on-demand bulanan. Konsultasikan kebutuhan sistem Anda hari ini."
+              : "From IDR 1.5M fast web stores to retail POS and monthly tech squads. Consult your system requirements today."}
           </p>
 
-          {/* CTA Pill Button with expanding animation - must be pointer-events-auto */}
-          <div className="pt-2 sm:pt-3 pointer-events-auto">
+          {/* CTA Pill Button with expanding animation */}
+          <div className="pt-2 sm:pt-3">
             <Button
-              variant="expand"
-              size="md"
+              variant="expand-primary"
+              size="lg"
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white/95"
+              className="h-12 sm:h-14"
             >
-              {lang === "id" ? "Dapatkan Penawaran Khusus" : "Get a Custom Quote"}
+              {lang === "id" ? "Konsultasi WhatsApp Sekarang" : "Consult on WhatsApp Now"}
             </Button>
           </div>
         </div>
 
         {/* Bottom Client Logos Marquee with Seamless CSS Mask */}
         <div 
-          className="w-full mt-16 sm:mt-20 lg:mt-24 relative select-none pointer-events-none"
+          className="w-full mt-16 sm:mt-20 lg:mt-24 relative select-none"
           style={{
             maskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
           }}
         >
           {/* Running Ticker */}
-          <div className="animate-marquee gap-10 sm:gap-14 lg:gap-18 items-center py-2 text-white/75 pointer-events-none">
+          <div className="animate-marquee gap-10 sm:gap-14 lg:gap-18 items-center py-2 text-white/75">
             {[...ctaLogos, ...ctaLogos].map((logo, idx) => (
               <div
                 key={`${logo.name}-${idx}`}
-                className="shrink-0 h-5 sm:h-6 flex items-center opacity-75 [&>svg]:h-full [&>svg]:w-auto [&>svg]:max-h-6 [&>svg]:fill-white pointer-events-none"
+                className="shrink-0 h-5 sm:h-6 flex items-center opacity-75 [&>svg]:h-full [&>svg]:w-auto [&>svg]:max-h-6 [&>svg]:fill-white"
                 dangerouslySetInnerHTML={{ __html: logo.svg }}
               />
             ))}

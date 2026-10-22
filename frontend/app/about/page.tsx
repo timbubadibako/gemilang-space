@@ -76,7 +76,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#335CFF] selection:text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
       {/* Light Navbar */}
       <Navbar
         navItems={navItems}
@@ -132,7 +132,7 @@ export default function AboutPage() {
         <section className="w-full py-16 sm:py-24 bg-[#FAFAFC] border-t border-neutral-200/80">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
             <div className="max-w-[960px] mx-auto bg-white rounded-3xl border border-neutral-200/90 p-8 sm:p-12 lg:p-16 shadow-xs relative overflow-hidden">
-              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#335CFF] mb-4">
+              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#00E1BA] mb-4">
                 OUR APPROACH
               </div>
 

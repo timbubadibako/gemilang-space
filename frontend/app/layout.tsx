@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { DaytimeThemeProvider } from "@/lib/daytime-context";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -9,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Gemilang Space — Digital Engineering & Product Design Studio",
+  title: "Gemilang — Digital Engineering & Product Design Studio",
   description:
-    "Gemilang Space is a founder-led engineering & design partner helping modern tech companies build digital products, web platforms, and scalable systems.",
+    "Gemilang is a founder-led engineering & design partner helping modern tech companies build digital products, web platforms, and scalable systems.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -23,9 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[#04060A] text-white">
-        {children}
+        <DaytimeThemeProvider>{children}</DaytimeThemeProvider>
       </body>
     </html>
   );

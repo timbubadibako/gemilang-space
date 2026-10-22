@@ -45,7 +45,7 @@ export default function ServiceDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#335CFF] selection:text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-[#FFFFFF] text-neutral-900 selection:bg-[#00E1BA] selection:text-white flex flex-col font-sans">
       {/* Light-Themed Navbar */}
       <Navbar
         navItems={navItems}
@@ -236,7 +236,7 @@ export default function ServiceDetailPage() {
         <section className="w-full py-16 sm:py-24 bg-white border-t border-neutral-200/80">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
             <div className="max-w-2xl mb-12 sm:mb-14">
-              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#335CFF] mb-2.5">
+              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#00E1BA] mb-2.5">
                 {service.bestFitEyebrow}
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-neutral-950 tracking-tight leading-[1.15]">
@@ -375,7 +375,7 @@ export default function ServiceDetailPage() {
         <section className="w-full py-16 sm:py-24 bg-[#F8F9FA] border-t border-neutral-200/80">
           <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8">
             <div className="max-w-2xl mb-10 sm:mb-12">
-              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#335CFF] mb-2.5">
+              <div className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#00E1BA] mb-2.5">
                 {service.whatYouGetEyebrow}
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-neutral-950 tracking-tight leading-[1.15]">
@@ -390,7 +390,7 @@ export default function ServiceDetailPage() {
                   key={idx}
                   className="flex items-center gap-2.5 px-4 py-3.5 rounded-xl bg-white border border-neutral-200/80 shadow-2xs text-xs sm:text-[13px] font-medium text-neutral-800"
                 >
-                  <Check className="w-4 h-4 text-[#335CFF] shrink-0 stroke-[2.5]" />
+                  <Check className="w-4 h-4 text-[#00E1BA] shrink-0 stroke-[2.5]" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -554,27 +554,27 @@ export default function ServiceDetailPage() {
 
                   <ul className="space-y-3 text-xs sm:text-sm text-neutral-200 font-medium mb-10">
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#335CFF]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E1BA]" />
                       <span>Ongoing requests</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#335CFF]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E1BA]" />
                       <span>Flexible priorities</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#335CFF]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E1BA]" />
                       <span>New features</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#335CFF]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E1BA]" />
                       <span>Product improvements</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#335CFF]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E1BA]" />
                       <span>Design system support</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#335CFF]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E1BA]" />
                       <span>Product + marketing design</span>
                     </li>
                   </ul>
