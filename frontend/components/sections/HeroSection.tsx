@@ -5,7 +5,6 @@ import Link from "next/link";
 import { HeroContent } from "@/types/content";
 import { Button } from "@/components/ui/button";
 import { RotatingSolutionsText } from "@/components/ui/RotatingSolutionsText";
-import { Cloudscape } from "@/components/ui/cloudscape";
 import { GradientWave } from "@/components/ui/gradient-wave";
 import { useDaytimeTheme } from "@/lib/daytime-context";
 import { Sunrise, Sun, Sunset, Moon } from "lucide-react";
@@ -58,7 +57,7 @@ export function HeroSection({
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_310px] xl:grid-cols-[1fr_335px] 2xl:grid-cols-[1fr_360px] gap-3.5 lg:gap-4 items-stretch h-full flex-1 min-h-0">
         
         {/* ============================================================== */}
-        {/* LEFT COLUMN: Main Signature Card with Living Cloudscape Shader  */}
+        {/* LEFT COLUMN: Main Signature Card */}
         {/* ============================================================== */}
         <div
           className={`rounded-xl sm:rounded-2xl p-7 sm:p-10 lg:p-11 xl:p-12 flex flex-col justify-between shadow-2xl relative overflow-hidden h-full border transition-colors duration-700 group/herocard ${
@@ -67,18 +66,11 @@ export function HeroSection({
               : "text-neutral-950 border-neutral-300/80 bg-neutral-100"
           }`}
         >
-          {/* Cloudscape Ambient Cloud Video Loop as Living Background */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <Cloudscape className="w-full h-full" />
-            {/* Ambient vignette wash that blends seamlessly with day/night palette */}
-            <div
-              className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ${
-                currentTheme.isNight
-                  ? "bg-gradient-to-t from-[#02040A]/85 via-[#02040A]/40 to-transparent"
-                  : "bg-gradient-to-t from-white/70 via-white/20 to-transparent"
-              }`}
-            />
-          </div>
+          {/* Subtle Ambient Radial Glow */}
+          <div
+            className="absolute -top-24 -left-24 w-96 h-96 rounded-full blur-[120px] pointer-events-none opacity-20 transition-all duration-700"
+            style={{ backgroundColor: currentTheme.accentColor }}
+          />
 
           {/* Top Section: Eyebrow + Headline with Rotating Solutions + CTA Buttons */}
           <div className="relative z-10">
