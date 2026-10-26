@@ -6,6 +6,7 @@ import { Globe, CheckSquare2, Gauge, Zap, PauseCircle, Award } from "lucide-reac
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { squadMembers } from "@/data/site-content";
+import { useCMS } from "@/lib/cms-context";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -42,6 +43,13 @@ const tickerItems = [
 export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const { cms } = useCMS();
+  const bento = cms.bentoStats || {
+    companiesCount: "40+ Perusahaan",
+    companiesLabel: { id: "Mempercayakan infrastruktur ke squad kami.", en: "Trusting their software to our squad." },
+    projectsCount: "150+ Proyek IT",
+    projectsLabel: { id: "Telah sukses dirilis ke produksi.", en: "Successfully deployed to production." },
+  };
 
   // Rotating ticker index (switching every 2.8 seconds smoothly via GSAP)
   const [tickerIdx, setTickerIdx] = useState(0);
@@ -259,10 +267,10 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                 <Globe className="w-6 h-6 sm:w-7 sm:h-7 text-neutral-900 shrink-0" strokeWidth={1.75} />
                 <div>
                   <h3 className="text-2xl sm:text-3xl font-bold text-neutral-950 tracking-tight leading-none">
-                    40+ Perusahaan
+                    {bento.companiesCount}
                   </h3>
                   <p className="text-xs sm:text-[13px] text-neutral-500 font-medium mt-1">
-                    {lang === "id" ? "Mempercayakan infrastruktur ke squad kami." : "Trusting their software to our squad."}
+                    {lang === "id" ? bento.companiesLabel.id : bento.companiesLabel.en}
                   </p>
                 </div>
               </div>
@@ -276,10 +284,10 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
               <CheckSquare2 className="w-6 h-6 sm:w-7 sm:h-7 text-neutral-900 shrink-0" strokeWidth={1.75} />
               <div>
                 <h3 className="text-2xl sm:text-3xl font-bold text-neutral-950 tracking-tight leading-none">
-                  150+ Proyek IT
+                  {bento.projectsCount}
                 </h3>
                 <p className="text-xs sm:text-[13px] text-neutral-500 font-medium mt-1">
-                  {lang === "id" ? "Telah sukses dirilis ke produksi." : "Successfully deployed to production."}
+                  {lang === "id" ? bento.projectsLabel.id : bento.projectsLabel.en}
                 </p>
               </div>
             </div>

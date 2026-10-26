@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
+import { useCMS } from "@/lib/cms-context";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -117,6 +118,8 @@ const projects: ProjectPanelData[] = [
 
 export function HighlightedWorks({ lang, whatsappNumber }: HighlightedWorksProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { cms } = useCMS();
+  const displayProjects = cms.highlightedWorks && cms.highlightedWorks.length > 0 ? cms.highlightedWorks : projects;
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -216,7 +219,7 @@ export function HighlightedWorks({ lang, whatsappNumber }: HighlightedWorksProps
       {/* 2. 100VH STACKING PARALLAX PANELS (Zigzag alternating layout) */}
       {/* ============================================================== */}
       <div className="relative w-full">
-        {projects.map((proj, idx) => {
+        {displayProjects.map((proj, idx) => {
           const isEven = idx % 2 === 0;
 
           return (

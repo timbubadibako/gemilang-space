@@ -6,12 +6,27 @@ import { ArrowRight } from "lucide-react";
 import { siteSettings } from "@/data/site-content";
 import { GemilangLogo } from "@/components/ui/GemilangLogo";
 import { Button } from "@/components/ui/button";
+import { useCMS } from "@/lib/cms-context";
 
 interface FooterProps {
   lang: "id" | "en";
 }
 
 export function Footer({ lang }: FooterProps) {
+  const { cms } = useCMS();
+  const footerData = cms.footer || {
+    address: "Kuningan & Cirebon, Jawa Barat • Layanan Remote Seluruh Indonesia",
+    copyrightYear: "2026",
+    badgeText: "Dibangun dengan presisi rekayasa & integritas ⚡",
+    socials: [
+      { name: "X.COM", href: "https://x.com" },
+      { name: "LINKEDIN", href: "https://linkedin.com" },
+      { name: "FRAMER", href: "https://framer.com" },
+      { name: "BEHANCE", href: "https://behance.net" },
+      { name: "DRIBBBLE", href: "https://dribbble.com" },
+      { name: "INSTAGRAM", href: "https://instagram.com" },
+    ],
+  };
   const categories = [
     "SISTEM KASIR (POS)",
     "WEBSITE TOKO CEPAT",
@@ -286,7 +301,7 @@ export function Footer({ lang }: FooterProps) {
         {/* ROW 3: SOCIAL PILLS                                            */}
         {/* ============================================================== */}
         <div className="py-8 border-b border-white/10 flex flex-wrap items-center gap-2">
-          {socialPills.map((p, idx) => (
+          {(footerData.socials || socialPills).map((p, idx) => (
             <a
               key={idx}
               href={p.href}
@@ -305,16 +320,16 @@ export function Footer({ lang }: FooterProps) {
         <div className="pt-8 pb-10 sm:pb-14 flex flex-col md:flex-row md:items-center justify-between gap-6 text-xs text-neutral-400 font-normal">
           <div>
             <p className="font-semibold text-white text-[13px] sm:text-sm">
-              © 2026 Gemilang | All rights reserved.
+              © {footerData.copyrightYear || "2026"} Gemilang | All rights reserved.
             </p>
             <p className="text-[11px] text-neutral-400 mt-1.5">
-              Kuningan &amp; Cirebon, Jawa Barat • Layanan Remote Seluruh Indonesia
+              {footerData.address || "Kuningan & Cirebon, Jawa Barat • Layanan Remote Seluruh Indonesia"}
             </p>
           </div>
 
           <div className="flex flex-col md:items-end gap-2 text-[11px]">
             <p className="font-semibold text-white flex items-center gap-1.5">
-              Dibangun dengan presisi rekayasa &amp; integritas <span className="text-[var(--theme-accent)]">⚡</span>
+              {footerData.badgeText || "Dibangun dengan presisi rekayasa & integritas ⚡"}
             </p>
             <div className="flex items-center gap-4 text-neutral-400">
               <Link href="#pricing" className="hover:text-white transition-colors">

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Plus, ArrowRight, MessageCircle } from "lucide-react";
+import { useCMS } from "@/lib/cms-context";
 
 interface FAQSectionProps {
   lang: "id" | "en";
@@ -81,6 +82,8 @@ export function FAQSection({
   whatsappNumber = "6285722045801",
 }: FAQSectionProps) {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const { cms } = useCMS();
+  const faqs = cms.faqs && cms.faqs.length > 0 ? cms.faqs : faqData;
 
   const toggle = (idx: number) => {
     setOpenIdx((prev) => (prev === idx ? null : idx));
@@ -185,7 +188,7 @@ export function FAQSection({
           {/* RIGHT COLUMN: FAQ ACCORDION LIST                              */}
           {/* ============================================================ */}
           <div className="lg:col-span-8 flex flex-col divide-y divide-neutral-200/80 border-t border-b border-neutral-200/80">
-            {faqData.map((item, idx) => {
+            {faqs.map((item, idx) => {
               const isOpen = openIdx === idx;
 
               return (

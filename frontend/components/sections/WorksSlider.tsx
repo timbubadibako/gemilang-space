@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useCMS } from "@/lib/cms-context";
 
 export interface ProjectCard {
   id: string;
@@ -77,7 +78,9 @@ interface WorksSliderProps {
   projects?: ProjectCard[];
 }
 
-export function WorksSlider({ projects = defaultProjects }: WorksSliderProps) {
+export function WorksSlider({ projects }: WorksSliderProps) {
+  const { cms } = useCMS();
+  const displayProjects = projects || (cms.worksSlider && cms.worksSlider.length > 0 ? cms.worksSlider : defaultProjects);
   return (
     <div id="works" className="relative w-full overflow-hidden py-3 sm:py-5 bg-[#04060A]">
       {/* 
@@ -112,7 +115,7 @@ export function WorksSlider({ projects = defaultProjects }: WorksSliderProps) {
           {/* Infinite Running Marquee Track */}
           <div className="animate-marquee gap-4 sm:gap-5 items-center py-2">
             {/* Double list for smooth seamless infinite loop */}
-            {[...projects, ...projects].map((item, idx) => (
+            {[...displayProjects, ...displayProjects].map((item, idx) => (
               <div
                 key={`${item.id}-${idx}`}
                 className="relative w-[300px] sm:w-[380px] lg:w-[400px] h-[200px] sm:h-[240px] lg:h-[260px] rounded-xl sm:rounded-2xl overflow-hidden bg-[#0D1017] border border-white/10 group flex-shrink-0 cursor-pointer shadow-xl"

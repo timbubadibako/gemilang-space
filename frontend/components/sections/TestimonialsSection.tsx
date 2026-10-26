@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, EyeOff } from "lucide-react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useCMS } from "@/lib/cms-context";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -148,6 +149,8 @@ export function TestimonialsSection({ lang }: TestimonialsSectionProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const { cms } = useCMS();
+  const testimonials = cms.testimonials && cms.testimonials.length > 0 ? cms.testimonials : testimonialsData;
 
   const checkScrollability = () => {
     if (!scrollRef.current) return;
@@ -329,7 +332,7 @@ export function TestimonialsSection({ lang }: TestimonialsSectionProps) {
             ref={scrollRef}
             className="flex items-stretch gap-3 sm:gap-3.5 overflow-x-auto scrollbar-none pb-4 snap-x snap-mandatory scroll-smooth"
           >
-          {testimonialsData.map((item) => {
+          {testimonials.map((item) => {
             if (item.coverImage) {
               return (
                 /* Card 1: 5U AI with Square Photo (Compact 4px padding frame) */

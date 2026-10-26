@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { RotatingSolutionsText } from "@/components/ui/RotatingSolutionsText";
 import { GradientWave } from "@/components/ui/gradient-wave";
 import { useDaytimeTheme } from "@/lib/daytime-context";
+import { useCMS } from "@/lib/cms-context";
 import { Sunrise, Sun, Sunset, Moon } from "lucide-react";
 
 interface HeroSectionProps {
@@ -40,6 +41,9 @@ export function HeroSection({
 }: HeroSectionProps) {
   // Day-time context shared across the entire app
   const { currentTheme } = useDaytimeTheme();
+  const { cms } = useCMS();
+  const teamImg = cms.heroMedia.teamCardImage || "https://framerusercontent.com/images/Q1nGlUmv7vVS6li66XKTFlMrIbk.png?width=1536&height=1536";
+  const teamCaption = cms.heroMedia.teamCardCaption || (lang === "id" ? "100% In-House Engineer • Tanpa Subkontrak" : "100% In-House Engineers • No Outsourcing");
 
   const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     lang === "id"
@@ -315,7 +319,7 @@ export function HeroSection({
             <div className="relative w-full flex-1 min-h-[135px] rounded-[14px] overflow-hidden bg-neutral-900">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://framerusercontent.com/images/Q1nGlUmv7vVS6li66XKTFlMrIbk.png?width=1536&height=1536"
+                src={teamImg}
                 alt="The Team - Gemilang"
                 className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
               />
@@ -324,12 +328,12 @@ export function HeroSection({
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
 
               {/* Center/Bottom Overlay: Clean Name & Role */}
-              <div className="absolute inset-0 flex flex-col items-center justify-end pb-2.5 text-center pointer-events-none">
+              <div className="absolute inset-0 flex flex-col items-center justify-end pb-2.5 text-center pointer-events-none px-2">
                 <span className="text-lg sm:text-[21px] font-black tracking-tight text-white leading-none">
                   THE TEAM
                 </span>
-                <span className="text-[9.5px] text-neutral-300 tracking-tight mt-1 font-medium">
-                  {lang === "id" ? "100% In-House Engineer • Tanpa Subkontrak" : "100% In-House Engineers • No Outsourcing"}
+                <span className="text-[9.5px] text-neutral-300 tracking-tight mt-1 font-medium truncate max-w-full">
+                  {teamCaption}
                 </span>
               </div>
             </div>

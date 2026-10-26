@@ -4,14 +4,17 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArticleCard } from "@/components/ui/ArticleCard";
 import { blogPosts } from "@/data/blog-posts";
+import { useCMS } from "@/lib/cms-context";
 
 interface BlogSectionProps {
   lang: "id" | "en";
 }
 
 export function BlogSection({ lang }: BlogSectionProps) {
+  const { cms } = useCMS();
+  const allPosts = cms.blogPosts && cms.blogPosts.length > 0 ? cms.blogPosts : blogPosts;
   // Ambil 3 artikel teratas untuk preview di homepage
-  const featuredPosts = blogPosts.slice(0, 3);
+  const featuredPosts = allPosts.slice(0, 3);
 
   return (
     <section
