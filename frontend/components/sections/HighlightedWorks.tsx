@@ -43,7 +43,7 @@ const projects: ProjectPanelData[] = [
       en: "SPECIALTY COFFEE ECOSYSTEM",
     },
     tags: ["NEXT.JS", "E-COMMERCE", "ROASTERY MANAGEMENT", "PAYMENT GATEWAY"],
-    imageUrl: "/images/portfolio/fermion-og.jpg",
+    imageUrl: "/images/portfolio/fermion-screen.png",
     bgColor: "#FFFFFF",
     caseUrl: "https://www.fermionroastery.com/",
   },

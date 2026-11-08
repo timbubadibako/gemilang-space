@@ -16,7 +16,7 @@ const defaultProjects: ProjectCard[] = [
     id: "p-1",
     title: "Fermion Roastery E-Commerce & Stok",
     category: "E-Commerce & Inventori",
-    imageUrl: "/images/portfolio/fermion-og.jpg",
+    imageUrl: "/images/portfolio/fermion-screen.png",
   },
   {
     id: "p-2",

@@ -128,7 +128,7 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
       en: "SPECIALTY COFFEE ECOSYSTEM",
     },
     tags: ["NEXT.JS", "E-COMMERCE", "ROASTERY MANAGEMENT", "PAYMENT GATEWAY"],
-    imageUrl: "/images/portfolio/fermion-og.jpg",
+    imageUrl: "/images/portfolio/fermion-screen.png",
     bgColor: "#FFFFFF",
     caseUrl: "https://www.fermionroastery.com/",
   },
@@ -314,7 +314,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v2";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v3";
 
 interface CMSContextType {
   cms: CMSDataState;
