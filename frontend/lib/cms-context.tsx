@@ -129,6 +129,7 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
     },
     tags: ["NEXT.JS", "E-COMMERCE", "ROASTERY MANAGEMENT", "PAYMENT GATEWAY"],
     imageUrl: "/images/portfolio/fermion-screen.png",
+    videoUrl: "/videos/fermion.mp4",
     bgColor: "#FFFFFF",
     caseUrl: "https://www.fermionroastery.com/",
   },
@@ -314,7 +315,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v3";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v4";
 
 interface CMSContextType {
   cms: CMSDataState;

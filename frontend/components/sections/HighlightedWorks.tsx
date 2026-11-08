@@ -44,6 +44,7 @@ const projects: ProjectPanelData[] = [
     },
     tags: ["NEXT.JS", "E-COMMERCE", "ROASTERY MANAGEMENT", "PAYMENT GATEWAY"],
     imageUrl: "/images/portfolio/fermion-screen.png",
+    videoUrl: "/videos/fermion.mp4",
     bgColor: "#FFFFFF",
     caseUrl: "https://www.fermionroastery.com/",
   },
