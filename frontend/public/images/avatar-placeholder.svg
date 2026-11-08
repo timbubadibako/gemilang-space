@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c1f26" />
+      <stop offset="50%" stop-color="#121418" />
+      <stop offset="100%" stop-color="#090a0c" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#3b4252" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#121418" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.04" />
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="1000" fill="url(#bg)" />
+  <rect width="800" height="1000" fill="url(#glow)" />
+  <rect width="800" height="1000" fill="url(#grid)" />
+
+  <!-- Minimalist Avatar Silhouette -->
+  <g transform="translate(400, 440)" opacity="0.32">
+    <!-- Head -->
+    <circle cx="0" cy="-80" r="90" fill="#64748b" />
+    <!-- Shoulders & Torso -->
+    <path d="M -180 190 C -180 60, -110 0, 0 0 C 110 0, 180 60, 180 190 Z" fill="#64748b" />
+  </g>
+</svg>

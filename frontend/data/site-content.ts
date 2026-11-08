@@ -130,7 +130,7 @@ export const squadMembers: SquadMember[] = [
       id: "Memimpin arah arsitektur & delivery kode langsung.",
       en: "Leading overall architecture & direct production delivery.",
     },
-    image: "/founder.png",
+    image: "/images/avatar-placeholder.svg",
     accentColor: "text-[#00E1BA]",
   },
   {
@@ -144,7 +144,7 @@ export const squadMembers: SquadMember[] = [
       id: "Arsitektur cloud, skalabilitas server & keamanan data.",
       en: "Cloud infrastructure, scalability & data security.",
     },
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+    image: "/images/avatar-placeholder.svg",
     accentColor: "text-emerald-400",
   },
   {
@@ -158,7 +158,7 @@ export const squadMembers: SquadMember[] = [
       id: "Antarmuka reaktif, micro-interactions & fluid animations.",
       en: "Reactive UI performance, micro-interactions & fluid animations.",
     },
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    image: "/images/avatar-placeholder.svg",
     accentColor: "text-purple-400",
   },
   {
@@ -172,7 +172,7 @@ export const squadMembers: SquadMember[] = [
       id: "Thermal printer, scanner barcode, IoT & POS offline-first.",
       en: "Thermal printer, barcode scanners, IoT & offline-first POS.",
     },
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80",
+    image: "/images/avatar-placeholder.svg",
     accentColor: "text-amber-400",
   },
   {
@@ -186,7 +186,7 @@ export const squadMembers: SquadMember[] = [
       id: "Aplikasi mobile lintas platform, background sync & native UX.",
       en: "Cross-platform mobile apps, background sync & native UX.",
     },
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+    image: "/images/avatar-placeholder.svg",
     accentColor: "text-cyan-400",
   },
   {
@@ -200,7 +200,7 @@ export const squadMembers: SquadMember[] = [
       id: "Integrasi LLM agent, automasi workflow operasional & data.",
       en: "LLM integrations, autonomous workflows & intelligent pipelines.",
     },
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+    image: "/images/avatar-placeholder.svg",
     accentColor: "text-rose-400",
   },
 ];
