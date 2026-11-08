@@ -15,7 +15,7 @@ interface FooterProps {
 export function Footer({ lang }: FooterProps) {
   const { cms } = useCMS();
   const footerData = cms.footer || {
-    address: "Kuningan & Cirebon, Jawa Barat • Layanan Remote Seluruh Indonesia",
+    address: "Jl. Karya Bakti, Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia",
     copyrightYear: "2026",
     badgeText: "Dibangun dengan presisi rekayasa & integritas ⚡",
     socials: [
@@ -323,7 +323,7 @@ export function Footer({ lang }: FooterProps) {
               © {footerData.copyrightYear || "2026"} Gemilang | All rights reserved.
             </p>
             <p className="text-[11px] text-neutral-400 mt-1.5">
-              {footerData.address || "Kuningan & Cirebon, Jawa Barat • Layanan Remote Seluruh Indonesia"}
+              {footerData.address || "Jl. Karya Bakti, Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia"}
             </p>
           </div>
 

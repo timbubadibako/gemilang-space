@@ -3,7 +3,7 @@ import { HeroContent, NavItem, SiteSettings, SquadMember } from "@/types/content
 export const siteSettings: SiteSettings = {
   siteName: "gemilang",
   whatsappNumber: "6285722045801",
-  contactEmail: "hello@gemilangspace.com",
+  contactEmail: "pjrlywm@gmail.com",
   defaultLanguage: "id",
 };
 

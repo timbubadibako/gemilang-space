@@ -992,7 +992,7 @@ function ControlFrontpageInner() {
                 value={footerAddress}
                 onChange={(e) => setFooterAddress(e.target.value)}
                 className="w-full bg-[#F4F9F8] border border-zinc-200 rounded-xl px-3 py-2 text-zinc-900 font-bold focus:outline-none focus:border-teal-500 focus:bg-white"
-                placeholder="Kuningan & Cirebon, Jawa Barat • Layanan Remote Seluruh Indonesia"
+                placeholder="Jl. Karya Bakti, Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia"
               />
             </div>
 

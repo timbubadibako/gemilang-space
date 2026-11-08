@@ -275,7 +275,7 @@ const defaultFaqs: FAQItemData[] = [
 ];
 
 const defaultFooter: FooterConfigData = {
-  address: "Kuningan & Cirebon, Jawa Barat • Layanan Remote Seluruh Indonesia",
+  address: "Jl. Karya Bakti, Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia",
   copyrightYear: "2026",
   badgeText: "Dibangun dengan presisi rekayasa & integritas ⚡",
   socials: [
@@ -315,7 +315,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v8";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v9";
 
 interface CMSContextType {
   cms: CMSDataState;

@@ -224,11 +224,11 @@ export default function FAQPage() {
                     <span>WhatsApp: +{siteSettings.whatsappNumber}</span>
                   </a>
                   <a
-                    href="mailto:hi@gemilangspace.com"
+                    href="mailto:pjrlywm@gmail.com"
                     className="flex items-center gap-2 text-neutral-900 hover:text-[#00E1BA] transition-colors"
                   >
                     <Mail className="w-3.5 h-3.5 text-neutral-500" />
-                    <span>hi@gemilangspace.com</span>
+                    <span>pjrlywm@gmail.com</span>
                   </a>
                 </div>
               </div>
