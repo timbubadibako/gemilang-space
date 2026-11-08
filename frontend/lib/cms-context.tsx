@@ -92,7 +92,7 @@ const defaultSliderItems: WorksSliderItem[] = [
     id: "p-3",
     title: "Desa Kadurama Portal & APBDes",
     category: "GovTech & Civic Tech",
-    imageUrl: "/images/portfolio/kadurama-og.png",
+    imageUrl: "/images/portfolio/desa.png",
   },
   {
     id: "p-4",
@@ -146,7 +146,7 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
       en: "DIGITAL VILLAGE GOVTECH",
     },
     tags: ["CIVIC TECH", "PORTAL DESA", "TRANSPARANSI APBDES", "RESPONSIVE"],
-    imageUrl: "/images/portfolio/kadurama-og.png",
+    imageUrl: "/images/portfolio/desa.png",
     bgColor: "#F3F5F9",
     caseUrl: "https://www.desakadurama.com/",
   },
@@ -315,7 +315,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v5";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v6";
 
 interface CMSContextType {
   cms: CMSDataState;

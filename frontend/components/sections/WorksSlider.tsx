@@ -28,7 +28,7 @@ const defaultProjects: ProjectCard[] = [
     id: "p-3",
     title: "Desa Kadurama Portal & APBDes",
     category: "GovTech & Civic Tech",
-    imageUrl: "/images/portfolio/kadurama-og.png",
+    imageUrl: "/images/portfolio/desa.png",
   },
   {
     id: "p-4",

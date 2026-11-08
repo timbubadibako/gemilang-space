@@ -61,7 +61,7 @@ const projects: ProjectPanelData[] = [
       en: "DIGITAL VILLAGE GOVTECH",
     },
     tags: ["CIVIC TECH", "PORTAL DESA", "TRANSPARANSI APBDES", "RESPONSIVE"],
-    imageUrl: "/images/portfolio/kadurama-og.png",
+    imageUrl: "/images/portfolio/desa.png",
     bgColor: "#F3F5F9",
     caseUrl: "https://www.desakadurama.com/",
   },
