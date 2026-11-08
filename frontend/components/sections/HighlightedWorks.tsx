@@ -78,7 +78,7 @@ const projects: ProjectPanelData[] = [
       en: "SCALE ERP & MULTI-WAREHOUSE",
     },
     tags: ["ENTERPRISE ERP", "HARDWARE TIMBANGAN", "INVENTORY 4 GUDANG", "FINANCIAL LEDGER"],
-    imageUrl: "/images/portfolio/greencycle-logo.png",
+    imageUrl: "/images/portfolio/gc.png",
     bgColor: "#FFFFFF",
     caseUrl: "https://greencycle.gemilang.space/",
   },

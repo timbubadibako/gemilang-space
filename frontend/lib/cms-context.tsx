@@ -98,7 +98,7 @@ const defaultSliderItems: WorksSliderItem[] = [
     id: "p-4",
     title: "Green Cycle ERP Timbangan Rongsok",
     category: "ERP & Multi-Gudang",
-    imageUrl: "/images/portfolio/greencycle-logo.png",
+    imageUrl: "/images/portfolio/gc.png",
   },
   {
     id: "p-5",
@@ -163,7 +163,7 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
       en: "SCALE ERP & MULTI-WAREHOUSE",
     },
     tags: ["ENTERPRISE ERP", "HARDWARE TIMBANGAN", "INVENTORY 4 GUDANG", "FINANCIAL LEDGER"],
-    imageUrl: "/images/portfolio/greencycle-logo.png",
+    imageUrl: "/images/portfolio/gc.png",
     bgColor: "#FFFFFF",
     caseUrl: "https://greencycle.gemilang.space/",
   },
@@ -315,7 +315,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v6";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v7";
 
 interface CMSContextType {
   cms: CMSDataState;

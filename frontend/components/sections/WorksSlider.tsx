@@ -34,7 +34,7 @@ const defaultProjects: ProjectCard[] = [
     id: "p-4",
     title: "Green Cycle ERP Timbangan Rongsok",
     category: "ERP & Multi-Gudang",
-    imageUrl: "/images/portfolio/greencycle-logo.png",
+    imageUrl: "/images/portfolio/gc.png",
   },
   {
     id: "p-5",
