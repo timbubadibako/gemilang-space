@@ -21,86 +21,70 @@ interface ShowcaseItem {
 const showcaseItems: ShowcaseItem[] = [
   {
     id: "sc-1",
-    title: "Autonomous Freight Automation",
-    client: "5U AI",
-    type: "AI WORKFORCE",
-    category: "AI",
-    imageUrl: "https://framerusercontent.com/images/UmsGTar3Kym230FQvHG4LGFfnE.jpg?width=3200&height=2400",
+    title: "Specialty Roastery E-Commerce & Subscription",
+    client: "FERMION ROASTERY",
+    type: "SPECIALTY COMMERCE",
+    category: "eCommerce",
+    imageUrl: "/images/portfolio/fermion-screen.png",
   },
   {
     id: "sc-2",
-    title: "Industrial Recycling Scale & ERP Terminal",
+    title: "Portal Desa Digital & Pelayanan Surat Mandiri Warga",
+    client: "DESA KADURAMA",
+    type: "CIVIC TECH",
+    category: "SaaS",
+    imageUrl: "/images/portfolio/desa.png",
+  },
+  {
+    id: "sc-3",
+    title: "Sistem ERP 4 Gudang & Integrasi Timbangan RS232",
     client: "GREEN CYCLE KUNINGAN",
-    type: "WEB POS RS232",
+    type: "ENTERPRISE ERP",
     category: "SaaS",
     imageUrl: "/images/portfolio/gc.png",
   },
   {
-    id: "sc-3",
-    title: "Specialty Roastery E-Commerce",
-    client: "FERMION ROASTERY",
-    type: "SPECIALTY COMMERCE",
-    category: "eCommerce",
-    imageUrl: "https://framerusercontent.com/images/glIJQjGjPLjFvclK2dzCQMcXXU.jpg?width=3200&height=2400",
-  },
-  {
     id: "sc-4",
-    title: "Citizen Governance Self-Service",
-    client: "DESA DIGITAL",
-    type: "CIVIC TECH",
-    category: "Fintech",
-    imageUrl: "https://framerusercontent.com/images/f2TBOrrRIY5dcoWQ72exps1cHlo.jpg?width=3200&height=2400",
+    title: "Katalog Suku Cadang Asli HET & Booking Servis Honda",
+    client: "AHASS AS PUTRA RAHMAT",
+    type: "AUTOMOTIVE RETAIL",
+    category: "eCommerce",
+    imageUrl: "/images/portfolio/asputra-dealer.png",
   },
   {
     id: "sc-5",
-    title: "Murajaah Voice AI Assistant",
-    client: "PESANTREN OS",
-    type: "VOICE AI (IN BUILD)",
-    category: "AI",
-    imageUrl: "https://framerusercontent.com/images/Nu0cRFLjMAItqhIVN0g649mMTM.jpg?width=3200&height=2400",
-  },
-  {
-    id: "sc-6",
-    title: "Cinematic Agency Showreel",
+    title: "Showcase Agensi Visual & Identitas Digital Brand",
     client: "FOURJECTIVE",
     type: "CREATIVE (IN BUILD)",
     category: "SaaS",
-    imageUrl: "https://framerusercontent.com/images/SvJuN95HnCUIYI9jnQM94YpDs.jpg?width=3200&height=2400",
+    imageUrl: "/images/project-placeholder.svg",
   },
   {
-    id: "sc-7",
-    title: "High-Concurrency News Publishing",
+    id: "sc-6",
+    title: "Platform Kolaborasi Produksi Konten & Edge Media Hub",
     client: "QIYAR MEDIA",
     type: "MEDIA OPS (IN BUILD)",
     category: "eCommerce",
-    imageUrl: "https://framerusercontent.com/images/vmp26uS1fzAEOVbdH19mrf2bnw.jpg?width=3200&height=2400",
+    imageUrl: "/images/project-placeholder.svg",
   },
   {
-    id: "sc-8",
-    title: "Next-Gen Decentralized Console",
-    client: "MINDSPHERE",
-    type: "WEB3 INTERACTION",
-    category: "Web3",
-    imageUrl: "https://framerusercontent.com/images/khoFnued04hLkd3MGQ5lafIfAbA.jpg?width=3200&height=2400",
-  },
-  {
-    id: "sc-9",
-    title: "Cross-Border Settlement Engine",
-    client: "GLOBAL PAY",
-    type: "FINTECH RAILS",
-    category: "Fintech",
-    imageUrl: "https://framerusercontent.com/images/f2TBOrrRIY5dcoWQ72exps1cHlo.jpg?width=3200&height=2400",
+    id: "sc-7",
+    title: "Sistem Manajemen Santri & Asisten Murajaah Voice AI",
+    client: "PESANTREN OS",
+    type: "VOICE AI (IN BUILD)",
+    category: "AI",
+    imageUrl: "/images/project-placeholder.svg",
   },
 ];
 
-const categories = ["All (95)", "Web3", "AI", "SaaS", "Fintech", "eCommerce"] as const;
+const categories = ["Semua", "AI", "SaaS", "eCommerce"] as const;
 
 export default function ShowcasePage() {
   const [lang, setLang] = useState<"id" | "en">(siteSettings.defaultLanguage);
-  const [selectedCategory, setSelectedCategory] = useState<string>("All (95)");
+  const [selectedCategory, setSelectedCategory] = useState<string>("Semua");
   const [columnsCount, setColumnsCount] = useState<2 | 3>(3);
 
-  const filteredItems = selectedCategory === "All (95)"
+  const filteredItems = selectedCategory === "Semua"
     ? showcaseItems
     : showcaseItems.filter((item) => item.category === selectedCategory);
 

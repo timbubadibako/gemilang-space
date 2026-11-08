@@ -33,6 +33,48 @@ interface WorkProject {
 
 const workProjects: WorkProject[] = [
   {
+    id: "fermion-roastery",
+    client: "FERMION ROASTERY",
+    category: "E-Commerce",
+    title: {
+      id: "Platform E-Commerce Specialty Coffee & Subscription Engine",
+      en: "Specialty Coffee E-Commerce Platform & Subscription Engine",
+    },
+    description: {
+      id: "Toko daring specialty coffee berkecepatan tinggi dengan kalkulator grind size interaktif, langganan biji kopi otomatis bulanan, dan integrasi payment gateway Xendit.",
+      en: "High-speed specialty coffee storefront with interactive grind selector, automated monthly bean subscriptions, and seamless payment gateway integration.",
+    },
+    tags: ["SPECIALTY COMMERCE", "SUBSCRIPTION ENGINE", "TRANSACTIONAL EMAIL"],
+    techStack: ["Next.js 15", "Tailwind CSS v4", "Resend API", "Xendit", "Supabase"],
+    impact: {
+      id: "Skor PageSpeed 98+, konversi pesanan kopi naik 2.4x lipat dalam 30 hari",
+      en: "98+ PageSpeed score, 2.4x customer order conversion within 30 days",
+    },
+    imageUrl: "/images/portfolio/fermion-screen.png",
+    slug: "fermion-roastery",
+  },
+  {
+    id: "desa-kadurama",
+    client: "PEMERINTAH DESA KADURAMA",
+    category: "Civic Tech",
+    title: {
+      id: "Portal Pelayanan Mandiri Warga & Kependudukan Cerdas Desa",
+      en: "Smart Village Citizen Self-Service & Population Registry Platform",
+    },
+    description: {
+      id: "Sistem administrasi desa modern dengan pembuatan surat keterangan instan ber-QR code legalitas, pemetaan bansos transparan, dan database kependudukan terenkripsi.",
+      en: "Modern civic service portal with instant QR-verified legal letters, transparent welfare distribution mapping, and encrypted citizen records.",
+    },
+    tags: ["CIVIC TECH", "E-GOVERNMENT", "PUBLIC SERVICES", "KUNINGAN"],
+    techStack: ["Next.js", "PostgreSQL (Supabase)", "Tailwind CSS", "PDF Engine", "Cloudflare"],
+    impact: {
+      id: "Waktu pembuatan surat warga dipersingkat dari 2 hari menjadi 3 menit",
+      en: "Citizen document issuance time reduced from 2 days to under 3 minutes",
+    },
+    imageUrl: "/images/portfolio/desa.png",
+    slug: "desa-kadurama",
+  },
+  {
     id: "green-cycle-erp",
     client: "GREEN CYCLE KUNINGAN",
     category: "Industrial IoT",
@@ -54,67 +96,25 @@ const workProjects: WorkProject[] = [
     slug: "green-cycle-erp",
   },
   {
-    id: "fermion-roastery",
-    client: "FERMION ROASTERY",
-    category: "E-Commerce",
+    id: "as-putra-honda",
+    client: "AHASS AS PUTRA RAHMAT",
+    category: "Industrial IoT",
     title: {
-      id: "Platform E-Commerce Specialty Coffee & Subscription Engine",
-      en: "Specialty Coffee E-Commerce Platform & Subscription Engine",
+      id: "Portal Katalog Suku Cadang Asli HET & Booking Servis Online",
+      en: "Official Honda Genuine Spare Parts Catalog & Booking Portal",
     },
     description: {
-      id: "Toko daring specialty coffee berkecepatan tinggi dengan kalkulator grind size interaktif, langganan biji kopi otomatis bulanan, dan integrasi payment gateway Xendit.",
-      en: "High-speed specialty coffee storefront with interactive grind selector, automated monthly bean subscriptions, and seamless payment gateway integration.",
+      id: "Katalog suku cadang motor resmi Honda AHASS #10870 dengan pencarian kode part, harga HET resmi AHM, dan formulir booking jadwal pit servis terintegrasi.",
+      en: "Official Honda AHASS #10870 spare parts catalog with part code search, official HET pricing, and integrated service pit schedule booking.",
     },
-    tags: ["SPECIALTY COMMERCE", "SUBSCRIPTION ENGINE", "TRANSACTIONAL EMAIL"],
-    techStack: ["Next.js 15", "Tailwind CSS v4", "Resend API", "Xendit", "Supabase"],
+    tags: ["DEALER HONDA #10870", "SPARE PART CATALOG", "BOOKING ONLINE", "KUNINGAN"],
+    techStack: ["Next.js", "Tailwind CSS", "Supabase", "Vercel"],
     impact: {
-      id: "Skor PageSpeed 98+, konversi pesanan kopi naik 2.4x lipat dalam 30 hari",
-      en: "98+ PageSpeed score, 2.4x customer order conversion within 30 days",
+      id: "Meningkatkan efisiensi antrean pit servis dan transparansi harga HET",
+      en: "Improved service queue turnover and total spare part price transparency",
     },
-    imageUrl: "https://framerusercontent.com/images/glIJQjGjPLjFvclK2dzCQMcXXU.jpg?width=3200&height=2400",
-    slug: "fermion-roastery",
-  },
-  {
-    id: "desa-digital",
-    client: "PEMERINTAH DESA & DISKOMINFO",
-    category: "Civic Tech",
-    title: {
-      id: "Portal Pelayanan Mandiri Warga & Kependudukan Cerdas Desa",
-      en: "Smart Village Citizen Self-Service & Population Registry Platform",
-    },
-    description: {
-      id: "Sistem administrasi desa modern dengan pembuatan surat keterangan instan ber-QR code legalitas, pemetaan bansos transparan, dan database kependudukan terenkripsi.",
-      en: "Modern civic service portal with instant QR-verified legal letters, transparent welfare distribution mapping, and encrypted citizen records.",
-    },
-    tags: ["CIVIC TECH", "E-GOVERNMENT", "PUBLIC SERVICES"],
-    techStack: ["Next.js", "PostgreSQL (Supabase)", "Tailwind CSS", "PDF Engine", "Cloudflare"],
-    impact: {
-      id: "Waktu pembuatan surat warga dipersingkat dari 2 hari menjadi 3 menit",
-      en: "Citizen document issuance time reduced from 2 days to under 3 minutes",
-    },
-    imageUrl: "https://framerusercontent.com/images/f2TBOrrRIY5dcoWQ72exps1cHlo.jpg?width=3200&height=2400",
-    slug: "desa-digital",
-  },
-  {
-    id: "pesantren-os",
-    client: "YAYASAN PONDOK PESANTREN & EDTECH",
-    category: "EdTech & AI",
-    title: {
-      id: "Sistem Manajemen Pesantren & Asisten Murajaah Voice AI",
-      en: "Islamic Education Management OS & Voice-AI Murajaah Assistant",
-    },
-    description: {
-      id: "Platform operasional santri terpadu mencakup buku kas SPP virtual, izin santri realtime via WhatsApp bot Baileys, serta engine AI murajaah pengenal makhraj suara.",
-      en: "Unified boarding school management OS featuring virtual tuition ledgers, Baileys WhatsApp parent notifications, and speech-AI murajaah recitation verification.",
-    },
-    tags: ["DALAM PENGERJAAN ⚡", "EDTECH OS", "VOICE AI", "WHATSAPP AUTOMATION"],
-    techStack: ["React Native / Flutter", "Next.js", "Whisper AI", "PocketBase", "Baileys"],
-    impact: {
-      id: "Tahap arsitektur & prototipe voice AI engine setoran hafalan",
-      en: "Under active architecture & speech verification prototype",
-    },
-    imageUrl: "https://framerusercontent.com/images/Nu0cRFLjMAItqhIVN0g649mMTM.jpg?width=3200&height=2400",
-    slug: "pesantren-os",
+    imageUrl: "/images/portfolio/asputra-dealer.png",
+    slug: "as-putra-honda",
   },
   {
     id: "fourjective",
@@ -134,13 +134,13 @@ const workProjects: WorkProject[] = [
       id: "Tahap perakitan frontend showreel & kurasi aset visual agensi",
       en: "Under active frontend showreel build & agency asset curation",
     },
-    imageUrl: "https://framerusercontent.com/images/SvJuN95HnCUIYI9jnQM94YpDs.jpg?width=3200&height=2400",
+    imageUrl: "/images/project-placeholder.svg",
     slug: "fourjective",
   },
   {
     id: "qiyar-media",
     client: "QIYAR MEDIA GROUP",
-    category: "E-Commerce",
+    category: "Creative Agency",
     title: {
       id: "Platform Penerbitan Media Digital & Otomasi Distribusi Konten",
       en: "Digital Media Publishing Platform & Content Distribution Automation",
@@ -155,8 +155,29 @@ const workProjects: WorkProject[] = [
       id: "Tahap setup CMS publishing, caching edge & ingestion feed media",
       en: "Under active CMS publishing pipeline & media feed ingestion",
     },
-    imageUrl: "https://framerusercontent.com/images/vmp26uS1fzAEOVbdH19mrf2bnw.jpg?width=3200&height=2400",
+    imageUrl: "/images/project-placeholder.svg",
     slug: "qiyar-media",
+  },
+  {
+    id: "pesantren-os",
+    client: "YAYASAN PONDOK PESANTREN & EDTECH",
+    category: "EdTech & AI",
+    title: {
+      id: "Sistem Manajemen Pesantren & Asisten Murajaah Voice AI",
+      en: "Islamic Education Management OS & Voice-AI Murajaah Assistant",
+    },
+    description: {
+      id: "Platform operasional santri terpadu mencakup buku kas SPP virtual, izin santri realtime via WhatsApp bot Baileys, serta engine AI murajaah pengenal makhraj suara.",
+      en: "Unified boarding school management OS featuring virtual tuition ledgers, Baileys WhatsApp parent notifications, and speech-AI murajaah recitation verification.",
+    },
+    tags: ["DALAM PENGERJAAN ⚡", "EDTECH OS", "VOICE AI", "WHATSAPP AUTOMATION"],
+    techStack: ["React Native / Flutter", "Next.js", "Whisper AI", "PocketBase", "Baileys"],
+    impact: {
+      id: "Tahap arsitektur & prototipe voice AI engine setoran hafalan",
+      en: "Under active architecture & speech verification prototype",
+    },
+    imageUrl: "/images/project-placeholder.svg",
+    slug: "pesantren-os",
   },
 ];
 

@@ -104,19 +104,19 @@ const defaultSliderItems: WorksSliderItem[] = [
     id: "p-5",
     title: "Fourjective Creative Studio",
     category: "Creative Agency • Dalam Pengerjaan",
-    imageUrl: "/images/portfolio/fermion-og.jpg",
+    imageUrl: "/images/project-placeholder.svg",
   },
   {
     id: "p-6",
     title: "Qiyar Media Production Platform",
     category: "Media Production • Dalam Pengerjaan",
-    imageUrl: "/images/portfolio/kadurama-og.png",
+    imageUrl: "/images/project-placeholder.svg",
   },
   {
     id: "p-7",
     title: "Pesantren OS & Murajaah Voice AI",
     category: "EdTech & Voice AI • Dalam Pengerjaan",
-    imageUrl: "/crafted-poster.png",
+    imageUrl: "/images/project-placeholder.svg",
   },
 ];
 
@@ -203,7 +203,7 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
       en: "IN ACTIVE BUILD ⚡",
     },
     tags: ["CREATIVE STUDIO", "FLUID MOTION", "SHOWCASE PLATFORM", "IN DEVELOPMENT"],
-    imageUrl: "/images/portfolio/fermion-og.jpg",
+    imageUrl: "/images/project-placeholder.svg",
     bgColor: "#FFFFFF",
     caseUrl: "#works",
   },
@@ -220,7 +220,7 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
       en: "IN ACTIVE BUILD ⚡",
     },
     tags: ["MEDIA PRODUCTION", "ASSET MANAGEMENT", "CONTENT OPS", "IN DEVELOPMENT"],
-    imageUrl: "/images/portfolio/kadurama-og.png",
+    imageUrl: "/images/project-placeholder.svg",
     bgColor: "#F3F5F9",
     caseUrl: "#works",
   },
@@ -237,7 +237,7 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
       en: "RESEARCH & ARCHITECTURE ⚡",
     },
     tags: ["EDTECH", "VOICE AI", "AUDIO PROCESSING", "IN DEVELOPMENT"],
-    imageUrl: "/crafted-poster.png",
+    imageUrl: "/images/project-placeholder.svg",
     bgColor: "#FFFFFF",
     caseUrl: "#works",
   },
@@ -389,7 +389,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v19";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v20";
 
 interface CMSContextType {
   cms: CMSDataState;

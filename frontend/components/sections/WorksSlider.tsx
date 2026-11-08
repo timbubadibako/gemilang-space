@@ -40,19 +40,19 @@ const defaultProjects: ProjectCard[] = [
     id: "p-5",
     title: "Fourjective Creative Studio",
     category: "Creative Agency • Dalam Pengerjaan",
-    imageUrl: "/images/portfolio/fermion-og.jpg",
+    imageUrl: "/images/project-placeholder.svg",
   },
   {
     id: "p-6",
     title: "Qiyar Media Production Platform",
     category: "Media Production • Dalam Pengerjaan",
-    imageUrl: "/images/portfolio/kadurama-og.png",
+    imageUrl: "/images/project-placeholder.svg",
   },
   {
     id: "p-7",
     title: "Pesantren OS & Murajaah Voice AI",
     category: "EdTech & Voice AI • Dalam Pengerjaan",
-    imageUrl: "/crafted-poster.png",
+    imageUrl: "/images/project-placeholder.svg",
   },
 ];
 
