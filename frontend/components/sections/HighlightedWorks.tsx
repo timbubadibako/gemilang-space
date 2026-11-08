@@ -80,7 +80,7 @@ const projects: ProjectPanelData[] = [
     tags: ["ENTERPRISE ERP", "HARDWARE TIMBANGAN", "INVENTORY 4 GUDANG", "FINANCIAL LEDGER"],
     imageUrl: "/images/portfolio/gc.png",
     bgColor: "#FFFFFF",
-    caseUrl: "https://greencycle.gemilang.space/",
+    caseUrl: "#works",
   },
   {
     id: "as-putra-honda",

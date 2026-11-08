@@ -165,7 +165,7 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
     tags: ["ENTERPRISE ERP", "HARDWARE TIMBANGAN", "INVENTORY 4 GUDANG", "FINANCIAL LEDGER"],
     imageUrl: "/images/portfolio/gc.png",
     bgColor: "#FFFFFF",
-    caseUrl: "https://greencycle.gemilang.space/",
+    caseUrl: "#works",
   },
   {
     id: "as-putra-honda",
@@ -315,7 +315,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v7";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v8";
 
 interface CMSContextType {
   cms: CMSDataState;
