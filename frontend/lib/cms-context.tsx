@@ -217,14 +217,14 @@ const defaultTestimonials: TestimonialItem[] = [
   },
   {
     id: "greencycle",
-    brand: "Green Cycle Indonesia",
+    brand: "Green Cycle Kuningan",
     badge: "ENTERPRISE ERP & LOGISTIK",
     quote: {
       id: "Sistem ERP internal yang dibangun squad Gemilang menghemat belasan jam kerja tim operasional kami setiap pekannya dalam rekap timbangan rongsok dan multi-gudang.",
       en: "The internal ERP engineered by the Gemilang squad saves dozens of operational hours every week across scrap weighing logs and multi-warehouse inventories.",
     },
     author: "Tim Operasional",
-    role: "Operations Lead @ Green Cycle Indonesia",
+    role: "Operations Lead @ Green Cycle Kuningan",
     coverImage: "/images/portfolio/gc.png",
     initials: "GC",
     brandColor: "bg-teal-500",
@@ -332,7 +332,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v16";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v17";
 
 interface CMSContextType {
   cms: CMSDataState;

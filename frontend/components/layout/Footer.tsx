@@ -40,7 +40,7 @@ export function Footer({ lang }: FooterProps) {
   const caseStudies = [
     { title: "Fermion Roastery — E-Commerce Specialty Coffee & Web Store", highlight: "(Live)" },
     { title: "Desa Kadurama — Portal Desa Digital & Pelayanan Surat Warga", highlight: "(Kuningan)" },
-    { title: "Green Cycle Indonesia — Sistem ERP Internal & Daur Ulang", highlight: "(Enterprise)" },
+    { title: "Green Cycle Kuningan — Sistem ERP Internal & Daur Ulang", highlight: "(Enterprise)" },
     { title: "AHASS AS Putra Rahmat — Portal Bengkel & Dealer Motor Honda", highlight: "(Segera)" },
   ];
 
