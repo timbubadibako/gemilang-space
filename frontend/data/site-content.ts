@@ -149,7 +149,7 @@ export const squadMembers: SquadMember[] = [
   },
   {
     id: "squad-3",
-    name: "Ade Dwi Heryatna",
+    name: "Pandu Satya Darma",
     role: {
       id: "Frontend & Design Systems",
       en: "Frontend & Design Systems",
@@ -177,7 +177,7 @@ export const squadMembers: SquadMember[] = [
   },
   {
     id: "squad-5",
-    name: "Pandu Satya Darma",
+    name: "M. Rizal Apriliadi",
     role: {
       id: "Mobile & Core Systems",
       en: "Mobile & Core Systems",
@@ -191,7 +191,7 @@ export const squadMembers: SquadMember[] = [
   },
   {
     id: "squad-6",
-    name: "M. Rizal Apriliadi",
+    name: "Ade Dwi Heryatna",
     role: {
       id: "AI & Automation Systems",
       en: "AI & Automation Systems",

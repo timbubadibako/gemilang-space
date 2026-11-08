@@ -315,7 +315,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v12";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v13";
 
 interface CMSContextType {
   cms: CMSDataState;
