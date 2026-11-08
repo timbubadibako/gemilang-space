@@ -39,53 +39,18 @@ export function Navbar({
   const [isVisible, setIsVisible] = useState(false);
   const closeTimer = useRef<NodeJS.Timeout | null>(null);
 
-  // Smart Hide/Show State
-  const [navVisible, setNavVisible] = useState(true);
-  const lastScrollY = useRef(0);
-  const ticking = useRef(false);
+  // Stable Smooth Sticky with subtle scroll elevation (no erratic sliding)
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!ticking.current) {
-        window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
-          const delta = currentScrollY - lastScrollY.current;
-
-          // Always visible at the very top of page
-          if (currentScrollY <= 40) {
-            setNavVisible(true);
-          } else if (delta > 8 && currentScrollY > 80) {
-            // Scrolling down -> hide navbar (unless mobile menu or dropdown is open)
-            if (!mobileMenuOpen && !activeMenu) {
-              setNavVisible(false);
-            }
-          } else if (delta < -4) {
-            // Scrolling up even slightly -> show navbar
-            setNavVisible(true);
-          }
-
-          lastScrollY.current = currentScrollY;
-          ticking.current = false;
-        });
-        ticking.current = true;
-      }
+      setIsScrolled(window.scrollY > 16);
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      // Cursor searching towards the top edge of viewport (within 70px) -> show navbar
-      if (e.clientY <= 70) {
-        setNavVisible(true);
-      }
-    };
-
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, [mobileMenuOpen, activeMenu]);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const isLight = theme === "light";
   const ctaLabel = currentLang === "id" ? "Konsultasi" : "Let's Talk";
@@ -193,12 +158,14 @@ export function Navbar({
 
   return (
     <header
-      className={`sticky top-0 w-full border-b transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] z-50 shrink-0 ${
-        navVisible ? "translate-y-0" : "-translate-y-full"
-      } ${
+      className={`sticky top-0 w-full border-b transition-all duration-300 z-50 shrink-0 ${
         isLight
-          ? "border-neutral-200/80 bg-[#FFFFFF]/95 text-neutral-950 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
-          : "border-[#28282B] bg-[#04060A]/95 text-white backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
+          ? isScrolled
+            ? "border-neutral-200/90 bg-[#FFFFFF]/95 text-neutral-950 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
+            : "border-transparent bg-[#FFFFFF]/80 text-neutral-950 backdrop-blur-xs"
+          : isScrolled
+            ? "border-[#28282B] bg-[#04060A]/95 text-white backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.45)]"
+            : "border-transparent bg-[#04060A]/85 text-white backdrop-blur-xs"
       }`}
       onMouseLeave={handleClose}
     >
