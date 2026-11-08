@@ -121,7 +121,7 @@ export const heroContent: HeroContent = {
 export const squadMembers: SquadMember[] = [
   {
     id: "squad-1",
-    name: "Syifa Pajril",
+    name: "Syifa Pajril Yaum",
     role: {
       id: "Founder & Lead Architect",
       en: "Founder & Lead Architect",
@@ -135,7 +135,7 @@ export const squadMembers: SquadMember[] = [
   },
   {
     id: "squad-2",
-    name: "Fajar Satria",
+    name: "M. Rangga Teja Saputra",
     role: {
       id: "Principal Backend & Cloud",
       en: "Principal Backend & Cloud",
@@ -149,7 +149,7 @@ export const squadMembers: SquadMember[] = [
   },
   {
     id: "squad-3",
-    name: "Rian Hidayat",
+    name: "Ade Dwi Heryatna",
     role: {
       id: "Frontend & Design Systems",
       en: "Frontend & Design Systems",
@@ -163,7 +163,7 @@ export const squadMembers: SquadMember[] = [
   },
   {
     id: "squad-4",
-    name: "Dimas Pratama",
+    name: "Iqbal Zaidan",
     role: {
       id: "Hardware & POS Specialist",
       en: "Hardware & POS Specialist",
@@ -177,7 +177,7 @@ export const squadMembers: SquadMember[] = [
   },
   {
     id: "squad-5",
-    name: "Naufal Hakim",
+    name: "Pandu Satya Darma",
     role: {
       id: "Mobile & Core Systems",
       en: "Mobile & Core Systems",
@@ -191,7 +191,7 @@ export const squadMembers: SquadMember[] = [
   },
   {
     id: "squad-6",
-    name: "Maya Aurelia",
+    name: "M. Rizal Apriliadi",
     role: {
       id: "AI & Automation Systems",
       en: "AI & Automation Systems",
