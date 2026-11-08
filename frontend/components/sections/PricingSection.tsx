@@ -28,6 +28,9 @@ export function PricingSection({
     "Desa Kadurama",
     "Green Cycle Kuningan",
     "AHASS AS Putra Rahmat",
+    "Fourjective",
+    "Qiyar Media",
+    "Pesantren OS",
     "Gemilang Space Studio",
   ];
 

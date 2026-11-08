@@ -38,15 +38,21 @@ const defaultProjects: ProjectCard[] = [
   },
   {
     id: "p-5",
-    title: "Sistem Kasir (POS) Offline-First",
-    category: "POS Kasir & Struk Thermal",
+    title: "Fourjective Creative Studio",
+    category: "Creative Agency • Dalam Pengerjaan",
     imageUrl: "/images/portfolio/fermion-og.jpg",
   },
   {
     id: "p-6",
-    title: "Portal Administrasi Desa & APBDes",
-    category: "Civic Tech & Transparansi",
+    title: "Qiyar Media Production Platform",
+    category: "Media Production • Dalam Pengerjaan",
     imageUrl: "/images/portfolio/kadurama-og.png",
+  },
+  {
+    id: "p-7",
+    title: "Pesantren OS & Murajaah Voice AI",
+    category: "EdTech & Voice AI • Dalam Pengerjaan",
+    imageUrl: "/crafted-poster.png",
   },
 ];
 

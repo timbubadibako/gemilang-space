@@ -42,6 +42,9 @@ export function Footer({ lang }: FooterProps) {
     { title: "Desa Kadurama — Portal Desa Digital & Pelayanan Surat Warga", highlight: "(Kuningan)" },
     { title: "Green Cycle Kuningan — Sistem ERP Internal & Daur Ulang", highlight: "(Enterprise)" },
     { title: "AHASS AS Putra Rahmat — Portal Bengkel & Dealer Motor Honda", highlight: "(Segera)" },
+    { title: "Fourjective — Creative Agency & Visual Brand Showcase", highlight: "(In Dev)" },
+    { title: "Qiyar Media — Media Agency & Production Collaboration Hub", highlight: "(In Dev)" },
+    { title: "Pesantren OS — EdTech & Asisten Suara Hafalan Qur'an AI", highlight: "(In Dev)" },
   ];
 
   const socialPills = [

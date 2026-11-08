@@ -102,15 +102,21 @@ const defaultSliderItems: WorksSliderItem[] = [
   },
   {
     id: "p-5",
-    title: "Sistem Kasir (POS) Offline-First",
-    category: "POS Kasir & Struk Thermal",
+    title: "Fourjective Creative Studio",
+    category: "Creative Agency • Dalam Pengerjaan",
     imageUrl: "/images/portfolio/fermion-og.jpg",
   },
   {
     id: "p-6",
-    title: "Portal Administrasi Desa & APBDes",
-    category: "Civic Tech & Transparansi",
+    title: "Qiyar Media Production Platform",
+    category: "Media Production • Dalam Pengerjaan",
     imageUrl: "/images/portfolio/kadurama-og.png",
+  },
+  {
+    id: "p-7",
+    title: "Pesantren OS & Murajaah Voice AI",
+    category: "EdTech & Voice AI • Dalam Pengerjaan",
+    imageUrl: "/crafted-poster.png",
   },
 ];
 
@@ -183,6 +189,57 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
     imageUrl: "/images/portfolio/asputra-dealer.png",
     bgColor: "#EFF1F6",
     caseUrl: "https://asputra.vercel.app/",
+  },
+  {
+    id: "fourjective",
+    client: "FOURJECTIVE",
+    category: "CREATIVE AGENCY",
+    title: {
+      id: "Platform showcase interaktif visual & identitas digital brand studio",
+      en: "Interactive visual showcase & brand studio digital platform",
+    },
+    badge: {
+      id: "TAHAP PENGEMBANGAN ⚡",
+      en: "IN ACTIVE BUILD ⚡",
+    },
+    tags: ["CREATIVE STUDIO", "FLUID MOTION", "SHOWCASE PLATFORM", "IN DEVELOPMENT"],
+    imageUrl: "/images/portfolio/fermion-og.jpg",
+    bgColor: "#FFFFFF",
+    caseUrl: "#works",
+  },
+  {
+    id: "qiyar-media",
+    client: "QIYAR MEDIA",
+    category: "MEDIA PRODUCTION",
+    title: {
+      id: "Pusat kolaborasi produksi konten, kurasi aset & distribusi media",
+      en: "Content production hub, asset curation & digital distribution",
+    },
+    badge: {
+      id: "TAHAP PENGEMBANGAN ⚡",
+      en: "IN ACTIVE BUILD ⚡",
+    },
+    tags: ["MEDIA PRODUCTION", "ASSET MANAGEMENT", "CONTENT OPS", "IN DEVELOPMENT"],
+    imageUrl: "/images/portfolio/kadurama-og.png",
+    bgColor: "#F3F5F9",
+    caseUrl: "#works",
+  },
+  {
+    id: "pesantren-os",
+    client: "PESANTREN OS",
+    category: "EDTECH & VOICE AI",
+    title: {
+      id: "Sistem otomasi pesantren & asisten koreksi setoran hafalan suara AI",
+      en: "Islamic boarding school OS & voice AI Qur'an recitation assistant",
+    },
+    badge: {
+      id: "TAHAP RISET & ARSITEKTUR ⚡",
+      en: "RESEARCH & ARCHITECTURE ⚡",
+    },
+    tags: ["EDTECH", "VOICE AI", "AUDIO PROCESSING", "IN DEVELOPMENT"],
+    imageUrl: "/crafted-poster.png",
+    bgColor: "#FFFFFF",
+    caseUrl: "#works",
   },
 ];
 
@@ -332,7 +389,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v18";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v19";
 
 interface CMSContextType {
   cms: CMSDataState;

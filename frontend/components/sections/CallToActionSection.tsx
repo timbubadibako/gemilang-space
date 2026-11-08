@@ -17,6 +17,9 @@ const ctaClients = [
   { name: "DESA KADURAMA", category: "Pemerintahan Desa" },
   { name: "GREEN CYCLE KUNINGAN", category: "Enterprise ERP" },
   { name: "AHASS AS PUTRA RAHMAT", category: "Bengkel Resmi Honda" },
+  { name: "FOURJECTIVE", category: "Creative Agency (In Dev)" },
+  { name: "QIYAR MEDIA", category: "Media Production (In Dev)" },
+  { name: "PESANTREN OS", category: "EdTech & Voice AI (In Dev)" },
   { name: "GEMILANG SPACE", category: "Engineering Studio" },
 ];
 
