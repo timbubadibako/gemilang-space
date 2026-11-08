@@ -30,89 +30,72 @@ interface ProjectPanelData {
 
 const projects: ProjectPanelData[] = [
   {
-    id: "5u-ai",
-    client: "5U AI",
-    category: "SAAS / B2B",
+    id: "fermion-roastery",
+    client: "FERMION ROASTERY",
+    category: "E-COMMERCE & ROASTERY",
     title: {
-      id: "Tenaga kerja AI untuk industri kargo & logistik",
-      en: "AI workforce for freight teams",
+      id: "Platform e-commerce specialty coffee & manajemen roastery presisi",
+      en: "Specialty coffee e-commerce & precision roastery platform",
     },
     badge: {
-      id: "5U AI RAIH US $3.2M",
-      en: "5U AI RAISES US $3.2M",
+      id: "EKOSISTEM SPECIALTY COFFEE",
+      en: "SPECIALTY COFFEE ECOSYSTEM",
     },
-    tags: ["UI/UX DESIGN", "LANDING PAGE", "ANIMATION & MICRO INTERACTION"],
-    imageUrl: "https://framerusercontent.com/images/UmsGTar3Kym230FQvHG4LGFfnE.jpg?width=3200&height=2400",
+    tags: ["NEXT.JS", "E-COMMERCE", "ROASTERY MANAGEMENT", "PAYMENT GATEWAY"],
+    imageUrl: "/images/portfolio/fermion-og.jpg",
     bgColor: "#FFFFFF",
-    caseUrl: "#works",
+    caseUrl: "https://www.fermionroastery.com/",
   },
   {
-    id: "mindsphere",
-    client: "MINDSPHERE",
-    category: "AI / WEB3",
+    id: "desa-kadurama",
+    client: "DESA KADURAMA",
+    category: "GOVTECH & CIVIC TECH",
     title: {
-      id: "Platform agen kecerdasan buatan terdesentralisasi",
-      en: "Blockchain AI agent platform",
+      id: "Portal transparansi publik, APBDes 2026 & layanan administrasi warga",
+      en: "Public transparency portal, 2026 APBDes & citizen digital services",
     },
     badge: {
-      id: "RAIH $4.5M PRE-SEED",
-      en: "RAISED $4.5M PRE-SEED",
+      id: "DESA DIGITAL KUNINGAN",
+      en: "DIGITAL VILLAGE GOVTECH",
     },
-    tags: ["AI AGENTS", "WEB3 PLATFORM", "LANDING PAGE"],
-    imageUrl: "https://framerusercontent.com/images/SvJuN95HnCUIYI9jnQM94YpDs.jpg?width=3200&height=2400",
+    tags: ["CIVIC TECH", "PORTAL DESA", "TRANSPARANSI APBDES", "RESPONSIVE"],
+    imageUrl: "/images/portfolio/kadurama-og.png",
     bgColor: "#F3F5F9",
-    caseUrl: "#works",
+    caseUrl: "https://www.desakadurama.com/",
   },
   {
-    id: "efficense",
-    client: "EFFICENSE",
-    category: "ENTERPRISE SAAS",
+    id: "green-cycle",
+    client: "GREEN CYCLE",
+    category: "ENTERPRISE ERP",
     title: {
-      id: "Alat optimasi performa dan analitik sistem IT",
-      en: "IT performance optimization tools",
+      id: "Sistem ERP timbangan rongsok, inventori 4 gudang & finansial sirkular",
+      en: "Scrap scale ERP, 4-warehouse inventory & circular finance system",
     },
     badge: {
-      id: "DIPAKAI 500+ PERUSAHAAN",
-      en: "500+ ENTERPRISE CLIENTS",
+      id: "ERP TIMBANGAN & 4 GUDANG",
+      en: "SCALE ERP & MULTI-WAREHOUSE",
     },
-    tags: ["B2B SAAS", "DASHBOARD DESIGN", "FRAMER DEVELOPMENT"],
-    imageUrl: "https://framerusercontent.com/images/vXAw0vDR2T0nBNxyGAT7m8yEDrs.jpg?width=3200&height=2400",
+    tags: ["ENTERPRISE ERP", "HARDWARE TIMBANGAN", "INVENTORY 4 GUDANG", "FINANCIAL LEDGER"],
+    imageUrl: "/images/portfolio/greencycle-logo.png",
     bgColor: "#FFFFFF",
-    caseUrl: "#works",
+    caseUrl: "https://greencycle.gemilang.space/",
   },
   {
-    id: "spex",
-    client: "SPEX",
-    category: "CYBER SECURITY",
+    id: "as-putra-honda",
+    client: "AHASS AS PUTRA",
+    category: "AUTOMOTIVE RETAIL",
     title: {
-      id: "Platform otomasi kepatuhan dan keamanan siber",
-      en: "Automated cybersecurity compliance platform",
+      id: "Katalog suku cadang asli Honda HET & booking servis online",
+      en: "Official Honda genuine parts catalog & online service booking",
     },
     badge: {
-      id: "MITRA KEAMANAN GLOBAL",
-      en: "GLOBAL SECURITY PARTNER",
+      id: "DEALER & AHASS RESMI #10870",
+      en: "OFFICIAL HONDA AHASS #10870",
     },
-    tags: ["CYBERSECURITY", "UI/UX DESIGN", "ANIMATION INTERACTION"],
-    imageUrl: "https://framerusercontent.com/images/vmp26uS1fzAEOVbdH19mrf2bnw.jpg?width=3200&height=2400",
+    tags: ["HONDA AHASS #10870", "SPARE PART CATALOG", "BOOKING ONLINE", "RETAIL PORTAL"],
+    imageUrl: "/images/portfolio/asputra-dealer.png",
     bgColor: "#EFF1F6",
-    caseUrl: "#works",
-  },
-  {
-    id: "enorm",
-    client: "ENORM",
-    category: "ENTERPRISE IT",
-    title: {
-      id: "Penyedia solusi IT enterprise dan infrastruktur",
-      en: "Enterprise IT solution provider",
-    },
-    badge: {
-      id: "TERPILIH DI PRODUCT HUNT #1",
-      en: "FEATURED ON PRODUCT HUNT #1",
-    },
-    tags: ["BRAND IDENTITY", "DESIGN SYSTEM", "PRODUCT STRATEGY"],
-    imageUrl: "https://framerusercontent.com/images/f2TBOrrRIY5dcoWQ72exps1cHlo.jpg?width=3200&height=2400",
-    bgColor: "#FFFFFF",
-    caseUrl: "#works",
+    caseUrl: "https://asputra.vercel.app/",
   },
 ];
 
@@ -267,11 +250,13 @@ export function HighlightedWorks({ lang, whatsappNumber }: HighlightedWorksProps
                       <Button
                         variant="expand"
                         size="md"
-                        href={waUrl}
+                        href={proj.caseUrl && proj.caseUrl.startsWith("http") ? proj.caseUrl : waUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {viewCaseLabel}
+                        {proj.caseUrl && proj.caseUrl.startsWith("http")
+                          ? (lang === "id" ? "Buka Live Website" : "Open Live Site")
+                          : viewCaseLabel}
                       </Button>
                     </div>
 
