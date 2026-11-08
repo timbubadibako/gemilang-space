@@ -279,12 +279,10 @@ const defaultFooter: FooterConfigData = {
   copyrightYear: "2026",
   badgeText: "Dibangun dengan presisi rekayasa & integritas ⚡",
   socials: [
-    { name: "X.COM", href: "https://x.com" },
-    { name: "LINKEDIN", href: "https://linkedin.com" },
-    { name: "FRAMER", href: "https://framer.com" },
-    { name: "BEHANCE", href: "https://behance.net" },
-    { name: "DRIBBBLE", href: "https://dribbble.com" },
-    { name: "INSTAGRAM", href: "https://instagram.com" },
+    { name: "INSTAGRAM", href: "https://instagram.com/gemilang_space" },
+    { name: "WHATSAPP", href: "https://wa.me/6285722045801" },
+    { name: "EMAIL", href: "mailto:pjrlywm@gmail.com" },
+    { name: "GITHUB", href: "https://github.com/timbubadibako/gemilang-space" },
   ],
 };
 
@@ -315,7 +313,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v13";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v14";
 
 interface CMSContextType {
   cms: CMSDataState;

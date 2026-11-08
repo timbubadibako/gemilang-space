@@ -19,12 +19,10 @@ export function Footer({ lang }: FooterProps) {
     copyrightYear: "2026",
     badgeText: "Dibangun dengan presisi rekayasa & integritas ⚡",
     socials: [
-      { name: "X.COM", href: "https://x.com" },
-      { name: "LINKEDIN", href: "https://linkedin.com" },
-      { name: "FRAMER", href: "https://framer.com" },
-      { name: "BEHANCE", href: "https://behance.net" },
-      { name: "DRIBBBLE", href: "https://dribbble.com" },
-      { name: "INSTAGRAM", href: "https://instagram.com" },
+      { name: "INSTAGRAM", href: "https://instagram.com/gemilang_space" },
+      { name: "WHATSAPP", href: `https://wa.me/${siteSettings.whatsappNumber}` },
+      { name: "EMAIL", href: `mailto:${siteSettings.contactEmail}` },
+      { name: "GITHUB", href: "https://github.com/timbubadibako/gemilang-space" },
     ],
   };
   const categories = [
@@ -46,13 +44,10 @@ export function Footer({ lang }: FooterProps) {
   ];
 
   const socialPills = [
-    { name: "X.COM", href: "https://x.com" },
-    { name: "LINKEDIN", href: "https://linkedin.com" },
-    { name: "FRAMER", href: "https://framer.com" },
-    { name: "BEHANCE", href: "https://behance.net" },
-    { name: "DRIBBBLE", href: "https://dribbble.com" },
-    { name: "CLUTCH", href: "https://clutch.co" },
-    { name: "INSTAGRAM", href: "https://instagram.com" },
+    { name: "INSTAGRAM", href: "https://instagram.com/gemilang_space" },
+    { name: "WHATSAPP", href: `https://wa.me/${siteSettings.whatsappNumber}` },
+    { name: "EMAIL", href: `mailto:${siteSettings.contactEmail}` },
+    { name: "GITHUB", href: "https://github.com/timbubadibako/gemilang-space" },
   ];
 
   const waUrl = `https://wa.me/${siteSettings.whatsappNumber}?text=${encodeURIComponent(
