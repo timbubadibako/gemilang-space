@@ -11,30 +11,30 @@ export const navItems: NavItem[] = [
   {
     id: "work",
     label: { id: "Karya & Portofolio", en: "Work" },
-    href: "#works",
+    href: "/#works",
     hasDropdown: true,
   },
   {
     id: "services",
     label: { id: "Layanan Solusi", en: "Services" },
-    href: "#services",
+    href: "/#services",
     hasDropdown: true,
   },
   {
     id: "contract-team",
     label: { id: "Tim Dedicated", en: "Contract Squad" },
-    href: "#pricing",
+    href: "/#pricing",
     badge: "BULANAN",
   },
   {
     id: "pricing",
     label: { id: "Biaya & Paket", en: "Pricing" },
-    href: "#pricing",
+    href: "/#pricing",
   },
   {
     id: "company",
     label: { id: "Tentang Studio", en: "About Us" },
-    href: "#about",
+    href: "/about",
     hasDropdown: true,
   },
 ];

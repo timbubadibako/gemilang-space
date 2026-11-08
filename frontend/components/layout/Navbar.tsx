@@ -137,14 +137,16 @@ export function Navbar({
           links: [
             { label: { id: "Semua Karya Terpilih", en: "All Selected Works" }, href: "/works" },
             { label: { id: "Showcase Eksplorasi & Lab", en: "Lab & Experiments" }, href: "/showcase", tag: "LAB" },
+            { label: { id: "Proyek Dalam Pengerjaan", en: "Active Builds (Fourjective/Qiyar)" }, href: "/showcase", tag: "BUILD" },
           ],
         },
         {
-          title: { id: "Studi Kasus", en: "Case Studies" },
+          title: { id: "Studi Kasus Riil", en: "Live Case Studies" },
           links: [
-            { label: { id: "PT DAVID POS (Offline-First)", en: "PT DAVID POS (Offline-First)" }, href: "/works" },
-            { label: { id: "Fermion Coffee Roastery", en: "Fermion Coffee Roastery" }, href: "/works" },
-            { label: { id: "Desa Digital Cikalahang", en: "Desa Digital Cikalahang" }, href: "/works" },
+            { label: { id: "Fermion Roastery (E-Commerce)", en: "Fermion Roastery (E-Commerce)" }, href: "/works" },
+            { label: { id: "Desa Kadurama (Portal Desa)", en: "Desa Kadurama (Civic Portal)" }, href: "/works" },
+            { label: { id: "Green Cycle Kuningan (ERP)", en: "Green Cycle Kuningan (ERP)" }, href: "/works" },
+            { label: { id: "AHASS AS Putra (Dealer Honda)", en: "AHASS AS Putra (Honda Portal)" }, href: "/works" },
           ],
         },
       ],
@@ -395,7 +397,7 @@ export function Navbar({
           }`}
         >
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.id}
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
@@ -409,8 +411,33 @@ export function Navbar({
                   {item.badge}
                 </span>
               )}
-            </a>
+            </Link>
           ))}
+
+          {/* Quick Subpage Access in Mobile */}
+          <div className="pt-1 flex flex-wrap gap-2 text-xs">
+            <Link
+              href="/works"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-neutral-400 hover:text-white"
+            >
+              Portofolio ↗
+            </Link>
+            <Link
+              href="/showcase"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-neutral-400 hover:text-white"
+            >
+              Showcase ↗
+            </Link>
+            <Link
+              href="/about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-neutral-400 hover:text-white"
+            >
+              Studio ↗
+            </Link>
+          </div>
 
           <div className="pt-2 flex flex-col gap-3">
             {onOpenEstimator ? (
