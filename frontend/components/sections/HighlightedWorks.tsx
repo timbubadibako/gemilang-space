@@ -277,11 +277,11 @@ export function HighlightedWorks({ lang, whatsappNumber }: HighlightedWorksProps
 
                   {/* Image Column: Right on even (0, 2, 4), Left on odd (1, 3) */}
                   <div
-                    className={`lg:col-span-7 relative w-full aspect-[16/10] max-h-[540px] rounded-xl sm:rounded-2xl overflow-hidden bg-[#0A0D14] border border-neutral-200/90 shadow-2xl group ${
+                    className={`lg:col-span-7 relative w-full aspect-[16/10] sm:aspect-[2066/1080] max-h-[540px] rounded-xl sm:rounded-2xl overflow-hidden bg-[#0A0D14] border border-neutral-200/90 shadow-2xl group ${
                       isEven ? "lg:order-2" : "lg:order-1"
                     }`}
                   >
-                    <div className="parallax-panel-image absolute inset-0 w-full h-full">
+                    <div className="parallax-panel-image absolute inset-0 w-full h-full flex items-center justify-center">
                       {(proj as ProjectPanelData).videoUrl ? (
                         <video
                           src={(proj as ProjectPanelData).videoUrl}
@@ -289,7 +289,7 @@ export function HighlightedWorks({ lang, whatsappNumber }: HighlightedWorksProps
                           loop
                           muted
                           playsInline
-                          className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700"
+                          className="w-full h-full object-contain object-center transition-transform duration-700"
                         />
                       ) : (
                         <Image
