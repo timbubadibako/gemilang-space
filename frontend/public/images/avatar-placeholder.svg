@@ -1,13 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#1c1f26" />
-      <stop offset="50%" stop-color="#121418" />
-      <stop offset="100%" stop-color="#090a0c" />
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181b22" />
+      <stop offset="50%" stop-color="#101217" />
+      <stop offset="100%" stop-color="#08090c" />
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
-      <stop offset="0%" stop-color="#3b4252" stop-opacity="0.35" />
-      <stop offset="100%" stop-color="#121418" stop-opacity="0" />
+    <radialGradient id="glow" cx="50%" cy="32%" r="55%">
+      <stop offset="0%" stop-color="#384252" stop-opacity="0.45" />
+      <stop offset="70%" stop-color="#121418" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#08090c" stop-opacity="0" />
     </radialGradient>
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
       <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.04" />
@@ -19,11 +20,17 @@
   <rect width="800" height="1000" fill="url(#glow)" />
   <rect width="800" height="1000" fill="url(#grid)" />
 
-  <!-- Minimalist Avatar Silhouette -->
-  <g transform="translate(400, 440)" opacity="0.32">
+  <!-- Technical Reticle Target behind Head -->
+  <g stroke="#ffffff" stroke-width="1" stroke-opacity="0.08" fill="none">
+    <circle cx="400" cy="270" r="140" stroke-dasharray="6 6" />
+    <circle cx="400" cy="270" r="180" stroke-dasharray="3 9" />
+  </g>
+
+  <!-- Minimalist Avatar Silhouette positioned higher up for bento visibility -->
+  <g transform="translate(400, 310)" opacity="0.38">
     <!-- Head -->
-    <circle cx="0" cy="-80" r="90" fill="#64748b" />
+    <circle cx="0" cy="-60" r="85" fill="#94a3b8" />
     <!-- Shoulders & Torso -->
-    <path d="M -180 190 C -180 60, -110 0, 0 0 C 110 0, 180 60, 180 190 Z" fill="#64748b" />
+    <path d="M -170 190 C -170 60, -100 10, 0 10 C 100 10, 170 60, 170 190 Z" fill="#94a3b8" />
   </g>
 </svg>

@@ -72,9 +72,9 @@ export const servicesData: Record<string, ServiceItemData> = {
       en: "Systems built for products that keep evolving.",
     },
     selectedWorkImages: [
-      "https://framerusercontent.com/images/f2TBOrrRIY5dcoWQ72exps1cHlo.jpg?width=3200&height=2400",
-      "https://framerusercontent.com/images/SvJuN95HnCUIYI9jnQM94YpDs.jpg?width=3200&height=2400",
-      "https://framerusercontent.com/images/vXAw0vDR2T0nBNxyGAT7m8yEDrs.jpg?width=3200&height=2400",
+      "/images/portfolio/fermion-screen.png",
+      "/images/portfolio/desa.png",
+      "/images/portfolio/asputra-dealer.png",
     ],
     bestFitEyebrow: "BEST FIT",
     bestFitTitle: {
@@ -244,9 +244,9 @@ export const servicesData: Record<string, ServiceItemData> = {
       en: "Interfaces crafted for genuine user adoption.",
     },
     selectedWorkImages: [
-      "https://framerusercontent.com/images/UmsGTar3Kym230FQvHG4LGFfnE.jpg?width=3200&height=2400",
-      "https://framerusercontent.com/images/BChAdDd106KgPBNGpEuF9W1Px8.jpg?width=3200&height=2400",
-      "https://framerusercontent.com/images/vmp26uS1fzAEOVbdH19mrf2bnw.jpg?width=3200&height=2400",
+      "/images/portfolio/gc.png",
+      "/images/portfolio/fermion-screen.png",
+      "/images/project-placeholder.svg",
     ],
     bestFitEyebrow: "BEST FIT",
     bestFitTitle: {

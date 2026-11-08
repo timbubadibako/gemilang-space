@@ -365,7 +365,7 @@ const defaultFooter: FooterConfigData = {
 const defaultCMSData: CMSDataState = {
   meta: siteSettings,
   heroMedia: {
-    teamCardImage: "/crafted-poster.png",
+    teamCardImage: "/images/studio-team-card.svg",
     teamCardCaption: "Dedicated IT Partner Rp 6.5 Jt/bln",
     squadMembers: squadMembers,
   },
@@ -389,7 +389,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v20";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v21";
 
 interface CMSContextType {
   cms: CMSDataState;

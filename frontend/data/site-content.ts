@@ -21,10 +21,10 @@ export const navItems: NavItem[] = [
     hasDropdown: true,
   },
   {
-    id: "contract-team",
-    label: { id: "Tim Dedicated", en: "Contract Squad" },
-    href: "/#pricing",
-    badge: "BULANAN",
+    id: "squad",
+    label: { id: "Tim Squad", en: "Squad Team" },
+    href: "/#why-us",
+    badge: "6 SQUAD",
   },
   {
     id: "pricing",

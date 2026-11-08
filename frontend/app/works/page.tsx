@@ -261,7 +261,7 @@ export default function WorksPage() {
                     src={project.imageUrl}
                     alt={project.title[lang]}
                     fill
-                    className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                    className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     unoptimized
                   />

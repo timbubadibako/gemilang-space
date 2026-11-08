@@ -39,18 +39,53 @@ export function Navbar({
   const [isVisible, setIsVisible] = useState(false);
   const closeTimer = useRef<NodeJS.Timeout | null>(null);
 
-  // Stable Smooth Sticky with subtle scroll elevation (no erratic sliding)
-  const [isScrolled, setIsScrolled] = useState(false);
+  // Smart Hide/Show State
+  const [navVisible, setNavVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 16);
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const delta = currentScrollY - lastScrollY.current;
+
+          // Always visible at the top zone
+          if (currentScrollY <= 100) {
+            setNavVisible(true);
+          } else if (delta > 15 && currentScrollY > 160) {
+            // Scrolling down with clear intent -> hide navbar (unless mobile menu or dropdown is open)
+            if (!mobileMenuOpen && !activeMenu) {
+              setNavVisible(false);
+            }
+          } else if (delta < -8) {
+            // Scrolling up with intent -> show navbar
+            setNavVisible(true);
+          }
+
+          lastScrollY.current = currentScrollY;
+          ticking.current = false;
+        });
+        ticking.current = true;
+      }
     };
 
-    handleScroll();
+    const handleMouseMove = (e: MouseEvent) => {
+      // Cursor searching towards the top edge of viewport (within 70px) -> show navbar
+      if (e.clientY <= 70) {
+        setNavVisible(true);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [mobileMenuOpen, activeMenu]);
 
   const isLight = theme === "light";
   const ctaLabel = currentLang === "id" ? "Konsultasi" : "Let's Talk";
@@ -82,7 +117,7 @@ export function Navbar({
         setIsRendered(false);
         setActiveMenu(null);
       }, 300);
-    }, 160);
+    }, 240);
   };
 
   const cancelClose = () => {
@@ -108,10 +143,10 @@ export function Navbar({
         {
           title: { id: "Studi Kasus Riil", en: "Live Case Studies" },
           links: [
-            { label: { id: "Fermion Roastery (E-Commerce)", en: "Fermion Roastery (E-Commerce)" }, href: "/works" },
-            { label: { id: "Desa Kadurama (Portal Desa)", en: "Desa Kadurama (Civic Portal)" }, href: "/works" },
+            { label: { id: "Fermion Roastery (E-Commerce)", en: "Fermion Roastery (E-Commerce)" }, href: "https://www.fermionroastery.com/" },
+            { label: { id: "Desa Kadurama (Portal Desa)", en: "Desa Kadurama (Civic Portal)" }, href: "https://www.desakadurama.com/" },
             { label: { id: "Green Cycle Kuningan (ERP)", en: "Green Cycle Kuningan (ERP)" }, href: "/works" },
-            { label: { id: "AHASS AS Putra (Dealer Honda)", en: "AHASS AS Putra (Honda Portal)" }, href: "/works" },
+            { label: { id: "AHASS AS Putra (Dealer Honda)", en: "AHASS AS Putra (Honda Portal)" }, href: "https://asputra.vercel.app/" },
           ],
         },
       ],
@@ -158,18 +193,16 @@ export function Navbar({
 
   return (
     <header
-      className={`sticky top-0 w-full border-b transition-all duration-300 z-50 shrink-0 ${
+      className={`sticky top-0 w-full border-b transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] z-50 shrink-0 ${
+        navVisible ? "translate-y-0" : "-translate-y-full"
+      } ${
         isLight
-          ? isScrolled
-            ? "border-neutral-200/90 bg-[#FFFFFF]/95 text-neutral-950 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
-            : "border-transparent bg-[#FFFFFF]/80 text-neutral-950 backdrop-blur-xs"
-          : isScrolled
-            ? "border-[#28282B] bg-[#04060A]/95 text-white backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.45)]"
-            : "border-transparent bg-[#04060A]/85 text-white backdrop-blur-xs"
+          ? "border-neutral-200/80 bg-[#FFFFFF]/95 text-neutral-950 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
+          : "border-[#28282B] bg-[#04060A]/95 text-white backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
       }`}
       onMouseLeave={handleClose}
     >
-      <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8 h-20 sm:h-[84px] flex items-center justify-between">
+      <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-7 lg:px-8 h-16 sm:h-[72px] flex items-center justify-between">
         
         {/* Left: Gemilang Dynamic Brand Logo */}
         <Link href="/" className="flex items-center select-none group py-1" aria-label="Gemilang Home">

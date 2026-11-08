@@ -178,12 +178,12 @@ export default function ShowcasePage() {
             {filteredItems.map((item) => (
               <article key={item.id} className="group flex flex-col cursor-pointer">
                 {/* Visual Card Box */}
-                <div className="relative w-full aspect-[16/11] rounded-2xl overflow-hidden bg-[#F2F3F5] border border-neutral-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)] group-hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
+                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#F2F3F5] border border-neutral-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)] group-hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
                   <Image
                     src={item.imageUrl}
                     alt={item.title}
                     fill
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     unoptimized
                   />

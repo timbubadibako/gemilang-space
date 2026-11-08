@@ -207,7 +207,7 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                   alt={squadMembers[0].name}
                   fill
                   sizes="(max-width: 768px) 100vw, 480px"
-                  className="object-cover object-center group-hover:scale-103 transition-transform duration-700"
+                  className="object-cover object-top group-hover:scale-103 transition-transform duration-700"
                   unoptimized
                   priority
                 />
@@ -235,7 +235,7 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                   alt={squadMembers[1].name}
                   fill
                   sizes="(max-width: 768px) 100vw, 480px"
-                  className="object-cover object-center group-hover:scale-103 transition-transform duration-700"
+                  className="object-cover object-top group-hover:scale-103 transition-transform duration-700"
                   unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
@@ -308,7 +308,7 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                   alt={squadMembers[2].name}
                   fill
                   sizes="(max-width: 768px) 100vw, 480px"
-                  className="object-cover object-center group-hover:scale-103 transition-transform duration-700"
+                  className="object-cover object-top group-hover:scale-103 transition-transform duration-700"
                   unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
@@ -335,7 +335,7 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                   alt={squadMembers[3].name}
                   fill
                   sizes="(max-width: 768px) 100vw, 480px"
-                  className="object-cover object-center group-hover:scale-103 transition-transform duration-700"
+                  className="object-cover object-top group-hover:scale-103 transition-transform duration-700"
                   unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
@@ -395,7 +395,7 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                   alt={squadMembers[4].name}
                   fill
                   sizes="(max-width: 768px) 100vw, 480px"
-                  className="object-cover object-center group-hover:scale-103 transition-transform duration-700"
+                  className="object-cover object-top group-hover:scale-103 transition-transform duration-700"
                   unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
@@ -422,7 +422,7 @@ export function WhyTeamsChooseUs({ lang }: WhyTeamsChooseUsProps) {
                   alt={squadMembers[5].name}
                   fill
                   sizes="(max-width: 768px) 100vw, 480px"
-                  className="object-cover object-center group-hover:scale-103 transition-transform duration-700"
+                  className="object-cover object-top group-hover:scale-103 transition-transform duration-700"
                   unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />

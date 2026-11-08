@@ -42,7 +42,8 @@ export function HeroSection({
   // Day-time context shared across the entire app
   const { currentTheme } = useDaytimeTheme();
   const { cms } = useCMS();
-  const teamImg = cms.heroMedia.teamCardImage || "/crafted-poster.png";
+  const rawTeamImg = cms.heroMedia.teamCardImage;
+  const teamImg = (!rawTeamImg || rawTeamImg === "/crafted-poster.png") ? "/images/studio-team-card.svg" : rawTeamImg;
   const teamCaption = cms.heroMedia.teamCardCaption || (lang === "id" ? "100% In-House Engineer • Tanpa Subkontrak" : "100% In-House Engineers • No Outsourcing");
 
   const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
@@ -212,21 +213,21 @@ export function HeroSection({
                   <span>Fermion Roastery</span>
                 </div>
 
-                {/* PT David */}
+                {/* Green Cycle Kuningan */}
                 <div className="flex items-center gap-1.5 font-bold tracking-tight text-xs sm:text-sm">
                   <span className="w-2 h-2 rounded-full bg-[var(--theme-accent)] inline-block" />
-                  <span>PT DAVID (Industrial POS)</span>
+                  <span>Green Cycle Kuningan</span>
                 </div>
 
-                {/* Desa Digital */}
+                {/* Desa Kadurama */}
                 <div className="flex items-center gap-1 font-bold tracking-tight text-xs sm:text-sm">
-                  <span>Desa Digital</span>
+                  <span>Desa Kadurama</span>
                 </div>
 
-                {/* Lari App */}
+                {/* AHASS AS Putra */}
                 <div className="flex items-center gap-1 text-xs sm:text-sm font-semibold">
                   <span className="text-[var(--theme-accent)]">⚡</span>
-                  <span>Lari App</span>
+                  <span>AHASS AS Putra</span>
                 </div>
               </div>
 
@@ -321,7 +322,7 @@ export function HeroSection({
               <img
                 src={teamImg}
                 alt="The Team - Gemilang"
-                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
               />
 
               {/* Dark subtle vignette over photo */}
