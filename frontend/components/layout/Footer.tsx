@@ -29,19 +29,19 @@ export function Footer({ lang }: FooterProps) {
   const categories = [
     "SISTEM KASIR (POS)",
     "WEBSITE TOKO CEPAT",
+    "PORTAL DESA DIGITAL",
+    "SISTEM ERP INTERNAL",
     "OTOMASI WHATSAPP",
-    "APLIKASI MOBILE",
-    "CHATBOT AI",
     "TIM IT ON-DEMAND",
     "SUPABASE & POSTGRES",
     "NEXT.JS & FLUTTER",
   ];
 
   const caseStudies = [
-    { title: "Fermion Roastery — E-Commerce Kopi Specialty & Multi-Gudang", highlight: "(+300% Sales)" },
-    { title: "David Beckham Store — Sistem Kasir POS & Rekap Struk Thermal", highlight: "(Hemat 12 Jam/Pekan)" },
-    { title: "Portal Desa Digital — Pelayanan Surat Online Warga & Administrasi", highlight: "(10.000+ Warga)" },
-    { title: "Lari App — Pelacak Rute GPS, Leaderboard & Offline Sync", highlight: "(Ringan & Presisi)" },
+    { title: "Fermion Roastery — E-Commerce Specialty Coffee & Web Store", highlight: "(Live)" },
+    { title: "Desa Kadurama — Portal Desa Digital & Pelayanan Surat Warga", highlight: "(Kuningan)" },
+    { title: "Green Cycle Indonesia — Sistem ERP Internal & Daur Ulang", highlight: "(Enterprise)" },
+    { title: "AHASS AS Putra Rahmat — Portal Bengkel & Dealer Motor Honda", highlight: "(Segera)" },
   ];
 
   const socialPills = [
@@ -110,45 +110,40 @@ export function Footer({ lang }: FooterProps) {
             <div className="space-y-2.5 text-xs sm:text-[13px] text-neutral-300 font-normal">
               <div>
                 <a href="#about" className="hover:text-white transition-colors">
-                  {lang === "id" ? "Tentang Kami" : "About"}
-                </a>
-              </div>
-              <div>
-                <a href="#careers" className="hover:text-white transition-colors">
-                  {lang === "id" ? "Karir" : "Careers"}
+                  {lang === "id" ? "Tentang Studio" : "About Us"}
                 </a>
               </div>
               <div>
                 <a href="#works" className="hover:text-white transition-colors">
-                  {lang === "id" ? "Karya (Studi Kasus)" : "Works (Case)"}
+                  {lang === "id" ? "Karya & Portofolio" : "Works & Case Studies"}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <a href="#showcase" className="hover:text-white transition-colors">
-                  Showcase
+                <a href="#why-us" className="hover:text-white transition-colors">
+                  {lang === "id" ? "Squad Inti 6 Engineer" : "6-Engineer Squad"}
                 </a>
                 <span className="text-[9px] font-mono uppercase bg-[var(--theme-accent)] text-[var(--theme-accent-text)] px-1.5 py-0.5 rounded font-bold leading-none">
-                  NEW
+                  TEAM
                 </span>
               </div>
               <div>
-                <a href="#testimonials" className="hover:text-white transition-colors">
-                  {lang === "id" ? "Testimoni Klien" : "Testimonials"}
+                <a href="#services" className="hover:text-white transition-colors">
+                  {lang === "id" ? "Layanan Solusi" : "Services"}
                 </a>
               </div>
               <div>
-                <a href="#blog" className="hover:text-white transition-colors">
-                  Blog
+                <a href="#pricing" className="hover:text-white transition-colors">
+                  {lang === "id" ? "Biaya & Paket" : "Pricing"}
                 </a>
               </div>
               <div>
-                <a href="#deck" className="hover:text-white transition-colors">
-                  Studio Deck
+                <a href="#faq" className="hover:text-white transition-colors">
+                  {lang === "id" ? "Tanya Jawab (FAQ)" : "FAQ"}
                 </a>
               </div>
               <div>
-                <a href={waUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                  {lang === "id" ? "Kontak" : "Contact"}
+                <a href={waUrl} target="_blank" rel="noopener noreferrer" className="text-[#00E1BA] hover:underline transition-all">
+                  {lang === "id" ? "Konsultasi WhatsApp ↗" : "WhatsApp Chat ↗"}
                 </a>
               </div>
             </div>
@@ -157,86 +152,76 @@ export function Footer({ lang }: FooterProps) {
           {/* Column 2: Services Nav */}
           <div className="lg:col-span-3 space-y-3.5">
             <h4 className="text-sm sm:text-[15px] font-semibold text-white tracking-tight mb-4">
-              {lang === "id" ? "Layanan" : "Services"}
+              {lang === "id" ? "Layanan Solusi" : "Solutions"}
             </h4>
             <div className="space-y-2.5 text-xs sm:text-[13px] text-neutral-300 font-normal">
               <div>
                 <a href="#services" className="hover:text-white transition-colors">
-                  Product Design
+                  Website &amp; Toko Online Cepat
                 </a>
               </div>
               <div>
                 <a href="#services" className="hover:text-white transition-colors">
-                  Landing Page Design
+                  Sistem Kasir (POS) &amp; Gudang
                 </a>
               </div>
               <div>
                 <a href="#services" className="hover:text-white transition-colors">
-                  UI/UX Design
+                  Aplikasi Web &amp; Mobile Custom
                 </a>
               </div>
               <div>
                 <a href="#services" className="hover:text-white transition-colors">
-                  Website Design
+                  Otomasi WhatsApp Bisnis
                 </a>
               </div>
               <div>
                 <a href="#services" className="hover:text-white transition-colors">
-                  Design System Setup
+                  Chatbot AI CS 24/7
                 </a>
               </div>
               <div>
                 <a href="#services" className="hover:text-white transition-colors">
-                  UX Audit and Optimization
-                </a>
-              </div>
-              <div>
-                <a href="#services" className="hover:text-white transition-colors">
-                  Mobile App Design
+                  Tim IT On-Demand &amp; Maintenance
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Column 3: Design Subscription Nav */}
+          {/* Column 3: Paket & Retainer */}
           <div className="lg:col-span-2 space-y-3.5">
             <div className="flex items-center gap-2 mb-4">
               <h4 className="text-sm sm:text-[15px] font-semibold text-white tracking-tight">
-                {lang === "id" ? "Langganan" : "Design Subscription"}
+                {lang === "id" ? "Paket & Retainer" : "Pricing & Plans"}
               </h4>
               <span className="text-[9px] font-mono uppercase bg-[var(--theme-accent)] text-[var(--theme-accent-text)] px-1.5 py-0.5 rounded font-bold leading-none">
-                NEW
+                POPULER
               </span>
             </div>
             <div className="space-y-2.5 text-xs sm:text-[13px] text-neutral-300 font-normal">
               <div>
                 <a href="#pricing" className="hover:text-white transition-colors">
-                  Brand Identity Design
+                  Dedicated Squad (Rp 6.5 Jt/bln)
                 </a>
               </div>
               <div>
                 <a href="#pricing" className="hover:text-white transition-colors">
-                  Logo Design
+                  Web Starter UMKM (Rp 1.5 Jt)
                 </a>
               </div>
               <div>
                 <a href="#pricing" className="hover:text-white transition-colors">
-                  Framer Development
+                  POS Retail &amp; Kasir (Rp 3.5 Jt)
                 </a>
               </div>
               <div>
                 <a href="#pricing" className="hover:text-white transition-colors">
-                  Growth &amp; Launch
+                  Server Ops &amp; Monitoring
                 </a>
               </div>
               <div>
                 <a href="#pricing" className="hover:text-white transition-colors">
-                  Pitch Deck Design
-                </a>
-              </div>
-              <div>
-                <a href="#pricing" className="hover:text-white transition-colors">
-                  Sales Deck Design
+                  Konsultasi Arsitektur Software
                 </a>
               </div>
             </div>
@@ -244,14 +229,14 @@ export function Footer({ lang }: FooterProps) {
         </div>
 
         {/* ============================================================== */}
-        {/* ROW 2: WE DESIGN FOR / POPULAR CASE STUDIES / RESOURCES        */}
+        {/* ROW 2: WE DESIGN FOR / POPULAR CASE STUDIES / DIRECT CONTACT   */}
         {/* ============================================================== */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 py-12 sm:py-16 border-b border-white/10">
           
           {/* We Design For */}
           <div className="lg:col-span-4">
             <h4 className="text-sm sm:text-[15px] font-semibold text-white mb-5 tracking-tight">
-              {lang === "id" ? "Bidang Desain Mitra" : "We Design For"}
+              {lang === "id" ? "Solusi & Standar Teknis" : "Solutions & Tech Stack"}
             </h4>
             <div className="flex flex-wrap gap-2">
               {categories.map((cat, idx) => (
@@ -268,28 +253,43 @@ export function Footer({ lang }: FooterProps) {
           {/* Popular Case Studies */}
           <div className="lg:col-span-5">
             <h4 className="text-sm sm:text-[15px] font-semibold text-white mb-5 tracking-tight">
-              {lang === "id" ? "Studi Kasus Populer" : "Popular Case Studies"}
+              {lang === "id" ? "Portofolio & Studi Kasus" : "Case Studies & Portfolio"}
             </h4>
             <ul className="space-y-3 text-xs sm:text-[13px] text-neutral-300 font-normal">
               {caseStudies.map((cs, idx) => (
                 <li key={idx} className="flex items-baseline gap-1.5 hover:text-white transition-colors">
                   <span>{cs.title}</span>
                   {cs.highlight && (
-                    <span className="font-bold text-white">{cs.highlight}</span>
+                    <span className="font-bold text-[#00E1BA]">{cs.highlight}</span>
                   )}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Studio Direct Contact */}
           <div className="lg:col-span-3">
             <h4 className="text-sm sm:text-[15px] font-semibold text-white mb-5 tracking-tight">
-              {lang === "id" ? "Sumber Daya" : "Resources"}
+              {lang === "id" ? "Kontak Langsung" : "Direct Contact"}
             </h4>
-            <p className="text-xs sm:text-[13px] text-neutral-400 leading-relaxed max-w-xs font-normal">
-              Create UI — World&apos;s largest design system &amp; react component library.
-            </p>
+            <div className="space-y-2 text-xs sm:text-[13px] text-neutral-300 font-normal">
+              <p className="text-neutral-400">
+                {lang === "id"
+                  ? "Diskusi cepat kebutuhan software atau optimasi sistem bisnis Anda:"
+                  : "Quick consultation for your software needs and system performance:"}
+              </p>
+              <div className="pt-1.5 space-y-1">
+                <a href={`mailto:${siteSettings.contactEmail}`} className="text-white hover:text-[#00E1BA] transition-colors block font-mono">
+                  {siteSettings.contactEmail}
+                </a>
+                <a href={`https://wa.me/${siteSettings.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#00E1BA] transition-colors block font-mono">
+                  +62 857-2204-5801
+                </a>
+                <span className="text-neutral-500 text-[11px] block mt-1">
+                  Kuningan, Jawa Barat • Indonesia
+                </span>
+              </div>
+            </div>
           </div>
 
         </div>

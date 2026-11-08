@@ -79,38 +79,38 @@ const defaultSliderItems: WorksSliderItem[] = [
   {
     id: "p-1",
     title: "Fermion Roastery E-Commerce & Stok",
-    category: "E-Commerce & Inventori",
-    imageUrl: "/images/portfolio/fermion-og.jpg",
+    category: "E-Commerce & Specialty Coffee",
+    imageUrl: "/images/portfolio/fermion-screen.png",
   },
   {
     id: "p-2",
-    title: "David Beckham POS & Kasir Toko",
-    category: "POS Kasir & Barcode",
-    imageUrl: "https://images.unsplash.com/photo-1556742049-0a67e5572293?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: "p-3",
-    title: "Desa Kadurama Portal & APBDes",
-    category: "GovTech & Civic Tech",
+    title: "Desa Kadurama Portal & Layanan Surat",
+    category: "GovTech & Pelayanan Warga",
     imageUrl: "/images/portfolio/desa.png",
   },
   {
-    id: "p-4",
-    title: "Green Cycle ERP Timbangan Rongsok",
-    category: "ERP & Multi-Gudang",
+    id: "p-3",
+    title: "Green Cycle ERP & Multi-Gudang",
+    category: "Enterprise ERP & Logistik",
     imageUrl: "/images/portfolio/gc.png",
   },
   {
-    id: "p-5",
+    id: "p-4",
     title: "AHASS AS Putra Rahmat Honda",
     category: "Katalog Part & Booking Servis",
     imageUrl: "/images/portfolio/asputra-dealer.png",
   },
   {
+    id: "p-5",
+    title: "Sistem Kasir (POS) Offline-First",
+    category: "POS Kasir & Struk Thermal",
+    imageUrl: "/images/portfolio/fermion-og.jpg",
+  },
+  {
     id: "p-6",
-    title: "Sistem Logistik & Stock Ledger",
-    category: "Enterprise System",
-    imageUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
+    title: "Portal Administrasi Desa & APBDes",
+    category: "Civic Tech & Transparansi",
+    imageUrl: "/images/portfolio/kadurama-og.png",
   },
 ];
 
@@ -188,42 +188,60 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
 
 const defaultTestimonials: TestimonialItem[] = [
   {
-    id: "5u",
-    brand: "5U AI",
-    badge: "5U AI RAISES US $3.2M",
+    id: "fermion",
+    brand: "Fermion Roastery",
+    badge: "SPECIALTY COFFEE STORE",
     quote: {
-      id: "Eksekusi arsitektur dan sistem AI yang luar biasa cepat; Gemilang Space menjadi tulang punggung engineering kami sejak tahap awal pendanaan!",
-      en: "Outstanding engineering execution and rapid AI architecture; Gemilang Space was the backbone of our early technical delivery!",
+      id: "Website e-commerce dan sistem pesanan kopi kami bekerja sangat cepat tanpa lag di HP pelanggan. Penjualan online langsung terhubung ke WhatsApp dan rekap order otomatis!",
+      en: "Our specialty coffee e-commerce and order flow is blazing fast on mobile. Online orders now automatically connect to WhatsApp and our fulfillment ledger!",
     },
-    author: "Yagiz Abik",
-    role: "Co-Founder / CEO @ 5U AI",
-    coverImage: "https://framerusercontent.com/images/Q1nGlUmv7vVS6li66XKTFlMrIbk.png?width=1536&height=1536",
-    avatarUrl: "https://framerusercontent.com/images/QBbUeJbAXuYKB99iyxgYpsdqbQ4.png?width=256",
+    author: "Tim Fermion",
+    role: "Specialty Roaster @ Fermion Roastery",
+    coverImage: "/images/portfolio/fermion-screen.png",
+    initials: "FR",
+    brandColor: "bg-[#00E1BA]",
   },
   {
-    id: "metamask",
-    brand: "Metamask / Consensys",
+    id: "desa-kadurama",
+    brand: "Desa Kadurama",
+    badge: "PORTAL DESA & APBDES",
     quote: {
-      id: "Engineer paling produktif dan presisi yang pernah bekerja dengan kami. Output kode sangat bersih, modular, dan selalu siap produksi skala besar.",
-      en: "The most prolific and disciplined engineers I know. Clean, modular code shipped directly to production at scale.",
+      id: "Pelayanan surat online dan transparansi APBDes kini mudah diakses oleh seluruh warga. Sistemnya sangat ringan dan stabil bahkan di jaringan seluler pelosok.",
+      en: "Online document requests and budget transparency are now seamlessly accessible to all village residents. Incredibly lightweight and reliable.",
     },
-    author: "Michael Lwin",
-    role: "Director of Product @ Metamask",
-    avatarUrl: "https://framerusercontent.com/images/kY64WfLzLSmJd1nZ2Z1o0q.png?width=256",
-    initials: "ML",
-    brandColor: "bg-[#E2761B]",
+    author: "Pemerintah Desa Kadurama",
+    role: "Aparatur Desa @ Kadurama, Kec. Ciawigebang",
+    coverImage: "/images/portfolio/desa.png",
+    initials: "KD",
+    brandColor: "bg-emerald-500",
   },
   {
-    id: "uptech",
-    brand: "Uptech",
+    id: "greencycle",
+    brand: "Green Cycle Indonesia",
+    badge: "ENTERPRISE ERP & LOGISTIK",
     quote: {
-      id: "Bekerja bersama squad Gemilang adalah pengalaman luar biasa. Komunikasi teknis sangat jernih, arsitektur microservices kokoh, dan integrasi API tanpa hambatan.",
-      en: "Working with the Gemilang squad was a breath of fresh air. Crystal-clear technical communication, rock-solid microservices, and seamless API integrations throughout.",
+      id: "Sistem ERP internal yang dibangun squad Gemilang menghemat belasan jam kerja tim operasional kami setiap pekannya dalam rekap timbangan rongsok dan multi-gudang.",
+      en: "The internal ERP engineered by the Gemilang squad saves dozens of operational hours every week across scrap weighing logs and multi-warehouse inventories.",
     },
-    author: "Oran Almog",
-    role: "Lead Tech Specialist @ Uptech",
-    initials: "O",
-    brandColor: "bg-[#1E65FF]",
+    author: "Tim Operasional",
+    role: "Operations Lead @ Green Cycle Indonesia",
+    coverImage: "/images/portfolio/gc.png",
+    initials: "GC",
+    brandColor: "bg-teal-500",
+  },
+  {
+    id: "asputra",
+    brand: "AHASS AS Putra Rahmat",
+    badge: "DEALER & AHASS RESMI #10870",
+    quote: {
+      id: "Katalog suku cadang HET resmi dan modul booking servis online memudahkan pelanggan menemukan part motor Honda asli tanpa harus antre lama di bengkel.",
+      en: "Official Honda genuine parts catalog and online service booking help customers verify part numbers and book slots without long workshop queues.",
+    },
+    author: "Tim Servis AS Putra",
+    role: "Workshop Lead @ AHASS AS Putra Rahmat",
+    coverImage: "/images/portfolio/asputra-dealer.png",
+    initials: "AP",
+    brandColor: "bg-red-500",
   },
 ];
 
@@ -314,7 +332,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v15";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v16";
 
 interface CMSContextType {
   cms: CMSDataState;
