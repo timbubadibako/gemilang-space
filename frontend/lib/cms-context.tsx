@@ -19,6 +19,7 @@ export interface HighlightedWorkItem {
   badge: { id: string; en: string };
   tags: string[];
   imageUrl: string;
+  videoUrl?: string;
   bgColor: string;
   caseUrl: string;
 }

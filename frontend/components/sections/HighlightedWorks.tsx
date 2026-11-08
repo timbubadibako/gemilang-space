@@ -24,6 +24,7 @@ interface ProjectPanelData {
   badge: { id: string; en: string };
   tags: string[];
   imageUrl: string;
+  videoUrl?: string;
   bgColor: string;
   caseUrl: string;
 }
@@ -280,14 +281,25 @@ export function HighlightedWorks({ lang, whatsappNumber }: HighlightedWorksProps
                     }`}
                   >
                     <div className="parallax-panel-image absolute inset-0 w-full h-full">
-                      <Image
-                        src={proj.imageUrl}
-                        alt={proj.title[lang]}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 850px"
-                        className="object-cover object-center group-hover:scale-102 transition-transform duration-700"
-                        unoptimized
-                      />
+                      {(proj as ProjectPanelData).videoUrl ? (
+                        <video
+                          src={(proj as ProjectPanelData).videoUrl}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700"
+                        />
+                      ) : (
+                        <Image
+                          src={proj.imageUrl}
+                          alt={proj.title[lang]}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 850px"
+                          className="object-cover object-center group-hover:scale-102 transition-transform duration-700"
+                          unoptimized
+                        />
+                      )}
                     </div>
                   </div>
 
