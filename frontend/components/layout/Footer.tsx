@@ -22,6 +22,7 @@ export function Footer({ lang }: FooterProps) {
       { name: "INSTAGRAM", href: "https://instagram.com/gemilang_space" },
       { name: "WHATSAPP", href: `https://wa.me/${siteSettings.whatsappNumber}` },
       { name: "EMAIL", href: `mailto:${siteSettings.contactEmail}` },
+      { name: "GOOGLE MAPS", href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Jl. Karya Bakti, Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia")}` },
       { name: "GITHUB", href: "https://github.com/timbubadibako/gemilang-space" },
     ],
   };
@@ -47,6 +48,7 @@ export function Footer({ lang }: FooterProps) {
     { name: "INSTAGRAM", href: "https://instagram.com/gemilang_space" },
     { name: "WHATSAPP", href: `https://wa.me/${siteSettings.whatsappNumber}` },
     { name: "EMAIL", href: `mailto:${siteSettings.contactEmail}` },
+    { name: "GOOGLE MAPS", href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Jl. Karya Bakti, Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia")}` },
     { name: "GITHUB", href: "https://github.com/timbubadibako/gemilang-space" },
   ];
 
@@ -317,9 +319,20 @@ export function Footer({ lang }: FooterProps) {
             <p className="font-semibold text-white text-[13px] sm:text-sm">
               © {footerData.copyrightYear || "2026"} Gemilang | All rights reserved.
             </p>
-            <p className="text-[11px] text-neutral-400 mt-1.5">
-              {footerData.address || "Jl. Karya Bakti, Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia"}
-            </p>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                footerData.address || "Jl. Karya Bakti, Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia"
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] text-neutral-400 hover:text-white transition-colors mt-1.5 inline-flex items-center gap-1.5 group"
+              title="Buka lokasi di Google Maps"
+            >
+              <span className="group-hover:underline underline-offset-2">
+                {footerData.address || "Jl. Karya Bakti, Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia"}
+              </span>
+              <span className="text-[10px] text-neutral-500 group-hover:text-[#00E1BA] transition-colors shrink-0 font-mono">↗ Maps</span>
+            </a>
           </div>
 
           <div className="flex flex-col md:items-end gap-2 text-[11px]">

@@ -282,6 +282,7 @@ const defaultFooter: FooterConfigData = {
     { name: "INSTAGRAM", href: "https://instagram.com/gemilang_space" },
     { name: "WHATSAPP", href: "https://wa.me/6285722045801" },
     { name: "EMAIL", href: "mailto:pjrlywm@gmail.com" },
+    { name: "GOOGLE MAPS", href: "https://www.google.com/maps/search/?api=1&query=Jl.+Karya+Bakti%2C+Kec.+Jalaksana%2C+Kabupaten+Kuningan%2C+Jawa+Barat+45554%2C+Indonesia" },
     { name: "GITHUB", href: "https://github.com/timbubadibako/gemilang-space" },
   ],
 };
@@ -313,7 +314,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v14";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v15";
 
 interface CMSContextType {
   cms: CMSDataState;
