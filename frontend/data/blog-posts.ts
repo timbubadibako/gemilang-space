@@ -55,9 +55,9 @@ export const blogPosts: BlogPost[] = [
     },
     tags: ["FILOSOFI PRODUK", "PRODUKTIVITAS", "SLOW DESIGN"],
     author: {
-      name: "Raden Gemilang",
-      role: "Founder & Design Principal",
-      avatar: "/founder.png",
+      name: "Syifa Pajril Yaum",
+      role: "Founder & Lead Architect",
+      avatar: "/images/avatar-placeholder.svg",
     },
     content: {
       introduction:
@@ -111,9 +111,9 @@ export const blogPosts: BlogPost[] = [
     },
     tags: ["UX DESIGN", "PSIKOLOGI", "INTERACTION"],
     author: {
-      name: "Raden Gemilang",
-      role: "Founder & Design Principal",
-      avatar: "/founder.png",
+      name: "Syifa Pajril Yaum",
+      role: "Founder & Lead Architect",
+      avatar: "/images/avatar-placeholder.svg",
     },
     content: {
       introduction:
@@ -156,9 +156,9 @@ export const blogPosts: BlogPost[] = [
     },
     tags: ["WEB3", "DESIGN THINKING", "USABILITY"],
     author: {
-      name: "Raden Gemilang",
-      role: "Founder & Design Principal",
-      avatar: "/founder.png",
+      name: "Syifa Pajril Yaum",
+      role: "Founder & Lead Architect",
+      avatar: "/images/avatar-placeholder.svg",
     },
     content: {
       introduction:
@@ -196,9 +196,9 @@ export const blogPosts: BlogPost[] = [
     },
     tags: ["MINIMALISME", "CLEAN UI", "SWISS DESIGN"],
     author: {
-      name: "Raden Gemilang",
-      role: "Founder & Design Principal",
-      avatar: "/founder.png",
+      name: "Syifa Pajril Yaum",
+      role: "Founder & Lead Architect",
+      avatar: "/images/avatar-placeholder.svg",
     },
     content: {
       introduction:
@@ -236,9 +236,9 @@ export const blogPosts: BlogPost[] = [
     },
     tags: ["BRAND IDENTITY", "FOUNDER GUIDE", "POSITIONING"],
     author: {
-      name: "Raden Gemilang",
-      role: "Founder & Design Principal",
-      avatar: "/founder.png",
+      name: "Syifa Pajril Yaum",
+      role: "Founder & Lead Architect",
+      avatar: "/images/avatar-placeholder.svg",
     },
     content: {
       introduction:

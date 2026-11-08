@@ -31,12 +31,11 @@ export default function ServiceDetailPage() {
   const service: ServiceItemData = servicesData[slug] || servicesData["design-systems"];
 
   const clientLogos = [
-    "PT DAVID BECKHAM",
     "FERMION ROASTERY",
-    "DESA DIGITAL",
-    "PESANTREN OS",
-    "FOURJECTIVE",
-    "QIYAR MEDIA",
+    "DESA KADURAMA",
+    "GREEN CYCLE KUNINGAN",
+    "AHASS AS PUTRA RAHMAT",
+    "GEMILANG SPACE",
     "SUPABASE",
     "CLOUDFLARE",
   ];

@@ -329,7 +329,7 @@ export default function AdminTicketsPage() {
                   <input
                     type="text"
                     required
-                    placeholder="Contoh: PT David Beckham POS"
+                    placeholder="Contoh: PT Green Cycle Kuningan POS"
                     value={projectName}
                     onChange={(e) => setProjectName(e.target.value)}
                     className="w-full bg-[#F4F9F8] border border-zinc-200 rounded-xl px-3 py-2 text-zinc-900 font-bold focus:outline-none focus:border-teal-500 focus:bg-white"
@@ -339,7 +339,7 @@ export default function AdminTicketsPage() {
                   <label className="block text-zinc-600 font-bold uppercase text-[10px] mb-1">Nama Klien Perusahaan</label>
                   <input
                     type="text"
-                    placeholder="Contoh: PT David Beckham Abadi"
+                    placeholder="Contoh: PT Green Cycle Kuningan Abadi"
                     value={clientName}
                     onChange={(e) => setClientName(e.target.value)}
                     className="w-full bg-[#F4F9F8] border border-zinc-200 rounded-xl px-3 py-2 text-zinc-900 font-bold focus:outline-none focus:border-teal-500 focus:bg-white"

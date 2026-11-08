@@ -42,7 +42,7 @@ export function HeroSection({
   // Day-time context shared across the entire app
   const { currentTheme } = useDaytimeTheme();
   const { cms } = useCMS();
-  const teamImg = cms.heroMedia.teamCardImage || "https://framerusercontent.com/images/Q1nGlUmv7vVS6li66XKTFlMrIbk.png?width=1536&height=1536";
+  const teamImg = cms.heroMedia.teamCardImage || "/crafted-poster.png";
   const teamCaption = cms.heroMedia.teamCardCaption || (lang === "id" ? "100% In-House Engineer • Tanpa Subkontrak" : "100% In-House Engineers • No Outsourcing");
 
   const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(

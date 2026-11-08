@@ -115,7 +115,7 @@ function ControlFrontpageInner() {
   const [blogExcerptId, setBlogExcerptId] = useState("");
   const [blogExcerptEn, setBlogExcerptEn] = useState("");
   const [blogCat, setBlogCat] = useState("Teknologi Bisnis");
-  const [blogAuthor, setBlogAuthor] = useState("Raden Gemilang");
+  const [blogAuthor, setBlogAuthor] = useState("Syifa Pajril Yaum");
 
   // 8. FOOTER FORM STATE
   const [footerAddress, setFooterAddress] = useState(cms.footer.address);
@@ -375,7 +375,7 @@ function ControlFrontpageInner() {
     setBlogExcerptId("");
     setBlogExcerptEn("");
     setBlogCat("Teknologi Bisnis");
-    setBlogAuthor("Raden Gemilang");
+    setBlogAuthor("Syifa Pajril Yaum");
     setIsBlogModal(true);
   };
 
@@ -728,7 +728,7 @@ function ControlFrontpageInner() {
           <div className="flex items-center justify-between bg-white border border-teal-100 p-4 rounded-2xl shadow-xs">
             <div>
               <h3 className="font-bold text-sm text-zinc-900">Highlighted Works (Kartu Parallax)</h3>
-              <p className="text-xs text-zinc-500">Studi kasus unggulan dengan efek kartu menumpuk (5U AI, MindSphere, Efficense).</p>
+              <p className="text-xs text-zinc-500">Studi kasus unggulan dengan efek kartu menumpuk (5U AI, MindSphere, Green Cycle Kuningan).</p>
             </div>
             <button
               onClick={openNewHighlighted}

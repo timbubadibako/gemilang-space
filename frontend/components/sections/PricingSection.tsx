@@ -25,12 +25,10 @@ export function PricingSection({
 
   const clientLogos = [
     "Fermion Roastery",
-    "David Beckham POS",
-    "Desa Digital",
-    "Lari App",
-    "Kopi Nusantara",
-    "Berkah Abadi Retail",
-    "Gemilang Space",
+    "Desa Kadurama",
+    "Green Cycle Kuningan",
+    "AHASS AS Putra Rahmat",
+    "Gemilang Space Studio",
   ];
 
   const handleCardClick = (tier: string) => {

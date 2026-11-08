@@ -105,14 +105,14 @@ export const heroContent: HeroContent = {
   featuredProject: {
     tag: "PORTOFOLIO UTAMA",
     title: {
-      id: "Sistem Kasir & POS David Beckham",
-      en: "David Beckham POS System",
+      id: "Sistem Kasir & POS Ritel Offline-First",
+      en: "Offline-First Retail POS System",
     },
     subtitle: {
       id: "POS kasir toko modern: scan barcode, cetak nota struk thermal, dan rekap keuangan otomatis.",
       en: "Modern retail POS: barcode scanning, thermal receipt printing, and real-time financial ledger.",
     },
-    imageUrl: "https://images.unsplash.com/photo-1556742049-0a67e5572293?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/images/portfolio/fermion-og.jpg",
     videoUrl: "",
     href: "#works",
   },

@@ -33,25 +33,25 @@ interface WorkProject {
 
 const workProjects: WorkProject[] = [
   {
-    id: "david-beckham",
-    client: "PT DAVID BECKHAM",
+    id: "green-cycle-erp",
+    client: "GREEN CYCLE KUNINGAN",
     category: "Industrial IoT",
     title: {
-      id: "Sistem Web POS Timbangan Sawit & Integrasi Hardware RS232",
-      en: "Palm Oil Weighing Web POS & RS232 Hardware Scale Integration",
+      id: "Sistem ERP Enterprise & Integrasi Timbangan Hardware RS232",
+      en: "Enterprise ERP System & RS232 Hardware Scale Integration",
     },
     description: {
-      id: "Aplikasi POS offline-first dengan sinkronisasi WebSerial RS232 untuk timbangan truk pabrik kelapa sawit, pencetakan struk termal otomatis, dan sinkronisasi cloud real-time.",
-      en: "Offline-first POS application with WebSerial RS232 hardware scale synchronization for palm oil weighing stations, thermal receipts, and real-time cloud sync.",
+      id: "Aplikasi POS & ERP offline-first dengan sinkronisasi WebSerial RS232 untuk timbangan truk daur ulang, pencetakan struk termal otomatis, dan sinkronisasi cloud real-time.",
+      en: "Offline-first ERP application with WebSerial RS232 hardware scale synchronization for industrial recycling, thermal receipts, and real-time cloud sync.",
     },
-    tags: ["OFFLINE-FIRST", "HARDWARE RS232", "INDUSTRIAL POS"],
+    tags: ["OFFLINE-FIRST", "HARDWARE RS232", "INDUSTRIAL ERP"],
     techStack: ["Next.js", "WebSerial API", "Dexie.js (IndexedDB)", "Supabase", "Tailwind CSS"],
     impact: {
-      id: "100% tanpa delay input manual, zero-data-loss saat internet pabrik padam",
+      id: "100% tanpa delay input manual, zero-data-loss saat jaringan padam",
       en: "Zero manual data-entry delays, 100% resilient during factory network drops",
     },
-    imageUrl: "https://framerusercontent.com/images/vXAw0vDR2T0nBNxyGAT7m8yEDrs.jpg?width=3200&height=2400",
-    slug: "david-beckham",
+    imageUrl: "/images/portfolio/gc.png",
+    slug: "green-cycle-erp",
   },
   {
     id: "fermion-roastery",

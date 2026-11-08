@@ -29,11 +29,11 @@ const showcaseItems: ShowcaseItem[] = [
   },
   {
     id: "sc-2",
-    title: "Industrial Palm Oil Weighing Terminal",
-    client: "PT DAVID BECKHAM",
+    title: "Industrial Recycling Scale & ERP Terminal",
+    client: "GREEN CYCLE KUNINGAN",
     type: "WEB POS RS232",
     category: "SaaS",
-    imageUrl: "https://framerusercontent.com/images/vXAw0vDR2T0nBNxyGAT7m8yEDrs.jpg?width=3200&height=2400",
+    imageUrl: "/images/portfolio/gc.png",
   },
   {
     id: "sc-3",

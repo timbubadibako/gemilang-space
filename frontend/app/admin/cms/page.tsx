@@ -28,7 +28,7 @@ export default function AdminCMSPage() {
   const [postExcerpt, setPostExcerpt] = useState("");
   const [postCategory, setPostCategory] = useState("Teknologi Bisnis");
   const [postReadTime, setPostReadTime] = useState("5 Menit Baca");
-  const [postAuthor, setPostAuthor] = useState("Raden Gemilang");
+  const [postAuthor, setPostAuthor] = useState("Syifa Pajril Yaum");
 
   const handleSaveMeta = (e: React.FormEvent) => {
     e.preventDefault();
