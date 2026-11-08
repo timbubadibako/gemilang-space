@@ -113,7 +113,7 @@ const workProjects: WorkProject[] = [
       id: "Meningkatkan efisiensi antrean pit servis dan transparansi harga HET",
       en: "Improved service queue turnover and total spare part price transparency",
     },
-    imageUrl: "/images/portfolio/asputra-dealer.png",
+    imageUrl: "/images/portfolio/asputra-dealer.jpg",
     slug: "as-putra-honda",
   },
   {

@@ -34,7 +34,7 @@ const defaultProjects: ProjectCard[] = [
     id: "p-4",
     title: "AHASS AS Putra Rahmat Honda",
     category: "Katalog Part & Booking Servis",
-    imageUrl: "/images/portfolio/asputra-dealer.png",
+    imageUrl: "/images/portfolio/asputra-dealer.jpg",
   },
   {
     id: "p-5",

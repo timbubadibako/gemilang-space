@@ -98,7 +98,7 @@ const defaultSliderItems: WorksSliderItem[] = [
     id: "p-4",
     title: "AHASS AS Putra Rahmat Honda",
     category: "Katalog Part & Booking Servis",
-    imageUrl: "/images/portfolio/asputra-dealer.png",
+    imageUrl: "/images/portfolio/asputra-dealer.jpg",
   },
   {
     id: "p-5",
@@ -186,7 +186,7 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
       en: "OFFICIAL HONDA AHASS #10870",
     },
     tags: ["HONDA AHASS #10870", "SPARE PART CATALOG", "BOOKING ONLINE", "RETAIL PORTAL"],
-    imageUrl: "/images/portfolio/asputra-dealer.png",
+    imageUrl: "/images/portfolio/asputra-dealer.jpg",
     bgColor: "#EFF1F6",
     caseUrl: "https://asputra.vercel.app/",
   },
@@ -296,7 +296,7 @@ const defaultTestimonials: TestimonialItem[] = [
     },
     author: "Tim Servis AS Putra",
     role: "Workshop Lead @ AHASS AS Putra Rahmat",
-    coverImage: "/images/portfolio/asputra-dealer.png",
+    coverImage: "/images/portfolio/asputra-dealer.jpg",
     initials: "AP",
     brandColor: "bg-red-500",
   },
@@ -389,7 +389,7 @@ const defaultCMSData: CMSDataState = {
   footer: defaultFooter,
 };
 
-const CMS_STORAGE_KEY = "gemilang_cms_state_v21";
+const CMS_STORAGE_KEY = "gemilang_cms_state_v22";
 
 interface CMSContextType {
   cms: CMSDataState;

@@ -49,7 +49,7 @@ const showcaseItems: ShowcaseItem[] = [
     client: "AHASS AS PUTRA RAHMAT",
     type: "AUTOMOTIVE RETAIL",
     category: "eCommerce",
-    imageUrl: "/images/portfolio/asputra-dealer.png",
+    imageUrl: "/images/portfolio/asputra-dealer.jpg",
   },
   {
     id: "sc-5",

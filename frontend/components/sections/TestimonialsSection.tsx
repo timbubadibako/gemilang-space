@@ -82,7 +82,7 @@ const testimonialsData: Testimonial[] = [
     },
     author: "Tim Servis AS Putra",
     role: "Workshop Lead @ AHASS AS Putra Rahmat",
-    coverImage: "/images/portfolio/asputra-dealer.png",
+    coverImage: "/images/portfolio/asputra-dealer.jpg",
     initials: "AP",
     brandColor: "bg-red-500",
   },

@@ -74,7 +74,7 @@ export const servicesData: Record<string, ServiceItemData> = {
     selectedWorkImages: [
       "/images/portfolio/fermion-screen.png",
       "/images/portfolio/desa.png",
-      "/images/portfolio/asputra-dealer.png",
+      "/images/portfolio/asputra-dealer.jpg",
     ],
     bestFitEyebrow: "BEST FIT",
     bestFitTitle: {

@@ -95,7 +95,7 @@ const projects: ProjectPanelData[] = [
       en: "OFFICIAL HONDA AHASS #10870",
     },
     tags: ["HONDA AHASS #10870", "SPARE PART CATALOG", "BOOKING ONLINE", "RETAIL PORTAL"],
-    imageUrl: "/images/portfolio/asputra-dealer.png",
+    imageUrl: "/images/portfolio/asputra-dealer.jpg",
     bgColor: "#EFF1F6",
     caseUrl: "https://asputra.vercel.app/",
   },
