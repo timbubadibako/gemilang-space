@@ -108,9 +108,9 @@ const defaultSliderItems: WorksSliderItem[] = [
   },
   {
     id: "p-6",
-    title: "Qiyar Media Production Platform",
-    category: "Media Production • Dalam Pengerjaan",
-    imageUrl: "/images/project-placeholder.svg",
+    title: "Qiyar Media Executive Dashboard",
+    category: "Operations & COD Analytics",
+    imageUrl: "/images/portfolio/qiyar-media.jpg",
   },
   {
     id: "p-7",
@@ -210,18 +210,18 @@ const defaultHighlightedWorks: HighlightedWorkItem[] = [
   {
     id: "qiyar-media",
     client: "QIYAR MEDIA",
-    category: "MEDIA PRODUCTION",
+    category: "OPERATIONS & ANALYTICS",
     title: {
-      id: "Pusat kolaborasi produksi konten, kurasi aset & distribusi media",
-      en: "Content production hub, asset curation & digital distribution",
+      id: "Executive Dashboard, konsolidasi omzet COD & kontrol laba bersih",
+      en: "Executive Dashboard, COD revenue consolidation & net profit analytics",
     },
     badge: {
-      id: "TAHAP PENGEMBANGAN ⚡",
-      en: "IN ACTIVE BUILD ⚡",
+      id: "TERVERIFIKASI SISTEM ⚡",
+      en: "SYSTEM VERIFIED ⚡",
     },
-    tags: ["MEDIA PRODUCTION", "ASSET MANAGEMENT", "CONTENT OPS", "IN DEVELOPMENT"],
-    imageUrl: "/images/project-placeholder.svg",
-    bgColor: "#F3F5F9",
+    tags: ["EXECUTIVE DASHBOARD", "COD ANALYTICS", "MULTI-COURIER", "FINANCIAL OPS"],
+    imageUrl: "/images/portfolio/qiyar-media.jpg",
+    bgColor: "#090D16",
     caseUrl: "#works",
   },
   {

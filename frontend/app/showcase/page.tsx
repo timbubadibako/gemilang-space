@@ -61,11 +61,11 @@ const showcaseItems: ShowcaseItem[] = [
   },
   {
     id: "sc-6",
-    title: "Platform Kolaborasi Produksi Konten & Edge Media Hub",
+    title: "Executive Dashboard & Konsolidasi Omzet COD Lintas Kurir",
     client: "QIYAR MEDIA",
-    type: "MEDIA OPS (IN BUILD)",
+    type: "OPERATIONAL ERP",
     category: "eCommerce",
-    imageUrl: "/images/project-placeholder.svg",
+    imageUrl: "/images/portfolio/qiyar-media.jpg",
   },
   {
     id: "sc-7",

@@ -200,7 +200,7 @@ export const squadMembers: SquadMember[] = [
       id: "Integrasi LLM agent, automasi workflow operasional & data.",
       en: "LLM integrations, autonomous workflows & intelligent pipelines.",
     },
-    image: "/images/avatar-placeholder.svg",
+    image: "/images/squad/ade-dwi.jpeg",
     accentColor: "text-rose-400",
   },
 ];

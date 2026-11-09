@@ -140,22 +140,22 @@ const workProjects: WorkProject[] = [
   {
     id: "qiyar-media",
     client: "QIYAR MEDIA GROUP",
-    category: "Creative Agency",
+    category: "E-Commerce",
     title: {
-      id: "Platform Penerbitan Media Digital & Otomasi Distribusi Konten",
-      en: "Digital Media Publishing Platform & Content Distribution Automation",
+      id: "Executive Dashboard Konsolidasi Omzet COD & Kontrol Arus Kas",
+      en: "Executive Dashboard for COD Revenue Consolidation & Cash Flow Control",
     },
     description: {
-      id: "Portal berita dan multimedia berkinerja tinggi dengan sistem caching edge global Cloudflare, optimasi Google Core Web Vitals, dan integrasi monetisasi iklan bersih.",
-      en: "High-throughput digital publishing portal with global Cloudflare edge caching, perfect Google Core Web Vitals, and clean non-intrusive monetization blocks.",
+      id: "Sistem analitik eksekutif dan kontrol pesanan COD/transfer lintas kurir (SiCepat, Mengantar, SPX) dengan pelacakan retur, alokasi beban CS/konten, dan rasio laba bersih real-time.",
+      en: "Executive analytics and multi-courier COD/transfer order management system with real-time return tracking, ad spend ratio, and net profit margins.",
     },
-    tags: ["DALAM PENGERJAAN ⚡", "DIGITAL MEDIA", "HIGH CONCURRENCY", "EDGE CACHING"],
-    techStack: ["Next.js App Router", "Cloudflare R2", "Tailwind CSS", "Postgres"],
+    tags: ["EXECUTIVE DASHBOARD", "FINANCIAL ANALYTICS", "MULTI-COURIER COD", "CASH FLOW"],
+    techStack: ["Next.js App Router", "Tailwind CSS", "Recharts", "Postgres"],
     impact: {
-      id: "Tahap setup CMS publishing, caching edge & ingestion feed media",
-      en: "Under active CMS publishing pipeline & media feed ingestion",
+      id: "Monitoring omzet kotor, beban iklan harian & estimasi pencairan paket COD terpusat",
+      en: "Centralized tracking of gross turnover, daily ad spend & COD settlement forecasts",
     },
-    imageUrl: "/images/project-placeholder.svg",
+    imageUrl: "/images/portfolio/qiyar-media.jpg",
     slug: "qiyar-media",
   },
   {

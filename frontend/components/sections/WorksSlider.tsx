@@ -44,9 +44,9 @@ const defaultProjects: ProjectCard[] = [
   },
   {
     id: "p-6",
-    title: "Qiyar Media Production Platform",
-    category: "Media Production • Dalam Pengerjaan",
-    imageUrl: "/images/project-placeholder.svg",
+    title: "Qiyar Media Executive Dashboard",
+    category: "Operations & COD Analytics",
+    imageUrl: "/images/portfolio/qiyar-media.jpg",
   },
   {
     id: "p-7",
