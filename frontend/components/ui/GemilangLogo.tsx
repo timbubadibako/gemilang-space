@@ -159,10 +159,10 @@ export function GemilangLogo({
       role="img"
       aria-label={alt}
     >
-      {/* Official branding asset directly from 2.png */}
+      {/* Official branding asset directly from Logo Tosca.png + 10.png */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={isDarkText ? "/logo-gemilang-2.png" : "/logo-gemilang-dark.png"}
+        src={isDarkText ? "/images/logo-composite-light.png" : "/images/logo-composite-dark.png"}
         alt={alt}
         className="h-full w-auto object-contain select-none pointer-events-none"
       />
