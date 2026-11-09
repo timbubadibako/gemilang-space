@@ -8,6 +8,7 @@ export interface CloudscapeProps extends React.HTMLAttributes<HTMLDivElement> {
   colorMid?: string;
   colorTop?: string;
   speed?: number;
+  theme?: "morning" | "noon" | "afternoon" | "night";
 }
 
 export function Cloudscape({
@@ -15,13 +16,14 @@ export function Cloudscape({
   colorMid: _colorMid,
   colorTop: _colorTop,
   speed: _speed,
+  theme = "night",
   className = "",
   style,
   children,
   ...props
 }: CloudscapeProps) {
-  const { currentTheme } = useDaytimeTheme();
-  const themeId = currentTheme?.id || "night";
+  // Lock to signature Gemilang Tosca video (night) by default
+  const themeId = theme || "night";
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {

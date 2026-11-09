@@ -37,19 +37,19 @@ const DEFAULT_HOUR = 20;
 
 export function DaytimeThemeProvider({ children }: { children: ReactNode }) {
   const [simulatedHour, setSimulatedHour] = useState<number>(DEFAULT_HOUR);
-  const [isAutoTime, setIsAutoTime] = useState(true);
+  const [isAutoTime, setIsAutoTime] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Sync with user's actual local clock only AFTER hydration completes
   useEffect(() => {
     setMounted(true);
-    const initialHour = new Date().getHours();
-    setSimulatedHour(initialHour);
   }, []);
 
   const currentTheme = useMemo(() => {
-    return getThemeByHour(simulatedHour);
-  }, [simulatedHour]);
+    if (isAutoTime) {
+      return getThemeByHour(simulatedHour);
+    }
+    return DAYTIME_THEMES.night;
+  }, [isAutoTime, simulatedHour]);
 
   // Apply CSS custom properties whenever theme changes
   useEffect(() => {

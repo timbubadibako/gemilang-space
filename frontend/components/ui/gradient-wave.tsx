@@ -7,6 +7,7 @@ export interface GradientWaveProps {
   colors?: string[];
   isPlaying?: boolean;
   className?: string;
+  theme?: "morning" | "noon" | "afternoon" | "night";
   shadowPower?: number;
   darkenTop?: boolean;
   noiseSpeed?: number;
@@ -26,9 +27,10 @@ export interface GradientWaveProps {
 export function GradientWave({
   isPlaying = true,
   className = "",
+  theme = "night",
 }: GradientWaveProps) {
-  const { currentTheme } = useDaytimeTheme();
-  const themeId = currentTheme?.id || "night";
+  // Lock to signature Gemilang Tosca video (night) by default
+  const themeId = theme || "night";
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
