@@ -126,6 +126,14 @@ export function GemilangLogo({
   textClassName,
   alt = "Gemilang",
 }: GemilangLogoProps) {
+  const isDarkText = Boolean(
+    textColor &&
+      (textColor.toLowerCase() === "#0a0d14" ||
+        textColor.toLowerCase() === "#000000" ||
+        textColor.toLowerCase() === "black" ||
+        textColor.toLowerCase() === "rgb(10, 13, 20)")
+  );
+
   if (variant === "mark") {
     return (
       <div className={cn("inline-flex items-center h-[29px] sm:h-8", className)} role="img" aria-label={alt}>
@@ -145,14 +153,19 @@ export function GemilangLogo({
   return (
     <div
       className={cn(
-        "inline-flex items-end gap-1.5 sm:gap-2 select-none h-[29px] sm:h-8",
+        "inline-flex items-center select-none h-[25px] sm:h-[28px]",
         className
       )}
       role="img"
       aria-label={alt}
     >
-      <GemilangMark color={iconColor} className={markClassName} />
-      <GemilangType color={textColor} className={textClassName} />
+      {/* Official branding asset directly from 2.png */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={isDarkText ? "/logo-gemilang-2.png" : "/logo-gemilang-dark.png"}
+        alt={alt}
+        className="h-full w-auto object-contain select-none pointer-events-none"
+      />
     </div>
   );
 }

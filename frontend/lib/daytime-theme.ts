@@ -23,85 +23,78 @@ export interface DayTimeTheme {
 export const DAYTIME_THEMES: Record<string, DayTimeTheme> = {
   morning: {
     id: "morning",
-    name: "Morning (Fajar Lembut)",
+    name: "Morning (Fajar)",
     nameId: "Pagi",
     hourRange: "05:00 - 10:59",
-    // Biru Muda Neon (Electric Sky Cyan)
-    accentColor: "#00E5FF",
-    accentHover: "#38EFFF",
+    // Official Brand Color Gemilang (2.png)
+    accentColor: "#00E1BA",
+    accentHover: "#00F2C8",
     accentText: "#04060A",
-    accentGlow: "rgba(0, 229, 255, 0.35)",
-    accentBorder: "rgba(0, 229, 255, 0.4)",
-    accentBg: "rgba(0, 229, 255, 0.12)",
-    // Cyan Wave Palette
-    waveColors: ["#021B24", "#053B47", "#008B9E", "#00E5FF", "#70F3FF", "#036473"],
-    // Original cloudscape settings
-    colorBottom: "#3B82F6", // Fresh morning royal-blue horizon
-    colorMid: "#FDE68A",    // Soft warm golden-amber sunlight beam
-    colorTop: "#FFFFFF",    // Pure clean white cloud puffs
-    speed: 0.65,
+    accentGlow: "rgba(0, 225, 186, 0.35)",
+    accentBorder: "rgba(0, 225, 186, 0.4)",
+    accentBg: "rgba(0, 225, 186, 0.12)",
+    // Cyan Wave Palette matching 2.png
+    waveColors: ["#041218", "#082F2F", "#008B7A", "#00E1BA", "#4DF5D4", "#026D60"],
+    colorBottom: "#04151E",
+    colorMid: "#062B2B",
+    colorTop: "#00E1BA",
+    speed: 0.6,
     isNight: false,
   },
   noon: {
     id: "noon",
-    name: "Noon (Siang Terik)",
+    name: "Noon (Siang)",
     nameId: "Siang",
     hourRange: "11:00 - 15:59",
-    // Biru Neon (Electric Cobalt Blue)
-    accentColor: "#2E51FF",
-    accentHover: "#5271FF",
-    accentText: "#FFFFFF",
-    accentGlow: "rgba(46, 81, 255, 0.4)",
-    accentBorder: "rgba(46, 81, 255, 0.45)",
-    accentBg: "rgba(46, 81, 255, 0.15)",
-    // Electric Blue Wave Palette
-    waveColors: ["#030B24", "#0C1D54", "#1B3BBB", "#2E51FF", "#7892FF", "#11267D"],
-    // Original cloudscape settings
-    colorBottom: "#0284C7", // Deep vivid cerulean sky
-    colorMid: "#7DD3FC",    // Crystal blue sky tint
-    colorTop: "#FFFFFF",    // Pure white cumulus cloud highlight
-    speed: 0.7,
+    // Official Brand Color Gemilang (2.png)
+    accentColor: "#00E1BA",
+    accentHover: "#00F2C8",
+    accentText: "#04060A",
+    accentGlow: "rgba(0, 225, 186, 0.35)",
+    accentBorder: "rgba(0, 225, 186, 0.4)",
+    accentBg: "rgba(0, 225, 186, 0.12)",
+    waveColors: ["#041218", "#082F2F", "#008B7A", "#00E1BA", "#4DF5D4", "#026D60"],
+    colorBottom: "#030A14",
+    colorMid: "#07202B",
+    colorTop: "#00E1BA",
+    speed: 0.65,
     isNight: false,
   },
   afternoon: {
     id: "afternoon",
-    name: "Golden Sunset (Sore)",
+    name: "Sunset (Sore)",
     nameId: "Sore",
     hourRange: "16:00 - 18:59",
-    // Ungu Neon (Electric Neon Violet / Purple)
-    accentColor: "#A855F7",
-    accentHover: "#C084FC",
-    accentText: "#FFFFFF",
-    accentGlow: "rgba(168, 85, 247, 0.38)",
-    accentBorder: "rgba(168, 85, 247, 0.45)",
-    accentBg: "rgba(168, 85, 247, 0.15)",
-    // Neon Violet Wave Palette
-    waveColors: ["#140520", "#300D4C", "#6B21A8", "#A855F7", "#D8B4FE", "#4C1478"],
-    // Original cloudscape settings
-    colorBottom: "#0F1E3D", // Biru senja gelap elegan (Dark twilight navy)
-    colorMid: "#EA580C",    // Awan oranye senja pekat (Sunset crimson orange)
-    colorTop: "#FB923C",    // Puncak awan oranye terang bersinar (Glowing warm amber)
-    speed: 0.6,
+    // Official Brand Color Gemilang (2.png)
+    accentColor: "#00E1BA",
+    accentHover: "#00F2C8",
+    accentText: "#04060A",
+    accentGlow: "rgba(0, 225, 186, 0.35)",
+    accentBorder: "rgba(0, 225, 186, 0.4)",
+    accentBg: "rgba(0, 225, 186, 0.12)",
+    waveColors: ["#041218", "#082F2F", "#008B7A", "#00E1BA", "#4DF5D4", "#026D60"],
+    colorBottom: "#060D1A",
+    colorMid: "#0A2830",
+    colorTop: "#00E1BA",
+    speed: 0.55,
     isNight: false,
   },
   night: {
     id: "night",
-    name: "Night (Malam Bertabur Bintang)",
+    name: "Night (Malam)",
     nameId: "Malam",
     hourRange: "19:00 - 04:59",
-    // Hijau Tosca Neon (Signature Cyber Tosca Gemilang)
+    // Official Brand Color Gemilang (2.png)
     accentColor: "#00E1BA",
     accentHover: "#00F2C8",
     accentText: "#04060A",
-    accentGlow: "rgba(0, 225, 186, 0.3)",
-    accentBorder: "rgba(0, 225, 186, 0.38)",
+    accentGlow: "rgba(0, 225, 186, 0.35)",
+    accentBorder: "rgba(0, 225, 186, 0.4)",
     accentBg: "rgba(0, 225, 186, 0.12)",
-    // Original Cyber Tosca Wave Palette
     waveColors: ["#041218", "#082F2F", "#008B7A", "#00E1BA", "#4DF5D4", "#026D60"],
-    // Original cloudscape settings
-    colorBottom: "#030712", // Deep midnight void
-    colorMid: "#1E1B4B",    // Deep velvety sapphire indigo
-    colorTop: "#6366F1",    // Luminous cosmic neon-indigo cloud highlights
+    colorBottom: "#030712",
+    colorMid: "#051C24",
+    colorTop: "#00E1BA",
     speed: 0.45,
     isNight: true,
   },
